@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     inputView: {
-        backgroundColor: 'white',
+        backgroundColor: 'Red',
         borderRadius: 25,
         height: 50,
         marginBottom: 20,
