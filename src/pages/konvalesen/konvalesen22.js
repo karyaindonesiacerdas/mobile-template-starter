@@ -1,41 +1,25 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import {
   Alert,
   ImageBackground,
   Image,
   Text,
   View,
-  StyleSheet,
   TextInput,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
-import {
-  Container,
-  Card,
-
-} from "native-base";
+import { Container, Header, Title, Left, HStack, Card } from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native-gesture-handler";
 import styles from "./styles";
-import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
-
-const CONTENT = {
-  tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
- 
-  tableData: [
-    ['JAM', 'INSTASI', 'KETERANGAN'],
-    ['08.00', 'PMI', 'Umum'],
-    ['Dst', '', ''],
-  
-  ],
-};
 
 function index() {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+  const [text, onChangeText] = React.useState("Useless Text");
+  const [number, onChangeNumber] = React.useState(null);
+
   return (
     <Container>
       <Image
@@ -62,58 +46,50 @@ function index() {
         }}
       ></Image>
       <ScrollView>
-        
-
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 10,
+            marginTop: 25,
             fontSize: 35,
             fontWeight: "bold",
             color: "red",
           }}
         >
-          Mobil Unit
+          Tempatmu
         </Text>
-        <Text
+         <Text
           style={{
             marginLeft: 30,
-            marginTop: -10,
-            marginBottom: 10,
-            fontSize: 25,
-            fontWeight: "bold",
+            marginTop: 20,
+            fontSize: 15,
             color: "black",
+         
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
           }}
         >
-          Terdekat
+          Ketik Alamat
         </Text>
-        
-         <View style={{width:"90%",justifyContent: "center",
-              alignSelf: "center",}}>
-      <Table borderStyle={{ borderWidth: 1 ,justifyContent: "center",
-              alignContent: "center",}}>
-        <Row
-          data={CONTENT.tableHead}
-          flexArr={[1, 2, 1, 1]}
-          style={styles.head}
-          textStyle={styles.text}
+
+        <TextInput
+          style={{
+            height: 80,
+
+            marginRight: 30,
+            marginLeft: 30,
+            backgroundColor: "#bebebe",
+
+            
+          }}
+          onChangeText={onChangeNumber}
+     
+      
         />
-        <TableWrapper style={styles.wrapper}>
-          <Col
-            data={CONTENT.tableTitle}
-            style={styles.title}
-            heightArr={[28, 28]}
-            textStyle={styles.text}
-          />
-          <Rows
-            data={CONTENT.tableData}
-            flexArr={[1, 1, 1]}
-            style={styles.row}
-            textStyle={styles.text}
-          />
-        </TableWrapper>
-      </Table>
-    </View>
+
+
+       
+       
 
         <Image
         source={{
@@ -123,7 +99,7 @@ function index() {
         
           width: 200,
           height: 100,
-          marginTop: 40,
+          marginTop: 20,
           marginBottom: 20,
           alignSelf:'center',
 
@@ -133,43 +109,40 @@ function index() {
        <Text
           style={{
             marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
+            marginTop: 0,
             fontSize: 15,
-            fontWeight: "bold",
-
-            textAlign: "justify",
             color: "black",
+         
             textShadowColor: "#fff",
             textShadowOffset: { width: 1, height: 1 },
             textShadowRadius: 10,
           }}
         >
-          NAMA LOKASI MOBILE UNIT
+          Pilih Alamat
         </Text>
- <Text
+
+        <TextInput
           style={{
-            marginLeft: 30,
-            marginRight: 30,
-            
-            fontSize: 15,
-            fontWeight: "bold",
+            height: 80,
 
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
+            marginRight: 30,
+            marginLeft: 30,
+            backgroundColor: "#bebebe",
+
+            
           }}
-        >
-          ALAMAT LOKASI MOBILE UNIT
-        </Text>
+          onChangeText={onChangeNumber}
+     
+      
+        />
+
+      
+
+      
 
        
-        
-
-
-        <View
+     
+         <View
           style={{
             alignContent: "center",
 
