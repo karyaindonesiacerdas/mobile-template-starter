@@ -45,7 +45,7 @@ function index() {
                         </Button>
                     </Left>
                     <Body>
-                        <Text>LOGOUT</Text>
+                        <Text>Keluar</Text>
                     </Body>
                 </ListItem>
             </Content>
