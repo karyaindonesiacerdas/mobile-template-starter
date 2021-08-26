@@ -1,6 +1,6 @@
 import Login from './auth/login';
 import Register from './auth/register';
-import Home from './konvalesen/konvalesen27';
+import Home from './permintaan/permintaan06';
 import LoadingStart from './loading';
 import Account from './account';
 
