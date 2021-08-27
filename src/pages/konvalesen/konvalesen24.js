@@ -5,7 +5,6 @@ import {
   Image,
   Text,
   View,
-  StyleSheet,
   TextInput,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
@@ -20,22 +19,9 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 import styles from "./styles";
-import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
-
-const CONTENT = {
-  tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
- 
-  tableData: [
-    ['JAM', 'INSTASI', 'KETERANGAN'],
-    ['08.00', 'PMI', 'Umum'],
-    ['Dst', '', ''],
-  
-  ],
-};
 
 function index() {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+  const B = (props) => <Text style={{fontWeight: 'bold',fontSize:20}}>{props.children}</Text>
   return (
     <Container>
       <Image
@@ -73,7 +59,7 @@ function index() {
             color: "red",
           }}
         >
-          Mobil Unit
+          Gedung UDD
         </Text>
         <Text
           style={{
@@ -85,52 +71,9 @@ function index() {
             color: "black",
           }}
         >
-          Terdekat
+          PMI Kota Semarang
         </Text>
-        
-         <View style={{width:"90%",justifyContent: "center",
-              alignSelf: "center",}}>
-      <Table borderStyle={{ borderWidth: 1 ,justifyContent: "center",
-              alignContent: "center",}}>
-        <Row
-          data={CONTENT.tableHead}
-          flexArr={[1, 2, 1, 1]}
-          style={styles.head}
-          textStyle={styles.text}
-        />
-        <TableWrapper style={styles.wrapper}>
-          <Col
-            data={CONTENT.tableTitle}
-            style={styles.title}
-            heightArr={[28, 28]}
-            textStyle={styles.text}
-          />
-          <Rows
-            data={CONTENT.tableData}
-            flexArr={[1, 1, 1]}
-            style={styles.row}
-            textStyle={styles.text}
-          />
-        </TableWrapper>
-      </Table>
-    </View>
-
-        <Image
-        source={{
-          uri: 'https://www.howtogeek.com/wp-content/uploads/2021/01/google-maps-satellite.png?height=200p&trim=2,2,2,2',
-        }}
-        style={{
-        
-          width: 200,
-          height: 100,
-          marginTop: 40,
-          marginBottom: 20,
-          alignSelf:'center',
-
-          
-        }}
-      ></Image>
-       <Text
+         <Text
           style={{
             marginLeft: 30,
             marginRight: 30,
@@ -138,38 +81,27 @@ function index() {
             fontSize: 15,
             fontWeight: "bold",
 
-            textAlign: "justify",
+            textAlign: "center",
             color: "black",
             textShadowColor: "#fff",
             textShadowOffset: { width: 1, height: 1 },
             textShadowRadius: 10,
           }}
         >
-          NAMA LOKASI MOBILE UNIT
+          <B>TERIMA KASIH</B>{'\n'}ANDA SUDAH MENDAFTARKAN DIRI SEBAGAI 
+CALON DONOR, KAMI AKAN SEGERA
+MENGINFORMASIKAN JADWAL PENGAMBILAN
+DARAH ANDA
         </Text>
- <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            
-            fontSize: 15,
-            fontWeight: "bold",
-
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          ALAMAT LOKASI MOBILE UNIT
-        </Text>
+     
 
        
-        
+     
 
 
-        <View
+       
+      </ScrollView>
+       <View
           style={{
             alignContent: "center",
 
@@ -177,6 +109,8 @@ function index() {
             justifyContent: "center",
               alignContent: "center",
               marginTop:30,
+              bottom: 10,
+              
             
           }}
         >
@@ -219,7 +153,6 @@ function index() {
             </TouchableOpacity>
           </Card>
         </View>
-      </ScrollView>
 
       <ImageBackground
         // resizeMethod={'auto'}
