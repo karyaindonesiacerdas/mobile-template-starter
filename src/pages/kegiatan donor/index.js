@@ -12,8 +12,9 @@ import styles from "../styles/styles";
 import * as Yup from 'yup';
 // import {authLogin} from '../../../config/api';
 import Bg from '../image/Baground2.jpg'
+import { KegiatanDonor } from "..";
 
-function Home(props) {
+function KegiatanDonor(props) {
   // const mutation = useMutation(authRegister, {
     //     onSettled: (data, error, variables, context) => {
     //         Toast.show({
@@ -97,49 +98,7 @@ function Home(props) {
                 </Text>
               </TouchableOpacity>
             </Card>
-            <Card style={styles.cardStyle}>
-              <TouchableOpacity>
-               
-                <Text
-                  style={{
-                    margin:10,
-                    fontSize: 15,
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    color:"white",
-                  }}
-                >
-                  Plasma{'\n'} Konvalesen
-                </Text>
-               
-              </TouchableOpacity>
-            </Card>
-          </View>
-              <View
-            style={{
-              marginTop:30,
-              flexDirection: "row",
-              justifyContent: "center",
-              alignContent: "center",
-            }}
-          >
-            <Card style={styles.cardStyle}>
-              <TouchableOpacity>
-               
-                <Text
-                  style={{
-                    margin:10,
-                    fontSize: 15,
-                    textAlign: "center",
-                    color:"white",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Permintaan {'\n'} Darah
-                </Text>
-               
-              </TouchableOpacity>
-            </Card>
+            
             
           </View>
 
@@ -175,4 +134,4 @@ function Home(props) {
   );
 }
 
-export default Home;
+export default KegiatanDonor;
