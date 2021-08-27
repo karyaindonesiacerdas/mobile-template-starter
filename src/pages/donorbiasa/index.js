@@ -94,7 +94,7 @@ function DonorBiasa(props) {
                             .max(20, 'Must be 5 characters or less')
                             .required('Required'),
                     })}
-                    onSubmit={goNextPage.bind(this, 'donorbiasa')}>
+                    onSubmit={goNextPage.bind(this, 'CheckBox')}>
                     {({
                         handleChange,
                         handleBlur,
@@ -137,7 +137,7 @@ function DonorBiasa(props) {
                             .max(20, 'Must be 5 characters or less')
                             .required('Required'),
                     })}
-                    onSubmit={goNextPage.bind(this, 'donorbiasa')}>
+                    onSubmit={goNextPage.bind(this, 'CheckBox')}>
                     {({
                         handleChange,
                         handleBlur,
@@ -248,7 +248,7 @@ function DonorBiasa(props) {
                                     </Text>
                                 </View>
                             )}
-                            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'DonorBiasa')}>
+                            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'CheckBox')}>
                
                <Text
                  style={{

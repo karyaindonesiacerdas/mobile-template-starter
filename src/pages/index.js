@@ -6,5 +6,4 @@ import Account from './account';
 import KegiatanDonor from './kegiatan donor';
 import DonorBiasa from'./DonorBiasa';
 
-
 export {Login, Register, Home, LoadingStart, Account, KegiatanDonor,DonorBiasa};
