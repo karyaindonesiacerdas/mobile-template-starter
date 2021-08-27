@@ -53,7 +53,7 @@ function kegiatandonor(props) {
         }}
       ></Image>
       <Image
-        source={require("../image/Logo2.png")}
+        source={require("../image/Logo.png")}
         style={{
           position:'absolute',
           width: 54,
