@@ -1,48 +1,25 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  ImageBackground,
-  Image,
-  Text,
-  View,
-  TextInput,
-} from "react-native";
-import { Icon } from "react-native-elements";
+import { ImageBackground, Image, Text, View,TouchableOpacity } from "react-native";
 import { Container, Card } from "native-base";
-import {
-  ScrollView,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import { ScrollView,  } from "react-native-gesture-handler";
 import styles from "./styles";
 
 function index() {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+    const goNextPage = page => {
+    if (page) {
+      props.navigation.replace(page)
+    }
+  }
+
   return (
     <Container>
       <Image
         source={require("../../asset/logoUDD.png")}
-        style={{
-          width: 54,
-          height: 60,
-          top: 10,
-          margin: 20,
-
-          left: 10,
-        }}
+        style={styles.logoUDD}
       ></Image>
       <Image
         source={require("../../asset/logoSehat.png")}
-        style={{
-          position: "absolute",
-          width: 54,
-          height: 60,
-          margin: 20,
-
-          right: 10,
-          top: 10,
-        }}
+        style={styles.logoSehat}
       ></Image>
       <ScrollView>
         <View
@@ -68,14 +45,7 @@ function index() {
               source={{
                 uri: "https://www.pmi-kabtegal.or.id/asset/foto_statis/pmi_jadul.jpg",
               }}
-              style={{
-                marginTop: 10,
-
-                  width: 100,
-                height: 70,
-                alignSelf: "center",
-              }}
-            ></Image>
+              style={styles.ImageAtas} ></Image>
 
             <Text
               style={{
@@ -102,14 +72,7 @@ function index() {
               source={{
                 uri: "https://pmikotasemarang.or.id/wp-content/uploads/2021/08/WhatsApp-Image-2021-08-14-at-17.14.08-1024x576.jpeg",
               }}
-              style={{
-                marginTop: 10,
-
-                 width: 100,
-                height: 70,
-                alignSelf: "center",
-              }}
-            ></Image>
+               style={styles.ImageAtas}></Image>
             <Text
               style={{
                 marginTop: 5,
@@ -134,14 +97,7 @@ function index() {
               source={{
                 uri: "https://pmi.or.id/wp-content/uploads/2021/07/WhatsApp-Image-2021-07-18-at-00.21.46.jpeg",
               }}
-              style={{
-                marginTop: 10,
-
-                width: 100,
-                height: 70,
-                alignSelf: "center",
-              }}
-            ></Image>
+               style={styles.ImageAtas} ></Image>
             <Text
               style={{
                 marginTop: 5,
@@ -257,20 +213,7 @@ function index() {
             alignSelf: "center",
           }}
         >
-         
-          <TouchableOpacity
-            style={{
-              margin: 5,
-              borderRadius: 10,
-              width: 120,
-              height: 100,
-              backgroundColor: "#fff",
-              elevation: 2, // Android shadowColor: 'rgba(0,0,0, .4)', // IOS
-              shadowOffset: { height: 1, width: 1 }, // IOS
-              shadowOpacity: 1, // IOS
-              shadowRadius: 1, //IOS
-            }}
-          >
+          <TouchableOpacity style={styles.cardStyle} >
             <Image
               source={require("../../asset/alurDonorDarah.png")}
               style={{
@@ -296,20 +239,7 @@ function index() {
             </Text>
           </TouchableOpacity>
 
-          
-           <TouchableOpacity
-            style={{
-              margin: 5,
-              borderRadius: 10,
-              width: 120,
-              height: 100,
-              backgroundColor: "#fff",
-              elevation: 2, // Android shadowColor: 'rgba(0,0,0, .4)', // IOS
-              shadowOffset: { height: 1, width: 1 }, // IOS
-              shadowOpacity: 1, // IOS
-              shadowRadius: 1, //IOS
-            }}
-          >
+          <TouchableOpacity style={styles.cardStyle}>
             <Image
               source={require("../../asset/persyaratanDonorDarah.png")}
               style={{
@@ -334,20 +264,8 @@ function index() {
               Persyaratan Donor {"\n"}& pendaftaran
             </Text>
           </TouchableOpacity>
-          
-           <TouchableOpacity
-            style={{
-              margin: 5,
-              borderRadius: 10,
-              width: 120,
-              height: 100,
-              backgroundColor: "#fff",
-              elevation: 2, // Android shadowColor: 'rgba(0,0,0, .4)', // IOS
-              shadowOffset: { height: 1, width: 1 }, // IOS
-              shadowOpacity: 1, // IOS
-              shadowRadius: 1, //IOS
-            }}
-          >
+
+          <TouchableOpacity style={styles.cardStyle} >
             <Image
               source={require("../../asset/stokDarah.png")}
               style={{
@@ -372,8 +290,6 @@ function index() {
               Info Stok & Kebutuhan Darah
             </Text>
           </TouchableOpacity>
-
-         
         </View>
         <View
           style={{
@@ -388,19 +304,7 @@ function index() {
             alignSelf: "center",
           }}
         >
-          <TouchableOpacity
-            style={{
-              margin: 5,
-              borderRadius: 10,
-              width: 120,
-              height: 100,
-              backgroundColor: "#fff",
-              elevation: 2, // Android shadowColor: 'rgba(0,0,0, .4)', // IOS
-              shadowOffset: { height: 1, width: 1 }, // IOS
-              shadowOpacity: 1, // IOS
-              shadowRadius: 1, //IOS
-            }}
-          >
+          <TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'MobilUnit01')} >
             <Image
               source={require("../../asset/jadwalMobilUnit.png")}
               style={{
@@ -426,19 +330,7 @@ function index() {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={{
-              margin: 5,
-              borderRadius: 10,
-              width: 120,
-              height: 100,
-              backgroundColor: "#fff",
-              elevation: 2, // Android shadowColor: 'rgba(0,0,0, .4)', // IOS
-              shadowOffset: { height: 1, width: 1 }, // IOS
-              shadowOpacity: 1, // IOS
-              shadowRadius: 1, //IOS
-            }}
-          >
+          <TouchableOpacity style={styles.cardStyle}>
             <Image
               source={require("../../asset/konselingDonorDarah.png")}
               style={{
@@ -462,19 +354,7 @@ function index() {
               Konseling Donor Darah Online
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              margin: 5,
-              borderRadius: 10,
-              width: 120,
-              height: 100,
-              backgroundColor: "#fff",
-              elevation: 2, // Android shadowColor: 'rgba(0,0,0, .4)', // IOS
-              shadowOffset: { height: 1, width: 1 }, // IOS
-              shadowOpacity: 1, // IOS
-              shadowRadius: 1, //IOS
-            }}
-          >
+          <TouchableOpacity style={styles.cardStyle}>
             <Image
               source={require("../../asset/palangMerahIndonesia.png")}
               style={{
@@ -506,7 +386,6 @@ function index() {
         source={require("../../asset/footer.png")}
         style={{
           width: "100%",
-
           backgroundColor: "#fff",
           padding: 0,
           paddingVertical: 90,

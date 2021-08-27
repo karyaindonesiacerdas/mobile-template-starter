@@ -1,7 +1,8 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Account, Dashboard, Home, LoadingStart, Login, Register, KegiatanDonor,DonorBiasa} from '../pages';
+import {Account, Dashboard, Home, LoadingStart, Login, Register, KegiatanDonor,DonorBiasa,MobilUnit01} from '../pages';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,11 @@ function index() {
                 <Stack.Screen
                     name="DonorBiasa"
                     component={DonorBiasa}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="MobilUnit01"
+                    component={MobilUnit01}
                     options={{headerShown: false}}
                 />
                 

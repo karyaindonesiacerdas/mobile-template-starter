@@ -5,124 +5,42 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#F9F9F9",
   },
-
-  iconSize: {
-    color: "#006C9B",
-    fontSize: 22,
-  },
-  header: {
-    borderBottomWidth: 1,
-    shadowColor: "#d4d4d4",
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.9,
-    elevation: 3,
-    backgroundColor: "#fff",
-    paddingLeft: "3%",
-  },
-
-  imageSizeIklan: {
-    width: "100%",
-    height: 330,
-    paddingTop: "70%",
-    resizeMode: "cover",
-    flex: 1,
-  },
-
-  top: {
-    backgroundColor: "#333",
-    // height: 300,
-    // height: '100%',
-  },
-  wrapIklan: {
-    width: "100%",
-  },
-  footerStyle: {
-    borderTopWidth: 0.5,
-    shadowColor: "#E5E5E5",
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.9,
-    elevation: 3,
-    backgroundColor: "#fff",
-  },
-  footerTabStyle: {
-    borderBottomWidth: 0.5,
-    shadowColor: "#E5E5E5",
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.9,
-    elevation: 3,
-    backgroundColor: "#fff",
-  },
-  imageStyle: {
-    marginTop: 15,
-    width: 60,
+  logoUDD: {
+    width: 54,
     height: 60,
-    marginBottom: 10,
-    alignSelf: "center",
-    marginTop: 15,
+    top: 10,
+    margin: 20,
+
+    left: 10,
   },
-  imageStyle1: {
-    marginTop: 15,
-    width: 60,
+  logoSehat: {
+    width: 54,
+    position: "absolute",
+    width: 54,
     height: 60,
-    marginBottom: 15,
-    alignSelf: "center",
+    margin: 20,
+    right: 10,
+    top: 10,
   },
-  cardStyle: {
-    backgroundColor: "red",
-    marginTop: 10,
-    borderRadius: 10,
-    width: "40%",
-  
-    marginLeft: "3%",
-    marginRight: "3%",
-    flexDirection: "column",
-    justifyContent: "center",
+
+  ImageAtas: {
+   marginTop: 10,
+
+                width: 100,
+                height: 70,
+                alignSelf: "center",
   },
-  separator: {
-    height: 90,
-    width: 1,
-    marginTop: 20,
-    marginBottom: 20,
-    marginRight: 20,
-    backgroundColor: "#fff",
+   cardStyle: {
+    margin: 5,
+              borderRadius: 10,
+              width: 120,
+              height: 100,
+              backgroundColor: "#fff",
+              elevation: 2, // Android shadowColor: 'rgba(0,0,0, .4)', // IOS
+              shadowOffset: { height: 1, width: 1 }, // IOS
+              shadowOpacity: 1, // IOS
+              shadowRadius: 1, //IOS
   },
-  conferenceCard: {
-    backgroundColor: "#006C9B",
-    flexDirection: "row",
-    marginTop: 20,
-    alignSelf: "center",
-    borderRadius: 10,
-    width: "90%",
-  },
-   descriptionPersyaratan: {
-    marginLeft:30, marginTop:0,fontSize: 15, color: "black",
-  },
-  input: {
-    height: 40,
-    
-    marginRight: 30,
-    marginLeft: 30,
-    backgroundColor:'#bebebe',
-  
-    padding: 10,
-  },
-  input1: {
-    height: 40,
-    
-    marginRight: 30,
-    marginLeft: 30,
-    backgroundColor:'#bebebe',
-  
-    paddingTop: 20,
-  },
-  checkbox: {
-    marginTop:0,marginLeft:30,marginRight:30, flexDirection: "row",justifyContent: "space-between"
-  },
-   head: { height: 40, backgroundColor: 'orange',  },
-  wrapper: { flexDirection: 'row' },
-  title: {  backgroundColor: '#2ecc71'},
-  row: { width:"100%"},
-  text: { textAlign: 'center',padding:5 },
 });
 
 export default styles;
