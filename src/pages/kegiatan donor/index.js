@@ -12,8 +12,9 @@ import styles from "../styles/styles";
 import * as Yup from 'yup';
 // import {authLogin} from '../../../config/api';
 import Bg from '../image/Baground2.jpg'
+import { KegiatanDonor } from "..";
 
-function kegiatandonor(props) {
+function KegiatanDonor(props) {
   // const mutation = useMutation(authRegister, {
     //     onSettled: (data, error, variables, context) => {
     //         Toast.show({
@@ -53,7 +54,7 @@ function kegiatandonor(props) {
         }}
       ></Image>
       <Image
-        source={require("../image/Logo.png")}
+        source={require("../image/Logo2.png")}
         style={{
           position:'absolute',
           width: 54,
@@ -66,27 +67,14 @@ function kegiatandonor(props) {
       ></Image>
   
      
-        <Text style={{ marginLeft:30, marginTop:30,fontSize: 30,fontWeight: "bold",  color: "black" }}>
+        <Text style={{ marginLeft:20, marginTop:30,fontSize: 35,fontWeight: "bold",  color: "black" }}>
                 Persyaratan & Pendaftaran
               </Text>
 
-        <Text style={{ marginLeft:30,marginBottom:20, marginTop:50,fontSize: 25,fontWeight: "bold",  color: "black" }}>
+        <Text style={{ marginLeft:130,marginBottom:20, marginTop:50,fontSize: 25,fontWeight: "bold",  color: "black" }}>
                 DONOR DARAH
               </Text>
-              <Text style={{ marginLeft:30,marginBottom:20, marginTop:0,fontSize: 15,fontWeight: "normal",  color: "black" }}>
-                1.Sehat,tidak sedang flu,batuk/demam/pusing{'\n'}
-                2.Usia maksimal 17 th s.d. 60 th {'\n'}
-                3.Berat badan ≥45 Kg{'\n'}
-                {'   '}a.Obat anti biotik apapun{'\n'}
-                {'   '}b.Obat tertentu (konsultasikan dengan dokter atau petugas){'\n'}
-                4.Kadar Hemoglobin 12,5 sd 17,0 g/dl{'\n'}
-                5.Cukup istirahat (Tidur minimal 4 jam){'\n'}
-                6.Interval Donor{'\n'}
-                {'    '}a.Metode Konvesional adalah ≥60 hari{'\n'}
-                {'    '}b.Metode apheresis adalah 14 hari{'\n'}
-                7.Donor perempuan,sedang tidak hamil,Menyusui 
-              </Text>
-              
+
               <View
             style={{
               flexDirection: "row",
@@ -96,7 +84,7 @@ function kegiatandonor(props) {
           >
 
             <Card style={styles.cardStyle}>
-              <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'DonorBiasa')} >
+              <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'KegiatanDonor')} >
                 <Text
                   style={{
                     margin:10,
@@ -106,11 +94,35 @@ function kegiatandonor(props) {
                     color:"white",
                   }}
                 >
-                  DAFTAR
+                  Biasa {'\n'}
                 </Text>
               </TouchableOpacity>
             </Card>
-             </View>
+            
+            
+          </View>
+
+           <Card style={{ backgroundColor: "#000",
+  
+  
+    marginTop:40,
+    width: "86%",marginLeft:"7%"}}>
+              <TouchableOpacity>
+               
+                <Text
+                  style={{
+                    margin:10,
+                    fontSize: 15,
+                    textAlign: "center",
+                    color:"white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Mengadakan Kegiatan Donor Darah
+                </Text>
+               
+              </TouchableOpacity>
+            </Card>
            
 
                
@@ -122,4 +134,4 @@ function kegiatandonor(props) {
   );
 }
 
-export default kegiatandonor;
+export default KegiatanDonor;
