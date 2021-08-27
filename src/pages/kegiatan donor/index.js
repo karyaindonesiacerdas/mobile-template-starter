@@ -12,7 +12,7 @@ import styles from "../styles/styles";
 import * as Yup from 'yup';
 // import {authLogin} from '../../../config/api';
 import Bg from '../image/Baground2.jpg'
-import { KegiatanDonor } from "..";
+
 
 function KegiatanDonor(props) {
   // const mutation = useMutation(authRegister, {
