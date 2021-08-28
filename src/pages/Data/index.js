@@ -17,6 +17,8 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 //import styles from "./styles";
+import Bg from '../../image/Baground2.jpg'
+
 
 function Data(props) {
     const [text, onChangeText] = React.useState("Useless Text");
@@ -24,6 +26,7 @@ function Data(props) {
   
   return (
     <Container>
+      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
         source={require("../image/logo.png")}
         style={{
@@ -51,14 +54,14 @@ function Data(props) {
      
   
      
-        <Text style={{ marginLeft:30, marginTop:25,fontSize: 35,fontWeight: "bold",  color: "red" }}>
+        <Text style={{ marginLeft:30, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "red" }}>
                 Daftar
               </Text>
               <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
                 Donor Darah Biasa
               </Text>
 
-                 <Text style={{ marginLeft:30, marginTop:0,fontSize: 15, color: "black" }}>
+                 <Text style={{ marginLeft:30, marginTop:30,fontSize: 17, color: "black" }}>
                 Tempat dan Tanggal Lahir (update otomatis) apabila usia kurang dari 17 tahun tidak lolos (otomatis)
               </Text>
                <Text style={{ marginLeft:30, marginTop:30,fontSize: 15,fontWeight: "bold", color: "black" }}>
@@ -68,7 +71,7 @@ function Data(props) {
 
             
 
-              <View style={{marginTop:10,marginLeft:40,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
                 <View style={{}}><CheckBox title='PNS' style={{width:"70%" }}   />
            
                  <CheckBox title='Swasta' style={{width:"70%" }}   />
@@ -94,7 +97,7 @@ function Data(props) {
 
             
 
-              <View style={{marginTop:10,marginLeft:40,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
                 <View style={{}}><CheckBox title='A' style={{width:"70%" }}   />
            
                  <CheckBox title='B' style={{width:"70%" }}   />
@@ -118,7 +121,7 @@ function Data(props) {
 
             
 
-              <View style={{marginTop:10,marginLeft:40,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
                 <View style={{}}>
            
                  <CheckBox title='Positif' style={{width:"70%" }}   />
