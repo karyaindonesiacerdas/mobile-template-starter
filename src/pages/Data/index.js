@@ -16,16 +16,14 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native-gesture-handler";
-import styles from "./styles";
-import bg from '../image/Background.png'
+//import styles from "./styles";
 
-function CheckBox(props) {
+function Data(props) {
     const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
   
   return (
     <Container>
-      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
         source={require("../image/logo.png")}
         style={{
@@ -158,4 +156,4 @@ function CheckBox(props) {
   );
 }
 
-export default CheckBox;
+export default Data;
