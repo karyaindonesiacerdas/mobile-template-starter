@@ -16,7 +16,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native-gesture-handler";
-//import styles from "./styles";
+import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
 
 
@@ -133,8 +133,41 @@ function Data(props) {
             
            
                 </View>             
-               
               </View>
+              <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "bold",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Berat badan (Pilih)
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 0,
+            fontSize: 15,
+            color: "black",
+            fontWeight: "bold",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          {'>'} 45 kg (Apabila kurang dari tidak lolos)
+        </Text>
 <Card style={{ backgroundColor: "#000", marginTop:40, marginBottom:20,
     width: "86%",marginLeft:"7%"}}>
               <TouchableOpacity>
