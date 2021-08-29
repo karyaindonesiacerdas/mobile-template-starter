@@ -5,7 +5,6 @@ import {
   Image,
   Text,
   View,
-  StyleSheet,
   TextInput,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
@@ -20,20 +19,9 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 import styles from "./styles";
-import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
-
-const CONTENT = {
-  tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
- 
-  tableData: [
-    ['JAM', 'INSTASI', 'KETERANGAN'],
-    ['08.00', 'PMI', 'Umum'],
-    ['Dst', '', ''],
-  
-  ],
-};
 
 function index() {
+  const B = (props) => <Text style={{fontWeight: 'bold', color:'red'}}>{props.children}</Text>
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   return (
@@ -73,7 +61,7 @@ function index() {
             color: "red",
           }}
         >
-          Mobil Unit
+          Gedung UDD
         </Text>
         <Text
           style={{
@@ -85,52 +73,9 @@ function index() {
             color: "black",
           }}
         >
-          Terdekat
+          PMI Kota Semarang
         </Text>
-        
-         <View style={{width:"90%",justifyContent: "center",
-              alignSelf: "center",}}>
-      <Table borderStyle={{ borderWidth: 1 ,justifyContent: "center",
-              alignContent: "center",}}>
-        <Row
-          data={CONTENT.tableHead}
-          flexArr={[1, 2, 1, 1]}
-          style={styles.head}
-          textStyle={styles.text}
-        />
-        <TableWrapper style={styles.wrapper}>
-          <Col
-            data={CONTENT.tableTitle}
-            style={styles.title}
-            heightArr={[28, 28]}
-            textStyle={styles.text}
-          />
-          <Rows
-            data={CONTENT.tableData}
-            flexArr={[1, 1, 1]}
-            style={styles.row}
-            textStyle={styles.text}
-          />
-        </TableWrapper>
-      </Table>
-    </View>
-
-        <Image
-        source={{
-          uri: 'https://www.howtogeek.com/wp-content/uploads/2021/01/google-maps-satellite.png?height=200p&trim=2,2,2,2',
-        }}
-        style={{
-        
-          width: 200,
-          height: 100,
-          marginTop: 40,
-          marginBottom: 20,
-          alignSelf:'center',
-
-          
-        }}
-      ></Image>
-       <Text
+         <Text
           style={{
             marginLeft: 30,
             marginRight: 30,
@@ -138,34 +83,64 @@ function index() {
             fontSize: 15,
             fontWeight: "bold",
 
-            textAlign: "justify",
+            textAlign: "center",
             color: "black",
             textShadowColor: "#fff",
             textShadowOffset: { width: 1, height: 1 },
             textShadowRadius: 10,
           }}
         >
-          NAMA LOKASI MOBILE UNIT
+          ANDA TERDAFTAR SEBAGAI CALON DONOR PLASMA KONVALESEN DI {'\n'}<B>NAMA LOKASI MOBILE UNIT</B>{'\n'}SILAKAN KUNJUNGI {'\n'}<B>NAMA LOKASI MOBILE UNIT</B>
         </Text>
- <Text
+         <Text
           style={{
             marginLeft: 30,
             marginRight: 30,
-            
+            marginTop: 20,
             fontSize: 15,
-            fontWeight: "bold",
+ 
 
-            textAlign: "justify",
+            textAlign: "center",
             color: "black",
             textShadowColor: "#fff",
             textShadowOffset: { width: 1, height: 1 },
             textShadowRadius: 10,
           }}
         >
-          ALAMAT LOKASI MOBILE UNIT
+          Scan barcode untuk cetak formulir donor
         </Text>
+        <Image
+        source={require("../../asset/barcode.png")}
+        style={{
+        
+          width: 100,
+          height: 100,
+          margin: 20,
+          alignSelf:'center',
+
+          
+        }}
+      ></Image>
 
        
+        <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+      
+            fontSize: 15,
+            marginTop:20,
+ 
+
+            textAlign: "center",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Keterangan :{'\n'}Berlaku 24 jam{'\n'}(Terinformasi masa berlaku)
+        </Text>
         
 
 

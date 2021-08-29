@@ -3,46 +3,18 @@ import { Alert, ImageBackground, Image, Text, View } from "react-native";
 import {
   Container,
   Card,
-  button,
 } from "native-base";
-import {TouchableOpacity} from 'react-native'
-import {Formik} from 'formik';
-//from "react-native-gesture-handler";
-import styles from "../styles/styles";
-import * as Yup from 'yup';
-// import {authLogin} from '../../../config/api';
-import Bg from '../image/Baground2.jpg'
+import {
+  TouchableOpacity,
+} from "react-native-gesture-handler";
+import styles from "./styles";
 
-function Home(props) {
-  // const mutation = useMutation(authRegister, {
-    //     onSettled: (data, error, variables, context) => {
-    //         Toast.show({
-    //             text: data.message,
-    //             type: data.type,
-    //             duration: 2000,
-    //             buttonText: 'Okay',
-    //         });
-    //         if (data?.code == 200) {
-    //             AsyncStorage.setItem('token', data.data);
-    //             setTimeout(() => {
-    //                 props.navigation.replace('HomeApp');
-    //             }, 2000);
-    //             return;
-    //         }
-    //     },
-    // });
-  const goNextPage = page => {
-    if (page) {
-      props.navigation.replace(page)
-    }
-  }
+function index() {
   return (
     <Container>
-
-      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
-
+      
       <Image
-        source={require("../image/logo.png")}
+        source={require("../../asset/logoUDD.png")}
         style={{
           width: 54,
           height: 60,
@@ -53,7 +25,7 @@ function Home(props) {
         }}
       ></Image>
       <Image
-        source={require("../image/Logo2.png")}
+        source={require("../../asset/logoSehat.png")}
         style={{
           position:'absolute',
           width: 54,
@@ -66,11 +38,11 @@ function Home(props) {
       ></Image>
   
      
-        <Text style={{ marginLeft:20, marginTop:30,fontSize: 35,fontWeight: "bold",  color: "black" }}>
-                Persyaratan & Pendaftaran
+        <Text style={{ marginLeft:30, marginTop:30,fontSize: 30,fontWeight: "bold",  color: "black" }}>
+                Persyaratan {'\n'}& Pendaftaran
               </Text>
 
-        <Text style={{ marginLeft:130,marginBottom:20, marginTop:50,fontSize: 25,fontWeight: "bold",  color: "black" }}>
+        <Text style={{ marginLeft:30, marginTop:40,fontSize: 15,fontWeight: "bold",  color: "black" }}>
                 DONOR DARAH
               </Text>
 
@@ -83,7 +55,8 @@ function Home(props) {
           >
 
             <Card style={styles.cardStyle}>
-              <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'KegiatanDonor')} >
+              <TouchableOpacity >
+         
                 <Text
                   style={{
                     margin:10,
@@ -93,8 +66,9 @@ function Home(props) {
                     color:"white",
                   }}
                 >
-                  Biasa {'\n'}
+                  Biasa
                 </Text>
+               
               </TouchableOpacity>
             </Card>
             <Card style={styles.cardStyle}>
@@ -115,14 +89,36 @@ function Home(props) {
               </TouchableOpacity>
             </Card>
           </View>
+
+           <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold",  color: "black" }}>
+                PERMINTAAN DARAH
+              </Text>
+
               <View
             style={{
-              marginTop:30,
               flexDirection: "row",
               justifyContent: "center",
               alignContent: "center",
             }}
           >
+
+            <Card style={styles.cardStyle}>
+              <TouchableOpacity >
+         
+                <Text
+                  style={{
+                    margin:10,
+                    fontSize: 15,
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    color:"white",
+                  }}
+                >
+                  Rumah{'\n'} Sakit
+                </Text>
+               
+              </TouchableOpacity>
+            </Card>
             <Card style={styles.cardStyle}>
               <TouchableOpacity>
                
@@ -135,7 +131,7 @@ function Home(props) {
                     fontWeight: "bold",
                   }}
                 >
-                  Permintaan {'\n'} Darah
+                  Mandiri
                 </Text>
                
               </TouchableOpacity>
@@ -164,8 +160,34 @@ function Home(props) {
                
               </TouchableOpacity>
             </Card>
+           
+
+               
+             <ImageBackground
+  // resizeMethod={'auto'}
+  source={require("../../asset/footer.png")}
+  style={{
+    width: "100%",
+
+  
+    backgroundColor:'#fff',
+    padding: 0,
+    paddingVertical: 90,
+    position: 'absolute',
+  bottom:0
+  }}
+  imageStyle={{
+    resizeMode: "cover",
+    alignSelf: "flex-end"
+  }}
+>
+  
+</ImageBackground>
+       
+     
+     
     </Container>
   );
 }
 
-export default Home;
+export default index;
