@@ -13,17 +13,21 @@ import {
 } from "native-base";
 import {
   ScrollView,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
 } from "react-native-gesture-handler";
+import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
+import { Button } from "react-native-elements/dist/buttons/Button";
 
 
 function Data(props) {
     const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
-  
+  const goNextPage = page => {
+    if (page) {
+      props.navigation.replace(page)
+    }
+  }
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -166,26 +170,32 @@ function Data(props) {
             textShadowRadius: 10,
           }}
         >
-          {'>'} 45 kg (Apabila kurang dari tidak lolos)
+          {''} ≥45 kg (Apabila kurang dari tidak lolos)
         </Text>
-<Card style={{ backgroundColor: "#000", marginTop:40, marginBottom:20,
-    width: "86%",marginLeft:"7%"}}>
-              <TouchableOpacity>
-               
+        <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+
+            <Card style={styles.cardStyle}>
+              <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Berhasil')} >
                 <Text
                   style={{
                     margin:10,
-                    fontSize: 20,
+                    fontSize: 15,
                     textAlign: "center",
-                    color:"white",
                     fontWeight: "bold",
+                    color:"white",
                   }}
                 >
-                  Selanjutnya
+                  SELANJUTNYA
                 </Text>
-               
               </TouchableOpacity>
             </Card>
+             </View>
           
  </ScrollView>
     </Container>

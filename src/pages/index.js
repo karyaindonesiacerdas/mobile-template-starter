@@ -6,5 +6,7 @@ import Account from './account';
 import KegiatanDonor from './kegiatan donor';
 import DonorBiasa from'./DonorBiasa';
 import Data from './Data';
+import Berhasil from './berhasil';
+import Pilih from './pilih';
 
-export {Login, Register, Home, LoadingStart, Account, KegiatanDonor,DonorBiasa,Data};
+export {Login, Register, Home, LoadingStart, Account, KegiatanDonor,DonorBiasa,Data,Berhasil,Pilih};
