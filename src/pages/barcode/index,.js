@@ -15,12 +15,13 @@ import {
 } from "native-base";
 import {
   ScrollView,
+  TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
 
-function Gedung(props) {
+function Barcode(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const goNextPage = page => {
@@ -34,7 +35,7 @@ function Gedung(props) {
       <Image
         source={require("../image/logo.png")}
         style={{
-          width: 54,
+          width: 55,
           height: 60,
           top: 10,
           margin: 20,
@@ -46,7 +47,7 @@ function Gedung(props) {
         source={require("../image/Logo2.png")}
         style={{
           position: "absolute",
-          width: 54,
+          width: 58,
           height: 60,
           margin: 20,
 
@@ -80,12 +81,46 @@ function Gedung(props) {
         >
           PMI Kota Semarang
         </Text>
+         <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "bold",
+
+            textAlign: "center",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          ANDA TERDAFTAR SEBAGAI CALON DONOR{'\n'} DI UDD PMI KOTA SEMARANG{'\n'}SILAKAN KUNJUNGI UDD PMI KOTA SEMARANG
+        </Text>
+         <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 20,
+            fontSize: 15,
+ 
+
+            textAlign: "center",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Scan barcode untuk cetak formulir donor
+        </Text>
         <Image
-        source={require("../image/gedung.jpg")}
+        source={require("../image/barcode.png")}
         style={{
         
-          width: 150,
-          height: 150,
+          width: 250,
+          height: 250,
           margin: 20,
           alignSelf:'center',
 
@@ -93,74 +128,26 @@ function Gedung(props) {
         }}
       ></Image>
 
-        <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
-            fontWeight: "bold",
-
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          UNIT DONOR DARAH PMI KOTA SEMARANG
-        </Text>
+       
         <Text
           style={{
             marginLeft: 30,
             marginRight: 30,
       
             fontSize: 15,
+            marginTop:20,
  
 
-            textAlign: "justify",
+            textAlign: "center",
             color: "black",
             textShadowColor: "#fff",
             textShadowOffset: { width: 1, height: 1 },
             textShadowRadius: 10,
           }}
         >
-          JL. MGR Soegiyopranoto No. 31 Semarang {'\n'}Telp. 024 351 5050
+          Keterangan :{'\n'}Berlaku 24 jam{'\n'}(Terinformasi masa berlaku)
         </Text>
-        <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
-            fontWeight: "bold",
-
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          Pelayanan Donor Setiap Hari 
-        </Text>
-        <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-      
-            fontSize: 15,
- 
-
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          Jam 07.39 s.d. 20.30 WIB
-        </Text>
+        
 
 
         <View
@@ -178,7 +165,7 @@ function Gedung(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Gedung')} >
               <Text
                 style={{
                   margin: 10,
@@ -197,7 +184,7 @@ function Gedung(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Barcode')} >
+            <TouchableOpacity>
               <Text
                 style={{
                   margin: 10,
@@ -213,8 +200,9 @@ function Gedung(props) {
           </Card>
         </View>
       </ScrollView>
+
     </Container>
   );
 }
 
-export default Gedung;
+export default Barcode;

@@ -55,7 +55,7 @@ function Pilih(props) {
   
   marginTop:40,
   width: "86%",marginLeft:"7%"}}>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Gedung')} >
              
               <Text
                 style={{
@@ -76,7 +76,7 @@ function Pilih(props) {
   
   marginTop:40,
   width: "86%",marginLeft:"7%"}}>
-            <TouchableOpacity>
+            <TouchableOpacity >
              
               <Text
                 style={{
@@ -113,6 +113,37 @@ function Pilih(props) {
              
             </TouchableOpacity>
           </Card>
+          <View
+          style={{
+            alignContent: "center",
+            marginLeft:30,
+            flexDirection: "row",
+            justifyContent: "flex-start",
+              alignContent: "center",
+              marginTop:400,
+            
+          }}
+        >
+          <Card
+            style={{
+              backgroundColor: "#000",width: "40%", marginRight:"2%" }}
+          >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Berhasil')} >
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+             
+                  color: "white",
+                  fontWeight: "bold",textAlign:'center',
+                }}
+              >
+                Kembali
+              </Text>
+            </TouchableOpacity>
+          </Card>
+          
+        </View>
     </Container>
   );
 }
