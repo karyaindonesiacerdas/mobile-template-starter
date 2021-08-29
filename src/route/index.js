@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Account, Home, LoadingStart, Login, Register, KegiatanDonor,DonorBiasa,Data,Berhasil,Pilih,Gedung,Barcode} from '../pages';
+import {Account, Home, LoadingStart, Login, Register, KegiatanDonor,DonorBiasa,Data,Berhasil,Pilih,Gedung,Barcode,Status} from '../pages';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createNativeStackNavigator();
@@ -63,6 +63,11 @@ function index() {
                 <Stack.Screen
                     name="Barcode"
                     component={Barcode}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="Status"
+                    component={Status}
                     options={{headerShown: false}}
                 />
             </Stack.Navigator>
