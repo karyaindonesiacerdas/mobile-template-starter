@@ -164,13 +164,6 @@ function Home(props) {
                
               </TouchableOpacity>
             </Card>
-           
-
-               
-            
-       
-     
-     
     </Container>
   );
 }

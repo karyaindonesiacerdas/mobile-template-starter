@@ -5,18 +5,23 @@ import {
   Image,
   Text,
   View,
-  TextInput,
+  TextInput,TouchableOpacity,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { Container, Card } from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
+  
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index() {
+function index(props) {
+  const goNextPage = page => {
+        if (page) {
+            props.navigation.replace(page);
+        }
+    };
   const B = (props) => <Text style={{fontWeight: 'bold'}}>{props.children}</Text>
   return (
     <Container>
@@ -218,7 +223,14 @@ function index() {
             </TouchableOpacity>
           </Card>
           
-           <View
+         
+         
+         
+        </View>
+        
+      </ScrollView>
+      
+ <View
           style={{
             alignContent: "center",
 
@@ -227,6 +239,7 @@ function index() {
               alignContent: "center",
               marginTop:30,
               bottom: 10,
+              position:'absolute',
               
             
           }}
@@ -235,7 +248,7 @@ function index() {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity
+            <TouchableOpacity onPress={goNextPage.bind(this, 'Alur01')}
             >
               <Text
                 style={{
@@ -252,18 +265,12 @@ function index() {
           </Card>
           <View
             style={{
-              width: "50%",marginLeft:"5%"
+              width: "40%",marginLeft:"5%"
             }}
           >
            
           </View>
         </View>
-         
-         
-        </View>
-      </ScrollView>
-      
-
 
       <ImageBackground
         // resizeMethod={'auto'}

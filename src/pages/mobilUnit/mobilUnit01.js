@@ -5,20 +5,23 @@ import {
   Image,
   Text,
   View,
-  TextInput,
+  TextInput,TouchableOpacity,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { Container, Card } from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index() {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+function index(props) {
+  const goNextPage = page => {
+        if (page) {
+            props.navigation.replace(page);
+        }
+    };
+
   return (
     <Container>
       <Image
@@ -51,22 +54,20 @@ function index() {
             marginTop: 10,
             fontSize: 35,
             fontWeight: "bold",
-            color: "red",
           }}
         >
-          Gedung UDD
+          Jadwal
         </Text>
         <Text
           style={{
             marginLeft: 30,
             marginTop: -10,
-            marginBottom: 10,
-            fontSize: 25,
+            fontSize: 35,
             fontWeight: "bold",
-            color: "black",
+            color: "red",
           }}
         >
-          PMI Kota Semarang
+          Mobil Unit
         </Text>
 
         <View
@@ -76,83 +77,309 @@ function index() {
             flexDirection: "row",
             justifyContent: "center",
             alignContent: "center",
-            marginTop: "20%",
+            marginTop: 30,
+            width: "80%",
+            alignSelf: "center",
+          }}
+        >
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit02')}
+            style={{
+              backgroundColor: "#fff",
+              width: 120,
+              height: 100,
+            }}
+          >
+            <Image
+              source={require("../../asset/jadwalMobilUnit.png")}
+              style={{
+                
+                marginTop: 10,
+
+                width: 50,
+                height: 50,
+                alignSelf: "center",
+              }}
+            ></Image>
+
+            <Text
+              style={{
+                marginTop: 5,
+                fontSize: 20,
+                textAlign: "center",
+
+                color: "black",
+                fontWeight: "bold",
+              }}
+            >
+              Senin
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit03')}
+            style={{
+              backgroundColor: "#fff",
+              width: 120,
+              height: 100,
+            }}
+          >
+           <Image
+              source={require("../../asset/jadwalMobilUnit.png")}
+              style={{
+                
+                marginTop: 10,
+
+                width: 50,
+                height: 50,
+                alignSelf: "center",
+              }}
+            ></Image>
+            <Text
+              style={{
+                marginTop: 5,
+                fontSize: 20,
+                textAlign: "center",
+
+                color: "black",
+                fontWeight: "bold",
+              }}
+            >
+              Selasa
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit04')}
+            style={{
+              backgroundColor: "#fff",
+             width: 120,
+              height: 100,
+            }}
+          >
+            <Image
+              source={require("../../asset/jadwalMobilUnit.png")}
+              style={{
+                
+                marginTop: 10,
+
+                width: 50,
+                height: 50,
+                alignSelf: "center",
+              }}
+            ></Image>
+            <Text
+              style={{
+                marginTop: 5,
+                fontSize: 20,
+                textAlign: "center",
+
+                color: "black",
+                fontWeight: "bold",
+              }}
+            >
+              Rabu
+            </Text>
+          </TouchableOpacity>
+        </View>
+         <View
+          style={{
+            alignContent: "center",
+            marginTop:20,
+
+            flexDirection: "row",
+            justifyContent: "center",
+            alignContent: "center",
+     
+            width: "80%",
+            alignSelf: "center",
+          }}
+        >
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit05')}
+            style={{
+              
+              width: 120,
+              height: 100,
+            }}
+          >
+            <Image
+              source={require("../../asset/jadwalMobilUnit.png")}
+              style={{
+                
+                marginTop: 5,
+
+                width: 50,
+                height: 50,
+                alignSelf: "center",
+              }}
+            ></Image>
+
+            <Text
+              style={{
+                marginTop: 5,
+                fontSize: 20,
+                textAlign: "center",
+
+                color: "black",
+                fontWeight: "bold",
+              }}
+            >
+              Kamis
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit06')}
+            style={{
+            
+              width: 120,
+              height: 100,
+            }}
+          >
+           <Image
+              source={require("../../asset/jadwalMobilUnit.png")}
+              style={{
+                
+                marginTop: 5,
+
+                width: 50,
+                height: 50,
+                alignSelf: "center",
+              }}
+            ></Image>
+            <Text
+              style={{
+                marginTop: 5,
+                fontSize: 20,
+                textAlign: "center",
+
+                color: "black",
+                fontWeight: "bold",
+              }}
+            >
+              Jumat
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit07')}
+            style={{
+             
+              width: 120,
+              height: 100,
+            }}
+          >
+            <Image
+              source={require("../../asset/jadwalMobilUnit.png")}
+              style={{
+                
+                marginTop: 5,
+
+                width: 50,
+                height: 50,
+                alignSelf: "center",
+              }}
+            ></Image>
+            <Text
+              style={{
+                marginTop: 5,
+                fontSize: 20,
+                textAlign: "center",
+
+                color: "black",
+                fontWeight: "bold",
+              }}
+            >
+              Sabtu
+            </Text>
+          </TouchableOpacity>
+        </View>
+         <View
+          style={{
+            alignContent: "center",marginTop:20,
+
+            flexDirection: "row",
+            justifyContent: "center",
+            alignContent: "center",
+          
+            width: "80%",
+            alignSelf: "center",
+            marginBottom:100,
+          }}
+        >
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit08')}
+            style={{backgroundColor:'white', borderRadius:10,
+    
+              width: 120,
+              height: 100,
+            }}
+          >
+            <Image
+              source={require("../../asset/jadwalMobilUnit.png")}
+              style={{
+                
+                marginTop: 5,
+
+                width: 50,
+                height: 50,
+                alignSelf: "center",
+              }}
+            ></Image>
+
+            <Text
+              style={{
+                marginTop: 5,
+                fontSize: 20,
+                textAlign: "center",
+
+                color: "black",
+                fontWeight: "bold",
+              }}
+            >
+              Minggu
+            </Text>
+          </TouchableOpacity>
+
+         
+          
+        </View>
+        
+        
+      </ScrollView>
+        <View
+          style={{
+            alignContent: "center",
+
+            flexDirection: "row",
+            justifyContent: "center",
+              alignContent: "center",
+             
+              bottom: 10,
+              
+            
           }}
         >
           <Card
             style={{
-              backgroundColor: "#fff",
-              width: 130,
-              height: 130,
-              marginLeft: "5%",
-            }}
+              backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity>
-              <Icon
-                name="money"
-                type="font-awesome"
-                color="#f50"
-                size={50}
-                style={{
-                  marginTop: 25,
-
-                  width: 55,
-                  height: 50,
-                  alignSelf: "center",
-                }}
-              />
+            <TouchableOpacity onPress={goNextPage.bind(this, 'Dashboard')}
+            >
               <Text
                 style={{
-                  marginTop: 10,
+                  margin: 10,
                   fontSize: 20,
-                  textAlign: "center",
-
-                  color: "black",
-                  fontWeight: "bold",
+             
+                  color: "white",
+                  fontWeight: "bold",textAlign:'center',
                 }}
               >
-                Transaksi
+                Kembali
               </Text>
             </TouchableOpacity>
           </Card>
-          <Card
+          <View
             style={{
-              backgroundColor: "#fff",
-              width: 130,
-              height: 130,
-              marginLeft: "5%",
+              width: "40%",marginLeft:"5%"
             }}
           >
-            <TouchableOpacity>
-              <Icon
-                name="envelope"
-                type="font-awesome"
-                color="#f50"
-                size={50}
-                style={{
-                  marginTop: 25,
-
-                  width: 50,
-                  height: 50,
-                  alignSelf: "center",
-                }}
-              />
-              <Text
-                style={{
-                  marginTop: 10,
-                  fontSize: 20,
-                  textAlign: "center",
-
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                Pesan
-              </Text>
-            </TouchableOpacity>
-          </Card>
+           
+          </View>
         </View>
-      </ScrollView>
+         
 
       <ImageBackground
         // resizeMethod={'auto'}
