@@ -13,16 +13,21 @@ import {
 } from "native-base";
 import {
   ScrollView,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
 } from "react-native-gesture-handler";
-import styles from "./styles";
-import bg from '../image/Background.png'
+import {TouchableOpacity} from 'react-native'
+import styles from "../styles/styles";
+import Bg from '../../image/Baground2.jpg'
+import { Button } from "react-native-elements/dist/buttons/Button";
 
-function CheckBox(props) {
+
+function Data(props) {
     const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
-  
+  const goNextPage = page => {
+    if (page) {
+      props.navigation.replace(page)
+    }
+  }
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -53,14 +58,14 @@ function CheckBox(props) {
      
   
      
-        <Text style={{ marginLeft:30, marginTop:25,fontSize: 35,fontWeight: "bold",  color: "red" }}>
+        <Text style={{ marginLeft:30, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "red" }}>
                 Daftar
               </Text>
               <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
                 Donor Darah Biasa
               </Text>
 
-                 <Text style={{ marginLeft:30, marginTop:0,fontSize: 15, color: "black" }}>
+                 <Text style={{ marginLeft:30, marginTop:30,fontSize: 17, color: "black" }}>
                 Tempat dan Tanggal Lahir (update otomatis) apabila usia kurang dari 17 tahun tidak lolos (otomatis)
               </Text>
                <Text style={{ marginLeft:30, marginTop:30,fontSize: 15,fontWeight: "bold", color: "black" }}>
@@ -70,7 +75,7 @@ function CheckBox(props) {
 
             
 
-              <View style={{marginTop:10,marginLeft:40,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
                 <View style={{}}><CheckBox title='PNS' style={{width:"70%" }}   />
            
                  <CheckBox title='Swasta' style={{width:"70%" }}   />
@@ -96,7 +101,7 @@ function CheckBox(props) {
 
             
 
-              <View style={{marginTop:10,marginLeft:40,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
                 <View style={{}}><CheckBox title='A' style={{width:"70%" }}   />
            
                  <CheckBox title='B' style={{width:"70%" }}   />
@@ -120,7 +125,7 @@ function CheckBox(props) {
 
             
 
-              <View style={{marginTop:10,marginLeft:40,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
                 <View style={{}}>
            
                  <CheckBox title='Positif' style={{width:"70%" }}   />
@@ -132,30 +137,69 @@ function CheckBox(props) {
             
            
                 </View>             
-               
               </View>
-<Card style={{ backgroundColor: "#000", marginTop:40, marginBottom:20,
-    width: "86%",marginLeft:"7%"}}>
-              <TouchableOpacity>
-               
+              <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "bold",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Berat badan (Pilih)
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 0,
+            fontSize: 15,
+            color: "black",
+            fontWeight: "bold",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          {''} ≥45 kg (Apabila kurang dari tidak lolos)
+        </Text>
+        <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+
+            <Card style={styles.cardStyle}>
+              <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Berhasil')} >
                 <Text
                   style={{
                     margin:10,
-                    fontSize: 20,
+                    fontSize: 15,
                     textAlign: "center",
-                    color:"white",
                     fontWeight: "bold",
+                    color:"white",
                   }}
                 >
-                  Selanjutnya
+                  SELANJUTNYA
                 </Text>
-               
               </TouchableOpacity>
             </Card>
+             </View>
           
  </ScrollView>
     </Container>
   );
 }
 
-export default CheckBox;
+export default Data;

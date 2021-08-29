@@ -6,6 +6,11 @@ import LoadingStart from "./loading";
 import Account from "./account";
 import KegiatanDonor from "./kegiatan donor";
 import DonorBiasa from "./donorbiasa";
+import Data from './Data';
+import Berhasil from './berhasil';
+import Pilih from './pilih';
+import Gedung from './gedung';
+import Barcode from './barcode/index,';
 import MobilUnit01 from "./mobilUnit/mobilUnit01.js";
 import MobilUnit02 from "./mobilUnit/mobilUnit02.js";
 import MobilUnit03 from "./mobilUnit/mobilUnit03.js";
@@ -30,6 +35,11 @@ export {
   Account,
   KegiatanDonor,
   DonorBiasa,
+  Data,
+  Pilih,
+  Gedung,
+  Barcode,
+  Berhasil,
   MobilUnit01,
   MobilUnit02,
   MobilUnit03,

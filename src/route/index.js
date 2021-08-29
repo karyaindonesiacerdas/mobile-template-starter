@@ -10,6 +10,11 @@ import {
   Register,
   KegiatanDonor,
   DonorBiasa,
+  Data,
+  Berhasil,
+  Pilih,
+  Gedung,
+  Barcode,
   MobilUnit01,
   MobilUnit02,
   MobilUnit03,
@@ -68,6 +73,31 @@ function index() {
           name="DonorBiasa"
           component={DonorBiasa}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+            name="Data"
+            component={Data}
+            options={{headerShown: false}}
+        />
+        <Stack.Screen
+            name="Berhasil"
+            component={Berhasil}
+            options={{headerShown: false}}
+        />
+        <Stack.Screen
+            name="Pilih"
+            component={Pilih}
+            options={{headerShown: false}}
+        />
+        <Stack.Screen
+            name="Gedung"
+            component={Gedung}
+            options={{headerShown: false}}
+        />
+        <Stack.Screen
+            name="Barcode"
+            component={Barcode}
+            options={{headerShown: false}}
         />
         <Stack.Screen
           name="MobilUnit01"
