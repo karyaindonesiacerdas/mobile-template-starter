@@ -4,12 +4,12 @@ import { Container, Card } from "native-base";
 import { ScrollView,  } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index() {
+function index(props) {
     const goNextPage = page => {
-    if (page) {
-      props.navigation.replace(page)
-    }
-  }
+        if (page) {
+            props.navigation.replace(page);
+        }
+    };
 
   return (
     <Container>

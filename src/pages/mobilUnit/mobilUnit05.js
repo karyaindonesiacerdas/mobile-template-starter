@@ -6,7 +6,7 @@ import {
   Text,
   View,
   StyleSheet,
-  TextInput,
+  TextInput,TouchableOpacity
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import {
@@ -17,7 +17,7 @@ import {
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
+ 
 } from "react-native-gesture-handler";
 import styles from "./styles";
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
@@ -33,9 +33,12 @@ const CONTENT = {
   ],
 };
 
-function index() {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+function index(props) {
+  const goNextPage = page => {
+        if (page) {
+            props.navigation.replace(page);
+        }
+    };
   return (
     <Container>
       <Image
@@ -165,7 +168,7 @@ function index() {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity
+            <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit01')}
             >
               <Text
                 style={{

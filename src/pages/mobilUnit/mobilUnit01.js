@@ -5,20 +5,23 @@ import {
   Image,
   Text,
   View,
-  TextInput,
+  TextInput,TouchableOpacity,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { Container, Card } from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index() {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+function index(props) {
+  const goNextPage = page => {
+        if (page) {
+            props.navigation.replace(page);
+        }
+    };
+
   return (
     <Container>
       <Image
@@ -79,7 +82,7 @@ function index() {
             alignSelf: "center",
           }}
         >
-          <TouchableOpacity
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit02')}
             style={{
               backgroundColor: "#fff",
               width: 120,
@@ -112,7 +115,7 @@ function index() {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit03')}
             style={{
               backgroundColor: "#fff",
               width: 120,
@@ -143,7 +146,7 @@ function index() {
               Selasa
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit04')}
             style={{
               backgroundColor: "#fff",
              width: 120,
@@ -188,7 +191,7 @@ function index() {
             alignSelf: "center",
           }}
         >
-          <TouchableOpacity
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit05')}
             style={{
               
               width: 120,
@@ -221,7 +224,7 @@ function index() {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit06')}
             style={{
             
               width: 120,
@@ -252,7 +255,7 @@ function index() {
               Jumat
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit07')}
             style={{
              
               width: 120,
@@ -297,7 +300,7 @@ function index() {
             marginBottom:100,
           }}
         >
-          <TouchableOpacity
+          <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit08')}
             style={{backgroundColor:'white', borderRadius:10,
     
               width: 120,
@@ -353,7 +356,7 @@ function index() {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity
+            <TouchableOpacity onPress={goNextPage.bind(this, 'Dashboard')}
             >
               <Text
                 style={{
