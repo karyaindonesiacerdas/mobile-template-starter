@@ -1,15 +1,24 @@
 import React, { Component } from "react";
-import { Alert, ImageBackground, Image, Text, View } from "react-native";
+import { Alert, ImageBackground, Image, Text, View,TouchableOpacity, } from "react-native";
 import {
   Container,
   Card,
 } from "native-base";
 import {
-  TouchableOpacity,
+  ScrollView,
+  TouchableWithoutFeedback,
+
 } from "react-native-gesture-handler";
+
 import styles from "./styles";
 
-function index() {
+function index(props) {
+  const goNextPage = page => {
+        if (page) {
+            props.navigation.replace(page);
+        }
+    };
+
   return (
     <Container>
       
@@ -36,26 +45,42 @@ function index() {
           top:10,
         }}
       ></Image>
-  
-     
-        <Text style={{ marginLeft:30, marginTop:30,fontSize: 30,fontWeight: "bold",  color: "black" }}>
-                Persyaratan {'\n'}& Pendaftaran
-              </Text>
 
-        <Text style={{ marginLeft:30, marginTop:40,fontSize: 15,fontWeight: "bold",  color: "black" }}>
-                DONOR DARAH
-              </Text>
+   <ScrollView>
+     <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 25,
+            fontSize: 35,
+            fontWeight: "bold",
+           
+          }}
+        >
+          Alur 
+        </Text>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: -10,
+            fontSize: 35,
+            fontWeight: "bold",
+            color: "red",
+          }}
+        >
+          Donor Darah
+        </Text>
 
               <View
             style={{
               flexDirection: "row",
               justifyContent: "center",
               alignContent: "center",
+              marginTop:20,
             }}
           >
 
             <Card style={styles.cardStyle}>
-              <TouchableOpacity >
+              <TouchableOpacity onPress={goNextPage.bind(this, 'Alur02')}>
          
                 <Text
                   style={{
@@ -72,7 +97,7 @@ function index() {
               </TouchableOpacity>
             </Card>
             <Card style={styles.cardStyle}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={goNextPage.bind(this, 'Alur03')}>
                
                 <Text
                   style={{
@@ -103,7 +128,7 @@ function index() {
           >
 
             <Card style={styles.cardStyle}>
-              <TouchableOpacity >
+              <TouchableOpacity onPress={goNextPage.bind(this, 'Alur04')}>
          
                 <Text
                   style={{
@@ -120,7 +145,7 @@ function index() {
               </TouchableOpacity>
             </Card>
             <Card style={styles.cardStyle}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={goNextPage.bind(this, 'Alur04')}>
                
                 <Text
                   style={{
@@ -142,9 +167,9 @@ function index() {
            <Card style={{ backgroundColor: "#000",
   
   
-    marginTop:40,
+    marginTop:20,
     width: "86%",marginLeft:"7%"}}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={goNextPage.bind(this, 'Alur05')}>
                
                 <Text
                   style={{
@@ -160,14 +185,80 @@ function index() {
                
               </TouchableOpacity>
             </Card>
+             
+             <Card style={{ backgroundColor: "#000",
+  
+  
+    marginTop:5,
+    width: "86%",marginLeft:"7%"}}>
+              <TouchableOpacity onPress={goNextPage.bind(this, 'Alur06')}>
+               
+                <Text
+                  style={{
+                    margin:10,
+                    fontSize: 15,
+                    textAlign: "center",
+                    color:"white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Konseling Donor Darah
+                </Text>
+               
+              </TouchableOpacity >
+            </Card>
+         
+           
+  </ScrollView>
+    <View
+          style={{
            
 
+            flexDirection: "row",
+            justifyContent: "center",
+           
+       
+              bottom: 10,
+              position:'absolute',
+              
+            
+          }}
+        >
+          <Card
+            style={{
+              backgroundColor: "#000",width: "40%", marginRight:"2%" }}
+          >
+            <TouchableOpacity onPress={goNextPage.bind(this, 'Dashboard')}
+            >
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+             
+                  color: "white",
+                  fontWeight: "bold",textAlign:'center',
+                }}
+              >
+                Kembali
+              </Text>
+            </TouchableOpacity>
+          </Card>
+          <View
+            style={{
+              width: "40%",marginLeft:"5%"
+            }}
+          >
+           
+          </View>
+        </View>
+  
+ 
                
              <ImageBackground
   // resizeMethod={'auto'}
   source={require("../../asset/footer.png")}
   style={{
-    width: "100%",
+    width: "100%", zIndex: -1,
 
   
     backgroundColor:'#fff',

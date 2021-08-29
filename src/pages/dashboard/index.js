@@ -213,7 +213,7 @@ function index(props) {
             alignSelf: "center",
           }}
         >
-          <TouchableOpacity style={styles.cardStyle} >
+          <TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'Alur01')} >
             <Image
               source={require("../../asset/alurDonorDarah.png")}
               style={{
