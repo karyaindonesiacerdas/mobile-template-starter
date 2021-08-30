@@ -10,6 +10,7 @@ import Berhasil from './berhasil';
 import Pilih from './pilih';
 import Gedung from './gedung';
 import Barcode from './barcode/index,';
+import Status from "./status";
 export {
   Login,
   Register,
@@ -23,4 +24,5 @@ export {
   Gedung,
   Barcode,
   Berhasil,
+  Status,
 };
