@@ -60,7 +60,7 @@ function Gedung(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 10,
+            marginTop: 0,
             fontSize: 35,
             fontWeight: "bold",
             color: "red",
@@ -71,7 +71,7 @@ function Gedung(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: -10,
+            marginTop: 0,
             marginBottom: 10,
             fontSize: 25,
             fontWeight: "bold",
@@ -84,8 +84,8 @@ function Gedung(props) {
         source={require("../image/gedung.jpg")}
         style={{
         
-          width: 150,
-          height: 150,
+          width: 200,
+          height: 200,
           margin: 20,
           alignSelf:'center',
 
@@ -98,7 +98,7 @@ function Gedung(props) {
             marginLeft: 30,
             marginRight: 30,
             marginTop: 20,
-            fontSize: 15,
+            fontSize: 20,
             fontWeight: "bold",
 
             textAlign: "justify",
@@ -115,7 +115,7 @@ function Gedung(props) {
             marginLeft: 30,
             marginRight: 30,
       
-            fontSize: 15,
+            fontSize: 18,
  
 
             textAlign: "justify",
@@ -132,7 +132,7 @@ function Gedung(props) {
             marginLeft: 30,
             marginRight: 30,
             marginTop: 20,
-            fontSize: 15,
+            fontSize: 20,
             fontWeight: "bold",
 
             textAlign: "justify",
@@ -149,7 +149,7 @@ function Gedung(props) {
             marginLeft: 30,
             marginRight: 30,
       
-            fontSize: 15,
+            fontSize: 18,
  
 
             textAlign: "justify",
@@ -170,7 +170,7 @@ function Gedung(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:30,
+              marginTop:240,
             
           }}
         >

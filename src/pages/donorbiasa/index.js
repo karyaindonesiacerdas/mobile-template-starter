@@ -12,11 +12,13 @@ import {
     Button,
     View,
     Text,
+    Card,
 } from 'native-base';
 import {useMutation} from 'react-query';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Formik} from 'formik';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, } from 'react-native';
+import {TouchableOpacity} from 'react-native'
 import * as Yup from 'yup';
 //from "react-native-gesture-handler";
 //import styles from "../styles/styles";
@@ -248,22 +250,55 @@ function DonorBiasa(props) {
                                     </Text>
                                 </View>
                             )}
-                            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Data')}>
-               
-               <Text
-                 style={{
-                   backgroundColor:'green',
-                   margin:10,
-                   fontSize: 18,
-                   textAlign: "center",
-                   color:"black",
-                   fontWeight: "bold",
-                 }}
-               >
-                 SELANJUTNYA
-               </Text>
-              
-             </TouchableOpacity>
+                            <View
+          style={{
+            alignContent: "center",
+
+            flexDirection: "row",
+            justifyContent: "center",
+              alignContent: "center",
+              marginTop:80,
+            
+          }}
+        >
+          <Card
+            style={{
+              backgroundColor: "#000",width: "40%", marginRight:"2%" }}
+          >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'KegiatanDonor')} >
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+             
+                  color: "white",
+                  fontWeight: "bold",textAlign:'center',
+                }}
+              >
+                Kembali
+              </Text>
+            </TouchableOpacity>
+          </Card>
+          <Card
+            style={{
+              backgroundColor: "#000",width: "40%",marginLeft:"2%"
+            }}
+          >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Data')} >
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20, textAlign:'center',
+
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+              >
+                Selanjutnya
+              </Text>
+            </TouchableOpacity>
+          </Card>
+        </View>
                             
                             {/* {mutation.isLoading && (
                                 <Spinner size="small" color="black" />
