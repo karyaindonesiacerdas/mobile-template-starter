@@ -18,27 +18,39 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 //import styles from "../styles/styles";
 import * as Yup from 'yup';
 import {authLogin} from '../../../config/api';
-import Bg from '../../image/Background.png'
+import Bg from '../../image/Background.png';
+import Axios from 'axios';
+import {StackActions} from '@react-navigation/native';
+import SyncStorage from 'sync-storage';
 
 function Login(props) {
-     // const mutation = useMutation(authRegister, {
-    //     onSettled: (data, error, variables, context) => {
-    //         Toast.show({
-    //             text: data.message,
-    //             type: data.type,
-    //             duration: 2000,
-    //             buttonText: 'Okay',
-    //         });
-    //         if (data?.code == 200) {
-    //             AsyncStorage.setItem('token', data.data);
-    //             setTimeout(() => {
-    //                 props.navigation.replace('HomeApp');
-    //             }, 2000);
-    //             return;
-    //         }
-    //     },
-    // });
-
+    const handleSubmitLogin = value => {
+        const url = 'http://sahabat-utd.id:6005';
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+        const body = {
+            email: value.email,
+            password: value.password,
+        };
+        Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body), {
+            headers,
+        })
+            .then(res => {
+                if (res.data.code == 200) {
+                    SyncStorage.set('token', res.data.token);
+                    alert('sukses login');
+                    props.navigation.replace('Home');
+                } else {
+                    console.log('Error', res.data.message);
+                    alert('email atau password salah');
+                    props.navigation.replace('Login');
+                }
+            })
+            .catch(err => {
+                console.log('test : ', err);
+            });
+    };
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
@@ -46,20 +58,23 @@ function Login(props) {
     };
 
     return (
-        <Container >
-            <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
-            
-      <Image
-        source={require("../../image/logo.png")}
-        style={{
-          position:'absolute',
-          width: 138,
-          height: 150,
-          margin:10,
-          right:126,
-          top:130,
-        }}
-      ></Image>
+        <Container>
+            <Image
+                source={Bg}
+                style={{width: '100%', height: '100%', position: 'absolute'}}
+            />
+
+            <Image
+                source={require('../../image/logo.png')}
+                style={{
+                    position: 'absolute',
+                    width: 138,
+                    height: 150,
+                    margin: 10,
+                    right: 126,
+                    top: 130,
+                }}
+            />
             <Content contentContainerStyle={styles.container}>
                 <View style={styles.logo}>
                     <Text style={{fontWeight: 'bold', fontSize: 40}}>
@@ -72,14 +87,15 @@ function Login(props) {
                         password: '',
                     }}
                     validationSchema={Yup.object({
-                        email: Yup.string()
-                            .email('Invalid email address'),
-                            // .required('Required'),
-                        password: Yup.string()
-                            .max(20, 'Must be 5 characters or less'),
-                            // .required('Required'),
+                        email: Yup.string().email('Invalid email address'),
+                        password: Yup.string().max(
+                            20,
+                            'Must be 5 characters or less',
+                        ),
                     })}
-                    onSubmit={goNextPage.bind(this, 'Dashboard')}>
+                    onSubmit={value => {
+                        handleSubmitLogin(value);
+                    }}>
                     {({
                         handleChange,
                         handleBlur,
@@ -129,19 +145,18 @@ function Login(props) {
                                 style={styles.loginBtn}>
                                 <Text>Login</Text>
                             </Button>
-                            {/* {mutation.isLoading && (
-                                <Spinner size="small" color="black" />
-                            )} */}
                         </View>
                     )}
                 </Formik>
                 <TouchableOpacity onPress={goNextPage.bind(this, 'Register')}>
-                    <Text style={{
-                   margin:10,
-                   fontSize: 20,
-                   textAlign: "center",
-                   color:"white",
-                   fontWeight: "normal",}}>
+                    <Text
+                        style={{
+                            margin: 10,
+                            fontSize: 20,
+                            textAlign: 'center',
+                            color: 'white',
+                            fontWeight: 'normal',
+                        }}>
                         Register
                     </Text>
                 </TouchableOpacity>
