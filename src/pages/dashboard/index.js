@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { ImageBackground, Image, Text, View,TouchableOpacity } from "react-native";
+import {
+  ImageBackground,
+  Image,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { Container, Card } from "native-base";
-import { ScrollView,  } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
 
 function index(props) {
-    const goNextPage = page => {
-        if (page) {
-            props.navigation.replace(page);
-        }
-    };
+  const goNextPage = (page) => {
+    if (page) {
+      props.navigation.replace(page);
+    }
+  };
 
   return (
     <Container>
@@ -22,43 +28,19 @@ function index(props) {
         style={styles.logoSehat}
       ></Image>
       <ScrollView>
-        <View
-          style={{
-            alignContent: "center",
-
-            flexDirection: "row",
-            justifyContent: "center",
-            alignContent: "center",
-            marginTop: 15,
-            width: "80%",
-            alignSelf: "center",
-          }}
-        >
+        <View style={styles.viewAtas}>
           <TouchableOpacity
-            style={{
-              backgroundColor: "#fff",
-              width: 120,
-              height: 120,
-            }}
-          >
+            style={{backgroundColor: "#fff",width: 120,height: 120}}>
             <Image
               source={{
                 uri: "https://www.pmi-kabtegal.or.id/asset/foto_statis/pmi_jadul.jpg",
               }}
-              style={styles.ImageAtas} ></Image>
-
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 12,
-                textAlign: "center",
-
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
+              style={styles.ImageAtas}
+            ></Image>
+            <Text style={styles.textAtas}>
               Sejarah PMI{"\n"}Kota Semarang
             </Text>
+
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -72,20 +54,13 @@ function index(props) {
               source={{
                 uri: "https://pmikotasemarang.or.id/wp-content/uploads/2021/08/WhatsApp-Image-2021-08-14-at-17.14.08-1024x576.jpeg",
               }}
-               style={styles.ImageAtas}></Image>
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 12,
-                textAlign: "center",
-
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
+              style={styles.ImageAtas}
+            ></Image>
+            <Text style={styles.textAtas}>
               Info kegiatan {"\n"}PMI & Donor Darah
             </Text>
           </TouchableOpacity>
+           
           <TouchableOpacity
             style={{
               backgroundColor: "#fff",
@@ -97,235 +72,110 @@ function index(props) {
               source={{
                 uri: "https://pmi.or.id/wp-content/uploads/2021/07/WhatsApp-Image-2021-07-18-at-00.21.46.jpeg",
               }}
-               style={styles.ImageAtas} ></Image>
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 12,
-                textAlign: "center",
-
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
+              style={styles.ImageAtas}
+            ></Image>
+            <Text style={styles.textAtas}>
               Info Plasma {"\n"}Konvalesen
             </Text>
           </TouchableOpacity>
         </View>
 
-        <View
-          style={{
-            alignContent: "center",
-
-            flexDirection: "row",
-            justifyContent: "center",
-            alignContent: "center",
-            marginTop: 20,
-            width: "80%",
-            alignSelf: "center",
-          }}
-        >
-          <Card
-            style={{
-              backgroundColor: "#e60013",
-              width: 120,
-              borderRadius: 10,
-
-              margin: "2%",
-            }}
-          >
+        <View style={styles.viewAtas}>
+          <Card style={styles.cardTengah}>
             <TouchableOpacity>
-              <Text
-                style={{
-                  margin: 10,
-
-                  fontSize: 14,
-                  textAlign: "center",
-
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
+              <Text style={styles.textTengah}>
                 Edit Profil
               </Text>
             </TouchableOpacity>
           </Card>
-          <Card
-            style={{
-              backgroundColor: "#e60013",
-              width: 120,
-              borderRadius: 10,
 
-              margin: "2%",
-            }}
-          >
+          <Card style={styles.cardTengah}>
             <TouchableOpacity>
-              <Text
-                style={{
-                  margin: 10,
-
-                  fontSize: 14,
-                  textAlign: "center",
-
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
+              <Text style={styles.textTengah}>
                 Riwayat Donor
               </Text>
             </TouchableOpacity>
           </Card>
-          <Card
-            style={{
-              backgroundColor: "#e60013",
-              width: 120,
-              borderRadius: 10,
 
-              margin: "2%",
-            }}
-          >
+          <Card style={styles.cardTengah}>
             <TouchableOpacity>
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 14,
-                  textAlign: "center",
-
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
+              <Text style={styles.textTengah}>
                 Logout
               </Text>
             </TouchableOpacity>
           </Card>
         </View>
 
-        <View
-          style={{
-            alignContent: "center",
-
-            flexDirection: "row",
-            justifyContent: "center",
-            alignContent: "center",
-            marginTop: 20,
-            width: "80%",
-            alignSelf: "center",
-          }}
-        >
-          <TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'Alur01')} >
+        <View style={styles.viewAtas}>
+          <TouchableOpacity
+            style={styles.cardStyle}
+            onPress={goNextPage.bind(this, "Alur01")}>
             <Image
               source={require("../../asset/alurDonorDarah.png")}
               style={{
                 marginTop: 5,
-
                 width: 35,
                 height: 50,
                 alignSelf: "center",
               }}
             ></Image>
 
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 12,
-                textAlign: "center",
-
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
+            <Text style={styles.textBawah}>
               Alur Donor {"\n"}Darah
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'Konvalesen01')} >
+          <TouchableOpacity
+            style={styles.cardStyle}
+            onPress={goNextPage.bind(this, "Konvalesen01")}
+          >
             <Image
               source={require("../../asset/persyaratanDonorDarah.png")}
               style={{
                 marginTop: 5,
-
                 width: 49,
                 height: 50,
                 alignSelf: "center",
               }}
             ></Image>
 
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 12,
-                textAlign: "center",
-
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
+            <Text style={styles.textBawah}>
               Persyaratan Donor {"\n"}& pendaftaran
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'InfoStok01')} >
+          <TouchableOpacity
+            style={styles.cardStyle}
+            onPress={goNextPage.bind(this, "InfoStok01")}
+          >
             <Image
               source={require("../../asset/stokDarah.png")}
               style={{
                 marginTop: 5,
-
                 width: 54,
                 height: 50,
                 alignSelf: "center",
-              }}
-            ></Image>
+              }}></Image>
 
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 12,
-                textAlign: "center",
-
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
+            <Text style={styles.textBawah}>
               Info Stok & Kebutuhan Darah
             </Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            alignContent: "center",
-            marginTop: 20,
-
-            flexDirection: "row",
-            justifyContent: "center",
-            alignContent: "center",
-
-            width: "80%",
-            alignSelf: "center",
-          }}
-        >
-          <TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'MobilUnit01')} >
+        <View style={styles.viewAtas}>
+          <TouchableOpacity
+            style={styles.cardStyle}
+            onPress={goNextPage.bind(this, "MobilUnit01")}>
             <Image
               source={require("../../asset/jadwalMobilUnit.png")}
               style={{
                 marginTop: 5,
-
                 width: 50,
                 height: 50,
                 alignSelf: "center",
-              }}
-            ></Image>
+              }}></Image>
 
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 12,
-                textAlign: "center",
-
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
+            <Text style={styles.textBawah}>
               Jadwal Mobil {"\n"}Unit
             </Text>
           </TouchableOpacity>
@@ -335,22 +185,12 @@ function index(props) {
               source={require("../../asset/konselingDonorDarah.png")}
               style={{
                 marginTop: 5,
-
                 width: 45,
                 height: 50,
                 alignSelf: "center",
-              }}
-            ></Image>
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 12,
-                textAlign: "center",
+              }}></Image>
 
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
+            <Text style={styles.textBawah}>
               Konseling Donor Darah Online
             </Text>
           </TouchableOpacity>
@@ -359,22 +199,12 @@ function index(props) {
               source={require("../../asset/palangMerahIndonesia.png")}
               style={{
                 marginTop: 5,
-
                 width: 80,
                 height: 50,
                 alignSelf: "center",
               }}
             ></Image>
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 12,
-                textAlign: "center",
-
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
+            <Text style={styles.textBawah}>
               Kontak PMI Kota Semarang
             </Text>
           </TouchableOpacity>
@@ -384,19 +214,8 @@ function index(props) {
       <ImageBackground
         // resizeMethod={'auto'}
         source={require("../../asset/footer.png")}
-        style={{
-          width: "100%",
-          backgroundColor: "#fff",
-          padding: 0,
-          paddingVertical: 90,
-          position: "absolute",
-          zIndex: -1,
-          bottom: 0,
-        }}
-        imageStyle={{
-          resizeMode: "cover",
-          alignSelf: "flex-end",
-        }}
+        style={styles.imageBackgroundStyle}
+        imageStyle={{resizeMode: "cover",alignSelf: "flex-end"}}
       ></ImageBackground>
     </Container>
   );
