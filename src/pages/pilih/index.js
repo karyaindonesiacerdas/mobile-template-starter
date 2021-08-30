@@ -76,7 +76,7 @@ function Pilih(props) {
   
   marginTop:40,
   width: "86%",marginLeft:"7%"}}>
-            <TouchableOpacity >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'table')} >
              
               <Text
                 style={{

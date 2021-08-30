@@ -24,27 +24,10 @@ import * as Yup from 'yup';
 //import styles from "../styles/styles";
 // import {authRegister} from '../../../config/api';
 import Bg from '../../image/Baground2.jpg'
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 function DonorBiasa(props) {
-    // const mutation = useMutation(authRegister, {
-    //     onSettled: (data, error, variables, context) => {
-    //         Toast.show({
-    //             text: data.message,
-    //             type: data.type,
-    //             duration: 2000,
-    //             buttonText: 'Okay',
-    //         });
-    //         if (data?.code == 200) {
-    //             AsyncStorage.setItem('token', data.data);
-    //             setTimeout(() => {
-    //                 props.navigation.replace('HomeApp');
-    //             }, 2000);
-    //             return;
-    //         }
-    //     },
-    // });
-
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
@@ -83,6 +66,7 @@ function DonorBiasa(props) {
                        DAFTAR DONOR DARAH BIASA
                     </Text>
                 </View>
+                <ScrollView>
                 <Formik
                     initialValues={{
                         email: '',
@@ -306,6 +290,7 @@ function DonorBiasa(props) {
                         </View>
                     )}
                 </Formik>
+                </ScrollView>
             </Content>
         </Container>
     );
