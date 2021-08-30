@@ -118,11 +118,12 @@ const styles = StyleSheet.create({
   checkbox: {
     marginTop:0,marginLeft:30,marginRight:30, flexDirection: "row",justifyContent: "space-between"
   },
-  head: { height: 40, backgroundColor: 'orange',  },
+  head: {  backgroundColor: 'orange',  },
   wrapper: { flexDirection: 'row' },
   title: {  backgroundColor: '#2ecc71'},
   row: { width:"100%"},
-  text: { textAlign: 'center',padding:5 },
+  text: { textAlign: 'center',padding:5,fontSize:10 },
+  textHead: { textAlign: 'center',padding:5,fontSize:12, fontWeight:'bold' },
 });
 
 export default styles;

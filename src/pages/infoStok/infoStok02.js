@@ -23,12 +23,15 @@ import styles from "./styles";
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 
 const CONTENT = {
-  tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
+  tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
  
   tableData: [
-    ['JAM', 'INSTASI', 'KETERANGAN'],
-    ['08.00', 'PMI', 'Umum'],
-    ['Dst', '', ''],
+    ['NO', 'RUMAH SAKIT', 'PRODUK DARAH','GOLONGAN DARAH','RHESUS','JUMLAH','STATUS'],
+    ['1', 'PMI', 'PRC','A','POSITIF','2','Terlayan Pukul\n ....\n Belum terlayani'],
+    ['2','Dst', '', '', '', '', ''],
+    ['3','Dst', '', '', '', '', ''],
+    ['4','Dst', '', '', '', '', ''],
+
   
   ],
 };
@@ -67,36 +70,61 @@ function index() {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 10,
+            marginTop: 25,
             fontSize: 35,
             fontWeight: "bold",
-            color: "red",
+           
           }}
         >
-          Mobil Unit
+          Informasi Stok &
         </Text>
         <Text
           style={{
             marginLeft: 30,
             marginTop: -10,
-            marginBottom: 10,
-            fontSize: 25,
+            fontSize: 35,
             fontWeight: "bold",
-            color: "black",
+            color: "red",
           }}
         >
-          Terdekat
+          Kebutuhan Darah
         </Text>
+
+        <Card
+            style={{
+              backgroundColor: "#70282b",  width:'90%',alignSelf:'center',marginTop:30, marginBottom:30,
+         
+       
+           
+            }}
+          >
+            <TouchableOpacity>
+             
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 15,
+                  borderRadius:10,
+                  textAlign: "center",fontWeight:'bold',
+
+                  color: "white",
+                
+                }}
+              >
+                KEBUTUHAN DARAH
+              </Text>
+            </TouchableOpacity>
+          </Card>
         
          <View style={{width:"90%",justifyContent: "center",
-              alignSelf: "center",}}>
+              alignSelf: "center", marginBottom:100}}>
       <Table borderStyle={{ borderWidth: 1 ,justifyContent: "center",
               alignContent: "center",}}>
         <Row
           data={CONTENT.tableHead}
           flexArr={[1, 2, 1, 1]}
           style={styles.head}
-          textStyle={styles.text}
+          textStyle={styles.textHead}
         />
         <TableWrapper style={styles.wrapper}>
           <Col
@@ -107,7 +135,7 @@ function index() {
           />
           <Rows
             data={CONTENT.tableData}
-            flexArr={[1, 1, 1]}
+            flexArr={[0.5, 1, 1,1.3,1,1,1]}
             style={styles.row}
             textStyle={styles.text}
           />
@@ -115,61 +143,14 @@ function index() {
       </Table>
     </View>
 
-        <Image
-        source={{
-          uri: 'https://www.howtogeek.com/wp-content/uploads/2021/01/google-maps-satellite.png?height=200p&trim=2,2,2,2',
-        }}
-        style={{
-        
-          width: 200,
-          height: 100,
-          marginTop: 40,
-          marginBottom: 20,
-          alignSelf:'center',
-
-          
-        }}
-      ></Image>
-       <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
-            fontWeight: "bold",
-
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          NAMA LOKASI MOBILE UNIT
-        </Text>
- <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            
-            fontSize: 15,
-            fontWeight: "bold",
-
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          ALAMAT LOKASI MOBILE UNIT
-        </Text>
-
+     
        
         
 
 
-        <View
+       
+      </ScrollView>
+         <View
           style={{
             alignContent: "center",
 
@@ -177,6 +158,8 @@ function index() {
             justifyContent: "center",
               alignContent: "center",
               marginTop:30,
+              bottom: 10,
+              
             
           }}
         >
@@ -199,27 +182,14 @@ function index() {
               </Text>
             </TouchableOpacity>
           </Card>
-          <Card
+          <View
             style={{
-              backgroundColor: "#000",width: "40%",marginLeft:"2%"
+              width: "40%",marginLeft:"5%"
             }}
           >
-            <TouchableOpacity>
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20, textAlign:'center',
-
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
-                Selanjutnya
-              </Text>
-            </TouchableOpacity>
-          </Card>
+           
+          </View>
         </View>
-      </ScrollView>
 
       <ImageBackground
         // resizeMethod={'auto'}

@@ -6,7 +6,7 @@ import {
   Text,
   View,
   StyleSheet,
-  TextInput,
+  TextInput,TouchableOpacity
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import {
@@ -17,13 +17,13 @@ import {
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
+  
 } from "react-native-gesture-handler";
 import styles from "./styles";
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 
 const CONTENT = {
-  tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
+  tableHead: ['JADWAL KEGIATAN DONOR DARAH JUMAT'],
  
   tableData: [
     ['JAM', 'INSTASI', 'KETERANGAN'],
@@ -33,9 +33,12 @@ const CONTENT = {
   ],
 };
 
-function index() {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+function index(props) {
+  const goNextPage = page => {
+        if (page) {
+            props.navigation.replace(page);
+        }
+    };
   return (
     <Container>
       <Image
@@ -70,23 +73,46 @@ function index() {
             marginTop: 10,
             fontSize: 35,
             fontWeight: "bold",
-            color: "red",
           }}
         >
-          Mobil Unit
+          Jadwal
         </Text>
         <Text
           style={{
             marginLeft: 30,
             marginTop: -10,
-            marginBottom: 10,
-            fontSize: 25,
+            fontSize: 35,
             fontWeight: "bold",
-            color: "black",
+            color: "red",
           }}
         >
-          Terdekat
+          Mobil Unit
         </Text>
+          <Card
+            style={{
+              backgroundColor: "#70282b",  width:'90%',alignSelf:'center',marginTop:30, marginBottom:30,
+         
+       
+           
+            }}
+          >
+            <TouchableOpacity>
+             
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 15,
+                  borderRadius:10,
+                  textAlign: "center",fontWeight:'bold',
+
+                  color: "white",
+                
+                }}
+              >
+                JADWAL MODAL UNIT - JUMAT
+              </Text>
+            </TouchableOpacity>
+          </Card>
         
          <View style={{width:"90%",justifyContent: "center",
               alignSelf: "center",}}>
@@ -115,68 +141,26 @@ function index() {
       </Table>
     </View>
 
-        <Image
-        source={{
-          uri: 'https://www.howtogeek.com/wp-content/uploads/2021/01/google-maps-satellite.png?height=200p&trim=2,2,2,2',
-        }}
-        style={{
-        
-          width: 200,
-          height: 100,
-          marginTop: 40,
-          marginBottom: 20,
-          alignSelf:'center',
+     
+      
 
-          
-        }}
-      ></Image>
-       <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
-            fontWeight: "bold",
-
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          NAMA LOKASI MOBILE UNIT
-        </Text>
- <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            
-            fontSize: 15,
-            fontWeight: "bold",
-
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          ALAMAT LOKASI MOBILE UNIT
-        </Text>
 
        
         
 
 
-        <View
+       
+      </ScrollView>
+       <View
           style={{
             alignContent: "center",
 
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:30,
+             
+              bottom: 10,
+              
             
           }}
         >
@@ -184,7 +168,7 @@ function index() {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity
+            <TouchableOpacity onPress={goNextPage.bind(this, 'MobilUnit01')}
             >
               <Text
                 style={{
@@ -199,27 +183,14 @@ function index() {
               </Text>
             </TouchableOpacity>
           </Card>
-          <Card
+          <View
             style={{
-              backgroundColor: "#000",width: "40%",marginLeft:"2%"
+              width: "40%",marginLeft:"5%"
             }}
           >
-            <TouchableOpacity>
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20, textAlign:'center',
-
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
-                Selanjutnya
-              </Text>
-            </TouchableOpacity>
-          </Card>
+           
+          </View>
         </View>
-      </ScrollView>
 
       <ImageBackground
         // resizeMethod={'auto'}
