@@ -79,7 +79,7 @@ function Login(props) {
                             .max(20, 'Must be 5 characters or less'),
                             // .required('Required'),
                     })}
-                    onSubmit={goNextPage.bind(this, 'Dashboard')}>
+                    onSubmit={goNextPage.bind(this, 'Home')}>
                     {({
                         handleChange,
                         handleBlur,
