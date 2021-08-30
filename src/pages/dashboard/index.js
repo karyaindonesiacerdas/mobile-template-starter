@@ -245,7 +245,7 @@ function index(props) {
               style={{
                 marginTop: 5,
 
-                width: 50,
+                width: 49,
                 height: 50,
                 alignSelf: "center",
               }}
@@ -265,7 +265,7 @@ function index(props) {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cardStyle} >
+          <TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'InfoStok01')} >
             <Image
               source={require("../../asset/stokDarah.png")}
               style={{

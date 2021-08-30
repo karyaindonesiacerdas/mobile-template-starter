@@ -29,6 +29,9 @@ import {
   Alur04,
   Alur05,
   Alur06,
+  InfoStok01,
+  InfoStok02,
+  InfoStok03,
 } from "../pages";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -169,7 +172,22 @@ function index() {
           component={Alur06}
           options={{ headerShown: false }}
         />
+         <Stack.Screen
+          name="InfoStok01"
+          component={InfoStok01}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="InfoStok02"
+          component={InfoStok02}
+          options={{ headerShown: false }}
+        />
         
+         <Stack.Screen
+          name="InfoStok03"
+          component={InfoStok03}
+          options={{ headerShown: false }}
+        />     
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -25,6 +25,10 @@ import Alur03 from "./alur/alur03.js";
 import Alur04 from "./alur/alur04.js";
 import Alur05 from "./alur/alur05.js";
 import Alur06 from "./alur/alur06.js";
+import InfoStok01 from "./infoStok/infoStok01";
+import InfoStok02 from "./infoStok/infoStok02";
+import InfoStok03 from "./infoStok/infoStok03";
+
 
 export {
   Login,
@@ -54,4 +58,7 @@ export {
   Alur04,
   Alur05,
   Alur06,
+  InfoStok01,
+  InfoStok02,
+  InfoStok03,
 };
