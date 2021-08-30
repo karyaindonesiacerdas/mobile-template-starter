@@ -239,7 +239,7 @@ function index(props) {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cardStyle}>
+          <TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'Konvalesen01')} >
             <Image
               source={require("../../asset/persyaratanDonorDarah.png")}
               style={{

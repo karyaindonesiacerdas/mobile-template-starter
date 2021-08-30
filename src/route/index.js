@@ -32,6 +32,30 @@ import {
   InfoStok01,
   InfoStok02,
   InfoStok03,
+  Konvalesen01,
+  Konvalesen02,
+  Konvalesen03,
+  Konvalesen04,
+  Konvalesen05,
+  Konvalesen06,
+  Konvalesen07,
+  Konvalesen08,
+  Konvalesen09,
+  Konvalesen10,
+  Konvalesen11,
+  Konvalesen12,
+  Konvalesen13,
+  Konvalesen14,
+  Konvalesen16,
+  Konvalesen17,
+  Konvalesen18,
+  Konvalesen19,
+  Konvalesen22,
+  Konvalesen23,
+  Konvalesen24,
+  Konvalesen25,
+  Konvalesen26,
+  Konvalesen27,
 } from "../pages";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -187,7 +211,129 @@ function index() {
           name="InfoStok03"
           component={InfoStok03}
           options={{ headerShown: false }}
+        />   
+         <Stack.Screen
+          name="Konvalesen01"
+          component={Konvalesen01}
+          options={{ headerShown: false }}
+        />  
+        <Stack.Screen
+          name="Konvalesen02"
+          component={Konvalesen02}
+          options={{ headerShown: false }}
         />     
+        <Stack.Screen
+          name="Konvalesen03"
+          component={Konvalesen03}
+          options={{ headerShown: false }}
+        /> 
+        <Stack.Screen
+          name="Konvalesen04"
+          component={Konvalesen04}
+          options={{ headerShown: false }}
+        />  
+        <Stack.Screen
+          name="Konvalesen05"
+          component={Konvalesen05}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen06"
+          component={Konvalesen06}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen07"
+          component={Konvalesen07}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen08"
+          component={Konvalesen08}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen09"
+          component={Konvalesen09}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen10"
+          component={Konvalesen10}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen11"
+          component={Konvalesen11}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen12"
+          component={Konvalesen12}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen13"
+          component={Konvalesen13}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen14"
+          component={Konvalesen14}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen16"
+          component={Konvalesen16}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen17"
+          component={Konvalesen17}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen18"
+          component={Konvalesen18}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen19"
+          component={Konvalesen19}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen22"
+          component={Konvalesen22}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen23"
+          component={Konvalesen23}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen24"
+          component={Konvalesen24}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen25"
+          component={Konvalesen25}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Konvalesen26"
+          component={Konvalesen26}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Konvalesen27"
+          component={Konvalesen27}
+          options={{ headerShown: false }}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
