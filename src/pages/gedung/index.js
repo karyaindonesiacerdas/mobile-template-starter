@@ -81,12 +81,15 @@ function Gedung(props) {
           PMI Kota Semarang
         </Text>
         <Image
-        source={require("../image/gedung.jpg")}
+        source={{
+          uri: 'https://www.howtogeek.com/wp-content/uploads/2021/01/google-maps-satellite.png?height=200p&trim=2,2,2,2',
+        }}
         style={{
         
           width: 200,
-          height: 200,
-          margin: 20,
+          height: 100,
+          marginTop: 40,
+          marginBottom: 20,
           alignSelf:'center',
 
           
@@ -97,7 +100,7 @@ function Gedung(props) {
           style={{
             marginLeft: 30,
             marginRight: 30,
-            marginTop: 20,
+            marginTop: 40,
             fontSize: 20,
             fontWeight: "bold",
 

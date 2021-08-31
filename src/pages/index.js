@@ -12,6 +12,7 @@ import Gedung from './gedung';
 import Barcode from './barcode/index,';
 import Status from "./status";
 import table from "text-table";
+import Tempatmu from "./tempatmu";
 export {
   Login,
   Register,
@@ -27,4 +28,5 @@ export {
   Berhasil,
   Status,
   table,
+  Tempatmu,
 };

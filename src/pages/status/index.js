@@ -61,7 +61,7 @@ function Status(props) {
         <Text style={{ marginLeft:30, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "red" }}>
                 Gedung UDD
               </Text>
-              <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
+              <Text style={{ marginLeft:30, marginTop:0,fontSize: 25,fontWeight: "bold",  color: "black" }}>
                 PMI Kota Semarang
               </Text>
 
@@ -78,20 +78,10 @@ function Status(props) {
                 </View>             
                
               </View>
-
-               <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black", textShadowColor:'#fff',
-    textShadowOffset:{width: 1, height: 1},
-    textShadowRadius:10,
-   }}>
-                Status Donor :
-              </Text>
-          
-
-            
-
-              <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}><CheckBox title='Berhasil' style={{width:"70%" }}   />
-           
+              <View style={{marginTop:0,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent:"flex-start" }}>
+              <CheckBox title='Status Donor :' style={{width:"70%" }}   />
+                <View style={{marginLeft:40,}}>
+                <CheckBox title='Berhasil' style={{width:"70%" }}   />
                  <CheckBox title='Gagal' style={{width:"70%" }}   />
            
                 </View>             

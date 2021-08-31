@@ -1,41 +1,25 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import {
   Alert,
   ImageBackground,
   Image,
   Text,
   View,
-  StyleSheet,
   TextInput,
-  CONTENT,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
-import {
-  Container,
-  Card,
-
-} from "native-base";
+import { Container, Header, Title, Left, HStack, Card } from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
-import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
+import Bg from '../../image/Baground2.jpg'
 
-const CONTENT = {
-  tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
- 
-  tableData: [
-    ['JAM', 'INSTASI', 'KETERANGAN'],
-    ['08.00', 'PMI', 'Umum'],
-    ['Dst', '', ''],
-  
-  ],
-};
-function table(props) {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+function Tempatmu(props) {
+  const [text, onChangeText] = React.useState("Useless Text");
+  const [number, onChangeNumber] = React.useState(null);
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)
@@ -44,6 +28,7 @@ function table(props) {
 
   return (
     <Container>
+        <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
         source={require("../image/logo.png")}
         style={{
@@ -68,58 +53,50 @@ function table(props) {
         }}
       ></Image>
       <ScrollView>
-        
-
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 10,
+            marginTop: 25,
             fontSize: 35,
             fontWeight: "bold",
             color: "red",
           }}
         >
-          Mobil Unit
+          Tempatmu
         </Text>
-        <Text
+         <Text
           style={{
             marginLeft: 30,
-            marginTop: -10,
-            marginBottom: 10,
-            fontSize: 25,
-            fontWeight: "bold",
+            marginTop: 20,
+            fontSize: 15,
             color: "black",
+         
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
           }}
         >
-          Terdekat
+          Ketik Alamat
         </Text>
-        
-         <View style={{width:"90%",justifyContent: "center",
-              alignSelf: "center",}}>
-      <Table borderStyle={{ borderWidth: 1 ,justifyContent: "center",
-              alignContent: "center",}}>
-        <Row
-          data={CONTENT.tableHead}
-          flexArr={[1, 2, 1, 1]}
-          style={styles.head}
-          textStyle={styles.text}
+
+        <TextInput
+          style={{
+            height: 80,
+
+            marginRight: 30,
+            marginLeft: 30,
+            backgroundColor: "#bebebe",
+
+            
+          }}
+          onChangeText={onChangeNumber}
+     
+      
         />
-        <TableWrapper style={styles.wrapper}>
-          <Col
-            data={CONTENT.tableTitle}
-            style={styles.title}
-            heightArr={[28, 28]}
-            textStyle={styles.text}
-          />
-          <Rows
-            data={CONTENT.tableData}
-            flexArr={[1, 1, 1]}
-            style={styles.row}
-            textStyle={styles.text}
-          />
-        </TableWrapper>
-      </Table>
-    </View>
+
+
+       
+       
 
         <Image
         source={{
@@ -129,7 +106,7 @@ function table(props) {
         
           width: 200,
           height: 100,
-          marginTop: 40,
+          marginTop: 20,
           marginBottom: 20,
           alignSelf:'center',
 
@@ -139,50 +116,40 @@ function table(props) {
        <Text
           style={{
             marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
+            marginTop: 0,
             fontSize: 15,
-            fontWeight: "bold",
-
-            textAlign: "justify",
             color: "black",
+         
             textShadowColor: "#fff",
             textShadowOffset: { width: 1, height: 1 },
             textShadowRadius: 10,
           }}
         >
-          NAMA LOKASI MOBILE UNIT
+          Pilih Alamat
         </Text>
- <Text
+
+        <TextInput
           style={{
-            marginLeft: 30,
+            height: 80,
+
             marginRight: 30,
+            marginLeft: 30,
+            backgroundColor: "#bebebe",
+
             
-            fontSize: 15,
-            fontWeight: "bold",
-
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
           }}
-        >
-          ALAMAT LOKASI MOBILE UNIT
-        </Text>
-
-       
-        
-
-
-        <View
+          onChangeText={onChangeNumber}
+     
+      
+        />
+         <View
           style={{
             alignContent: "center",
 
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:30,
+              marginTop:280,
             
           }}
         >
@@ -190,8 +157,7 @@ function table(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity
-            >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih')} >
               <Text
                 style={{
                   margin: 10,
@@ -226,8 +192,10 @@ function table(props) {
           </Card>
         </View>
       </ScrollView>
+
+      
     </Container>
   );
 }
 
-export default table;
+export default Tempatmu;
