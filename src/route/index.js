@@ -17,6 +17,8 @@ import {
   Status,
   table,
   Tempatmu,
+  Sukses,
+  Barcode3,
 } from "../pages";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -95,6 +97,16 @@ function index() {
         <Stack.Screen
             name="Tempatmu"
             component={Tempatmu}
+            options={{headerShown: false}}
+        />
+        <Stack.Screen
+            name="Sukses"
+            component={Sukses}
+            options={{headerShown: false}}
+        />
+        <Stack.Screen
+            name="Barcode3"
+            component={Barcode3}
             options={{headerShown: false}}
         />
       </Stack.Navigator>

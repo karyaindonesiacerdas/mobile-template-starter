@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Alert,
   ImageBackground,
@@ -8,27 +8,39 @@ import {
   TextInput,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
-import { Container, Header, Title, Left, HStack, Card } from "native-base";
+import {
+  Container,
+  Header,
+  Title,
+  Left,
+  Right,
+  Button,
+  Body,
+  Content,
+  Card,
+  CardItem,
+  Footer,
+  FooterTab,
+  Icon,
+} from "native-base";
 import {
   ScrollView,
-  TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
 
-function Tempatmu(props) {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
+function Sukses(props) {
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)
     }
   }
-
   return (
     <Container>
-        <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
         source={require("../image/logo.png")}
         style={{
@@ -64,92 +76,50 @@ function Tempatmu(props) {
         >
           Tempatmu
         </Text>
-         <Text
+
+           <Text
           style={{
             marginLeft: 30,
-            marginTop: 20,
-            fontSize: 15,
-            color: "black",
+            marginRight: 30,
          
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
+            marginTop: 100,
+            marginBottom: 20,
+            fontSize: 20,
+            fontWeight:'bold',
+
+            textAlign: "center",
+            color: "black",
+      
           }}
         >
-          Ketik Alamat
+          TERIMA KASIH
         </Text>
-
-        <TextInput
+        <Text
           style={{
-            height: 80,
-
+            marginLeft: 30,
             marginRight: 30,
-            marginLeft: 30,
-            backgroundColor: "#bebebe",
-
-            
-          }}
-          onChangeText={onChangeNumber}
-     
-      
-        />
-
-
-       
-       
-
-        <Image
-        source={{
-          uri: 'https://www.howtogeek.com/wp-content/uploads/2021/01/google-maps-satellite.png?height=200p&trim=2,2,2,2',
-        }}
-        style={{
-        
-          width: 200,
-          height: 100,
-          marginTop: 20,
-          marginBottom: 20,
-          alignSelf:'center',
-
-          
-        }}
-      ></Image>
-       <Text
-          style={{
-            marginLeft: 30,
+         
             marginTop: 0,
-            fontSize: 15,
+            marginBottom: 20,
+            fontSize: 18,
+            fontWeight:'normal',
+
+            textAlign: "center",
             color: "black",
-         
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
+      
           }}
         >
-          Pilih Alamat
+          ANDA SUDAH MENDAFTARKAN DIRI SEBAGAI CALON DONOR,KAMI AKAN SEGERA{'\N'}
+          MENGINFORMASIKAN JADWAL PENGAMBILAN{'\N'}DARAH ANDA
         </Text>
-
-        <TextInput
-          style={{
-            height: 80,
-
-            marginRight: 30,
-            marginLeft: 30,
-            backgroundColor: "#bebebe",
-
-            
-          }}
-          onChangeText={onChangeNumber}
-     
-      
-        />
-         <View
+          <View
           style={{
             alignContent: "center",
 
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:280,
+              marginTop:370,
             
           }}
         >
@@ -157,7 +127,7 @@ function Tempatmu(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Tempatmu')} >
               <Text
                 style={{
                   margin: 10,
@@ -176,7 +146,7 @@ function Tempatmu(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Sukses')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Barcode3')} >
               <Text
                 style={{
                   margin: 10,
@@ -191,11 +161,11 @@ function Tempatmu(props) {
             </TouchableOpacity>
           </Card>
         </View>
-      </ScrollView>
 
       
+      </ScrollView>
     </Container>
   );
 }
 
-export default Tempatmu;
+export default Sukses;

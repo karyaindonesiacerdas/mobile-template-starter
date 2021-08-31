@@ -13,6 +13,8 @@ import Barcode from './barcode/index,';
 import Status from "./status";
 import table from "text-table";
 import Tempatmu from "./tempatmu";
+import Sukses from "./suksestempat";
+import Barcode3 from "./barcodetempat";
 export {
   Login,
   Register,
@@ -29,4 +31,6 @@ export {
   Status,
   table,
   Tempatmu,
+  Sukses,
+  Barcode3,
 };
