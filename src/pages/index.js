@@ -11,10 +11,11 @@ import Pilih from './pilih';
 import Gedung from './gedung';
 import Barcode from './barcode/index,';
 import Status from "./status";
-import table from "text-table";
+import table from "./table";
 import Tempatmu from "./tempatmu";
 import Sukses from "./suksestempat";
 import Barcode3 from "./barcodetempat";
+import Kegiatan from "./kegiatan";
 export {
   Login,
   Register,
@@ -33,4 +34,5 @@ export {
   Tempatmu,
   Sukses,
   Barcode3,
+  Kegiatan,
 };
