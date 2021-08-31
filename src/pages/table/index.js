@@ -182,7 +182,7 @@ function table(props) {
                             width: '40%',
                             marginRight: '2%',
                         }}>
-                        <TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih')} >
                             <Text
                                 style={{
                                     margin: 10,
