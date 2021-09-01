@@ -6137,6 +6137,11 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
+"react-native-add-calendar-event@^4.0.0":
+  "integrity" "sha512-gkqidtFquTKR46QWdV12iu86OQJGNTnsT1C58EBPFy1MyCFJZar6y6wRBLaWNfvnhgeGzJeA0ODb8KmD+HU8GQ=="
+  "resolved" "https://registry.npmjs.org/react-native-add-calendar-event/-/react-native-add-calendar-event-4.0.0.tgz"
+  "version" "4.0.0"
+
 "react-native-codegen@^0.0.7":
   "integrity" "sha512-dwNgR8zJ3ALr480QnAmpTiqvFo+rDtq6V5oCggKhYFlRjzOmVSFn3YD41u8ltvKS5G2nQ8gCs2vReFFnRGLYng=="
   "resolved" "https://registry.npmjs.org/react-native-codegen/-/react-native-codegen-0.0.7.tgz"

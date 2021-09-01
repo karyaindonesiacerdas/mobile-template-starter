@@ -60,7 +60,7 @@ function Gedung(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 10,
+            marginTop: 0,
             fontSize: 35,
             fontWeight: "bold",
             color: "red",
@@ -71,7 +71,7 @@ function Gedung(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: -10,
+            marginTop: 0,
             marginBottom: 10,
             fontSize: 25,
             fontWeight: "bold",
@@ -81,12 +81,15 @@ function Gedung(props) {
           PMI Kota Semarang
         </Text>
         <Image
-        source={require("../image/gedung.jpg")}
+        source={{
+          uri: 'https://www.howtogeek.com/wp-content/uploads/2021/01/google-maps-satellite.png?height=200p&trim=2,2,2,2',
+        }}
         style={{
         
-          width: 150,
-          height: 150,
-          margin: 20,
+          width: 200,
+          height: 100,
+          marginTop: 40,
+          marginBottom: 20,
           alignSelf:'center',
 
           
@@ -97,8 +100,8 @@ function Gedung(props) {
           style={{
             marginLeft: 30,
             marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
+            marginTop: 40,
+            fontSize: 20,
             fontWeight: "bold",
 
             textAlign: "justify",
@@ -115,7 +118,7 @@ function Gedung(props) {
             marginLeft: 30,
             marginRight: 30,
       
-            fontSize: 15,
+            fontSize: 18,
  
 
             textAlign: "justify",
@@ -132,7 +135,7 @@ function Gedung(props) {
             marginLeft: 30,
             marginRight: 30,
             marginTop: 20,
-            fontSize: 15,
+            fontSize: 20,
             fontWeight: "bold",
 
             textAlign: "justify",
@@ -149,7 +152,7 @@ function Gedung(props) {
             marginLeft: 30,
             marginRight: 30,
       
-            fontSize: 15,
+            fontSize: 18,
  
 
             textAlign: "justify",
@@ -170,7 +173,7 @@ function Gedung(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:30,
+              marginTop:290,
             
           }}
         >
@@ -197,7 +200,7 @@ function Gedung(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Barcode')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kalender')} >
               <Text
                 style={{
                   margin: 10,

@@ -30,7 +30,7 @@ import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
 
-function Berhasil(props) {
+function Sukses(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const goNextPage = page => {
@@ -74,58 +74,44 @@ function Berhasil(props) {
             color: "red",
           }}
         >
-          Daftar
+          Tempatmu
         </Text>
-        <Text
-          style={{
-            marginLeft: 30,
-            marginTop: -10,
-            fontSize: 25,
-            fontWeight: "bold",
-            color: "black",
-          }}
-        >
-          Donor Darah Biasa
-        </Text>
-          <Card
-          style={{
-            backgroundColor: "#70282b",
-            marginTop: 50,
-            marginBottom: 20,
-            width: "86%",
-            marginLeft: "7%",
-          }}
-        >
+
            <Text
           style={{
             marginLeft: 30,
             marginRight: 30,
          
-            marginTop: 20,
+            marginTop: 100,
             marginBottom: 20,
             fontSize: 20,
             fontWeight:'bold',
 
             textAlign: "center",
-            color: "white",
+            color: "black",
       
           }}
         >
-          SELAMAT{'\n'}ANDA LOLOS SEBAGAI{'\n'}CALON PENDONOR
+          TERIMA KASIH
         </Text>
-          
-        </Card>
-
-        <Card
+        <Text
           style={{
-            backgroundColor: "#000",
-            marginTop: 30,
+            marginLeft: 30,
+            marginRight: 30,
+         
+            marginTop: 0,
             marginBottom: 20,
-            width: "86%",
-            marginLeft: "7%",
+            fontSize: 18,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
           }}
         >
-          </Card>
+          ANDA SUDAH MENDAFTARKAN DIRI SEBAGAI CALON DONOR,KAMI AKAN SEGERA{'\N'}
+          MENGINFORMASIKAN JADWAL PENGAMBILAN{'\N'}DARAH ANDA
+        </Text>
           <View
           style={{
             alignContent: "center",
@@ -141,7 +127,7 @@ function Berhasil(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Data')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Tempatmu')} >
               <Text
                 style={{
                   margin: 10,
@@ -160,7 +146,7 @@ function Berhasil(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Barcode3')} >
               <Text
                 style={{
                   margin: 10,
@@ -182,4 +168,4 @@ function Berhasil(props) {
   );
 }
 
-export default Berhasil;
+export default Sukses;

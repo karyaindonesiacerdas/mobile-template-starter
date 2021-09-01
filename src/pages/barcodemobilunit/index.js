@@ -21,7 +21,7 @@ import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
 
-function Barcode(props) {
+function Barcode2(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const goNextPage = page => {
@@ -67,19 +67,19 @@ function Barcode(props) {
             color: "red",
           }}
         >
-          Gedung UDD
+          Mobil Unit
         </Text>
         <Text
           style={{
             marginLeft: 30,
             marginTop: 0,
             marginBottom: 10,
-            fontSize: 25,
+            fontSize: 35,
             fontWeight: "bold",
             color: "black",
           }}
         >
-          PMI Kota Semarang
+          Terdekat
         </Text>
          <Text
           style={{
@@ -96,8 +96,68 @@ function Barcode(props) {
             textShadowRadius: 10,
           }}
         >
-          ANDA TERDAFTAR SEBAGAI CALON DONOR{'\n'} DI UDD PMI KOTA SEMARANG{'\n'}SILAKAN KUNJUNGI UDD PMI KOTA SEMARANG
+          ANDA TERDAFTAR SEBAGAI CALON DONOR DI
         </Text>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 0,
+            fontSize: 15,
+            fontWeight: "bold",
+
+            textAlign: "center",
+            color: "red",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          NAMA LOKASI MOBILE UNIT
+        </Text>
+        <View style={{
+          marginTop:0,marginLeft:30,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+                <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 3,
+            marginTop: 0,
+            fontSize: 15,
+            fontWeight: "bold",
+
+            textAlign: "center",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          SILAKAN KUNJUNGI
+        </Text>
+                    </View>
+                    <View>
+                    <Text
+          style={{
+            marginLeft: 0,
+            marginRight: 0,
+            marginTop: 0,
+            fontSize: 15,
+            fontWeight: "bold",
+
+            textAlign: "center",
+            color: "red",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          NAMA LOKASI MOBILE UNIT
+        </Text>
+                    </View>
+                </View>
          <Text
           style={{
             marginLeft: 30,
@@ -165,7 +225,7 @@ function Barcode(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kalender')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'table')} >
               <Text
                 style={{
                   margin: 10,
@@ -205,4 +265,4 @@ function Barcode(props) {
   );
 }
 
-export default Barcode;
+export default Barcode2;

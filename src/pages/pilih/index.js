@@ -50,6 +50,12 @@ function Pilih(props) {
           top: 10,
         }}
       ></Image>
+      <Text style={{ marginLeft:170, marginTop:80,fontSize: 50,fontWeight: "bold",  color: "black" }}>
+                Pilih
+              </Text>
+              <Text style={{ marginLeft:70, marginTop:0,fontSize: 40,fontWeight: "bold",  color: "black" }}>
+                Tempat Donormu
+              </Text>
       <Card style={{ backgroundColor: "brown",
   
   
@@ -76,7 +82,7 @@ function Pilih(props) {
   
   marginTop:40,
   width: "86%",marginLeft:"7%"}}>
-            <TouchableOpacity >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'table')} >
              
               <Text
                 style={{
@@ -97,7 +103,7 @@ function Pilih(props) {
   
   marginTop:40,
   width: "86%",marginLeft:"7%"}}>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Tempatmu')} >
              
               <Text
                 style={{
@@ -120,7 +126,7 @@ function Pilih(props) {
             flexDirection: "row",
             justifyContent: "flex-start",
               alignContent: "center",
-              marginTop:400,
+              marginTop:250,
             
           }}
         >
