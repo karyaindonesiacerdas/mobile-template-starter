@@ -157,7 +157,7 @@ function Barcode(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:30,
+              marginTop:140,
             
           }}
         >
@@ -165,7 +165,7 @@ function Barcode(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Gedung')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kalender')} >
               <Text
                 style={{
                   margin: 10,

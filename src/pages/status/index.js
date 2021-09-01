@@ -94,7 +94,7 @@ function Status(props) {
             flexDirection: "row",
             justifyContent: "flex-start",
               alignContent: "center",
-              marginTop:300,
+              marginTop:350,
             
           }}
         >
@@ -116,7 +116,7 @@ function Status(props) {
               </Text>
             </TouchableOpacity>
           </Card>
-          
+         
         </View>
           
  </ScrollView>

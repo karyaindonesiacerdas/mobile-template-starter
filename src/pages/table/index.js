@@ -26,12 +26,12 @@ import {
 import Bg from '../../image/Baground2.jpg'
 
 const CONTENT = {
-    tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
+    tableHead: ['                   JADWAL KEGIATAN DONOR DARAH SENIN'],
 
     tableData: [
-        ['JAM', 'INSTASI', 'KETERANGAN'],
-        ['08.00', 'PMI', 'Umum'],
-        ['Dst', '', ''],
+        ['               JAM', '             INSTASI', '       KETERANGAN'],
+        ['              08.00', '               PMI', '             Umum'],
+        ['                Dst', '', ''],
     ],
 };
 function table(props) {

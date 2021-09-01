@@ -173,7 +173,7 @@ function Gedung(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:240,
+              marginTop:290,
             
           }}
         >
@@ -200,7 +200,7 @@ function Gedung(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Barcode')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kalender')} >
               <Text
                 style={{
                   margin: 10,
