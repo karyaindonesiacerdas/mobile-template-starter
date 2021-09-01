@@ -1,44 +1,38 @@
-import React from 'react';
+import React, { Component } from "react";
+import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
+import { CheckBox } from 'react-native-elements';
 import {
-    Container,
-    Content,
-    Item,
-    Input,
-    Spinner,
-    Toast,
-    ListItem,
-    CheckBox,
-    Body,
-    Button,
-    View,
-    Text,
-    Card,
-} from 'native-base';
-import {useMutation} from 'react-query';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Formik} from 'formik';
-import {Image, StyleSheet, } from 'react-native';
+  Container,
+  Header,
+  Title,
+  Left,
+   HStack,
+ 
+  Card,
+  
+} from "native-base";
+import {
+  ScrollView,
+} from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
-import * as Yup from 'yup';
-//from "react-native-gesture-handler";
-//import styles from "../styles/styles";
-// import {authRegister} from '../../../config/api';
+import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
-import { ScrollView } from 'react-native-gesture-handler';
+import { Button } from "react-native-elements/dist/buttons/Button";
 
 
 function DonorBiasa(props) {
-    const goNextPage = page => {
-        if (page) {
-            props.navigation.replace(page);
-        }
-    };
-
-    return (
-        <Container >
-            <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
-            <Image
-        source={require("../../image/logo.png")}
+    const [text, onChangeText] = React.useState("Useless Text");
+  const [number, onChangeNumber] = React.useState(null);
+  const goNextPage = page => {
+    if (page) {
+      props.navigation.replace(page)
+    }
+  }
+  return (
+    <Container>
+      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+      <Image
+        source={require("../image/logo.png")}
         style={{
           width: 54,
           height: 60,
@@ -49,7 +43,7 @@ function DonorBiasa(props) {
         }}
       ></Image>
       <Image
-        source={require("../../image/Logo2.png")}
+        source={require("../image/Logo2.png")}
         style={{
           position:'absolute',
           width: 54,
@@ -60,181 +54,160 @@ function DonorBiasa(props) {
           top:10,
         }}
       ></Image>
-            <Content contentContainerStyle={styles.container}>
-                <View style={styles.logo}>
-                    <Text style={{fontWeight: 'bold', fontSize: 25}}>
-                       DAFTAR DONOR DARAH BIASA
-                    </Text>
-                </View>
-                <ScrollView>
-                <Formik
-                    initialValues={{
-                        email: '',
-                        password: '',
-                    }}
-                    validationSchema={Yup.object({
-                        email: Yup.string()
-                            .email('Invalid email address')
-                            .required('Required'),
-                        password: Yup.string()
-                            .max(20, 'Must be 5 characters or less')
-                            .required('Required'),
-                    })}
-                    onSubmit={goNextPage.bind(this, 'Data')}>
-                    {({
-                        handleChange,
-                        handleBlur,
-                        handleSubmit,
-                        values,
-                        errors,
-                    }) => (
-                        <View>
-                            <Item style={styles.inputView} regular>
-                                <Input
-                                    style={styles.inputText}
-                                    onChangeText={handleChange('Text')}
-                                    onBlur={handleBlur('Text')}
-                                    value={values.Text}
-                                    placeholder="NO KTP"
-                                    underlineColorAndroid="transparent"
-                                />
-                            </Item>
-                            {errors.Text && (
-                                <View>
-                                    <Text style={styles.errMsg}>
-                                        {errors.Text}
-                                    </Text>
-                                </View>
-                            )}
-                            
-                        </View>
-                    )}
-                </Formik>
-                <Formik
-                    initialValues={{
-                        email: '',
-                        password: '',
-                    }}
-                    validationSchema={Yup.object({
-                        email: Yup.string()
-                            .email('Invalid email address')
-                            .required('Required'),
-                        password: Yup.string()
-                            .max(20, 'Must be 5 characters or less')
-                            .required('Required'),
-                    })}
-                    onSubmit={goNextPage.bind(this, 'Data')}>
-                    {({
-                        handleChange,
-                        handleBlur,
-                        handleSubmit,
-                        values,
-                        errors,
-                    }) => (
-                        <View>
-                            <Item style={styles.inputView} regular>
-                                <Input
-                                    style={styles.inputText}
-                                    onChangeText={handleChange('email')}
-                                    onBlur={handleBlur('email')}
-                                    value={values.username}
-                                    placeholder="Nama Lengkap"
-                                    underlineColorAndroid="transparent"
-                                />
-                            </Item>
-                            {errors.username && (
-                                <View>
-                                    <Text style={styles.errMsg}>
-                                        {errors.username}
-                                    </Text>
-                                </View>
-                            )}
-                            <Item style={styles.inputView} regular>
-                                <Input
-                                    style={styles.inputText}
-                                    onChangeText={handleChange('alamat')}
-                                    onBlur={handleBlur('alamat')}
-                                    value={values.alamat}
-                                    placeholder="Alamat Lengkap"
-                                    underlineColorAndroid="transparent"
-                                />
-                            </Item>
-                            {errors.alamat && (
-                                <View>
-                                    <Text style={styles.errMsg}>
-                                        {errors.alamat}
-                                    </Text>
-                                </View>
-                            )}
-                            <Item style={styles.inputView} regular>
-                                <Input
-                                    style={styles.inputText}
-                                    onChangeText={handleChange('kelurahan')}
-                                    onBlur={handleBlur('kelurahan')}
-                                    value={values.kelurahan}
-                                    placeholder="Kelurahan"
-                                    underlineColorAndroid="transparent"
-                                />
-                            </Item>
-                            {errors.kelurahan && (
-                                <View>
-                                    <Text style={styles.errMsg}>
-                                        {errors.kelurahan}
-                                    </Text>
-                                </View>
-                            )}
-                            <Item style={styles.inputView} regular>
-                                <Input
-                                    style={styles.inputText}
-                                    onChangeText={handleChange('Kecamatan')}
-                                    onBlur={handleBlur('kecamatan')}
-                                    value={values.kecamatan}
-                                    placeholder="Kecamatan"
-                                    underlineColorAndroid="transparent"
-                                />
-                            </Item>
-                            {errors.kecamatan && (
-                                <View>
-                                    <Text style={styles.errMsg}>
-                                        {errors.kecamatan}
-                                    </Text>
-                                </View>
-                            )}
-                            <Item style={styles.inputView} regular>
-                                <Input
-                                    style={styles.inputText}
-                                    onChangeText={handleChange('Kab/kota')}
-                                    onBlur={handleBlur('kab/kota')}
-                                    value={values.kabkota}
-                                    placeholder="Kab/Kota"
-                                    underlineColorAndroid="transparent"
-                                />
-                            </Item>
-                            {errors.kabkota && (
-                                <View>
-                                    <Text style={styles.errMsg}>
-                                        {errors.kabkota}
-                                    </Text>
-                                </View>
-                            )}
-                            <Item style={styles.inputView} regular>
-                                <Input
-                                    style={styles.inputText}
-                                    onChangeText={handleChange('No.Telp')}
-                                    onBlur={handleBlur('No.Telp')}
-                                    value={values.Notelp}
-                                    placeholder="No.Telp"
-                                    underlineColorAndroid="transparent"
-                                />
-                            </Item>
-                            {errors.Notelp && (
-                                <View>
-                                    <Text style={styles.errMsg}>
-                                        {errors.Notelp}
-                                    </Text>
-                                </View>
-                            )}
-                            <View
+      <ScrollView>
+     
+  
+     
+        <Text style={{ marginLeft:30, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "red" }}>
+                Daftar
+              </Text>
+              <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
+                Donor Darah Biasa
+              </Text>
+
+                 
+              <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          No.KTP
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Nama Lengkap
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Alamat Lengkap
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Kelurahan
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Kecamatan
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Kab/Kota
+        </Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 16,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+            alignContent:"space-around"
+          }}
+        >
+          No.Telp
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        <View
           style={{
             alignContent: "center",
 
@@ -278,59 +251,15 @@ function DonorBiasa(props) {
                   fontWeight: "bold",
                 }}
               >
-                Selanjutnya
+                  Selanjutnya
               </Text>
             </TouchableOpacity>
           </Card>
         </View>
-                            
-                            {/* {mutation.isLoading && (
-                                <Spinner size="small" color="black" />
-                            )} */}
-                        </View>
-                    )}
-                </Formik>
-                </ScrollView>
-            </Content>
-        </Container>
-    );
+          
+ </ScrollView>
+    </Container>
+  );
 }
 
 export default DonorBiasa;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: '10%',
-    },
-    logo: {
-        marginBottom: 20,
-        alignSelf: 'center',
-    },
-    inputView: {
-        backgroundColor: 'white',
-        borderRadius: 25,
-        height: 50,
-        marginBottom: 20,
-        justifyContent: 'center',
-        padding: 20,
-    },
-    inputText: {
-        height: 50,
-    },
-    registerBtn: {
-        width: '70%',
-        borderRadius: 25,
-        height: 50,
-        marginTop: 10,
-        alignSelf: 'center',
-    },
-    errMsg: {
-        color: 'red',
-        marginBottom: 10,
-        marginTop: -10,
-        fontSize: 12,
-        paddingLeft: 10,
-    },
-});
