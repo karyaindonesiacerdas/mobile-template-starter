@@ -16,6 +16,7 @@ import Tempatmu from "./tempatmu";
 import Sukses from "./suksestempat";
 import Barcode3 from "./barcodetempat";
 import Kegiatan from "./kegiatan";
+import Barcode2 from "./barcodemobilunit";
 export {
   Login,
   Register,
@@ -35,4 +36,5 @@ export {
   Sukses,
   Barcode3,
   Kegiatan,
+  Barcode2,
 };

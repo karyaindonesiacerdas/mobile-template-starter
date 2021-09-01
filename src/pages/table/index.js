@@ -23,6 +23,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
+import Bg from '../../image/Baground2.jpg'
 
 const CONTENT = {
     tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
@@ -44,6 +45,7 @@ function table(props) {
 
     return (
         <Container>
+            <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
             <Image
                 source={require('../image/logo.png')}
                 style={{
@@ -81,7 +83,7 @@ function table(props) {
                         marginLeft: 30,
                         marginTop: -10,
                         marginBottom: 10,
-                        fontSize: 25,
+                        fontSize: 35,
                         fontWeight: 'bold',
                         color: 'black',
                     }}>
@@ -174,7 +176,7 @@ function table(props) {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignContent: 'center',
-                        marginTop: 30,
+                        marginTop: 300,
                     }}>
                     <Card
                         style={{
@@ -202,7 +204,7 @@ function table(props) {
                             width: '40%',
                             marginLeft: '2%',
                         }}>
-                        <TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Barcode2')} >
                             <Text
                                 style={{
                                     margin: 10,

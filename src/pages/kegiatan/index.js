@@ -199,7 +199,11 @@ function Kegiatan(props) {
         >
             Waktu Pelaksanaan
         </Text>
-
+        <View style={{
+          marginTop:0,marginLeft:30,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
         <Text
           style={{
             marginLeft: 30,
@@ -213,7 +217,77 @@ function Kegiatan(props) {
             alignContent:"space-around"
           }}
         >
-          hari
+          Hari
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        </View>
+        <View>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+            alignContent:"space-around"
+          }}
+        >
+          Tanggal
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        </View>
+        
+        <View>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+            alignContent:"space-around"
+          }}
+        >
+          Waktu
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        </View>
+        </View>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 16,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+            alignContent:"space-around"
+          }}
+        >
+          Upload Surat Permohonan
         </Text>
 
         <TextInput
@@ -228,7 +302,7 @@ function Kegiatan(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:30,
+              marginTop:15,
             
           }}
         >
@@ -265,7 +339,7 @@ function Kegiatan(props) {
                   fontWeight: "bold",
                 }}
               >
-                Selanjutnya
+                Kirim
               </Text>
             </TouchableOpacity>
           </Card>
