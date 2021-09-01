@@ -20,7 +20,7 @@ import Bg from '../../image/Baground2.jpg'
 import { Button } from "react-native-elements/dist/buttons/Button";
 
 
-function DonorBiasa(props) {
+function Kegiatan(props) {
     const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
   const goNextPage = page => {
@@ -59,10 +59,10 @@ function DonorBiasa(props) {
   
      
         <Text style={{ marginLeft:30, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "red" }}>
-                Daftar
+                Kegiatan
               </Text>
               <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
-                Donor Darah Biasa
+                Donor Darah
               </Text>
 
                  
@@ -78,7 +78,7 @@ function DonorBiasa(props) {
             textShadowRadius: 10,
           }}
         >
-          No.KTP
+          Instansi / Koordinator Donor
         </Text>
 
         <TextInput
@@ -98,7 +98,7 @@ function DonorBiasa(props) {
             textShadowRadius: 10,
           }}
         >
-          Nama Lengkap
+          Alamat Tempat Donor
         </Text>
 
         <TextInput
@@ -118,7 +118,7 @@ function DonorBiasa(props) {
             textShadowRadius: 10,
           }}
         >
-          Alamat Lengkap
+          Nama Koordinator
         </Text>
 
         <TextInput
@@ -138,7 +138,7 @@ function DonorBiasa(props) {
             textShadowRadius: 10,
           }}
         >
-          Kelurahan
+          No.Telp
         </Text>
 
         <TextInput
@@ -158,7 +158,7 @@ function DonorBiasa(props) {
             textShadowRadius: 10,
           }}
         >
-          Kecamatan
+          Target
         </Text>
 
         <TextInput
@@ -178,14 +178,102 @@ function DonorBiasa(props) {
             textShadowRadius: 10,
           }}
         >
-          Kab/Kota
+          Kriteria Pelaksanaan Donor
         </Text>
+
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        <Text style={{
+            marginLeft: 30,
+            marginTop:20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+            Waktu Pelaksanaan
+        </Text>
+        <View style={{
+          marginTop:0,marginLeft:30,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+            alignContent:"space-around"
+          }}
+        >
+          Hari
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        </View>
+        <View>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+            alignContent:"space-around"
+          }}
+        >
+          Tanggal
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        </View>
         
+        <View>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+            alignContent:"space-around"
+          }}
+        >
+          Waktu
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        </View>
+        </View>
         <Text
           style={{
             marginLeft: 30,
@@ -199,7 +287,7 @@ function DonorBiasa(props) {
             alignContent:"space-around"
           }}
         >
-          No.Telp
+          Upload Surat Permohonan
         </Text>
 
         <TextInput
@@ -214,7 +302,7 @@ function DonorBiasa(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:80,
+              marginTop:15,
             
           }}
         >
@@ -222,7 +310,7 @@ function DonorBiasa(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'KegiatanDonor')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Home')} >
               <Text
                 style={{
                   margin: 10,
@@ -241,7 +329,7 @@ function DonorBiasa(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Data')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
               <Text
                 style={{
                   margin: 10,
@@ -251,7 +339,7 @@ function DonorBiasa(props) {
                   fontWeight: "bold",
                 }}
               >
-                  Selanjutnya
+                Kirim
               </Text>
             </TouchableOpacity>
           </Card>
@@ -262,4 +350,4 @@ function DonorBiasa(props) {
   );
 }
 
-export default DonorBiasa;
+export default Kegiatan;

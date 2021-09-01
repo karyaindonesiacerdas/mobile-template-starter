@@ -6,14 +6,14 @@ import {
   Text,
   View,
   StyleSheet,
-  TextInput,
+  TextInput,TouchableOpacity,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { Container, Card } from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
+  
 } from "react-native-gesture-handler";
 import styles from "./styles";
 import {
@@ -50,9 +50,12 @@ const CONTENT = {
   ],
 };
 
-function index() {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+function index(props) {
+   const goNextPage = page => {
+        if (page) {
+            props.navigation.replace(page);
+        }
+    };
   return (
     <Container>
       <Image
@@ -199,7 +202,7 @@ function index() {
             marginRight: "2%",
           }}
         >
-          <TouchableOpacity>
+          <TouchableOpacity onPress={goNextPage.bind(this, 'InfoStok01')}>
             <Text
               style={{
                 margin: 10,

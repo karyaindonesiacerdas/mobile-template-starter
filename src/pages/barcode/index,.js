@@ -61,7 +61,7 @@ function Barcode(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 10,
+            marginTop: 0,
             fontSize: 35,
             fontWeight: "bold",
             color: "red",
@@ -72,7 +72,7 @@ function Barcode(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: -10,
+            marginTop: 0,
             marginBottom: 10,
             fontSize: 25,
             fontWeight: "bold",
@@ -157,7 +157,7 @@ function Barcode(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:30,
+              marginTop:140,
             
           }}
         >
@@ -165,7 +165,7 @@ function Barcode(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Gedung')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kalender')} >
               <Text
                 style={{
                   margin: 10,
@@ -184,7 +184,7 @@ function Barcode(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Status')} >
               <Text
                 style={{
                   margin: 10,

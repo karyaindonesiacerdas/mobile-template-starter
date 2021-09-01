@@ -6,8 +6,9 @@ import {
   Text,
   View,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
-import { CheckBox } from 'react-native-elements';
+import { CheckBox } from "react-native-elements";
 import {
   Container,
   Header,
@@ -22,18 +23,21 @@ import {
   Footer,
   FooterTab,
   Icon,
-  
 } from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index() {
+function index(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
+  const goNextPage = (page) => {
+    if (page) {
+      props.navigation.replace(page);
+    }
+  };
   return (
     <Container>
       <Image
@@ -90,66 +94,106 @@ function index() {
             marginTop: 20,
             fontSize: 15,
 
-            textAlign: 'justify',
+            textAlign: "justify",
             color: "black",
             textShadowColor: "#fff",
             textShadowOffset: { width: 1, height: 1 },
             textShadowRadius: 10,
           }}
         >
-          Saya telah mendapatkan dan membaca semua informasi
-yang diberikan serta menjawab pertanyaan dengan jujur.
-Saya mengerti dan bersedia menyumbangkan darah dengan
-volume sesuai standar yang diberlakukan dan setuju diambil
-contoh darahnya untuk keperluan pemeriksaan
-laboratorium berupa uji golongan darah, HIV, Hepatitis B,
-hepatitis C, Sifilis dan infeksi lainnya yang diperlukan saya
-serta untuk kepentingan penelitian. Bila ternyata hasil
-pemeriksaan laboratorium perlu ditindaklanjuti, maka saya
-setuju untuk diberikan kabar tertulis.
-{'\n'}Jika komponen plasma tidak terpakai untuk transfusi, saya
-setuju dapat dijadikan produk plasma untuk pengobatan.
+          Saya telah mendapatkan dan membaca semua informasi yang diberikan
+          serta menjawab pertanyaan dengan jujur. Saya mengerti dan bersedia
+          menyumbangkan darah dengan volume sesuai standar yang diberlakukan dan
+          setuju diambil contoh darahnya untuk keperluan pemeriksaan
+          laboratorium berupa uji golongan darah, HIV, Hepatitis B, hepatitis C,
+          Sifilis dan infeksi lainnya yang diperlukan saya serta untuk
+          kepentingan penelitian. Bila ternyata hasil pemeriksaan laboratorium
+          perlu ditindaklanjuti, maka saya setuju untuk diberikan kabar
+          tertulis.
+          {"\n"}Jika komponen plasma tidak terpakai untuk transfusi, saya setuju
+          dapat dijadikan produk plasma untuk pengobatan.
         </Text>
-         <View style={{marginTop:20,marginLeft:40,marginRight:40, flexDirection: "row",justifyContent: "center", }}>
-                <View style={{}}>
-           
-                 <CheckBox title='Setuju' checked={check1}
-        onPress={() => setCheck1(!check1)}  style={{width:"70%",  }}  />
-                <CheckBox title='Tidak Setuju' style={{width:"70%",  }} checked={check2}
-        onPress={() => setCheck2(!check2)}   />
-               
-                </View>
-               
-                     
-               
-              </View>
-
-       
-
-
-        <Card
+        <View
           style={{
-            backgroundColor: "#000",
-            marginTop: 30,
-            marginBottom: 20,
-            width: "86%",
-            marginLeft: "7%",
+            marginTop: 20,
+            marginLeft: 40,
+            marginRight: 40,
+            flexDirection: "row",
+            justifyContent: "center",
           }}
         >
-          <TouchableOpacity>
-            <Text
-              style={{
-                margin: 10,
-                fontSize: 20,
-                textAlign: "center",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              Selanjutnya
-            </Text>
-          </TouchableOpacity>
-        </Card>
+          <View style={{}}>
+            <CheckBox
+              title="Setuju"
+              checked={check1}
+              onPress={() => setCheck1(!check1)}
+              style={{ width: "70%" }}
+            />
+            <CheckBox
+              title="Tidak Setuju"
+              style={{ width: "70%" }}
+              checked={check2}
+              onPress={() => setCheck2(!check2)}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{
+            alignContent: "center",
+
+            flexDirection: "row",
+            justifyContent: "center",
+            alignContent: "center",
+            marginTop: 30,
+            marginBottom: 10,
+          }}
+        >
+          <Card
+            style={{
+              backgroundColor: "#000",
+              width: "40%",
+              marginRight: "2%",
+            }}
+          >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen06")}>
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+
+                  color: "white",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Kembali
+              </Text>
+            </TouchableOpacity>
+          </Card>
+          <Card
+            style={{
+              backgroundColor: "#000",
+              width: "40%",
+              marginLeft: "2%",
+            }}
+          >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen09")}>
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+                  textAlign: "center",
+
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+              >
+                Selanjutnya
+              </Text>
+            </TouchableOpacity>
+          </Card>
+        </View>
       </ScrollView>
 
       <ImageBackground

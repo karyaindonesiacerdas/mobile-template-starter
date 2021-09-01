@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import {
   Alert,
   ImageBackground,
@@ -8,39 +8,27 @@ import {
   TextInput,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
-import {
-  Container,
-  Header,
-  Title,
-  Left,
-  Right,
-  Button,
-  Body,
-  Content,
-  Card,
-  CardItem,
-  Footer,
-  FooterTab,
-  Icon,
-} from "native-base";
+import { Container, Header, Title, Left, HStack, Card } from "native-base";
 import {
   ScrollView,
+  TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
 
-function Berhasil(props) {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+function Tempatmu(props) {
+  const [text, onChangeText] = React.useState("Useless Text");
+  const [number, onChangeNumber] = React.useState(null);
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)
     }
   }
+
   return (
     <Container>
-      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+        <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
         source={require("../image/logo.png")}
         style={{
@@ -74,66 +62,94 @@ function Berhasil(props) {
             color: "red",
           }}
         >
-          Daftar
+          Tempatmu
         </Text>
-        <Text
+         <Text
           style={{
             marginLeft: 30,
-            marginTop: -10,
-            fontSize: 25,
-            fontWeight: "bold",
-            color: "black",
-          }}
-        >
-          Donor Darah Biasa
-        </Text>
-          <Card
-          style={{
-            backgroundColor: "#70282b",
-            marginTop: 50,
-            marginBottom: 20,
-            width: "86%",
-            marginLeft: "7%",
-          }}
-        >
-           <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-         
             marginTop: 20,
-            marginBottom: 20,
-            fontSize: 20,
-            fontWeight:'bold',
-
-            textAlign: "center",
-            color: "white",
-      
+            fontSize: 15,
+            color: "black",
+         
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
           }}
         >
-          SELAMAT{'\n'}ANDA LOLOS SEBAGAI{'\n'}CALON PENDONOR
+          Ketik Alamat
         </Text>
-          
-        </Card>
 
-        <Card
+        <TextInput
           style={{
-            backgroundColor: "#000",
-            marginTop: 30,
-            marginBottom: 20,
-            width: "86%",
-            marginLeft: "7%",
+            height: 80,
+
+            marginRight: 30,
+            marginLeft: 30,
+            backgroundColor: "#bebebe",
+
+            
+          }}
+          onChangeText={onChangeNumber}
+     
+      
+        />
+
+
+       
+       
+
+        <Image
+        source={{
+          uri: 'https://www.howtogeek.com/wp-content/uploads/2021/01/google-maps-satellite.png?height=200p&trim=2,2,2,2',
+        }}
+        style={{
+        
+          width: 200,
+          height: 100,
+          marginTop: 20,
+          marginBottom: 20,
+          alignSelf:'center',
+
+          
+        }}
+      ></Image>
+       <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 0,
+            fontSize: 15,
+            color: "black",
+         
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
           }}
         >
-          </Card>
-          <View
+          Pilih Alamat
+        </Text>
+
+        <TextInput
+          style={{
+            height: 80,
+
+            marginRight: 30,
+            marginLeft: 30,
+            backgroundColor: "#bebebe",
+
+            
+          }}
+          onChangeText={onChangeNumber}
+     
+      
+        />
+         <View
           style={{
             alignContent: "center",
 
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:370,
+              marginTop:280,
             
           }}
         >
@@ -141,7 +157,7 @@ function Berhasil(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Data')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih')} >
               <Text
                 style={{
                   margin: 10,
@@ -160,7 +176,7 @@ function Berhasil(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Sukses')} >
               <Text
                 style={{
                   margin: 10,
@@ -175,11 +191,11 @@ function Berhasil(props) {
             </TouchableOpacity>
           </Card>
         </View>
+      </ScrollView>
 
       
-      </ScrollView>
     </Container>
   );
 }
 
-export default Berhasil;
+export default Tempatmu;

@@ -198,6 +198,7 @@ function Register(props) {
                             )} */}
                         </View>
                     )}
+                    
                 </Formik>
             </Content>
         </Container>
