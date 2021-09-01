@@ -1,201 +1,269 @@
 import React, { Component } from "react";
-import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
-import { CheckBox } from 'react-native-elements';
 import {
-  Container,
-  Header,
-  Title,
-  Left,
-   HStack,
- 
-  Card,
-  
-} from "native-base";
+  Alert,
+  ImageBackground,
+  Image,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import { CheckBox } from "react-native-elements";
+import { Container, Header, Title, Left, HStack, Card } from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index() {
-    const [text, onChangeText] = React.useState("Useless Text");
+function index(props) {
+  const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
-  
+  const goNextPage = (page) => {
+    if (page) {
+      props.navigation.replace(page);
+    }
+  };
+
   return (
     <Container>
-      
       <Image
         source={require("../../asset/logoUDD.png")}
         style={{
           width: 54,
           height: 60,
-          top:10,
-          margin:20,
-    
-          left:10,
+          top: 10,
+          margin: 20,
+
+          left: 10,
         }}
       ></Image>
       <Image
         source={require("../../asset/logoSehat.png")}
         style={{
-          position:'absolute',
+          position: "absolute",
           width: 54,
           height: 60,
-          margin:20,
-       
-          right:10,
-          top:10,
+          margin: 20,
+
+          right: 10,
+          top: 10,
         }}
       ></Image>
       <ScrollView>
-     
-  
-     
-        <Text style={{ marginLeft:30, marginTop:25,fontSize: 35,fontWeight: "bold",  color: "red" }}>
-                Daftar
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 25,
+            fontSize: 35,
+            fontWeight: "bold",
+            color: "red",
+          }}
+        >
+          Daftar
+        </Text>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: -10,
+            fontSize: 25,
+            fontWeight: "bold",
+            color: "black",
+          }}
+        >
+          Donor Darah Konvalesen
+        </Text>
+
+        <Text
+          style={{ marginLeft: 30, marginTop: 0, fontSize: 15, color: "black" }}
+        >
+          Tempat dan Tanggal Lahir (update otomatis) apabila usia kurang dari 17
+          tahun tidak lolos (otomatis)
+        </Text>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 30,
+            fontSize: 15,
+            fontWeight: "bold",
+            color: "black",
+          }}
+        >
+          Pekerjaan (Pilih salah satu)
+        </Text>
+
+        <View
+          style={{
+            marginTop: 10,
+            marginLeft: 40,
+            marginRight: 40,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{}}>
+            <CheckBox title="PNS" style={{ width: "70%" }} />
+
+            <CheckBox title="Swasta" style={{ width: "70%" }} />
+            <CheckBox title="Polri" style={{ width: "70%" }} />
+            <CheckBox title="Petani" style={{ width: "70%" }} />
+          </View>
+
+          <View>
+            <CheckBox title="BUMN" style={{ width: "70%" }} />
+            <CheckBox title="Pelajar" style={{ width: "70%" }} />
+            <CheckBox title="Wirausaha" style={{ width: "70%" }} />
+            <CheckBox title="Lain-lain" style={{ width: "70%" }} />
+          </View>
+        </View>
+
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "bold",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Golongan Darah
+        </Text>
+
+        <View
+          style={{
+            marginTop: 10,
+            marginLeft: 40,
+            marginRight: 40,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{}}>
+            <CheckBox title="A" style={{ width: "70%" }} />
+
+            <CheckBox title="B" style={{ width: "70%" }} />
+            <CheckBox title="O" style={{ width: "70%" }} />
+          </View>
+
+          <View>
+            <CheckBox title="AB" style={{ width: "70%" }} />
+            <CheckBox title="X (Tidak tahu)" style={{ width: "70%" }} />
+          </View>
+        </View>
+
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "bold",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Rhesus
+        </Text>
+
+        <View
+          style={{
+            marginTop: 10,
+            marginLeft: 40,
+            marginRight: 40,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{}}>
+            <CheckBox title="Positif" style={{ width: "70%" }} />
+            <CheckBox title="X (Tidak Tahu)" style={{ width: "70%" }} />
+          </View>
+
+          <View>
+            <CheckBox title="Negatif" style={{ width: "70%" }} />
+          </View>
+        </View>
+
+        <View
+          style={{
+            alignContent: "center",
+
+            flexDirection: "row",
+            justifyContent: "center",
+            alignContent: "center",
+            marginTop: 30,
+            marginBottom: 10,
+          }}
+        >
+          <Card
+            style={{
+              backgroundColor: "#000",
+              width: "40%",
+              marginRight: "2%",
+            }}
+          >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen03")}>
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+
+                  color: "white",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Kembali
               </Text>
-              <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
-                Donor Darah Konvalesen
+            </TouchableOpacity>
+          </Card>
+          <Card
+            style={{
+              backgroundColor: "#000",
+              width: "40%",
+              marginLeft: "2%",
+            }}
+          >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen05")}>
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+                  textAlign: "center",
+
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+              >
+                Selanjutnya
               </Text>
+            </TouchableOpacity>
+          </Card>
+        </View>
+      </ScrollView>
 
-                 <Text style={{ marginLeft:30, marginTop:0,fontSize: 15, color: "black" }}>
-                Tempat dan Tanggal Lahir (update otomatis) apabila usia kurang dari 17 tahun tidak lolos (otomatis)
-              </Text>
-               <Text style={{ marginLeft:30, marginTop:30,fontSize: 15,fontWeight: "bold", color: "black" }}>
-                Pekerjaan (Pilih salah satu)
-              </Text>
-            
+      <ImageBackground
+        // resizeMethod={'auto'}
+        source={require("../../asset/footer.png")}
+        style={{
+          width: "100%",
 
-            
-
-              <View style={{marginTop:10,marginLeft:40,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}><CheckBox title='PNS' style={{width:"70%" }}   />
-           
-                 <CheckBox title='Swasta' style={{width:"70%" }}   />
-                <CheckBox title='Polri' style={{width:"70%" }}   />
-                <CheckBox title='Petani' style={{width:"70%" }}   />
-                </View>
-               
-                <View><CheckBox title='BUMN' style={{width:"70%" }}   />
-                <CheckBox title='Pelajar' style={{width:"70%" }}   />
-                <CheckBox title='Wirausaha' style={{width:"70%" }}   />
-                <CheckBox title='Lain-lain' style={{width:"70%" }}   />
-                </View>             
-               
-              </View>
-
-               <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black", textShadowColor:'#fff',
-    textShadowOffset:{width: 1, height: 1},
-    textShadowRadius:10,
-   }}>
-                Golongan Darah
-              </Text>
-          
-
-            
-
-              <View style={{marginTop:10,marginLeft:40,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}><CheckBox title='A' style={{width:"70%" }}   />
-           
-                 <CheckBox title='B' style={{width:"70%" }}   />
-                <CheckBox title='O' style={{width:"70%" }}   />
-               
-                </View>
-               
-                <View><CheckBox title='AB' style={{width:"70%" }}   />
-                <CheckBox title='X (Tidak tahu)' style={{width:"70%" }}   />
-           
-                </View>             
-               
-              </View>
-
-               <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black" , textShadowColor:'#fff',
-    textShadowOffset:{width: 1, height: 1},
-    textShadowRadius:10,}}>
-                Rhesus
-              </Text>
-            
-
-            
-
-              <View style={{marginTop:10,marginLeft:40,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}>
-           
-                 <CheckBox title='Positif' style={{width:"70%" }}   />
-                <CheckBox title='X (Tidak Tahu)' style={{width:"70%" }}   />
-               
-                </View>
-               
-                <View><CheckBox title='Negatif' style={{width:"70%" }}   />
-            
-           
-                </View>             
-               
-              </View>
-
-                
-
-             
-             
-            
-             
-
-             
-             
-        
-            
-              
-            
-
-              
-
-
-           <Card style={{ backgroundColor: "#000", marginTop:40, marginBottom:20,
-    width: "86%",marginLeft:"7%"}}>
-              <TouchableOpacity>
-               
-                <Text
-                  style={{
-                    margin:10,
-                    fontSize: 20,
-                    textAlign: "center",
-                    color:"white",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Selanjutnya
-                </Text>
-               
-              </TouchableOpacity>
-            </Card>
-          
- </ScrollView>
-               
-             <ImageBackground
-  // resizeMethod={'auto'}
-  source={require("../../asset/footer.png")}
-  style={{
-    width: "100%",
-
-  
-    backgroundColor:'#fff',
-    padding: 0,
-    paddingVertical: 90,
-    position: 'absolute',
-    zIndex:-1,
-  bottom:0
-  }}
-  imageStyle={{
-    resizeMode: "cover",
-    alignSelf: "flex-end"
-  }}
->
-  
-</ImageBackground>
-       
-     
-     
+          backgroundColor: "#fff",
+          padding: 0,
+          paddingVertical: 90,
+          position: "absolute",
+          zIndex: -1,
+          bottom: 0,
+        }}
+        imageStyle={{
+          resizeMode: "cover",
+          alignSelf: "flex-end",
+        }}
+      ></ImageBackground>
     </Container>
   );
 }

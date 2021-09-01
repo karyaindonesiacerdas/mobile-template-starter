@@ -5,7 +5,7 @@ import {
   Image,
   Text,
   View,
-  TextInput,
+  TextInput,TouchableOpacity,
 } from "react-native";
 import {
   Container,
@@ -25,13 +25,18 @@ import {
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
+  
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index() {
+function index(props) {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
+  const goNextPage = (page) => {
+    if (page) {
+      props.navigation.replace(page);
+    }
+  };
   return (
     <Container>
       <Image
@@ -223,29 +228,63 @@ function index() {
         />
 
 
-        <Card
+     
+         <View
           style={{
-            backgroundColor: "#000",
-            marginTop: 40,
-            marginBottom: 20,
-            width: "86%",
-            marginLeft: "7%",
+            alignContent: "center",
+
+            flexDirection: "row",
+            justifyContent: "center",
+            alignContent: "center",
+            marginTop: 30,
+            marginBottom: 10,
           }}
         >
-          <TouchableOpacity>
-            <Text
-              style={{
-                margin: 10,
-                fontSize: 20,
-                textAlign: "center",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              Selanjutnya
-            </Text>
-          </TouchableOpacity>
-        </Card>
+          <Card
+            style={{
+              backgroundColor: "#000",
+              width: "40%",
+              marginRight: "2%",
+            }}
+          >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen04")}>
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+
+                  color: "white",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Kembali
+              </Text>
+            </TouchableOpacity>
+          </Card>
+          <Card
+            style={{
+              backgroundColor: "#000",
+              width: "40%",
+              marginLeft: "2%",
+            }}
+          >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen06")}>
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+                  textAlign: "center",
+
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+              >
+                Selanjutnya
+              </Text>
+            </TouchableOpacity>
+          </Card>
+        </View>
       </ScrollView>
 
       <ImageBackground
