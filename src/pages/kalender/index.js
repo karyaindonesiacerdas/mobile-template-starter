@@ -128,7 +128,9 @@ function Kalender(props) {
                         </TableWrapper>
                     </Table>
                 </View>
-
+                <View style={{}}>
+                    <CheckBox title='Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan' style={{width:"70%" }}   />
+          </View>
                 <View
                     style={{
                         alignContent: 'center',
@@ -136,7 +138,7 @@ function Kalender(props) {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignContent: 'center',
-                        marginTop: 450,
+                        marginTop: 400,
                     }}>
                     <Card
                         style={{

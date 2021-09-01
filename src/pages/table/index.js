@@ -30,7 +30,7 @@ const CONTENT = {
 
     tableData: [
         ['               JAM', '             INSTASI', '       KETERANGAN'],
-        ['              08.00', '               PMI', '             Umum'],
+        ['              08.00', '                PMI', '             Umum'],
         ['                Dst', '', ''],
     ],
 };
