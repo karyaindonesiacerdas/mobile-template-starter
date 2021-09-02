@@ -126,11 +126,9 @@ function Home(props) {
                     </TouchableOpacity>
                 </Card>
             </View>
-
             <Card
                 style={{
                     backgroundColor: '#000',
-
                     marginTop: 40,
                     width: '86%',
                     marginLeft: '7%',
@@ -153,8 +151,9 @@ function Home(props) {
             <Card
                 style={{
                     backgroundColor: '#000',
-                    width: '40%',
-                    marginRight: '2%',
+                    marginTop: 40,
+                    width: '86%',
+                    marginLeft: '7%',
                 }}>
                 <TouchableOpacity
                     style={styles.button}
@@ -162,11 +161,10 @@ function Home(props) {
                     <Text
                         style={{
                             margin: 10,
-                            fontSize: 20,
-
+                            fontSize: 15,
+                            textAlign: 'center',
                             color: 'white',
                             fontWeight: 'bold',
-                            textAlign: 'center',
                         }}>
                         Kembali
                     </Text>
