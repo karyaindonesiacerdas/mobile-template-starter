@@ -19,6 +19,8 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Yup from 'yup';
 import {authLogin} from '../../../config/api';
 import Bg from '../../image/Background.png';
+import SyncStorage from 'sync-storage';
+import Axios from 'axios';
 
 function Login(props) {
     const handleSubmitLogin = value => {
