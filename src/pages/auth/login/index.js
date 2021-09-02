@@ -38,7 +38,7 @@ function Login(props) {
                 if (res.data.code == 200) {
                     SyncStorage.set('token', res.data.token);
                     alert('sukses login');
-                    props.navigation.replace('Home');
+                    props.navigation.replace('Dashboard');
                 } else {
                     console.log('Error', res.data.message);
                     alert('email atau password salah');
