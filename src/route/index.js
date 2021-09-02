@@ -22,9 +22,6 @@ import {
     Barcode2,
     Kalender,
     Dashboard,
-    InfoStok01,
-    InfoStok02,
-    InfoStok03,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -128,21 +125,6 @@ function index() {
                 <Stack.Screen
                     name="Dashboard"
                     component={Dashboard}
-                    options={{headerShown: false}}
-                />
-                <Stack.Screen
-                    name="InfoStok01"
-                    component={InfoStok01}
-                    options={{headerShown: false}}
-                />
-                <Stack.Screen
-                    name="InfoStok02"
-                    component={InfoStok02}
-                    options={{headerShown: false}}
-                />
-                <Stack.Screen
-                    name="InfoStok03"
-                    component={InfoStok03}
                     options={{headerShown: false}}
                 />
             </Stack.Navigator>
