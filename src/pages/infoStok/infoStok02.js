@@ -50,17 +50,16 @@ function InfoStok02(props) {
         headers,
     })
         .then(res => {
-            console.log(res.data);
             if (res.data.code == 200) {
-                for (let i = 0; i < res.data.length; i++) {
+                for (let i = 0; i < res.data.data.length; i++) {
                     CONTENT.tableData.push([
-                        res.data[i].rumah_sakit,
-                        res.data[i].produk_darah,
-                        res.data[i].golongan_darah,
-                        res.data[i].rhesus,
-                        res.data[i].jumlah_permintaan,
-                        res.data[i].jumlah_terpenuhi,
-                        res.data[i].keterangan,
+                        res.data.data[i].rumah_sakit,
+                        res.data.data[i].produk_darah,
+                        res.data.data[i].golongan_darah,
+                        res.data.data[i].rhesus,
+                        res.data.data[i].jumlah_permintaan,
+                        res.data.data[i].jumlah_terpenuhi,
+                        res.data.data[i].keterangan,
                     ]);
                 }
             } else {
