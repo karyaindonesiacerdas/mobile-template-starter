@@ -93,6 +93,29 @@ function Pilih(props) {
             </Card>
             <Card
                 style={{
+                    backgroundColor: 'brown',
+
+                    marginTop: 60,
+                    width: '86%',
+                    marginLeft: '7%',
+                }}>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={goNextPage.bind(this, 'table')}>
+                    <Text
+                        style={{
+                            margin: 10,
+                            fontSize: 20,
+                            textAlign: 'center',
+                            color: 'white',
+                            fontWeight: 'bold',
+                        }}>
+                        Mobil Unit Terdekat
+                    </Text>
+                </TouchableOpacity>
+            </Card>
+            <Card
+                style={{
                     backgroundColor: '#000',
                     marginTop: 10,
                     width: '86%',
@@ -108,28 +131,6 @@ function Pilih(props) {
                             textAlign: 'center',
                             color: 'white',
                             fontWeight: 'bold',
-                        }}>
-                        Kembali
-                    </Text>
-                </TouchableOpacity>
-            </Card>
-            <Card
-                style={{
-                    backgroundColor: '#000',
-                    width: '40%',
-                    marginRight: '2%',
-                }}>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={goNextPage.bind(this, 'Berhasil')}>
-                    <Text
-                        style={{
-                            margin: 10,
-                            fontSize: 20,
-
-                            color: 'white',
-                            fontWeight: 'bold',
-                            textAlign: 'center',
                         }}>
                         Kembali
                     </Text>
