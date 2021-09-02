@@ -50,6 +50,7 @@ function InfoStok02(props) {
         headers,
     })
         .then(res => {
+            console.log(res.data);
             if (res.data.code == 200) {
                 for (let i = 0; i < res.data.length; i++) {
                     CONTENT.tableData.push([
