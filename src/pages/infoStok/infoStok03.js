@@ -47,7 +47,9 @@ function InfoStok03(props) {
     const headers = {
         'Content-Type': 'application/json',
     };
-    const body = {};
+    const body = {
+        waktu: '',
+    };
     Axios.post(`${url}/api/simaba/stok-darah`, JSON.stringify(body), {
         headers,
     })
