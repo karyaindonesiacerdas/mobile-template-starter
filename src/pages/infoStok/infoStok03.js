@@ -53,15 +53,14 @@ function InfoStok03(props) {
     Axios.post(`${url}/api/simaba/stok-darah`, JSON.stringify(body), {
         headers,
     })
-        .then(r => {
-            var res = r.data;
-            console.log(res.data[0].waktu);
+        .then(res => {
+            console.log(res.data.data[0].waktu);
             if (res.data.code == 200) {
                 CONTENT.tableHead = [
-                    `Informasi kebutuhan Darah\nTanggal ${res.data[0].waktu.slice(
+                    `Informasi kebutuhan Darah\nTanggal ${res.data.data[0].waktu.slice(
                         0,
                         10,
-                    )} Pukul ${res.data[0].waktu.slice(11, 16)} `,
+                    )} Pukul ${res.data.data[0].waktu.slice(11, 16)} `,
                 ];
                 CONTENT.tableData = [
                     [
