@@ -12,12 +12,12 @@ import Gedung from './gedung';
 import Barcode from './barcode/index,';
 import Status from './status';
 import table from './table';
-import Tempatmu from './tempatmu';
 import Sukses from './suksestempat';
 import Barcode3 from './barcodetempat';
 import Kegiatan from './kegiatan';
 import Barcode2 from './barcodemobilunit';
 import Kalender from './kalender';
+import Dashboard from './dashboard';
 export {
 	Login,
 	Register,
@@ -33,10 +33,10 @@ export {
 	Berhasil,
 	Status,
 	table,
-	Tempatmu,
 	Sukses,
 	Barcode3,
 	Kegiatan,
 	Barcode2,
-	Kalender
+	Kalender,
+	Dashboard,
 };

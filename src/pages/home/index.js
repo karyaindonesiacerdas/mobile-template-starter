@@ -179,7 +179,7 @@ function Home(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Login')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
               <Text
                 style={{
                   margin: 10,

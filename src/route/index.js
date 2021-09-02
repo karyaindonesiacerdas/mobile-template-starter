@@ -16,12 +16,12 @@ import {
 	Barcode,
 	Status,
 	table,
-	Tempatmu,
 	Sukses,
 	Barcode3,
 	Kegiatan,
 	Barcode2,
-	Kalender
+	Kalender,
+	Dashboard,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -45,12 +45,12 @@ function index() {
 				<Stack.Screen name="Barcode" component={Barcode} options={{ headerShown: false }} />
 				<Stack.Screen name="Status" component={Status} options={{ headerShown: false }} />
 				<Stack.Screen name="table" component={table} options={{ headerShown: false }} />
-				<Stack.Screen name="Tempatmu" component={Tempatmu} options={{ headerShown: false }} />
 				<Stack.Screen name="Sukses" component={Sukses} options={{ headerShown: false }} />
 				<Stack.Screen name="Barcode3" component={Barcode3} options={{ headerShown: false }} />
 				<Stack.Screen name="Kegiatan" component={Kegiatan} options={{ headerShown: false }} />
 				<Stack.Screen name="Barcode2" component={Barcode2} options={{ headerShown: false }} />
 				<Stack.Screen name="Kalender" component={Kalender} options={{ headerShown: false }} />
+				<Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
