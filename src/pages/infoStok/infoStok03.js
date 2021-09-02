@@ -54,7 +54,7 @@ function InfoStok03(props) {
         headers,
     })
         .then(r => {
-            var res = r;
+            var res = r.json();
             console.log(res.data);
             console.log(res.data[0].waktu);
             if (res.data.code == 200) {
