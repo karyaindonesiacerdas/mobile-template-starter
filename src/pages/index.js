@@ -4,7 +4,7 @@ import Home from './home';
 import LoadingStart from './loading';
 import Account from './account';
 import KegiatanDonor from './kegiatan donor';
-import DonorBiasa from './DonorBiasa';
+import DonorBiasa from './donorbiasa';
 import Data from './Data';
 import Berhasil from './berhasil';
 import Pilih from './pilih';
@@ -19,24 +19,24 @@ import Barcode2 from './barcodemobilunit';
 import Kalender from './kalender';
 import Dashboard from './dashboard';
 export {
-	Login,
-	Register,
-	Home,
-	LoadingStart,
-	Account,
-	KegiatanDonor,
-	DonorBiasa,
-	Data,
-	Pilih,
-	Gedung,
-	Barcode,
-	Berhasil,
-	Status,
-	table,
-	Sukses,
-	Barcode3,
-	Kegiatan,
-	Barcode2,
-	Kalender,
-	Dashboard,
+    Login,
+    Register,
+    Home,
+    LoadingStart,
+    Account,
+    KegiatanDonor,
+    DonorBiasa,
+    Data,
+    Pilih,
+    Gedung,
+    Barcode,
+    Berhasil,
+    Status,
+    table,
+    Sukses,
+    Barcode3,
+    Kegiatan,
+    Barcode2,
+    Kalender,
+    Dashboard,
 };
