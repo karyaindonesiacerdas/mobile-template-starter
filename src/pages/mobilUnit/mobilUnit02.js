@@ -23,6 +23,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
+import Axios from 'axios';
 
 const CONTENT = {
     tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
