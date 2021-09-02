@@ -5,20 +5,25 @@ import {
   Image,
   Text,
   View,
-  TextInput,
+  TextInput,TouchableOpacity,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { Container, Header, Title, Left, HStack, Card } from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
+  
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index() {
+function index(props) {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
+    const goNextPage = (page) => {
+    if (page) {
+      props.navigation.replace(page);
+    }
+  };
 
   return (
     <Container>
@@ -85,16 +90,16 @@ function index() {
         <View
           style={{
             marginTop: 10,
-            marginLeft: 40,
-            marginRight: 40,
+            marginLeft: 10,
+            marginRight: 10,
          
             justifyContent: "space-between",
           }}
         >
           <View style={{}}>
-            <CheckBox title="Lulus Pendaftaran Awal" style={{ width: "70%" }} />
+            <CheckBox title="Lulus Pendaftaran Awal" style={{ width: "90%" }} />
 
-            <CheckBox title="Pendaftaran Donor" style={{ width: "70%" }} />
+            <CheckBox title="Pendaftaran Donor" style={{ width: "90%" }} />
           
           </View>
 
@@ -103,14 +108,14 @@ function index() {
           <View
           style={{
             marginTop: 10,
-            marginLeft: 40,
-            marginRight: 40,
+            marginLeft: 10,
+            marginRight: 10,
          
             flexDirection: "row",
           }}
         >
           <View style={{}}>
-            <CheckBox title="Status Donor" style={{ width: "40%" }} />
+            <CheckBox title="Status Donor" style={{ width: "60%" }} />
 
         
           </View>
@@ -129,30 +134,36 @@ function index() {
       
 
        
-       <View
+      
+      </ScrollView>
+         <View
           style={{
             alignContent: "center",
 
             flexDirection: "row",
             justifyContent: "center",
-              alignContent: "center",
-              marginTop:30,
+            alignContent: "center",
+            marginTop: 30,
+            marginBottom: 10,
             
           }}
         >
           <Card
             style={{
-              backgroundColor: "#000",width: "40%", marginRight:"2%" }}
+              backgroundColor: "#000",
+              width: "40%",
+              marginRight: "2%",
+            }}
           >
-            <TouchableOpacity
-            >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen17")}>
               <Text
                 style={{
                   margin: 10,
                   fontSize: 20,
-             
+
                   color: "white",
-                  fontWeight: "bold",textAlign:'center',
+                  fontWeight: "bold",
+                  textAlign: "center",
                 }}
               >
                 Kembali
@@ -161,13 +172,14 @@ function index() {
           </Card>
           <View
             style={{
-              width: "40%",marginLeft:"2%"
+      
+              width: "40%",
+              marginLeft: "2%",
             }}
           >
-            
+           
           </View>
         </View>
-      </ScrollView>
 
       <ImageBackground
         // resizeMethod={'auto'}

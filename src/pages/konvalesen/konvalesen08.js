@@ -5,7 +5,7 @@ import {
   Image,
   Text,
   View,
-  TextInput,
+  TextInput,TouchableOpacity
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import {
@@ -26,13 +26,18 @@ import {
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
+  
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index() {
+function index(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
+   const goNextPage = (page) => {
+    if (page) {
+      props.navigation.replace(page);
+    }
+  };
   return (
     <Container>
       <Image
@@ -181,9 +186,64 @@ function index() {
        
        
 
-      
+  
       </ScrollView>
+    <View
+          style={{
+            alignContent: "center",
 
+            flexDirection: "row",
+            justifyContent: "center",
+            alignContent: "center",
+            marginTop: 30,
+            marginBottom: 10,
+          }}
+        >
+          <Card
+            style={{
+              backgroundColor: "#000",
+              width: "40%",
+              marginRight: "2%",
+            }}
+          >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen01")}>
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+
+                  color: "white",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Kembali
+              </Text>
+            </TouchableOpacity>
+          </Card>
+          <Card
+            style={{
+              backgroundColor: "#000",
+              width: "40%",
+              marginLeft: "2%",
+            }}
+          >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen10")}>
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+                  textAlign: "center",
+
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+              >
+                Selanjutnya
+              </Text>
+            </TouchableOpacity>
+          </Card>
+        </View>
       <ImageBackground
         // resizeMethod={'auto'}
         source={require("../../asset/footer.png")}
