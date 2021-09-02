@@ -3,8 +3,9 @@ import { ImageBackground, Image, Text, View, TouchableOpacity } from 'react-nati
 import { Container, Card } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 import styles from './styles';
+import Bg from '../../image/Baground2.jpg'
 
-function index(props) {
+function Dashboard(props) {
 	const goNextPage = (page) => {
 		if (page) {
 			props.navigation.replace(page);
@@ -13,8 +14,9 @@ function index(props) {
 
 	return (
 		<Container>
-			<Image source={require('../../asset/logoUDD.png')} style={styles.logoUDD} />
-			<Image source={require('../../asset/logoSehat.png')} style={styles.logoSehat} />
+             <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+			<Image source={require('../image/logo.png')} style={styles.logoUDD} />
+			<Image source={require('../image/Logo2.png')} style={styles.logoSehat} />
 			<ScrollView>
 				<View style={styles.viewAtas}>
 					<TouchableOpacity style={{ backgroundColor: '#fff', width: 120, height: 120 }}>
@@ -83,9 +85,9 @@ function index(props) {
 				</View>
 
 				<View style={styles.viewAtas}>
-					<TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'Alur01')}>
+					<TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, '')}>
 						<Image
-							source={require('../../asset/alurDonorDarah.png')}
+							source={require('../image/alur.png')}
 							style={{
 								marginTop: 5,
 								width: 35,
@@ -97,12 +99,12 @@ function index(props) {
 						<Text style={styles.textBawah}>Alur Donor {'\n'}Darah</Text>
 					</TouchableOpacity>
 
-					<TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'Konvalesen01')}>
+					<TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'Home')}>
 						<Image
-							source={require('../../asset/persyaratanDonorDarah.png')}
+							source={require('../image/donor.png')}
 							style={{
 								marginTop: 5,
-								width: 49,
+								width: 80,
 								height: 50,
 								alignSelf: 'center'
 							}}
@@ -113,10 +115,10 @@ function index(props) {
 
 					<TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'InfoStok01')}>
 						<Image
-							source={require('../../asset/stokDarah.png')}
+							source={require('../image/infostok.jpeg')}
 							style={{
 								marginTop: 5,
-								width: 54,
+								width: 60,
 								height: 50,
 								alignSelf: 'center'
 							}}
@@ -128,7 +130,7 @@ function index(props) {
 				<View style={styles.viewAtas}>
 					<TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'MobilUnit01')}>
 						<Image
-							source={require('../../asset/jadwalMobilUnit.png')}
+							source={require('../image/jadwal2.png')}
 							style={{
 								marginTop: 5,
 								width: 50,
@@ -142,10 +144,10 @@ function index(props) {
 
 					<TouchableOpacity style={styles.cardStyle}>
 						<Image
-							source={require('../../asset/konselingDonorDarah.png')}
+							source={require('../image/konseling2.jpeg')}
 							style={{
 								marginTop: 5,
-								width: 45,
+								width: 55,
 								height: 50,
 								alignSelf: 'center'
 							}}
@@ -155,10 +157,10 @@ function index(props) {
 					</TouchableOpacity>
 					<TouchableOpacity style={styles.cardStyle}>
 						<Image
-							source={require('../../asset/palangMerahIndonesia.png')}
+							source={require('../image/download.png')}
 							style={{
 								marginTop: 5,
-								width: 80,
+								width: 90,
 								height: 50,
 								alignSelf: 'center'
 							}}
@@ -167,15 +169,8 @@ function index(props) {
 					</TouchableOpacity>
 				</View>
 			</ScrollView>
-
-			<ImageBackground
-				// resizeMethod={'auto'}
-				source={require('../../asset/footer.png')}
-				style={styles.imageBackgroundStyle}
-				imageStyle={{ resizeMode: 'cover', alignSelf: 'flex-end' }}
-			/>
 		</Container>
 	);
 }
 
-export default index;
+export default Dashboard;

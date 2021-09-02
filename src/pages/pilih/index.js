@@ -59,7 +59,7 @@ function Pilih(props) {
       <Card style={{ backgroundColor: "brown",
   
   
-  marginTop:40,
+  marginTop:80,
   width: "86%",marginLeft:"7%"}}>
             <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Gedung')} >
              
@@ -80,7 +80,7 @@ function Pilih(props) {
           <Card style={{ backgroundColor: "brown",
   
   
-  marginTop:40,
+  marginTop:60,
   width: "86%",marginLeft:"7%"}}>
             <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'table')} >
              
@@ -98,27 +98,7 @@ function Pilih(props) {
              
             </TouchableOpacity>
           </Card>
-          <Card style={{ backgroundColor: "brown",
-  
-  
-  marginTop:40,
-  width: "86%",marginLeft:"7%"}}>
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Tempatmu')} >
-             
-              <Text
-                style={{
-                  margin:10,
-                  fontSize: 20,
-                  textAlign: "center",
-                  color:"white",
-                  fontWeight: "bold",
-                }}
-              >
-                Tempatmu
-              </Text>
-             
-            </TouchableOpacity>
-          </Card>
+          
           <View
           style={{
             alignContent: "center",
