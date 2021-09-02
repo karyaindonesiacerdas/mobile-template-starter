@@ -54,7 +54,7 @@ function InfoStok03(props) {
         headers,
     })
         .then(res => {
-            console.log(res);
+            console.log(res.data);
             if (res.data.code == 200) {
                 CONTENT.tableHead = [
                     `Informasi kebutuhan Darah\nTanggal ${res.data[0].waktu.slice(
