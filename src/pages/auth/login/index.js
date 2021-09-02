@@ -32,8 +32,8 @@ function Login(props) {
         };
         const requestOptions = {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({title: body}),
+            headers: headers,
+            body: JSON.stringify(body),
         };
         fetch(`${url}/api/simaba/user/register`, requestOptions)
             .then(res => {
