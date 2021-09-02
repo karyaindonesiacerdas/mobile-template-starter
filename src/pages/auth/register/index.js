@@ -37,7 +37,6 @@ function Register(props) {
             headers,
         })
             .then(res => {
-                console.log(res);
                 if (res.data.code === 200) {
                     alert(
                         'anda telah terdaftar, silakan cek email untuk mendapatkan credential',
