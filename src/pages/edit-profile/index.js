@@ -16,7 +16,6 @@ import {Formik} from 'formik';
 import {Alert, Keyboard, StyleSheet} from 'react-native';
 import * as Yup from 'yup';
 import {updateProfile, userProfile} from '../../../utils/queryFunc';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function index(props) {
     const dataProfile = useQuery('my-profile', userProfile);
@@ -30,7 +29,6 @@ function index(props) {
             });
             if (data?.code == 200) {
                 setTimeout(() => {
-                    AsyncStorage.clear();
                     props.navigation.replace('LoadingStart');
                 }, 2000);
                 return;

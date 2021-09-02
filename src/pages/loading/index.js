@@ -1,15 +1,15 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {View} from 'native-base';
 import React from 'react';
 import {useEffect} from 'react';
 import {ActivityIndicator} from 'react-native';
+import SyncStorage from 'sync-storage';
 
 const loading = true;
 
 function LoadingStart(props) {
     useEffect(() => {
         async function checkToken() {
-            const token = await AsyncStorage.getItem('token');
+            const token = await SyncStorage.getItem('token');
             if (token) {
                 props.navigation.replace('Home');
             } else {
