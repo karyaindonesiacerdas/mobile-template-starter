@@ -93,7 +93,7 @@ function Home(props) {
                     color:"white",
                   }}
                 >
-                  Biasa {'\n'}
+                 {'\n'} Biasa {'\n'}
                 </Text>
               </TouchableOpacity>
             </Card>
