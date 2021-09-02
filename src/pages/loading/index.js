@@ -11,7 +11,7 @@ function LoadingStart(props) {
         async function checkToken() {
             const token = await AsyncStorage.getItem('token');
             if (token) {
-                props.navigation.replace('HomeApp');
+                props.navigation.replace('Home');
             } else {
                 props.navigation.replace('Login');
             }
