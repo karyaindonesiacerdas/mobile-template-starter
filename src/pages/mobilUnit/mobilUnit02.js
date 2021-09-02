@@ -28,11 +28,7 @@ import Axios from 'axios';
 const CONTENT = {
     tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
 
-    tableData: [
-        ['JAM', 'INSTASI', 'KETERANGAN'],
-        ['08.00', 'PMI', 'Umum'],
-        ['Dst', '', ''],
-    ],
+    tableData: [['JAM', 'INSTASI', 'KETERANGAN']],
 };
 
 function MobilUnit02(props) {
@@ -50,12 +46,18 @@ function MobilUnit02(props) {
     })
         .then(r => r.data)
         .then(data => {
-            setRes(data);
+            for (let i = 0; i < data.data.lenght; i++) {
+                CONTENT.tableData.push([
+                    data.data[i].pelaksanaan.slice(8, 10) +
+                        data.data[i].pelaksanaan.slice(4, 8) +
+                        data.data[i].pelaksanaan.slice(0, 4),
+                    data.data[i].mulai.slice(0, 5),
+                    data.data[i].instansi,
+                    data.data[i].status,
+                ]);
+            }
         })
-        .catch(err => console.log('test : ', err))
-        .finally(() => {
-            setIsLoading(false);
-        });
+        .catch(err => console.log('test : ', err));
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
