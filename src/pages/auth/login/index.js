@@ -35,7 +35,7 @@ function Login(props) {
             headers: headers,
             body: JSON.stringify(body),
         };
-        fetch(`${url}/api/simaba/user/register`, requestOptions)
+        fetch(`${url}/api/simaba/user/login`, requestOptions)
             .then(res => {
                 if (res.data.code === 200) {
                     alert('sukses login');
