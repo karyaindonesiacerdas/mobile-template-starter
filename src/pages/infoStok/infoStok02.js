@@ -53,7 +53,7 @@ function InfoStok02(props) {
             if (res.data.code == 200) {
                 for (let i = 0; i < res.data.data.length; i++) {
                     CONTENT.tableData.push([
-                        i,
+                        i + 1,
                         res.data.data[i].rumah_sakit,
                         res.data.data[i].produk_darah,
                         res.data.data[i].golongan_darah,
