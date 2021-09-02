@@ -202,6 +202,21 @@ function Home(props) {
                             Selanjutnya
                         </Text>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={goNextPage.bind(this, 'Dashboard')}>
+                        <Text
+                            style={{
+                                margin: 10,
+                                fontSize: 20,
+                                textAlign: 'center',
+
+                                color: 'white',
+                                fontWeight: 'bold',
+                            }}>
+                            Kembali
+                        </Text>
+                    </TouchableOpacity>
                 </Card>
             </View>
         </Container>
