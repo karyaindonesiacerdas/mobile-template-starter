@@ -30,20 +30,18 @@ function Login(props) {
             email: value.email,
             password: value.password,
         };
-        const requestOptions = {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(body),
-        };
-        fetch(`${url}/api/simaba/user/login`, requestOptions)
+        Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body), {
+            headers,
+        })
             .then(res => {
-                if (res.data.code === 200) {
+                if (res.data.code == 200) {
+                    SyncStorage.set('token', res.data.token);
                     alert('sukses login');
-                    props.navigation.dispatch(StackActions.replace('Home'));
+                    props.navigation.replace('Home');
                 } else {
                     console.log('Error', res.data.message);
-                    alert('email atau password tidak cocok');
-                    props.navigation.dispatch(StackActions.replace('Login'));
+                    alert('email atau password salah');
+                    props.navigation.replace('Login');
                 }
             })
             .catch(err => {
