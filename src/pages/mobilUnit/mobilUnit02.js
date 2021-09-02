@@ -46,7 +46,6 @@ function MobilUnit02(props) {
     })
         .then(r => r.data)
         .then(data => {
-            console.log(data);
             for (let i = 0; i < data.data.lenght; i++) {
                 CONTENT.tableData.push([
                     data.data[i].pelaksanaan.slice(8, 10) +
@@ -56,6 +55,7 @@ function MobilUnit02(props) {
                     data.data[i].instansi,
                     data.data[i].status,
                 ]);
+                console.log(data.data[i]);
             }
         })
         .catch(err => console.log('test : ', err));
