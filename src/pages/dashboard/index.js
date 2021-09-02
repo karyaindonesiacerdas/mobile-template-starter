@@ -78,7 +78,7 @@ function Dashboard(props) {
 					</Card>
 
 					<Card style={styles.cardTengah}>
-						<TouchableOpacity>
+						<TouchableOpacity onPress={goNextPage.bind(this, 'Login')}>
 							<Text style={styles.textTengah}>Logout</Text>
 						</TouchableOpacity>
 					</Card>
