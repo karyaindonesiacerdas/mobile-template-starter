@@ -53,7 +53,8 @@ function InfoStok03(props) {
     Axios.post(`${url}/api/simaba/stok-darah`, JSON.stringify(body), {
         headers,
     })
-        .then(res => {
+        .then(r => {
+            var res = r;
             console.log(res.data);
             console.log(res.data[0].waktu);
             if (res.data.code == 200) {
