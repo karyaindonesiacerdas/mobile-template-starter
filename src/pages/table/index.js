@@ -176,7 +176,7 @@ function table(props) {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignContent: 'center',
-                        marginTop: 300,
+                        marginTop: 320,
                     }}>
                     <Card
                         style={{

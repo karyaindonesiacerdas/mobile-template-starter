@@ -93,7 +93,7 @@ function Home(props) {
                     color:"white",
                   }}
                 >
-                 {'\n'} Biasa {'\n'}
+                 Donor Darah{'\n'} Biasa
                 </Text>
               </TouchableOpacity>
             </Card>
