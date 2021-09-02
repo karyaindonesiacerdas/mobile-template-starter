@@ -23,6 +23,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
+import Axios from 'axios';
 
 const CONTENT = {
     tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
@@ -37,22 +38,37 @@ const CONTENT = {
             'JUMLAH',
             'STATUS',
         ],
-        [
-            '1',
-            'PMI',
-            'PRC',
-            'A',
-            'POSITIF',
-            '2',
-            'Terlayan Pukul\n ....\n Belum terlayani',
-        ],
-        ['2', 'Dst', '', '', '', '', ''],
-        ['3', 'Dst', '', '', '', '', ''],
-        ['4', 'Dst', '', '', '', '', ''],
     ],
 };
 
 function InfoStok02(props) {
+    const url = 'http://sahabat-utd.id:6007';
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+    Axios.post(`${url}/api/simaba/resipien`, JSON.stringify({}), {
+        headers,
+    })
+        .then(res => {
+            if (res.data.code == 200) {
+                for (let i = 0; i < res.data.length; i++) {
+                    CONTENT.tableData.push([
+                        res.data[i].rumah_sakit,
+                        res.data[i].produk_darah,
+                        res.data[i].golongan_darah,
+                        res.data[i].rhesus,
+                        res.data[i].jumlah_permintaan,
+                        res.data[i].jumlah_terpenuhi,
+                        res.data[i].keterangan,
+                    ]);
+                }
+            } else {
+                console.log('Error', res.data.message);
+            }
+        })
+        .catch(err => {
+            console.log('tes : ', err);
+        });
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
