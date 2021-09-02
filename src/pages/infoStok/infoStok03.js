@@ -53,7 +53,13 @@ function InfoStok03(props) {
     })
         .then(res => {
             if (res.data.code == 200) {
-                DataTable: [
+                tableHead: [
+                    `Informasi kebutuhan Darah\nTanggal ${res.data[0].waktu.slice(
+                        0,
+                        10,
+                    )} Pukul ${res.data[0].waktu.slice(11, 16)} `,
+                ];
+                tableData: [
                     [
                         'Whole Blood',
                         res.data.data[0].wb_a,
