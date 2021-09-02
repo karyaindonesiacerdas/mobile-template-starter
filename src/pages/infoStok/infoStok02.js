@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Alert,
     ImageBackground,
@@ -42,33 +42,38 @@ const CONTENT = {
 };
 
 function InfoStok02(props) {
-    const url = 'http://sahabat-utd.id:6007';
-    const headers = {
-        'Content-Type': 'application/json',
-    };
-    Axios.post(`${url}/api/simaba/resipien`, JSON.stringify({}), {
-        headers,
-    })
-        .then(res => {
-            if (res.data.code == 200) {
-                for (let i = 0; i < res.data.data.length; i++) {
-                    CONTENT.tableData.push([
-                        i + 1,
-                        res.data.data[i].rumah_sakit,
-                        res.data.data[i].produk_darah,
-                        res.data.data[i].golongan_darah,
-                        res.data.data[i].rhesus,
-                        res.data.data[i].jumlah_permintaan,
-                        res.data.data[i].keterangan,
-                    ]);
-                }
-            } else {
-                console.log('Error', res.data.message);
-            }
+    cosnt[setRes] = useState('');
+    useEffect(() => {
+        const url = 'http://sahabat-utd.id:6007';
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+        Axios.post(`${url}/api/simaba/resipien`, JSON.stringify({}), {
+            headers,
         })
-        .catch(err => {
-            console.log('tes : ', err);
-        });
+            .then(res => {
+                if (res.data.code == 200) {
+                    // for (let i = 0; i < res.data.data.length; i++) {
+                    //     CONTENT.tableData.push([
+                    //         i + 1,
+                    //         res.data.data[i].rumah_sakit,
+                    //         res.data.data[i].produk_darah,
+                    //         res.data.data[i].golongan_darah,
+                    //         res.data.data[i].rhesus,
+                    //         res.data.data[i].jumlah_permintaan,
+                    //         res.data.data[i].keterangan,
+                    //     ]);
+                    // }
+                    setRes(res.data);
+                } else {
+                    console.log('Error', res.data.message);
+                }
+            })
+            .catch(err => {
+                console.log('tes : ', err);
+            });
+    });
+
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
@@ -168,12 +173,28 @@ function InfoStok02(props) {
                                 heightArr={[28, 28]}
                                 textStyle={styles.text}
                             />
-                            <Rows
+                            <Row
                                 data={CONTENT.tableData}
                                 flexArr={[0.5, 1, 1, 1.3, 1, 1, 1]}
                                 style={styles.row}
                                 textStyle={styles.text}
                             />
+                            {setRes.data.map((dat, i) => (
+                                <Row
+                                    data={[
+                                        di + 1,
+                                        dat.rumah_sakit,
+                                        dat.produk_darah,
+                                        dat.golongan_darah,
+                                        dat.rhesus,
+                                        dat.jumlah_permintaan,
+                                        dat.jumlah_terpenuhi,
+                                        dat.keterangan,
+                                    ]}
+                                    key={i}
+                                    textStyle={styles.TableText}
+                                />
+                            ))}
                         </TableWrapper>
                     </Table>
                 </View>
