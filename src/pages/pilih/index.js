@@ -93,24 +93,23 @@ function Pilih(props) {
             </Card>
             <Card
                 style={{
-                    backgroundColor: 'brown',
-
-                    marginTop: 60,
+                    backgroundColor: '#000',
+                    marginTop: 10,
                     width: '86%',
                     marginLeft: '7%',
                 }}>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={goNextPage.bind(this, 'table')}>
+                    onPress={goNextPage.bind(this, 'Berhasil')}>
                     <Text
                         style={{
                             margin: 10,
-                            fontSize: 20,
+                            fontSize: 15,
                             textAlign: 'center',
                             color: 'white',
                             fontWeight: 'bold',
                         }}>
-                        Mobil Unit Terdekat
+                        Kembali
                     </Text>
                 </TouchableOpacity>
             </Card>
@@ -136,39 +135,6 @@ function Pilih(props) {
                     </Text>
                 </TouchableOpacity>
             </Card>
-
-            <View
-                style={{
-                    alignContent: 'center',
-                    marginLeft: 30,
-                    flexDirection: 'row',
-                    justifyContent: 'flex-start',
-                    alignContent: 'center',
-                    marginTop: 250,
-                }}>
-                <Card
-                    style={{
-                        backgroundColor: '#000',
-                        width: '40%',
-                        marginRight: '2%',
-                    }}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={goNextPage.bind(this, 'Berhasil')}>
-                        <Text
-                            style={{
-                                margin: 10,
-                                fontSize: 20,
-
-                                color: 'white',
-                                fontWeight: 'bold',
-                                textAlign: 'center',
-                            }}>
-                            Kembali
-                        </Text>
-                    </TouchableOpacity>
-                </Card>
-            </View>
         </Container>
     );
 }
