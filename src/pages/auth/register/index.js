@@ -21,8 +21,7 @@ import * as Yup from 'yup';
 //from "react-native-gesture-handler";
 //import styles from "../styles/styles";
 // import {authRegister} from '../../../config/api';
-import Bg from '../../image/Baground2.jpg'
-
+import Bg from '../../image/Baground2.jpg';
 
 function Register(props) {
     // const mutation = useMutation(authRegister, {
@@ -50,31 +49,32 @@ function Register(props) {
     };
 
     return (
-        <Container >
-            <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+        <Container>
             <Image
-        source={require("../../image/logo.png")}
-        style={{
-          width: 54,
-          height: 60,
-          top:10,
-          margin:20,
-    
-          left:10,
-        }}
-      ></Image>
-      <Image
-        source={require("../../image/Logo2.png")}
-        style={{
-          position:'absolute',
-          width: 54,
-          height: 60,
-          margin:20,
-       
-          right:10,
-          top:10,
-        }}
-      ></Image>
+                source={Bg}
+                style={{width: '100%', height: '100%', position: 'absolute'}}
+            />
+            <Image
+                source={require('../../image/logo.png')}
+                style={{
+                    width: 54,
+                    height: 60,
+                    top: 10,
+                    margin: 20,
+
+                    left: 10,
+                }}></Image>
+            <Image
+                source={require('../../image/Logo2.png')}
+                style={{
+                    position: 'absolute',
+                    width: 54,
+                    height: 60,
+                    margin: 20,
+
+                    right: 10,
+                    top: 10,
+                }}></Image>
             <Content contentContainerStyle={styles.container}>
                 <View style={styles.logo}>
                     <Text style={{fontWeight: 'bold', fontSize: 50}}>
@@ -120,7 +120,6 @@ function Register(props) {
                                     </Text>
                                 </View>
                             )}
-                            
                         </View>
                     )}
                 </Formik>
@@ -181,24 +180,26 @@ function Register(props) {
                                 </View>
                             )}
                             <ListItem>
-            <CheckBox checked={false} color="red"/>
-            <Body>
-              <Text>I Agree All the statements in Terms of Service</Text>
-            </Body>
-          </ListItem>
+                                <CheckBox checked={false} color="red" />
+                                <Body>
+                                    <Text>
+                                        I Agree All the statements in Terms of
+                                        Service
+                                    </Text>
+                                </Body>
+                            </ListItem>
                             <Button
                                 onPress={handleSubmit}
                                 full
                                 style={styles.registerBtn}>
                                 <Text>Register</Text>
                             </Button>
-                            
+
                             {/* {mutation.isLoading && (
                                 <Spinner size="small" color="black" />
                             )} */}
                         </View>
                     )}
-                    
                 </Formik>
             </Content>
         </Container>
