@@ -22,6 +22,7 @@ import {
 	Barcode2,
 	Kalender,
 	Dashboard,
+	Kuisioner,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -51,6 +52,7 @@ function index() {
 				<Stack.Screen name="Barcode2" component={Barcode2} options={{ headerShown: false }} />
 				<Stack.Screen name="Kalender" component={Kalender} options={{ headerShown: false }} />
 				<Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
+				<Stack.Screen name="Kuisioner" component={Kuisioner} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

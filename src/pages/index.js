@@ -18,6 +18,7 @@ import Kegiatan from './kegiatan';
 import Barcode2 from './barcodemobilunit';
 import Kalender from './kalender';
 import Dashboard from './dashboard';
+import Kuisioner from './kuisioner';
 export {
 	Login,
 	Register,
@@ -39,4 +40,5 @@ export {
 	Barcode2,
 	Kalender,
 	Dashboard,
+	Kuisioner,
 };

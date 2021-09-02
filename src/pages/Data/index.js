@@ -206,7 +206,7 @@ function Data(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Berhasil')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kuisioner')} >
               <Text
                 style={{
                   margin: 10,
