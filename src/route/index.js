@@ -22,7 +22,6 @@ import {
 	Barcode2,
 	Kalender,
 	Dashboard,
-
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';

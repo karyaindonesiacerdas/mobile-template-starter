@@ -90,8 +90,8 @@ function Dashboard(props) {
 							source={require('../image/alur.png')}
 							style={{
 								marginTop: 5,
-								width: 35,
-								height: 50,
+								width: 60,
+								height: 60,
 								alignSelf: 'center'
 							}}
 						/>
@@ -105,7 +105,7 @@ function Dashboard(props) {
 							style={{
 								marginTop: 5,
 								width: 80,
-								height: 50,
+								height: 60,
 								alignSelf: 'center'
 							}}
 						/>
@@ -119,7 +119,7 @@ function Dashboard(props) {
 							style={{
 								marginTop: 5,
 								width: 60,
-								height: 50,
+								height: 60,
 								alignSelf: 'center'
 							}}
 						/>
@@ -133,8 +133,8 @@ function Dashboard(props) {
 							source={require('../image/jadwal2.png')}
 							style={{
 								marginTop: 5,
-								width: 50,
-								height: 50,
+								width: 60,
+								height: 60,
 								alignSelf: 'center'
 							}}
 						/>
@@ -147,8 +147,8 @@ function Dashboard(props) {
 							source={require('../image/konseling2.jpeg')}
 							style={{
 								marginTop: 5,
-								width: 55,
-								height: 50,
+								width: 60,
+								height: 60,
 								alignSelf: 'center'
 							}}
 						/>
@@ -160,8 +160,8 @@ function Dashboard(props) {
 							source={require('../image/download.png')}
 							style={{
 								marginTop: 5,
-								width: 90,
-								height: 50,
+								width: 120,
+								height: 60,
 								alignSelf: 'center'
 							}}
 						/>
