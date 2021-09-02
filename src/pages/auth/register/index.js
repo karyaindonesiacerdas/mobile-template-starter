@@ -18,9 +18,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Formik} from 'formik';
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Yup from 'yup';
-//from "react-native-gesture-handler";
-//import styles from "../styles/styles";
-// import {authRegister} from '../../../config/api';
+import qs from 'qs';
+import Axios from 'axios';
 import Bg from '../../image/Baground2.jpg';
 
 function Register(props) {
