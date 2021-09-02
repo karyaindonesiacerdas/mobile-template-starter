@@ -21,7 +21,7 @@ import {authLogin} from '../../../config/api';
 import Bg from '../../image/Background.png'
 
 function Login(props) {
-     // const mutation = useMutation(authRegister, {
+   // const mutation = useMutation(authRegister, {
     //     onSettled: (data, error, variables, context) => {
     //         Toast.show({
     //             text: data.message,
@@ -79,7 +79,7 @@ function Login(props) {
                             .max(20, 'Must be 5 characters or less'),
                             // .required('Required'),
                     })}
-                    onSubmit={goNextPage.bind(this, 'Home')}>
+                    onSubmit={goNextPage.bind(this, 'Dashboard')}>
                     {({
                         handleChange,
                         handleBlur,
