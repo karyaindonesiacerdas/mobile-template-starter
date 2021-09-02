@@ -21,7 +21,7 @@ import {authLogin} from '../../../config/api';
 import Bg from '../../image/Background.png'
 
 function Login(props) {
-     // const mutation = useMutation(authRegister, {
+   // const mutation = useMutation(authRegister, {
     //     onSettled: (data, error, variables, context) => {
     //         Toast.show({
     //             text: data.message,
