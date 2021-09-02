@@ -33,7 +33,7 @@ function Login(props) {
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: qs.stringify({title: body}),
+            body: JSON.stringify({title: body}),
         };
         fetch(`${url}/api/simaba/user/register`, requestOptions)
             .then(res => {
