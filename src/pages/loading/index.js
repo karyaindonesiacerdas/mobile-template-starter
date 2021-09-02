@@ -8,8 +8,8 @@ const loading = true;
 
 function LoadingStart(props) {
     useEffect(() => {
-        async function checkToken() {
-            const token = await SyncStorage.getItem('token');
+        function checkToken() {
+            const token = SyncStorage.getItem('token');
             if (token) {
                 props.navigation.replace('Home');
             } else {
