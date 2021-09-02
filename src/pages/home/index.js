@@ -149,6 +149,21 @@ function Home(props) {
                         Mengadakan Kegiatan Donor Darah
                     </Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={goNextPage.bind(this, 'Dashboard')}>
+                    <Text
+                        style={{
+                            margin: 10,
+                            fontSize: 20,
+
+                            color: 'white',
+                            fontWeight: 'bold',
+                            textAlign: 'center',
+                        }}>
+                        Kembali
+                    </Text>
+                </TouchableOpacity>
             </Card>
             <View
                 style={{
@@ -213,9 +228,7 @@ function Home(props) {
 
                                 color: 'white',
                                 fontWeight: 'bold',
-                            }}>
-                            Kembali
-                        </Text>
+                            }}></Text>
                     </TouchableOpacity>
                 </Card>
             </View>
