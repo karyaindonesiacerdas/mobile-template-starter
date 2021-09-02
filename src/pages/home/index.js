@@ -151,7 +151,7 @@ function Home(props) {
             <Card
                 style={{
                     backgroundColor: '#000',
-                    marginTop: 40,
+                    marginTop: 10,
                     width: '86%',
                     marginLeft: '7%',
                 }}>
