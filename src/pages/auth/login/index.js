@@ -11,7 +11,6 @@ import {
     Text,
 } from 'native-base';
 import {useMutation} from 'react-query';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Formik} from 'formik';
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 //from "react-native-gesture-handler";
