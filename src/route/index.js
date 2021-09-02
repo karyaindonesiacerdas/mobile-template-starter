@@ -25,6 +25,8 @@ import {
     InfoStok01,
     InfoStok02,
     InfoStok03,
+    MobilUnit01,
+    MobilUnit02,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -143,6 +145,16 @@ function index() {
                 <Stack.Screen
                     name="InfoStok03"
                     component={InfoStok03}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="MobilUnit01"
+                    component={MobilUnit01}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="MobilUnit02"
+                    component={MobilUnit02}
                     options={{headerShown: false}}
                 />
             </Stack.Navigator>
