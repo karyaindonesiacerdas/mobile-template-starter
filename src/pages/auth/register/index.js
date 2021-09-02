@@ -37,15 +37,16 @@ function Register(props) {
             headers,
         })
             .then(res => {
+                console.log(res);
                 if (res.data.code === 200) {
                     alert(
                         'anda telah terdaftar, silakan cek email untuk mendapatkan credential',
                     );
-                    props.navigation.dispatch(StackActions.replace('Login'));
+                    props.navigation.replace('Login');
                 } else {
                     console.log('Error', res.data.message);
                     alert('username sudah digunakan');
-                    props.navigation.dispatch(StackActions.replace('Register'));
+                    props.navigation.replace('Register');
                 }
             })
             .catch(err => {
