@@ -18,7 +18,6 @@ import Kegiatan from './kegiatan';
 import Barcode2 from './barcodemobilunit';
 import Kalender from './kalender';
 import Dashboard from './dashboard';
-import {InfoStok01, InfoStok02, InfoStok03} from './infoStok';
 export {
     Login,
     Register,
@@ -40,7 +39,4 @@ export {
     Barcode2,
     Kalender,
     Dashboard,
-    InfoStok01,
-    InfoStok02,
-    InfoStok03,
 };

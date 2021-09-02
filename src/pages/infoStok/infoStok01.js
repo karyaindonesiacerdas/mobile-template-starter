@@ -15,7 +15,6 @@ import {
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
 import styles from './styles';
-import {InfoStok01} from '..';
 
 function InfoStok01(props) {
     const goNextPage = page => {
