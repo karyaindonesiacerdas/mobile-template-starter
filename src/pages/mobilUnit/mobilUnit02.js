@@ -34,7 +34,7 @@ const CONTENT = {
     ],
 };
 
-function index(props) {
+function MobilUnit02(props) {
     const url = 'http://sahabat-utd.id:6006';
     const headers = {
         'Content-Type': 'application/json',
@@ -222,4 +222,4 @@ function index(props) {
     );
 }
 
-export default index;
+export default MobilUnit02;
