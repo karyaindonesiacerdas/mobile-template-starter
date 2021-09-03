@@ -100,16 +100,15 @@ function index(props) {
                     />
                     <Card style={styles.flowCardRed}>
                         <TouchableOpacity>
-                            <Text style={styles.textInCard}>
-                                Pemeriksaan kesehatan
-                                <FlatList>
-                                    <Text>a. Pengukuran tekanan darah</Text>
-                                    <Text>b. Pengukuran berat badan</Text>
-                                    <Text>c. Pemeriksaan nadi</Text>
-                                    <Text>d. Pemeriksaan suhu tubuh</Text>
-                                    <Text>e. Wawancara riwayat kesehatan</Text>
-                                </FlatList>
-                            </Text>
+                            <Text style={styles.textInCard}></Text>
+                            Pemeriksaan kesehatan
+                            <FlatList>
+                                <Text>a. Pengukuran tekanan darah</Text>
+                                <Text>b. Pengukuran berat badan</Text>
+                                <Text>c. Pemeriksaan nadi</Text>
+                                <Text>d. Pemeriksaan suhu tubuh</Text>
+                                <Text>e. Wawancara riwayat kesehatan</Text>
+                            </FlatList>
                         </TouchableOpacity>
                     </Card>
 
