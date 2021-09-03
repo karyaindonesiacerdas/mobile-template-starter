@@ -116,6 +116,24 @@ function Status(props) {
               </Text>
             </TouchableOpacity>
           </Card>
+          <Card
+            style={{
+              backgroundColor: "#000",width: "40%", marginRight:"2%" }}
+          >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+             
+                  color: "white",
+                  fontWeight: "bold",textAlign:'center',
+                }}
+              >
+                Selanjutnya
+              </Text>
+            </TouchableOpacity>
+          </Card>
          
         </View>
           

@@ -52,6 +52,24 @@ const CONTENT = {
         ['23', 'Apakah anda tinggal dengan penderita hepatitis  ', '',''],
         ['24', 'Apakah anda pernah tato ', '',''],
         ['25', 'Apakah anda memiliki tindik telinga atau bagian tubuh lainnya ', '',''],
+        ['26', 'Apakah anda sedang atau pernah mendapat pengobatan sifilis atau GO (kencing nanah) ', '',''],
+        ['27', 'Apakah anda pernah ditahan atau/dipenjara untuk waktu lebih dari 3 hari ', '',''],
+        ['28', 'Dalam waktu 3 tahun apakah anda pernah diluar wilayah indonesia ', '',''],
+        ['29', 'Tahun 1977 hingga sekarang apakah anda menerima uang, obat atau pembayaran lain untuk seks? ', '',''],
+        ['30', 'Tahun 1977 hingga sekarang laki laki : apakah anda pernah berhubungan  seksual dengan laki laki walaupun sekali ? ', '',''],
+        ['31', 'Tahun 1980 hingga sekarang apakah anda tinggal selama 5 tahun atau lebih di eropa (terutama inggris) ', '',''],
+        ['32', 'Apakah anda menerima transfusi darah di inggris ? ', '',''],
+        ['33', 'Tahun 1980 hingga 1996 apakah ada tingga lebih dari 3 bulan di inggris ? ', '',''],
+        ['34', 'Apakah anda pernah mendapatkan hasil positif tes HIV/AIDS ', '',''],
+        ['35', 'Apakah anda pernah menggunakan ajrum suntik untuk obat-obatan ', '',''],
+        ['36', 'Apakah anda pernah menggunakan konsetrat faktor pembekuan ', '',''],
+        ['37', 'Apakah anda pernah menderita hepatitis ', '',''],
+        ['38', 'Apakah anda pernah menderita malaria ', '',''],
+        ['39', 'Apakah anda pernah menderita kanker ', '',''],
+        ['40', 'Apakah anda pernah bermasalah dengan jantung dan paru-paru ? ', '',''],
+        ['41', 'Apakah anda pernah menderita perdarahan atau penyakit berhubungan dengan darah ? ', '',''],
+        ['42', 'Apakah anda pernah berhubungan seksual dengan orang yang tinggal di afrika ', '',''],
+        ['43', 'Apakah anda pernah tinggal di afrika ? ', '',''],
     ],
 };
 function Kuisioner(props) {
@@ -90,7 +108,7 @@ function Kuisioner(props) {
                 <Text
                     style={{
                         marginLeft: 10,
-                        marginTop: 10,
+                        marginTop: -10,
                         fontSize: 25,
                         fontWeight: 'bold',
                         color: 'red',
