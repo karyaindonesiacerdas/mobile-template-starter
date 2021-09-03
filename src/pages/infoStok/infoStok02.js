@@ -96,7 +96,19 @@ function InfoStok02(props) {
             props.navigation.replace(page);
         }
     };
-    res.data.map((dat, i) =>
+    res.data.map(
+        (dat, i) =>
+            (CONTENT.tableData = [
+                [
+                    'NO',
+                    'RUMAH SAKIT',
+                    'PRODUK DARAH',
+                    'GOLONGAN DARAH',
+                    'RHESUS',
+                    'JUMLAH',
+                    'STATUS',
+                ],
+            ]),
         CONTENT.tableData.push([
             i + 1,
             dat.rumah_sakit,
@@ -104,7 +116,6 @@ function InfoStok02(props) {
             dat.golongan_darah,
             dat.rhesus,
             dat.jumlah_permintaan,
-            dat.jumlah_terpenuhi,
             dat.keterangan,
         ]),
     );
