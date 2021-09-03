@@ -192,7 +192,7 @@ function InfoStok02(props) {
                             />
                             {res.data.map((dat, i) =>
                                 CONTENT.tableData.push([
-                                    i + 1,
+                                    (i + 1).toString(),
                                     dat.rumah_sakit,
                                     dat.produk_darah,
                                     dat.golongan_darah,
