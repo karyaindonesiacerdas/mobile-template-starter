@@ -65,6 +65,7 @@ function InfoStok02(props) {
                     //     ]);
                     // }
                     setRes(res.data);
+                    console.log(setRes);
                 } else {
                     console.log('Error', res.data.message);
                 }
