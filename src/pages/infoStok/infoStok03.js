@@ -24,25 +24,26 @@ import {
     Col,
 } from 'react-native-table-component';
 
-const CONTENT = {
-    tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
-    tableTitle2: ['Produk'],
-    tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB']],
-
-    tableData: [
-        ['Whole Blood', '0', '0', '0', '0', '0'],
-        ['Packed Red Cell', '0', '0', '0', '0', '0'],
-        ['Thrombocyte Concentrate', '0', '0', '0', '0', '0'],
-        ['Fresh Frozen Plasma', '0', '0', '0', '0', '0'],
-        ['AHF', '0', '0', '0', '0', '0'],
-        ['Leucodepleted', '0', '0', '0', '0', '0'],
-        ['Leucoreduce', '0', '0', '0', '0', '0'],
-        ['Plasma Konvalesen', '0', '0', '0', '0', '0'],
-    ],
-};
 import Axios from 'axios';
 
 function InfoStok03(props) {
+    const CONTENT = {
+        tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
+        tableTitle2: ['Produk'],
+        tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB']],
+
+        tableData: [
+            ['Whole Blood', '0', '0', '0', '0', '0'],
+            ['Packed Red Cell', '0', '0', '0', '0', '0'],
+            ['Thrombocyte Concentrate', '0', '0', '0', '0', '0'],
+            ['Fresh Frozen Plasma', '0', '0', '0', '0', '0'],
+            ['AHF', '0', '0', '0', '0', '0'],
+            ['Leucodepleted', '0', '0', '0', '0', '0'],
+            ['Leucoreduce', '0', '0', '0', '0', '0'],
+            ['Plasma Konvalesen', '0', '0', '0', '0', '0'],
+        ],
+    };
+
     const url = 'http://sahabat-utd.id:6100';
     const headers = {
         'Content-Type': 'application/json',
