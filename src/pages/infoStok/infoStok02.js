@@ -42,7 +42,17 @@ const CONTENT = {
 };
 
 function InfoStok02(props) {
-    const [res, setRes] = useState('');
+    const [res, setRes] = useState({
+        data: [
+            {
+                pelaksanaan: '2021-08-10T00:00:00Z',
+                instansi: 'PT TECHPACK',
+                alamat: 'JL RAYA KARANG AWEN KM 18 MRANGGEN DEMAK',
+                mulai: '08:00:00',
+                status: 'BATAL',
+            },
+        ],
+    });
     useEffect(() => {
         const url = 'http://sahabat-utd.id:6007';
         const headers = {
