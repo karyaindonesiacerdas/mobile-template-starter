@@ -27,22 +27,21 @@ import {
 import Axios from 'axios';
 
 function InfoStok03(props) {
-    const CONTENT = {
+    const [CONTENT, setCONTENT] = useState({
         tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
         tableTitle2: ['Produk'],
-        tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB']],
-
-        tableData: [
-            ['Whole Blood', '0', '0', '0', '0', '0'],
-            ['Packed Red Cell', '0', '0', '0', '0', '0'],
-            ['Thrombocyte Concentrate', '0', '0', '0', '0', '0'],
-            ['Fresh Frozen Plasma', '0', '0', '0', '0', '0'],
-            ['AHF', '0', '0', '0', '0', '0'],
-            ['Leucodepleted', '0', '0', '0', '0', '0'],
-            ['Leucoreduce', '0', '0', '0', '0', '0'],
-            ['Plasma Konvalesen', '0', '0', '0', '0', '0'],
-        ],
-    };
+        tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB']], 
+    });
+    const [tableData, setTableData] = useState([
+        ['Whole Blood', '0', '0', '0', '0', '0'],
+        ['Packed Red Cell', '0', '0', '0', '0', '0'],
+        ['Thrombocyte Concentrate', '0', '0', '0', '0', '0'],
+        ['Fresh Frozen Plasma', '0', '0', '0', '0', '0'],
+        ['AHF', '0', '0', '0', '0', '0'],
+        ['Leucodepleted', '0', '0', '0', '0', '0'],
+        ['Leucoreduce', '0', '0', '0', '0', '0'],
+        ['Plasma Konvalesen', '0', '0', '0', '0', '0'],
+    ],)
     useEffect(() => {
         const url = 'http://sahabat-utd.id:6100';
         const headers = {
@@ -62,7 +61,7 @@ function InfoStok03(props) {
                             10,
                         )} Pukul ${res.data.data[0].waktu.slice(11, 16)} `,
                     ];
-                    CONTENT.tableData = [
+                    setTableData([
                         [
                             'Whole Blood',
                             res.data.data[0].wb_a,
@@ -127,7 +126,7 @@ function InfoStok03(props) {
                             res.data.data[0].pk_o,
                             res.data.data[0].subtotal_pk,
                         ],
-                    ];
+                    ]);
                 } else {
                     console.log('Error', res.data.message);
                 }
@@ -135,8 +134,7 @@ function InfoStok03(props) {
             .catch(err => {
                 console.log('err : ', err);
             });
-    });
-
+    },[]);
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
@@ -251,7 +249,7 @@ function InfoStok03(props) {
                                 textStyle={styles.text}
                             />
                             <Rows
-                                data={CONTENT.tableData}
+                                data={tableData}
                                 flexArr={[1, 1, 1, 1]}
                                 style={styles.row}
                                 textStyle={styles.text}

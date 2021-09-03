@@ -26,47 +26,63 @@ import {
 import Axios from 'axios';
 
 function MobilUnit02(props) {
-    const [isActive, setIsActive] = useState(true);
-    const CONTENT = {
-        tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
-
-        tableData: [['JAM', 'INSTASI', 'KETERANGAN']],
-    };
-    useEffect(() => {
-        setIsActive(false);
-        const url = 'http://sahabat-utd.id:6006';
-        const headers = {
-            'Content-Type': 'application/json',
-        };
-        const body = {
-            pelaksanaan: '',
-            bulan: '08',
-            hari: 'Monday',
-        };
-        Axios.post(`${url}/api/simaba/mobil-unit`, JSON.stringify(body), {
-            headers,
-        })
-            .then(r => r.data)
-            .then(data => {
-                for (let i = 0; i < data.data.length; i++) {
-                    CONTENT.tableData.push([
-                        data.data[i].pelaksanaan.slice(8, 10) +
-                            data.data[i].pelaksanaan.slice(4, 8) +
-                            data.data[i].pelaksanaan.slice(0, 4),
-                        data.data[i].mulai.slice(0, 5),
-                        data.data[i].instansi,
-                        data.data[i].status,
-                    ]);
-                }
-            })
-            .catch(err => console.log('err : ', err));
+    const parseHari = {
+        0: 'Senin',
+        1: 'Selasa',
+        2: 'Rabu',
+        3: 'Kamis',
+        4: 'Jumat',
+        5: 'Sabtu',
+        6: 'Minggu',
+    }
+    const [tableData] = useState([['TANGGAL','JAM', 'INSTASI', 'KETERANGAN']])
+    const [res, setRes] = useState({
+        data: [],
     });
+    const CONTENT = {
+        tableHead: [`JADWAL KEGIATAN DONOR DARAH ${parseHari[props.route.params.code].toUpperCase()}`],
+        };
+
+    useEffect(() => {
+            var t = new Date().toISOString().slice(0, 10);
+            const url = 'http://sahabat-utd.id:6006';
+            const headers = {
+                'Content-Type': 'application/json',
+            };
+            const body = {
+                pelaksanaan: '',
+                bulan: t.slice(5, 7),
+                hari: props.route.params.day,
+            };
+            Axios.post(`${url}/api/simaba/mobil-unit`, JSON.stringify(body), {
+                headers,
+            })
+                .then(r => {
+                    if (r.data.code == 200) {
+                        setRes(r.data);
+                    } else {
+                        console.log('Error', r.data.message);
+                    }
+                })
+                .catch(err => {
+                    console.log('tes : ', err);
+                });
+        },[]);
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
         }
     };
-
+        res?.data?.map((dat) =>
+        tableData.push([
+            dat.pelaksanaan.slice(8, 10) +
+                dat.pelaksanaan.slice(4, 8) +
+                dat.pelaksanaan.slice(0, 4),
+            dat.mulai.slice(0, 5),
+            dat.instansi,
+            dat.status,
+        ])
+    )
     return (
         <Container>
             <Image
@@ -129,7 +145,7 @@ function MobilUnit02(props) {
 
                                 color: 'white',
                             }}>
-                            JADWAL MODAL UNIT - SENIN
+                            {`JADWAL MOBIL UNIT - ${parseHari[props.route.params.code].toUpperCase()}`}
                         </Text>
                     </TouchableOpacity>
                 </Card>
@@ -160,7 +176,7 @@ function MobilUnit02(props) {
                                 textStyle={styles.text}
                             />
                             <Rows
-                                data={CONTENT.tableData}
+                                data={tableData}
                                 flexArr={[1, 1, 1]}
                                 style={styles.row}
                                 textStyle={styles.text}

@@ -17,8 +17,11 @@ import {
 import styles from './styles';
 
 function MobilUnit01(props) {
-    const goNextPage = page => {
-        if (page) {
+    var parseDay = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    const goNextPage = (page, x) => {
+        if (page !== 'Dashboard') {
+            props.navigation.replace(page, {day : parseDay[x], code : x});
+        }else {
             props.navigation.replace(page);
         }
     };
@@ -79,7 +82,7 @@ function MobilUnit01(props) {
                         alignSelf: 'center',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'MobilUnit02')}
+                        onPress={goNextPage.bind(this, 'MobilUnit02', 0)}
                         style={{
                             backgroundColor: '#fff',
                             width: 120,
@@ -109,7 +112,7 @@ function MobilUnit01(props) {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'MobilUnit03')}
+                        onPress={goNextPage.bind(this, 'MobilUnit02',1)}
                         style={{
                             backgroundColor: '#fff',
                             width: 120,
@@ -137,7 +140,7 @@ function MobilUnit01(props) {
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'MobilUnit04')}
+                        onPress={goNextPage.bind(this, 'MobilUnit02',2)}
                         style={{
                             backgroundColor: '#fff',
                             width: 120,
@@ -178,7 +181,7 @@ function MobilUnit01(props) {
                         alignSelf: 'center',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'MobilUnit05')}
+                        onPress={goNextPage.bind(this, 'MobilUnit02',3)}
                         style={{
                             width: 120,
                             height: 100,
@@ -207,7 +210,7 @@ function MobilUnit01(props) {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'MobilUnit06')}
+                        onPress={goNextPage.bind(this, 'MobilUnit02',4)}
                         style={{
                             width: 120,
                             height: 100,
@@ -234,7 +237,7 @@ function MobilUnit01(props) {
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'MobilUnit07')}
+                        onPress={goNextPage.bind(this, 'MobilUnit02',5)}
                         style={{
                             width: 120,
                             height: 100,
@@ -275,7 +278,7 @@ function MobilUnit01(props) {
                         marginBottom: 100,
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'MobilUnit08')}
+                        onPress={goNextPage.bind(this, 'MobilUnit02',6)}
                         style={{
                             backgroundColor: 'white',
                             borderRadius: 10,

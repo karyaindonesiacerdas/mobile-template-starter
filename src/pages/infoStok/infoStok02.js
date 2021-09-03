@@ -45,7 +45,7 @@ function InfoStok02(props) {
         ],
     });
     const CONTENT = {
-        tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
+        tableHead: [`Informasi kebutuhan Darah\nTanggal ${res.data[0].waktu.slice(0,10)} Pukul ${res.data[0].waktu.slice(11,16)} `],
 
         tableData: [
             [
@@ -65,22 +65,12 @@ function InfoStok02(props) {
         const headers = {
             'Content-Type': 'application/json',
         };
-        Axios.post(`${url}/api/simaba/resipien`, JSON.stringify({}), {
+        const body = {}
+        Axios.post(`${url}/api/simaba/resipien`, JSON.stringify(body), {
             headers,
         })
             .then(r => {
                 if (r.data.code == 200) {
-                    // for (let i = 0; i < res.data.data.length; i++) {
-                    //     CONTENT.tableData.push([
-                    //         i + 1,
-                    //         res.data.data[i].rumah_sakit,
-                    //         res.data.data[i].produk_darah,
-                    //         res.data.data[i].golongan_darah,
-                    //         res.data.data[i].rhesus,
-                    //         res.data.data[i].jumlah_permintaan,
-                    //         res.data.data[i].keterangan,
-                    //     ]);
-                    // }
                     setRes(r.data);
                 } else {
                     console.log('Error', r.data.message);
@@ -89,7 +79,7 @@ function InfoStok02(props) {
             .catch(err => {
                 console.log('tes : ', err);
             });
-    });
+    },[]);
 
     const goNextPage = page => {
         if (page) {
