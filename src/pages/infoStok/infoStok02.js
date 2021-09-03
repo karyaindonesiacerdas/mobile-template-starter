@@ -190,28 +190,24 @@ function InfoStok02(props) {
                                 heightArr={[28, 28]}
                                 textStyle={styles.text}
                             />
+                            {res.data.map((dat, i) =>
+                                CONTENT.tableData.push([
+                                    i + 1,
+                                    dat.rumah_sakit,
+                                    dat.produk_darah,
+                                    dat.golongan_darah,
+                                    dat.rhesus,
+                                    dat.jumlah_permintaan,
+                                    dat.jumlah_terpenuhi,
+                                    dat.keterangan,
+                                ]),
+                            )}
                             <Row
                                 data={CONTENT.tableData}
                                 flexArr={[0.5, 1, 1, 1.3, 1, 1, 1]}
                                 style={styles.row}
                                 textStyle={styles.text}
                             />
-                            {res.data.map((dat, i) => (
-                                <Row
-                                    data={[
-                                        i + 1,
-                                        dat.rumah_sakit,
-                                        dat.produk_darah,
-                                        dat.golongan_darah,
-                                        dat.rhesus,
-                                        dat.jumlah_permintaan,
-                                        dat.jumlah_terpenuhi,
-                                        dat.keterangan,
-                                    ]}
-                                    key={i}
-                                    textStyle={styles.TableText}
-                                />
-                            ))}
                         </TableWrapper>
                     </Table>
                 </View>
