@@ -202,7 +202,7 @@ function InfoStok02(props) {
                                     dat.keterangan,
                                 ]),
                             )}
-                            <Row
+                            <Rows
                                 data={CONTENT.tableData}
                                 flexArr={[0.5, 1, 1, 1.3, 1, 1, 1]}
                                 style={styles.row}
