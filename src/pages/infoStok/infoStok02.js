@@ -98,6 +98,18 @@ function InfoStok02(props) {
     };
     return (
         <Container>
+            {res.data.map((dat, i) =>
+                CONTENT.tableData.push([
+                    (i + 1).toString(),
+                    dat.rumah_sakit,
+                    dat.produk_darah,
+                    dat.golongan_darah,
+                    dat.rhesus,
+                    dat.jumlah_permintaan,
+                    dat.jumlah_terpenuhi,
+                    dat.keterangan,
+                ]),
+            )}
             <Image
                 source={require('../../asset/logoUDD.png')}
                 style={{
@@ -183,18 +195,6 @@ function InfoStok02(props) {
                             style={styles.head}
                             textStyle={styles.textHead}
                         />
-                        {res.data.map((dat, i) =>
-                            CONTENT.tableData.push([
-                                (i + 1).toString(),
-                                dat.rumah_sakit,
-                                dat.produk_darah,
-                                dat.golongan_darah,
-                                dat.rhesus,
-                                dat.jumlah_permintaan,
-                                dat.jumlah_terpenuhi,
-                                dat.keterangan,
-                            ]),
-                        )}
                         <TableWrapper style={styles.wrapper}>
                             <Col
                                 data={CONTENT.tableTitle}
