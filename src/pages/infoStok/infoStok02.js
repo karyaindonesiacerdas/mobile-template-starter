@@ -51,8 +51,8 @@ function InfoStok02(props) {
         Axios.post(`${url}/api/simaba/resipien`, JSON.stringify({}), {
             headers,
         })
-            .then(res => {
-                if (res.data.code == 200) {
+            .then(r => {
+                if (r.data.code == 200) {
                     // for (let i = 0; i < res.data.data.length; i++) {
                     //     CONTENT.tableData.push([
                     //         i + 1,
@@ -64,9 +64,9 @@ function InfoStok02(props) {
                     //         res.data.data[i].keterangan,
                     //     ]);
                     // }
-                    setRes(res.data);
+                    setRes(r.data);
                 } else {
-                    console.log('Error', res.data.message);
+                    console.log('Error', r.data.message);
                 }
             })
             .catch(err => {
@@ -179,7 +179,7 @@ function InfoStok02(props) {
                                 style={styles.row}
                                 textStyle={styles.text}
                             />
-                            {setRes.data.map((dat, i) => (
+                            {res.data.map((dat, i) => (
                                 <Row
                                     data={[
                                         di + 1,
