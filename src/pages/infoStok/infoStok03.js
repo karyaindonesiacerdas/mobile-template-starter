@@ -43,98 +43,100 @@ function InfoStok03(props) {
             ['Plasma Konvalesen', '0', '0', '0', '0', '0'],
         ],
     };
-
-    const url = 'http://sahabat-utd.id:6100';
-    const headers = {
-        'Content-Type': 'application/json',
-    };
-    const body = {
-        waktu: '',
-    };
-    Axios.post(`${url}/api/simaba/stok-darah`, JSON.stringify(body), {
-        headers,
-    })
-        .then(res => {
-            if (res.data.code == 200) {
-                CONTENT.tableHead = [
-                    `Informasi kebutuhan Darah\nTanggal ${res.data.data[0].waktu.slice(
-                        0,
-                        10,
-                    )} Pukul ${res.data.data[0].waktu.slice(11, 16)} `,
-                ];
-                CONTENT.tableData = [
-                    [
-                        'Whole Blood',
-                        res.data.data[0].wb_a,
-                        res.data.data[0].wb_b,
-                        res.data.data[0].wb_ab,
-                        res.data.data[0].wb_o,
-                        res.data.data[0].subtotal_wb,
-                    ],
-                    [
-                        'Packed Red Cell',
-                        res.data.data[0].prc_a,
-                        res.data.data[0].prc_b,
-                        res.data.data[0].prc_ab,
-                        res.data.data[0].prc_o,
-                        res.data.data[0].subtotal_prc,
-                    ],
-                    [
-                        'Thrombocyte Concentrate',
-                        res.data.data[0].tc_a,
-                        res.data.data[0].tc_b,
-                        res.data.data[0].tc_ab,
-                        res.data.data[0].tc_o,
-                        res.data.data[0].subtotal_tc,
-                    ],
-                    [
-                        'Fresh Frozen Plasma',
-                        res.data.data[0].ffp_a,
-                        res.data.data[0].ffp_b,
-                        res.data.data[0].ffp_ab,
-                        res.data.data[0].ffp_o,
-                        res.data.data[0].subtotal_ffp,
-                    ],
-                    [
-                        'AHF',
-                        res.data.data[0].ahf_a,
-                        res.data.data[0].ahf_b,
-                        res.data.data[0].ahf_ab,
-                        res.data.data[0].ahf_o,
-                        res.data.data[0].subtotal_ahf,
-                    ],
-                    [
-                        'Leucodepleted',
-                        res.data.data[0].ld_a,
-                        res.data.data[0].ld_b,
-                        res.data.data[0].ld_ab,
-                        res.data.data[0].ld_o,
-                        res.data.data[0].subtotal_ld,
-                    ],
-                    [
-                        'Leucoreduce',
-                        res.data.data[0].lr_a,
-                        res.data.data[0].lr_b,
-                        res.data.data[0].lr_ab,
-                        res.data.data[0].lr_o,
-                        res.data.data[0].subtotal_lr,
-                    ],
-                    [
-                        'Plasma Konvalesen',
-                        res.data.data[0].pk_a,
-                        res.data.data[0].pk_b,
-                        res.data.data[0].pk_ab,
-                        res.data.data[0].pk_o,
-                        res.data.data[0].subtotal_pk,
-                    ],
-                ];
-            } else {
-                console.log('Error', res.data.message);
-            }
+    useEffect(() => {
+        const url = 'http://sahabat-utd.id:6100';
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+        const body = {
+            waktu: '',
+        };
+        Axios.post(`${url}/api/simaba/stok-darah`, JSON.stringify(body), {
+            headers,
         })
-        .catch(err => {
-            console.log('err : ', err);
-        });
+            .then(res => {
+                if (res.data.code == 200) {
+                    CONTENT.tableHead = [
+                        `Informasi kebutuhan Darah\nTanggal ${res.data.data[0].waktu.slice(
+                            0,
+                            10,
+                        )} Pukul ${res.data.data[0].waktu.slice(11, 16)} `,
+                    ];
+                    CONTENT.tableData = [
+                        [
+                            'Whole Blood',
+                            res.data.data[0].wb_a,
+                            res.data.data[0].wb_b,
+                            res.data.data[0].wb_ab,
+                            res.data.data[0].wb_o,
+                            res.data.data[0].subtotal_wb,
+                        ],
+                        [
+                            'Packed Red Cell',
+                            res.data.data[0].prc_a,
+                            res.data.data[0].prc_b,
+                            res.data.data[0].prc_ab,
+                            res.data.data[0].prc_o,
+                            res.data.data[0].subtotal_prc,
+                        ],
+                        [
+                            'Thrombocyte Concentrate',
+                            res.data.data[0].tc_a,
+                            res.data.data[0].tc_b,
+                            res.data.data[0].tc_ab,
+                            res.data.data[0].tc_o,
+                            res.data.data[0].subtotal_tc,
+                        ],
+                        [
+                            'Fresh Frozen Plasma',
+                            res.data.data[0].ffp_a,
+                            res.data.data[0].ffp_b,
+                            res.data.data[0].ffp_ab,
+                            res.data.data[0].ffp_o,
+                            res.data.data[0].subtotal_ffp,
+                        ],
+                        [
+                            'AHF',
+                            res.data.data[0].ahf_a,
+                            res.data.data[0].ahf_b,
+                            res.data.data[0].ahf_ab,
+                            res.data.data[0].ahf_o,
+                            res.data.data[0].subtotal_ahf,
+                        ],
+                        [
+                            'Leucodepleted',
+                            res.data.data[0].ld_a,
+                            res.data.data[0].ld_b,
+                            res.data.data[0].ld_ab,
+                            res.data.data[0].ld_o,
+                            res.data.data[0].subtotal_ld,
+                        ],
+                        [
+                            'Leucoreduce',
+                            res.data.data[0].lr_a,
+                            res.data.data[0].lr_b,
+                            res.data.data[0].lr_ab,
+                            res.data.data[0].lr_o,
+                            res.data.data[0].subtotal_lr,
+                        ],
+                        [
+                            'Plasma Konvalesen',
+                            res.data.data[0].pk_a,
+                            res.data.data[0].pk_b,
+                            res.data.data[0].pk_ab,
+                            res.data.data[0].pk_o,
+                            res.data.data[0].subtotal_pk,
+                        ],
+                    ];
+                } else {
+                    console.log('Error', res.data.message);
+                }
+            })
+            .catch(err => {
+                console.log('err : ', err);
+            });
+    });
+
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
