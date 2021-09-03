@@ -25,13 +25,13 @@ import {
 } from 'react-native-table-component';
 import Axios from 'axios';
 
-const CONTENT = {
-    tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
-
-    tableData: [['JAM', 'INSTASI', 'KETERANGAN']],
-};
-
 function MobilUnit02(props) {
+    const CONTENT = {
+        tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
+
+        tableData: [['JAM', 'INSTASI', 'KETERANGAN']],
+    };
+
     const url = 'http://sahabat-utd.id:6006';
     const headers = {
         'Content-Type': 'application/json',
