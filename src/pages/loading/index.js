@@ -3,13 +3,14 @@ import React from 'react';
 import {useEffect} from 'react';
 import {ActivityIndicator} from 'react-native';
 import SyncStorage from 'sync-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const loading = true;
 
 function LoadingStart(props) {
     useEffect(() => {
         function checkToken() {
-            const token = SyncStorage.getItem('token');
+            async const token = await AsyncStorage.getItem('token');
             if (token) {
                 props.navigation.replace('Dashboard');
             } else {
