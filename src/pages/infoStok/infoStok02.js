@@ -42,7 +42,7 @@ const CONTENT = {
 };
 
 function InfoStok02(props) {
-    const [setRes] = useState('');
+    const [res, setRes] = useState('');
     useEffect(() => {
         const url = 'http://sahabat-utd.id:6007';
         const headers = {
@@ -65,7 +65,6 @@ function InfoStok02(props) {
                     //     ]);
                     // }
                     setRes(res.data);
-                    console.log(setRes);
                 } else {
                     console.log('Error', res.data.message);
                 }
