@@ -100,8 +100,9 @@ function index(props) {
                     />
                     <Card style={styles.flowCardRed}>
                         <TouchableOpacity>
-                            <Text style={styles.textInCard}></Text>
-                            Pemeriksaan kesehatan
+                            <Text style={styles.textInCard}>
+                                Pemeriksaan kesehatan
+                            </Text>
                             <FlatList>
                                 <Text>a. Pengukuran tekanan darah</Text>
                                 <Text>b. Pengukuran berat badan</Text>
