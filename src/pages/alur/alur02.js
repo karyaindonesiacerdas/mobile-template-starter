@@ -102,13 +102,13 @@ function index(props) {
                         <TouchableOpacity>
                             <Text style={styles.textInCard}>
                                 Pemeriksaan kesehatan
-                                <Flatlist>
+                                <FlatList>
                                     <Text>a. Pengukuran tekanan darah</Text>
                                     <Text>b. Pengukuran berat badan</Text>
                                     <Text>c. Pemeriksaan nadi</Text>
                                     <Text>d. Pemeriksaan suhu tubuh</Text>
                                     <Text>e. Wawancara riwayat kesehatan</Text>
-                                </Flatlist>
+                                </FlatList>
                             </Text>
                         </TouchableOpacity>
                     </Card>
@@ -147,7 +147,7 @@ function index(props) {
                             <Text style={styles.textInCard}>
                                 Tips setelah donor:
                             </Text>
-                            <Flatlist>
+                            <FlatList>
                                 <Text>
                                     a. Membatasi aktivitas fisik Anda selama
                                     setidaknya 5 jam setelah donor
@@ -179,7 +179,7 @@ function index(props) {
                                     tinggi, vitamin C, asam folat, riboflavin
                                     (vitamin B2), damn vitamin B6
                                 </Text>
-                            </Flatlist>
+                            </FlatList>
                         </TouchableOpacity>
                     </Card>
 
