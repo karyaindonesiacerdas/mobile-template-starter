@@ -128,6 +128,16 @@ function index(props) {
                             </Text>
                         </TouchableOpacity>
                     </Card>
+                    <Icon
+                        name="arrow-down"
+                        type="font-awesome"
+                        color="#007dc3"
+                        size={30}
+                        style={{
+                            marginTop: 0,
+                            alignSelf: 'center',
+                        }}
+                    />
                     <Card style={styles.flowCardRed}>
                         <TouchableOpacity>
                             <Text style={styles.textInCard}>
