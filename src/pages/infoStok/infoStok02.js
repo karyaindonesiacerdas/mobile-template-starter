@@ -25,22 +25,6 @@ import {
 } from 'react-native-table-component';
 import Axios from 'axios';
 
-const CONTENT = {
-    tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
-
-    tableData: [
-        [
-            'NO',
-            'RUMAH SAKIT',
-            'PRODUK DARAH',
-            'GOLONGAN DARAH',
-            'RHESUS',
-            'JUMLAH',
-            'STATUS',
-        ],
-    ],
-};
-
 function InfoStok02(props) {
     const [res, setRes] = useState({
         data: [
@@ -60,6 +44,22 @@ function InfoStok02(props) {
             },
         ],
     });
+    const CONTENT = {
+        tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
+
+        tableData: [
+            [
+                'NO',
+                'RUMAH SAKIT',
+                'PRODUK DARAH',
+                'GOLONGAN DARAH',
+                'RHESUS',
+                'JUMLAH',
+                'STATUS',
+            ],
+        ],
+    };
+
     useEffect(() => {
         const url = 'http://sahabat-utd.id:6007';
         const headers = {
@@ -96,19 +96,7 @@ function InfoStok02(props) {
             props.navigation.replace(page);
         }
     };
-    res.data.map(
-        (dat, i) =>
-            (CONTENT.tableData = [
-                [
-                    'NO',
-                    'RUMAH SAKIT',
-                    'PRODUK DARAH',
-                    'GOLONGAN DARAH',
-                    'RHESUS',
-                    'JUMLAH',
-                    'STATUS',
-                ],
-            ]),
+    res.data.map((dat, i) =>
         CONTENT.tableData.push([
             i + 1,
             dat.rumah_sakit,
