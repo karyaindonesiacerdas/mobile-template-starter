@@ -96,20 +96,21 @@ function InfoStok02(props) {
             props.navigation.replace(page);
         }
     };
+    res.data.map((dat, i) =>
+        CONTENT.tableData.push([
+            i + 1,
+            dat.rumah_sakit,
+            dat.produk_darah,
+            dat.golongan_darah,
+            dat.rhesus,
+            dat.jumlah_permintaan,
+            dat.jumlah_terpenuhi,
+            dat.keterangan,
+        ]),
+    );
+
     return (
         <Container>
-            {res.data.map((dat, i) =>
-                CONTENT.tableData.push([
-                    (i + 1).toString(),
-                    dat.rumah_sakit,
-                    dat.produk_darah,
-                    dat.golongan_darah,
-                    dat.rhesus,
-                    dat.jumlah_permintaan,
-                    dat.jumlah_terpenuhi,
-                    dat.keterangan,
-                ]),
-            )}
             <Image
                 source={require('../../asset/logoUDD.png')}
                 style={{
