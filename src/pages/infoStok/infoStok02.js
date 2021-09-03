@@ -45,11 +45,18 @@ function InfoStok02(props) {
     const [res, setRes] = useState({
         data: [
             {
-                pelaksanaan: '2021-08-10T00:00:00Z',
-                instansi: 'PT TECHPACK',
-                alamat: 'JL RAYA KARANG AWEN KM 18 MRANGGEN DEMAK',
-                mulai: '08:00:00',
-                status: 'BATAL',
+                uid: '1',
+                waktu: '2021-08-18T07:10:09Z',
+                no_form: 'UTD-180821-0018',
+                rumah_sakit: 'RSUP Dr Kariadi Semarang',
+                produk_darah: 'PRC',
+                golongan_darah: 'B',
+                rhesus: '+',
+                jumlah_permintaan: '1',
+                jumlah_terpenuhi: 0,
+                keterangan: 'DATA DUMMY',
+                ditambahkan: '2021-08-18T13:21:34Z',
+                diupdate: '',
             },
         ],
     });
@@ -192,7 +199,7 @@ function InfoStok02(props) {
                             {res.data.map((dat, i) => (
                                 <Row
                                     data={[
-                                        di + 1,
+                                        i + 1,
                                         dat.rumah_sakit,
                                         dat.produk_darah,
                                         dat.golongan_darah,
