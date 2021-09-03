@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Alert,
     ImageBackground,
@@ -31,33 +31,34 @@ function MobilUnit02(props) {
 
         tableData: [['JAM', 'INSTASI', 'KETERANGAN']],
     };
-
-    const url = 'http://sahabat-utd.id:6006';
-    const headers = {
-        'Content-Type': 'application/json',
-    };
-    const body = {
-        pelaksanaan: '',
-        bulan: '08',
-        hari: 'Monday',
-    };
-    Axios.post(`${url}/api/simaba/mobil-unit`, JSON.stringify(body), {
-        headers,
-    })
-        .then(r => r.data)
-        .then(data => {
-            for (let i = 0; i < data.data.length; i++) {
-                CONTENT.tableData.push([
-                    data.data[i].pelaksanaan.slice(8, 10) +
-                        data.data[i].pelaksanaan.slice(4, 8) +
-                        data.data[i].pelaksanaan.slice(0, 4),
-                    data.data[i].mulai.slice(0, 5),
-                    data.data[i].instansi,
-                    data.data[i].status,
-                ]);
-            }
+    useEffect(() => {
+        const url = 'http://sahabat-utd.id:6006';
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+        const body = {
+            pelaksanaan: '',
+            bulan: '08',
+            hari: 'Monday',
+        };
+        Axios.post(`${url}/api/simaba/mobil-unit`, JSON.stringify(body), {
+            headers,
         })
-        .catch(err => console.log('test : ', err));
+            .then(r => r.data)
+            .then(data => {
+                for (let i = 0; i < data.data.length; i++) {
+                    CONTENT.tableData.push([
+                        data.data[i].pelaksanaan.slice(8, 10) +
+                            data.data[i].pelaksanaan.slice(4, 8) +
+                            data.data[i].pelaksanaan.slice(0, 4),
+                        data.data[i].mulai.slice(0, 5),
+                        data.data[i].instansi,
+                        data.data[i].status,
+                    ]);
+                }
+            })
+            .catch(err => console.log('err : ', err));
+    });
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
