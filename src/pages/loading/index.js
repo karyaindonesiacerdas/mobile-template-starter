@@ -9,12 +9,12 @@ const loading = true;
 function LoadingStart(props) {
     useEffect(() => {
         function checkToken() {
-            // const token = SyncStorage.getItem('token');
-            // if (token) {
-            //     props.navigation.replace('Home');
-            // } else {
-            props.navigation.replace('Login');
-            // }
+            const token = SyncStorage.getItem('token');
+            if (token) {
+                props.navigation.replace('Dashboard');
+            } else {
+                props.navigation.replace('Login');
+            }
         }
         checkToken();
     }, []);
