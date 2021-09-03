@@ -26,12 +26,14 @@ import {
 import Axios from 'axios';
 
 function MobilUnit02(props) {
+    const [isActive, setIsActive] = useState(true);
     const CONTENT = {
         tableHead: ['JADWAL KEGIATAN DONOR DARAH SENIN'],
 
         tableData: [['JAM', 'INSTASI', 'KETERANGAN']],
     };
     useEffect(() => {
+        setIsActive(false);
         const url = 'http://sahabat-utd.id:6006';
         const headers = {
             'Content-Type': 'application/json',
