@@ -9,8 +9,8 @@ const loading = true;
 
 function LoadingStart(props) {
     useEffect(() => {
-        function checkToken() {
-            async const token = await AsyncStorage.getItem('token');
+        async function checkToken() {
+            const token = await AsyncStorage.getItem('token');
             if (token) {
                 props.navigation.replace('Dashboard');
             } else {
