@@ -139,7 +139,7 @@ function Konvalesen07(props) {
             flexDirection: "row",
             justifyContent: "center",
             alignContent: "center",
-            marginTop: 300,
+            marginTop: 30,
             marginBottom: 10,
           }}
         >

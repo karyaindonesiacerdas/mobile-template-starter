@@ -1,206 +1,190 @@
-import React, { Component } from "react";
+import React, {useState} from 'react';
 import {
-  Alert,
-  ImageBackground,
-  Image,
-  Text,
-  View,
-  TextInput,TouchableOpacity,
-} from "react-native";
-import { CheckBox } from "react-native-elements";
-import { Container, Header, Title, Left, HStack, Card } from "native-base";
+    Alert,
+    ImageBackground,
+    Image,
+    Text,
+    View,
+    StyleSheet,
+    TextInput
+} from 'react-native';
+import {CheckBox} from 'react-native-elements';
+import {Container, Card} from 'native-base';
 import {
-  ScrollView,
-  TouchableWithoutFeedback,
-  
-} from "react-native-gesture-handler";
-import styles from "./styles";
+    ScrollView,
+    TouchableWithoutFeedback,
+} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native';
+import styles from '../styles/styles';
+import {
+    Table,
+    TableWrapper,
+    Row,
+    Rows,
+    Col,
+} from 'react-native-table-component';
+import Bg from '../../image/Baground2.jpg'
 
-function index(props) {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-    const goNextPage = (page) => {
-    if (page) {
-      props.navigation.replace(page);
-    }
-  };
+const CONTENT = {
+    tableHead: ['                                             Agustus 2021'],
 
-  return (
-    <Container>
-      <Image
-        source={require("../../asset/logoUDD.png")}
-        style={{
-          width: 54,
-          height: 60,
-          top: 10,
-          margin: 20,
+    tableData: [
+        ['   Senin', '  Selasa', '   Rabu','  Kamis','  Jumat','  Sabtu',' Minggu'],
+        ['', '', '','','','','       1'],
+        ['       2', '       3', '       4','       5','       6','      7','       8'],
+        ['       9', '      10', '      11','      12','      13','     14','      15'],
+        ['      16', '      17', '      18','      19','      20','     21','      22'],
+        ['      23', '      24', '      25','      26','      27','     28','      29'],
+        ['      30', '      31', '','','','',''],
+    ],
+};
+function Konvalesen19(props) {
+    const [check1, setCheck1] = useState(false);
+    const [check2, setCheck2] = useState(false);
+    const goNextPage = page => {
+        if (page) {
+            props.navigation.replace(page);
+        }
+    };
 
-          left: 10,
-        }}
-      ></Image>
-      <Image
-        source={require("../../asset/logoSehat.png")}
-        style={{
-          position: "absolute",
-          width: 54,
-          height: 60,
-          margin: 20,
-
-          right: 10,
-          top: 10,
-        }}
-      ></Image>
-      <ScrollView>
-        <Text
-          style={{
-            marginLeft: 30,
-            marginTop: 25,
-            fontSize: 35,
-            fontWeight: "bold",
-            color: "red",
-          }}
-        >
-          Mobil Unit
-        </Text>
-        <Text
-          style={{
-            marginLeft: 30,
-            marginTop: -10,
-            fontSize: 25,
-            fontWeight: "bold",
-            color: "black",
-          }}
-        >
-          Terdekat
-        </Text>
-
-       
-        <Text
-          style={{
-            marginLeft: 30,
-            marginTop: 30,
-            fontSize: 15,
-            fontWeight: "bold",
-            color: "black",
-          }}
-        >
-          STATUS TRANSAKSI
-        </Text>
-
-        <View
-          style={{
-            marginTop: 10,
-            marginLeft: 10,
-            marginRight: 10,
-         
-            justifyContent: "space-between",
-          }}
-        >
-          <View style={{}}>
-            <CheckBox title="Lulus Pendaftaran Awal" style={{ width: "90%" }} />
-
-            <CheckBox title="Pendaftaran Donor" style={{ width: "90%" }} />
-          
-          </View>
-
-          
-        </View>
-          <View
-          style={{
-            marginTop: 10,
-            marginLeft: 10,
-            marginRight: 10,
-         
-            flexDirection: "row",
-          }}
-        >
-          <View style={{}}>
-            <CheckBox title="Status Donor" style={{ width: "60%" }} />
-
-        
-          </View>
-          <View style={{}}>
-            <CheckBox title="Berhasil" style={{ width: "30%" }} />
-
-            <CheckBox title="Gagal" style={{ width: "30%" }} />
-           
-          </View>
-
-          
-        </View>
-
-      
-
-      
-
-       
-      
-      </ScrollView>
-         <View
-          style={{
-            alignContent: "center",
-
-            flexDirection: "row",
-            justifyContent: "center",
-            alignContent: "center",
-            marginTop: 30,
-            marginBottom: 10,
-            
-          }}
-        >
-          <Card
-            style={{
-              backgroundColor: "#000",
-              width: "40%",
-              marginRight: "2%",
-            }}
-          >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen17")}>
-              <Text
+    return (
+        <Container>
+            <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+            <Image
+                source={require('../image/logo.png')}
                 style={{
-                  margin: 10,
-                  fontSize: 20,
+                    width: 54,
+                    height: 60,
+                    top: 10,
+                    margin: 20,
 
-                  color: "white",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              >
-                Kembali
-              </Text>
-            </TouchableOpacity>
-          </Card>
-          <View
-            style={{
-      
-              width: "40%",
-              marginLeft: "2%",
-            }}
-          >
-           
+                    left: 10,
+                }}></Image>
+            <Image
+                source={require('../image/Logo2.png')}
+                style={{
+                    position: 'absolute',
+                    width: 54,
+                    height: 60,
+                    margin: 20,
+
+                    right: 10,
+                    top: 10,
+                }}></Image>
+            <ScrollView>
+                <Text
+                    style={{
+                        marginLeft: 30,
+                        marginTop: 10,
+                        fontSize: 35,
+                        fontWeight: 'bold',
+                        color: 'red',
+                    }}>
+                    Gdeung UDD
+                </Text>
+                <Text
+                    style={{
+                        marginLeft: 30,
+                        marginTop: -10,
+                        marginBottom: 10,
+                        fontSize: 35,
+                        fontWeight: 'bold',
+                        color: 'black',
+                    }}>
+                    PMI Kota Semarang
+                </Text>
+
+                <View
+                    style={{
+                        width: '90%',
+                        justifyContent: 'center',
+                        alignSelf: 'center',
+                    }}>
+                    <Table
+                        borderStyle={{
+                            borderWidth: 1,
+                            justifyContent: 'center',
+                            alignContent: 'center',
+                        }}>
+                        <Row
+                            data={CONTENT.tableHead}
+                            flexArr={[1, 2, 1, 1]}
+                            style={styles.head}
+                            textStyle={styles.text}
+                        />
+                        <TableWrapper style={styles.wrapper}>
+                            <Col
+                                data={CONTENT.tableTitle}
+                                style={styles.title}
+                                heightArr={[28, 28]}
+                                textStyle={styles.text}
+                            />
+                            <Rows
+                                data={CONTENT.tableData}
+                                flexArr={[1, 1, 1]}
+                                style={styles.row}
+                                textStyle={styles.text}
+                            />
+                        </TableWrapper>
+                    </Table>
+                </View>
+                <View style={{}}>
+                    <CheckBox title='Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan' style={{width:"70%" }}checked={check1}
+              onPress={() => setCheck1(!check1)}   />
           </View>
-        </View>
+                <View
+                    style={{
+                        alignContent: 'center',
 
-      <ImageBackground
-        // resizeMethod={'auto'}
-        source={require("../../asset/footer.png")}
-        style={{
-          width: "100%",
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        marginTop: 400,
+                    }}>
+                    <Card
+                        style={{
+                            backgroundColor: '#000',
+                            width: '40%',
+                            marginRight: '2%',
+                        }}>
+                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Konvalesen17')} >
+                            <Text
+                                style={{
+                                    margin: 10,
+                                    fontSize: 20,
 
-          backgroundColor: "#fff",
-          padding: 0,
-          paddingVertical: 90,
-          position: "absolute",
-          zIndex: -1,
-          bottom: 0,
-        }}
-        imageStyle={{
-          resizeMode: "cover",
-          alignSelf: "flex-end",
-        }}
-      ></ImageBackground>
-    </Container>
-  );
+                                    color: 'white',
+                                    fontWeight: 'bold',
+                                    textAlign: 'center',
+                                }}>
+                                Kembali
+                            </Text>
+                        </TouchableOpacity>
+                    </Card>
+                    <Card
+                        style={{
+                            backgroundColor: '#000',
+                            width: '40%',
+                            marginLeft: '2%',
+                        }}>
+                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Konvalesen13')} >
+                            <Text
+                                style={{
+                                    margin: 10,
+                                    fontSize: 20,
+                                    textAlign: 'center',
+
+                                    color: 'white',
+                                    fontWeight: 'bold',
+                                }}>
+                                Selanjutnya
+                            </Text>
+                        </TouchableOpacity>
+                    </Card>
+                </View>
+            </ScrollView>
+        </Container>
+    );
 }
 
-export default index;
+export default Konvalesen19;

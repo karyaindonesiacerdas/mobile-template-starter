@@ -37,6 +37,10 @@ import {
 	Konvalesen14,
 	Konvalesen15,
 	Konvalesen16,
+	Konvalesen17,
+	Konvalesen19,
+	Konvalesen22,
+	Konvalesen23,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -81,6 +85,10 @@ function index() {
 				<Stack.Screen name="Konvalesen14" component={Konvalesen14} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen15" component={Konvalesen15} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen16" component={Konvalesen16} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen17" component={Konvalesen17} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen19" component={Konvalesen19} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen22" component={Konvalesen22} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen23" component={Konvalesen23} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

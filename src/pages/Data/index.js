@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
 import { CheckBox } from 'react-native-elements';
 import {
@@ -21,6 +21,22 @@ import { Button } from "react-native-elements/dist/buttons/Button";
 
 
 function Data(props) {
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
+  const [check3, setCheck3] = useState(false);
+  const [check4, setCheck4] = useState(false);
+  const [check5, setCheck5] = useState(false);
+  const [check6, setCheck6] = useState(false);
+  const [check7, setCheck7] = useState(false);
+  const [check8, setCheck8] = useState(false);
+  const [check9, setCheck9] = useState(false);
+  const [check10, setCheck10] = useState(false);
+  const [check11, setCheck11] = useState(false);
+  const [check12, setCheck12] = useState(false);
+  const [check13, setCheck13] = useState(false);
+  const [check14, setCheck14] = useState(false);
+  const [check15, setCheck15] = useState(false);
+  const [check16, setCheck16] = useState(false);
     const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
   const goNextPage = page => {
@@ -76,17 +92,25 @@ function Data(props) {
             
 
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}><CheckBox title='PNS' style={{width:"70%" }}   />
+                <View style={{}}><CheckBox title='PNS' style={{width:"70%" }} checked={check1}
+              onPress={() => setCheck1(!check1)}  />
            
-                 <CheckBox title='Swasta' style={{width:"70%" }}   />
-                <CheckBox title='Polri' style={{width:"70%" }}   />
-                <CheckBox title='Petani' style={{width:"70%" }}   />
+                 <CheckBox title='Swasta' style={{width:"70%" }}checked={check2}
+              onPress={() => setCheck2(!check2)}   />
+                <CheckBox title='Polri' style={{width:"70%" }} checked={check3}
+              onPress={() => setCheck3(!check3)}  />
+                <CheckBox title='Petani' style={{width:"70%" }} checked={check4}
+              onPress={() => setCheck4(!check4)}  />
                 </View>
                
-                <View><CheckBox title='BUMN' style={{width:"70%" }}   />
-                <CheckBox title='Pelajar' style={{width:"70%" }}   />
-                <CheckBox title='Wirausaha' style={{width:"70%" }}   />
-                <CheckBox title='Lain-lain' style={{width:"70%" }}   />
+                <View><CheckBox title='BUMN' style={{width:"70%" }} checked={check5}
+              onPress={() => setCheck5(!check5)}  />
+                <CheckBox title='Pelajar' style={{width:"70%" }}  checked={check6}
+              onPress={() => setCheck6(!check6)} />
+                <CheckBox title='Wirausaha' style={{width:"70%" }}  checked={check7}
+              onPress={() => setCheck7(!check7)} />
+                <CheckBox title='Lain-lain' style={{width:"70%" }} checked={check8}
+              onPress={() => setCheck8(!check8)}  />
                 </View>             
                
               </View>
@@ -102,15 +126,20 @@ function Data(props) {
             
 
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}><CheckBox title='A' style={{width:"70%" }}   />
+                <View style={{}}><CheckBox title='A' style={{width:"70%" }}checked={check9}
+              onPress={() => setCheck9(!check9)}  />
            
-                 <CheckBox title='B' style={{width:"70%" }}   />
-                <CheckBox title='O' style={{width:"70%" }}   />
+                 <CheckBox title='B' style={{width:"70%" }} checked={check10}
+              onPress={() => setCheck10(!check10)}   />
+                <CheckBox title='O' style={{width:"70%" }} checked={check11}
+              onPress={() => setCheck11(!check11)}  />
                
                 </View>
                
-                <View><CheckBox title='AB' style={{width:"70%" }}   />
-                <CheckBox title='X (Tidak tahu)' style={{width:"70%" }}   />
+                <View><CheckBox title='AB' style={{width:"70%" }}checked={check12}
+              onPress={() => setCheck12(!check12)}   />
+                <CheckBox title='X (Tidak tahu)' style={{width:"70%" }}checked={check13}
+              onPress={() => setCheck13(!check13)}   />
            
                 </View>             
                
@@ -128,12 +157,15 @@ function Data(props) {
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
                 <View style={{}}>
            
-                 <CheckBox title='Positif' style={{width:"70%" }}   />
-                <CheckBox title='X (Tidak Tahu)' style={{width:"70%" }}   />
+                 <CheckBox title='Positif' style={{width:"70%" }}  checked={check14}
+              onPress={() => setCheck14(!check14)} />
+                <CheckBox title='X (Tidak Tahu)' style={{width:"70%" }}checked={check15}
+              onPress={() => setCheck15(!check15)}   />
                
                 </View>
                
-                <View><CheckBox title='Negatif' style={{width:"70%" }}   />
+                <View><CheckBox title='Negatif' style={{width:"70%" }} checked={check16}
+              onPress={() => setCheck16(!check16)}  />
             
            
                 </View>             

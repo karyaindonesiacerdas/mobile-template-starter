@@ -33,6 +33,10 @@ import Konvalesen13 from './konvalesen/konvalesen13';
 import Konvalesen14 from './konvalesen/konvalesen14';
 import Konvalesen15 from './konvalesen/konvalesen15';
 import Konvalesen16 from './konvalesen/konvalesen16';
+import Konvalesen17 from './konvalesen/konvalesen17';
+import Konvalesen19 from './konvalesen/konvalesen19';
+import Konvalesen22 from './konvalesen/konvalesen22';
+import Konvalesen23 from './konvalesen/konvalesen23';
 export {
 	Login,
 	Register,
@@ -69,4 +73,8 @@ export {
 	Konvalesen14,
 	Konvalesen15,
 	Konvalesen16,
+	Konvalesen17,
+	Konvalesen19,
+	Konvalesen22,
+	Konvalesen23,
 };

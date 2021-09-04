@@ -75,7 +75,7 @@ function Konvalesen16(props) {
             marginLeft: "7%",
           }}
         >
-          <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen11")}>
+          <TouchableOpacity onPress={goNextPage.bind(this, "")}>
             <Text
               style={{
                 margin: 10,

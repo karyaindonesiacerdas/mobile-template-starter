@@ -73,18 +73,18 @@ function Konvalesen13(props) {
             color: "red",
           }}
         >
-          Daftar
+          Gedung
         </Text>
         <Text
           style={{
             marginLeft: 30,
-            marginTop: -10,
+            marginTop: -5,
             fontSize: 25,
             fontWeight: "bold",
             color: "black",
           }}
         >
-          Donor Darah Konvalesen
+          PMI Kota Semarang
         </Text>
            <Text
           style={{
@@ -126,28 +126,6 @@ function Konvalesen13(props) {
             
           }}
         >
-          <Card
-            style={{
-              backgroundColor: "#000",
-              width: "40%",
-              marginRight: "2%",
-            }}
-          >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen12")}>
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20,
-
-                  color: "white",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              >
-                Kembali
-              </Text>
-            </TouchableOpacity>
-          </Card>
           <Card
             style={{
               backgroundColor: "#000",
