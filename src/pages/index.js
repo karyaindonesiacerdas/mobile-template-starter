@@ -19,6 +19,11 @@ import Barcode2 from './barcodemobilunit';
 import Kalender from './kalender';
 import Dashboard from './dashboard';
 import Kuisioner from './kuisioner';
+import konvalesen02 from './konvalesen/konvalesen02';
+import Konvalesen03 from './konvalesen/konvalesen03';
+import Konvalesen04 from './konvalesen/konvalesen04';
+import Konvalesen05 from './konvalesen/konvalesen05';
+import Konvalesen06 from './konvalesen/konvalesen06';
 export {
 	Login,
 	Register,
@@ -41,4 +46,9 @@ export {
 	Kalender,
 	Dashboard,
 	Kuisioner,
+	konvalesen02,
+	Konvalesen03,
+	Konvalesen04,
+	Konvalesen05,
+	Konvalesen06,
 };

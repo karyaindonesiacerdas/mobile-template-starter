@@ -23,6 +23,11 @@ import {
 	Kalender,
 	Dashboard,
 	Kuisioner,
+	konvalesen02,
+	Konvalesen03,
+	Konvalesen04,
+	Konvalesen05,
+	Konvalesen06,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -53,6 +58,11 @@ function index() {
 				<Stack.Screen name="Kalender" component={Kalender} options={{ headerShown: false }} />
 				<Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
 				<Stack.Screen name="Kuisioner" component={Kuisioner} options={{ headerShown: false }} />
+				<Stack.Screen name="konvalesen02" component={konvalesen02} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen03" component={Konvalesen03} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen04" component={Konvalesen04} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen05" component={Konvalesen05} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen06" component={Konvalesen06} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
