@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Container,
     Content,
@@ -16,14 +16,15 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 //from "react-native-gesture-handler";
 //import styles from "../styles/styles";
 import * as Yup from 'yup';
-import {authLogin} from '../../../config/api';
 import Bg from '../../image/Background.png';
 import SyncStorage from 'sync-storage';
 import Axios from 'axios';
+import {USER_MANAGEMENT} from '../../../config/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login(props) {
     const handleSubmitLogin = value => {
-        const url = 'http://sahabat-utd.id:6005';
+            const url = USER_MANAGEMENT;
         const headers = {
             'Content-Type': 'application/json',
         };
@@ -34,22 +35,28 @@ function Login(props) {
         Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body), {
             headers,
         })
-            .then(res => {
-                if (res.data.code == 200) {
-                    SyncStorage.set('token', res.data.token);
-                    alert('sukses login');
-                    props.navigation.replace('Dashboard');
+            .then(r => {
+                if (r.data.code == 200) {
+                    AsyncStorage.setItem('token', r.data.token);
+                    AsyncStorage.setItem('role', r.data.role);
+                    switch (r.data.role) {
+                        case "pendonor":
+                        props.navigation.replace('Dashboard');
+                        break
+                        case "admin":
+                        props.navigation.replace('DashboardAdmin');
+                        break
+                    }
                 } else {
-                    console.log('Error', res.data.message);
+                    console.log('Error', r.data.message);
                     alert('email atau password salah');
                     props.navigation.replace('Login');
                 }
             })
-            .catch(err => {
-                console.log('test : ', err);
+            .catch(err => {console.log('error : ', err);
             });
-    };
-
+        
+    }
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);

@@ -20,10 +20,11 @@ import * as Yup from 'yup';
 import qs from 'qs';
 import Axios from 'axios';
 import Bg from '../../image/Baground2.jpg';
+import {USER_MANAGEMENT} from '../../../config/api';
 
 function Register(props) {
     const handleSubmitRegister = value => {
-        const url = 'http://sahabat-utd.id:6005';
+        const url = USER_MANAGEMENT;
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
         };

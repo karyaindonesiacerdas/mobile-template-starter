@@ -23,6 +23,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
+import {MOBIL_UNIT} from '../../config/api';
 import Axios from 'axios';
 
 function MobilUnit02(props) {
@@ -45,7 +46,7 @@ function MobilUnit02(props) {
 
     useEffect(() => {
             var t = new Date().toISOString().slice(0, 10);
-            const url = 'http://sahabat-utd.id:6006';
+            const url = MOBIL_UNIT;
             const headers = {
                 'Content-Type': 'application/json',
             };

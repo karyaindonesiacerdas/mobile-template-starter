@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Alert,
     ImageBackground,
@@ -15,7 +15,7 @@ import {
     ScrollView,
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
-import styles from './styles';
+import styles from "../styles/styles";
 import {
     Table,
     TableWrapper,
@@ -23,82 +23,63 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
+import {USER_MANAGEMENT} from '../../config/api';
 import Axios from 'axios';
-import {RESIPIEN} from '../../config/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function InfoStok02(props) {
+function ListUser(props) {
+    const parseHari = {
+        0: 'Senin',
+        1: 'Selasa',
+        2: 'Rabu',
+        3: 'Kamis',
+        4: 'Jumat',
+        5: 'Sabtu',
+        6: 'Minggu',
+    }
+    const [tableData] = useState([['NAMA','EMAIL', 'ROLE']])
     const [res, setRes] = useState({
-        data: [
-            {
-                uid: '1',
-                waktu: '2021-08-18T07:10:09Z',
-                no_form: 'UTD-180821-0018',
-                rumah_sakit: 'RSUP Dr Kariadi Semarang',
-                produk_darah: 'PRC',
-                golongan_darah: 'B',
-                rhesus: '+',
-                jumlah_permintaan: '1',
-                jumlah_terpenuhi: 0,
-                keterangan: 'DATA DUMMY',
-                ditambahkan: '2021-08-18T13:21:34Z',
-                diupdate: '',
-            },
-        ],
+        data: [],
     });
-    const CONTENT = {
-        tableHead: [`Informasi kebutuhan Darah\nTanggal ${res.data[0].waktu.slice(0,10)} Pukul ${res.data[0].waktu.slice(11,16)} `],
-
-        tableData: [
-            [
-                'NO',
-                'RUMAH SAKIT',
-                'PRODUK DARAH',
-                'GOLONGAN DARAH',
-                'RHESUS',
-                'JUMLAH',
-                'STATUS',
-            ],
-        ],
-    };
-
     useEffect(() => {
-        const url = RESIPIEN;
-        const headers = {
-            'Content-Type': 'application/json',
-        };
-        const body = {}
-        Axios.post(`${url}/api/simaba/resipien`, JSON.stringify(body), {
-            headers,
-        })
-            .then(r => {
-                if (r.data.code == 200) {
-                    setRes(r.data);
-                } else {
-                    console.log('Error', r.data.message);
-                }
+        async function getToken() {
+            const token = await AsyncStorage.getItem('token')
+            var t = new Date().toISOString().slice(0, 10);
+            const url = USER_MANAGEMENT;
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + token
+            };
+            const body = {
+            };
+            Axios.post(`${url}/api/simaba/user`, JSON.stringify(body), {
+                headers,
             })
-            .catch(err => {
-                console.log('tes : ', err);
-            });
-    },[]);
-
+                .then(r => {
+                    if (r.data.code == 200) {
+                        setRes(r.data);
+                    } else {
+                        console.log('Error', r.data.message);
+                    }
+                })
+                .catch(err => {
+                    console.log('error : ', err);
+                });
+        }
+        getToken()
+        },[]);
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
         }
     };
-    res.data.map((dat, i) =>
-        CONTENT.tableData.push([
-            i + 1,
-            dat.rumah_sakit,
-            dat.produk_darah,
-            dat.golongan_darah,
-            dat.rhesus,
-            dat.jumlah_permintaan,
-            dat.keterangan,
-        ]),
-    );
-
+        res?.data?.map((dat) =>
+        tableData.push([
+            dat.nama,
+            dat.email,
+            dat.role,
+        ])
+    )
     return (
         <Container>
             <Image
@@ -126,11 +107,11 @@ function InfoStok02(props) {
                 <Text
                     style={{
                         marginLeft: 30,
-                        marginTop: 25,
+                        marginTop: 10,
                         fontSize: 35,
                         fontWeight: 'bold',
                     }}>
-                    Informasi Stok &
+                    User Management
                 </Text>
                 <Text
                     style={{
@@ -140,9 +121,8 @@ function InfoStok02(props) {
                         fontWeight: 'bold',
                         color: 'red',
                     }}>
-                    Kebutuhan Darah
+                    Daftar User
                 </Text>
-
                 <Card
                     style={{
                         backgroundColor: '#70282b',
@@ -162,8 +142,7 @@ function InfoStok02(props) {
 
                                 color: 'white',
                             }}>
-                            KEBUTUHAN DARAH
-                        </Text>
+                            </Text>
                     </TouchableOpacity>
                 </Card>
 
@@ -172,7 +151,6 @@ function InfoStok02(props) {
                         width: '90%',
                         justifyContent: 'center',
                         alignSelf: 'center',
-                        marginBottom: 100,
                     }}>
                     <Table
                         borderStyle={{
@@ -180,22 +158,10 @@ function InfoStok02(props) {
                             justifyContent: 'center',
                             alignContent: 'center',
                         }}>
-                        <Row
-                            data={CONTENT.tableHead}
-                            flexArr={[1, 2, 1, 1]}
-                            style={styles.head}
-                            textStyle={styles.textHead}
-                        />
                         <TableWrapper style={styles.wrapper}>
-                            <Col
-                                data={CONTENT.tableTitle}
-                                style={styles.title}
-                                heightArr={[28, 28]}
-                                textStyle={styles.text}
-                            />
                             <Rows
-                                data={CONTENT.tableData}
-                                flexArr={[0.5, 1, 1, 1.3, 1, 1, 1]}
+                                data={tableData}
+                                flexArr={[1, 1, 1]}
                                 style={styles.row}
                                 textStyle={styles.text}
                             />
@@ -210,7 +176,7 @@ function InfoStok02(props) {
                     flexDirection: 'row',
                     justifyContent: 'center',
                     alignContent: 'center',
-                    marginTop: 30,
+
                     bottom: 10,
                 }}>
                 <Card
@@ -220,7 +186,7 @@ function InfoStok02(props) {
                         marginRight: '2%',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'InfoStok01')}>
+                        onPress={goNextPage.bind(this, 'DashboardAdmin')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -262,4 +228,4 @@ function InfoStok02(props) {
     );
 }
 
-export default InfoStok02;
+export default ListUser;

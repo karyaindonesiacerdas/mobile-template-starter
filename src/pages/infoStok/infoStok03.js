@@ -25,6 +25,7 @@ import {
 } from 'react-native-table-component';
 
 import Axios from 'axios';
+import {STOK_DARAH} from '../../config/api';
 
 function InfoStok03(props) {
     const [CONTENT, setCONTENT] = useState({
@@ -43,7 +44,7 @@ function InfoStok03(props) {
         ['Plasma Konvalesen', '0', '0', '0', '0', '0'],
     ],)
     useEffect(() => {
-        const url = 'http://sahabat-utd.id:6100';
+        const url = STOK_DARAH;
         const headers = {
             'Content-Type': 'application/json',
         };
