@@ -37,6 +37,17 @@ import Konvalesen17 from './konvalesen/konvalesen17';
 import Konvalesen19 from './konvalesen/konvalesen19';
 import Konvalesen22 from './konvalesen/konvalesen22';
 import Konvalesen23 from './konvalesen/konvalesen23';
+import InfoStok01 from '../pages/infoStok/InfoStok01';
+import InfoStok02 from './infoStok/infoStok02';
+import InfoStok03 from './infoStok/infoStok03';
+import MobilUnit01 from './mobilUnit/mobilUnit01';
+import MobilUnit02 from './mobilUnit/mobilUnit02';
+import MobilUnit03 from './mobilUnit/mobilUnit03';
+import MobilUnit04 from './mobilUnit/mobilUnit04';
+import MobilUnit05 from './mobilUnit/mobilUnit05';
+import MobilUnit06 from './mobilUnit/mobilUnit06';
+import MobilUnit07 from './mobilUnit/mobilUnit07';
+import MobilUnit08 from './mobilUnit/mobilUnit08';
 export {
 	Login,
 	Register,
@@ -77,4 +88,15 @@ export {
 	Konvalesen19,
 	Konvalesen22,
 	Konvalesen23,
+	InfoStok01,
+	InfoStok02,
+	InfoStok03,
+	MobilUnit01,
+	MobilUnit02,
+	MobilUnit03,
+	MobilUnit04,
+	MobilUnit05,
+	MobilUnit06,
+	MobilUnit07,
+	MobilUnit08,
 };

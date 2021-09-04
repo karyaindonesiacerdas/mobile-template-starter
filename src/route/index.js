@@ -41,6 +41,17 @@ import {
 	Konvalesen19,
 	Konvalesen22,
 	Konvalesen23,
+	InfoStok01,
+	InfoStok02,
+	InfoStok03,
+	MobilUnit01,
+	MobilUnit02,
+	MobilUnit03,
+	MobilUnit04,
+	MobilUnit05,
+	MobilUnit06,
+	MobilUnit07,
+	MobilUnit08,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -89,6 +100,17 @@ function index() {
 				<Stack.Screen name="Konvalesen19" component={Konvalesen19} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen22" component={Konvalesen22} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen23" component={Konvalesen23} options={{ headerShown: false }} />
+				<Stack.Screen name="InfoStok01" component={InfoStok01} options={{ headerShown: false }} />
+				<Stack.Screen name="InfoStok02" component={InfoStok02} options={{ headerShown: false }} />
+				<Stack.Screen name="InfoStok03" component={InfoStok03} options={{ headerShown: false }} />
+				<Stack.Screen name="MobilUnit01" component={MobilUnit01} options={{ headerShown: false }} />
+				<Stack.Screen name="MobilUnit02" component={MobilUnit02} options={{ headerShown: false }} />
+				<Stack.Screen name="MobilUnit03" component={MobilUnit03} options={{ headerShown: false }} />
+				<Stack.Screen name="MobilUnit04" component={MobilUnit04} options={{ headerShown: false }} />
+				<Stack.Screen name="MobilUnit05" component={MobilUnit05} options={{ headerShown: false }} />
+				<Stack.Screen name="MobilUnit06" component={MobilUnit06} options={{ headerShown: false }} />
+				<Stack.Screen name="MobilUnit07" component={MobilUnit07} options={{ headerShown: false }} />
+				<Stack.Screen name="MobilUnit08" component={MobilUnit08} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

@@ -50,7 +50,7 @@ const CONTENT = {
   ],
 };
 
-function index(props) {
+function InfoStok03(props) {
    const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
@@ -247,4 +247,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default InfoStok03;

@@ -33,7 +33,7 @@ const CONTENT = {
   ],
 };
 
-function index(props) {
+function MobilUnit04(props) {
   const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
@@ -214,4 +214,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default MobilUnit04;
