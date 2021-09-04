@@ -30,7 +30,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index(props) {
+function Konvalesen07(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const goNextPage = (page) => {
@@ -129,12 +129,6 @@ function index(props) {
               onPress={() => setCheck1(!check1)}
               style={{ width: "70%" }}
             />
-            <CheckBox
-              title="Tidak Setuju"
-              style={{ width: "70%" }}
-              checked={check2}
-              onPress={() => setCheck2(!check2)}
-            />
           </View>
         </View>
 
@@ -145,7 +139,7 @@ function index(props) {
             flexDirection: "row",
             justifyContent: "center",
             alignContent: "center",
-            marginTop: 30,
+            marginTop: 300,
             marginBottom: 10,
           }}
         >
@@ -218,4 +212,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Konvalesen07;

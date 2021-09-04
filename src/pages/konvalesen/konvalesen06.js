@@ -124,7 +124,7 @@ function Konvalesen06(props) {
                         fontWeight: 'bold',
                         color: 'black',
                     }}>
-                    Donor Darah Biasa
+                    Donor Darah Konvalesen
                 </Text>
 
                 <View
@@ -176,7 +176,7 @@ function Konvalesen06(props) {
                             width: '40%',
                             marginRight: '2%',
                         }}>
-                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Data')} >
+                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Konvalesen05')} >
                             <Text
                                 style={{
                                     margin: 10,
@@ -196,7 +196,7 @@ function Konvalesen06(props) {
                             width: '40%',
                             marginLeft: '2%',
                         }}>
-                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Berhasil')} >
+                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Konvalesen07')} >
                             <Text
                                 style={{
                                     margin: 10,

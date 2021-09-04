@@ -24,6 +24,15 @@ import Konvalesen03 from './konvalesen/konvalesen03';
 import Konvalesen04 from './konvalesen/konvalesen04';
 import Konvalesen05 from './konvalesen/konvalesen05';
 import Konvalesen06 from './konvalesen/konvalesen06';
+import Konvalesen07 from './konvalesen/konvalesen07';
+import Konvalesen09 from './konvalesen/konvalesen09';
+import Konvalesen10 from './konvalesen/konvalesen10';
+import Konvalesen11 from './konvalesen/konvalesen11';
+import Konvalesen12 from './konvalesen/konvalesen12';
+import Konvalesen13 from './konvalesen/konvalesen13';
+import Konvalesen14 from './konvalesen/konvalesen14';
+import Konvalesen15 from './konvalesen/konvalesen15';
+import Konvalesen16 from './konvalesen/konvalesen16';
 export {
 	Login,
 	Register,
@@ -51,4 +60,13 @@ export {
 	Konvalesen04,
 	Konvalesen05,
 	Konvalesen06,
+	Konvalesen07,
+	Konvalesen09,
+	Konvalesen10,
+	Konvalesen11,
+	Konvalesen12,
+	Konvalesen13,
+	Konvalesen14,
+	Konvalesen15,
+	Konvalesen16,
 };

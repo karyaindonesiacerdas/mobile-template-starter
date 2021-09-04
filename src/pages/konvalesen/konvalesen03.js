@@ -64,7 +64,7 @@ function Konvalesen03(props) {
                 Daftar
               </Text>
               <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
-                Donor Darah Biasa
+                Donor Darah Konvalesen
               </Text>
 
                  <Text style={{ marginLeft:30, marginTop:20,fontSize: 15, color: "black" }}>

@@ -18,6 +18,17 @@ function Dashboard(props) {
 			<Image source={require('../image/logo.png')} style={styles.logoUDD} />
 			<Image source={require('../image/Logo2.png')} style={styles.logoSehat} />
 			<ScrollView>
+			<TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'Konvalesen14')}>
+						<Image
+							source={require('../image/pesan.jpg')}
+							style={{
+								marginTop: 20,
+								width: 90,
+								height: 60,
+								alignSelf: 'center'
+							}}
+						/>
+					</TouchableOpacity>
 				<View style={styles.viewAtas}>
 					<TouchableOpacity style={{ backgroundColor: '#fff', width: 120, height: 120 }}>
 						<Image

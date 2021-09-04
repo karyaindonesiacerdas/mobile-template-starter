@@ -28,6 +28,15 @@ import {
 	Konvalesen04,
 	Konvalesen05,
 	Konvalesen06,
+	Konvalesen07,
+	Konvalesen09,
+	Konvalesen10,
+	Konvalesen11,
+	Konvalesen12,
+	Konvalesen13,
+	Konvalesen14,
+	Konvalesen15,
+	Konvalesen16,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -63,6 +72,15 @@ function index() {
 				<Stack.Screen name="Konvalesen04" component={Konvalesen04} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen05" component={Konvalesen05} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen06" component={Konvalesen06} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen07" component={Konvalesen07} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen09" component={Konvalesen09} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen10" component={Konvalesen10} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen11" component={Konvalesen11} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen12" component={Konvalesen12} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen13" component={Konvalesen13} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen14" component={Konvalesen14} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen15" component={Konvalesen15} options={{ headerShown: false }} />
+				<Stack.Screen name="Konvalesen16" component={Konvalesen16} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
