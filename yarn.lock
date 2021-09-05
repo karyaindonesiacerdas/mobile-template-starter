@@ -6231,6 +6231,11 @@
   dependencies:
     "warn-once" "^0.1.0"
 
+"react-native-single-select@^1.8.4":
+  "integrity" "sha512-TSk45h2LOKmPyg9T1fsZFzohAxefFmC9noCjW1W4E2uYCHOsdcSwmyRSbr2+X1oDrDJOxflIst2/Hl6/mEgIMg=="
+  "resolved" "https://registry.npmjs.org/react-native-single-select/-/react-native-single-select-1.8.4.tgz"
+  "version" "1.8.4"
+
 "react-native-size-matters@^0.3.1":
   "integrity" "sha512-mKOfBLIBFBcs9br1rlZDvxD5+mAl8Gfr5CounwJtxI6Z82rGrMO+Kgl9EIg3RMVf3G855a85YVqHJL2f5EDRlw=="
   "resolved" "https://registry.npmjs.org/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz"

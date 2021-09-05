@@ -48,6 +48,7 @@ import MobilUnit05 from './mobilUnit/mobilUnit05';
 import MobilUnit06 from './mobilUnit/mobilUnit06';
 import MobilUnit07 from './mobilUnit/mobilUnit07';
 import MobilUnit08 from './mobilUnit/mobilUnit08';
+import PermintaanDarah from './permintaandarah';
 export {
 	Login,
 	Register,
@@ -99,4 +100,5 @@ export {
 	MobilUnit06,
 	MobilUnit07,
 	MobilUnit08,
+	PermintaanDarah,
 };

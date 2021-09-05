@@ -124,7 +124,7 @@ function Home(props) {
             }}
           >
             <Card style={styles.cardStyle}>
-              <TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'PermintaanDarah')} >
                
                 <Text
                   style={{
