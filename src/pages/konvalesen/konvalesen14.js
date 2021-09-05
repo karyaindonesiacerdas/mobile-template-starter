@@ -16,12 +16,18 @@ import {
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
 } from "react-native-gesture-handler";
+import {TouchableOpacity} from 'react-native'
 import styles from "./styles";
 
-function index() {
-  const B = (props) => <Text style={{fontWeight: 'bold'}}>{props.children}</Text>
+function Konvalesen14(props) {
+  const goNextPage = (page) => {
+    if (page) {
+      props.navigation.replace(page);
+    }
+  };
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
   return (
     <Container>
       <Image
@@ -48,137 +54,99 @@ function index() {
         }}
       ></Image>
       <ScrollView>
-        
-
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 10,
+            marginTop: 25,
             fontSize: 35,
             fontWeight: "bold",
             color: "red",
           }}
         >
-          Gedung UDD
+          Daftar
         </Text>
         <Text
           style={{
             marginLeft: 30,
             marginTop: -10,
-            marginBottom: 10,
             fontSize: 25,
             fontWeight: "bold",
             color: "black",
           }}
         >
-          PMI Kota Semarang
-        </Text>
-         <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
-           
-
-            textAlign: "justify",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          <B>TERIMA KASIH</B> telah mendonorkan darah plasma
-konvalesen untuk hasil pengujian darah lulus untuk diolah
-menjadi produk plasma konvalesen
-        </Text>
-         <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
-            fontWeight:'bold',
- 
-
-          
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          SILAHKAN UNTUK AMBIL SOUVENIR KHUSUS
-        </Text>
-         <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
-       
- 
-
-          
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          Buka setiap hari pukul 07.30 s.d. 20.30 WIB{'\n'}
-di bagian Pengambilan Darah{'\n'}
-Alamat UDD PMI Kota Semarang{'\n'}
-JL. MGR Soegiyopranoto No. 31 Semarang
+          Donor Darah Konvalesen
         </Text>
            <Text
           style={{
             marginLeft: 30,
             marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
-       
- 
+         
+            marginTop: 80,
+            marginBottom: 20,
+            fontSize: 25,
+            fontWeight:'bold',
 
-          
+            textAlign: "center",
             color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
+      
           }}
         >
-          Keterangan : Berlaku 24 jam (terinformasi masa berlaku)
+          Terima Kasih Anda telah melakukan Pengambilan Contoh Darah{'\n'}
+          {'\n'}
+          Untuk Hasil Pemeriksaan Contoh{'\n'}Darah akan kami informasikan {'\n'}lebih lanjut
         </Text>
-      
-      
 
-       
-       
         
 
-
+      
+      </ScrollView>
         <View
           style={{
             alignContent: "center",
 
             flexDirection: "row",
             justifyContent: "center",
-              alignContent: "center",
-              marginTop:30,
+            alignContent: "center",
+            marginTop: 30,
+            marginBottom: 10,
             
           }}
         >
-          
           <Card
             style={{
-              backgroundColor: "#000",width: "86%",marginLeft:"2%"
+              backgroundColor: "#000",
+              width: "40%",
+              marginRight: "2%",
             }}
           >
-            <TouchableOpacity>
+            <TouchableOpacity onPress={goNextPage.bind(this, "Dashboard")}>
               <Text
                 style={{
                   margin: 10,
-                  fontSize: 20, textAlign:'center',
+                  fontSize: 20,
+
+                  color: "white",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Kembali
+              </Text>
+            </TouchableOpacity>
+          </Card>
+          <Card
+            style={{
+              backgroundColor: "#000",
+              width: "40%",
+              marginLeft: "2%",
+            }}
+          >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen15")}>
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+                  textAlign: "center",
 
                   color: "white",
                   fontWeight: "bold",
@@ -189,7 +157,6 @@ JL. MGR Soegiyopranoto No. 31 Semarang
             </TouchableOpacity>
           </Card>
         </View>
-      </ScrollView>
 
       <ImageBackground
         // resizeMethod={'auto'}
@@ -213,4 +180,5 @@ JL. MGR Soegiyopranoto No. 31 Semarang
   );
 }
 
-export default index;
+
+export default Konvalesen14;

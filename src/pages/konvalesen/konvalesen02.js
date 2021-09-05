@@ -17,7 +17,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index(props) {
+function konvalesen02(props) {
   const goNextPage = (page) => {
     if (page) {
       props.navigation.replace(page);
@@ -158,7 +158,7 @@ function index(props) {
             marginRight: "2%",
           }}
         >
-          <TouchableOpacity onPress={goNextPage.bind(this, "Dashboard")}>
+          <TouchableOpacity onPress={goNextPage.bind(this, "Home")}>
             <Text
               style={{
                 margin: 10,
@@ -203,4 +203,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default konvalesen02;

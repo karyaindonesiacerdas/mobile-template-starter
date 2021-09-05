@@ -5,22 +5,37 @@ import {
   Image,
   Text,
   View,
-  TextInput,
+  TextInput, TouchableOpacity,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import {
   Container,
+  Header,
+  Title,
+  Left,
+  Right,
+  Button,
+  Body,
+  Content,
   Card,
-
+  CardItem,
+  Footer,
+  FooterTab,
+  Icon,
 } from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
+ 
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index() {
+function Konvalesen13(props) {
+   const goNextPage = (page) => {
+    if (page) {
+      props.navigation.replace(page);
+    }
+  };
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   return (
@@ -49,24 +64,21 @@ function index() {
         }}
       ></Image>
       <ScrollView>
-        
-
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 10,
+            marginTop: 25,
             fontSize: 35,
             fontWeight: "bold",
             color: "red",
           }}
         >
-          Gedung UDD
+          Gedung
         </Text>
         <Text
           style={{
             marginLeft: 30,
-            marginTop: -10,
-            marginBottom: 10,
+            marginTop: -5,
             fontSize: 25,
             fontWeight: "bold",
             color: "black",
@@ -74,115 +86,59 @@ function index() {
         >
           PMI Kota Semarang
         </Text>
-         <Text
+           <Text
           style={{
             marginLeft: 30,
             marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
-            fontWeight: "bold",
+         
+            marginTop: 50,
+            marginBottom: 20,
+            fontSize: 24,
+            fontWeight:'bold',
 
             textAlign: "center",
             color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          ANDA TERDAFTAR SEBAGAI CALON DONOR{'\n'}PLASMA KONVALESEN DI UDD PMI{'\n'}KOTA SEMARANG{'\n'}SILAKAN KUNJUNGI UDD PMI KOTA SEMARANG
-        </Text>
-         <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
-            fontSize: 15,
- 
-
-            textAlign: "center",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          Scan barcode untuk cetak formulir donor
-        </Text>
-        <Image
-        source={require("../../asset/barcode.png")}
-        style={{
-        
-          width: 100,
-          height: 100,
-          margin: 20,
-          alignSelf:'center',
-
-          
-        }}
-      ></Image>
-
-       
-        <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
       
-            fontSize: 15,
-            marginTop:20,
- 
-
-            textAlign: "center",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
           }}
         >
-          Keterangan :{'\n'}Berlaku 24 jam{'\n'}(Terinformasi masa berlaku)
+          Terima Kasih Anda Sudah Mendaftarkan Diri Sebagai Calon Donor Plasma Konvalesen.{'\n'}
+          {'\n'}
+          Jadwal Pengambilan Sampel Darah di (lokasi) pada tanggal{'\n'}
+          {'\n'}
+          DD-MM-YYYY{'\n'}
+          {'\n'}
+          Silahkan Datang Pada Jadwal Yang Sudah di Tentukan
         </Text>
+
         
 
-
+      
+      </ScrollView>
         <View
           style={{
             alignContent: "center",
 
             flexDirection: "row",
             justifyContent: "center",
-              alignContent: "center",
-              marginTop:30,
+            alignContent: "center",
+            marginTop: 30,
+            marginBottom: 10,
             
           }}
         >
           <Card
             style={{
-              backgroundColor: "#000",width: "40%", marginRight:"2%" }}
+              backgroundColor: "#000",
+              width: "40%",
+              marginLeft: "2%",
+            }}
           >
-            <TouchableOpacity
-            >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Dashboard")}>
               <Text
                 style={{
                   margin: 10,
                   fontSize: 20,
-             
-                  color: "white",
-                  fontWeight: "bold",textAlign:'center',
-                }}
-              >
-                Kembali
-              </Text>
-            </TouchableOpacity>
-          </Card>
-          <Card
-            style={{
-              backgroundColor: "#000",width: "40%",marginLeft:"2%"
-            }}
-          >
-            <TouchableOpacity>
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20, textAlign:'center',
+                  textAlign: "center",
 
                   color: "white",
                   fontWeight: "bold",
@@ -193,7 +149,6 @@ function index() {
             </TouchableOpacity>
           </Card>
         </View>
-      </ScrollView>
 
       <ImageBackground
         // resizeMethod={'auto'}
@@ -217,4 +172,4 @@ function index() {
   );
 }
 
-export default index;
+export default Konvalesen13;

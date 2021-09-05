@@ -5,25 +5,29 @@ import {
   Image,
   Text,
   View,
-  TextInput,TouchableOpacity,
+  TextInput,
 } from "react-native";
-import { Icon } from "react-native-elements";
-import { Container, Card } from "native-base";
+import { CheckBox } from "react-native-elements";
+import {
+  Container,
+  Card,
+
+} from "native-base";
 import {
   ScrollView,
   TouchableWithoutFeedback,
-  
 } from "react-native-gesture-handler";
+import {TouchableOpacity} from 'react-native'
 import styles from "./styles";
 
-function index(props) {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
-   const goNextPage = (page) => {
+function Konvalesen23(props) {
+  const goNextPage = (page) => {
     if (page) {
       props.navigation.replace(page);
     }
   };
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
   return (
     <Container>
       <Image
@@ -53,101 +57,64 @@ function index(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 10,
+            marginTop: 25,
             fontSize: 35,
             fontWeight: "bold",
             color: "red",
           }}
         >
-          Tempatmu
+          Daftar
         </Text>
-        
-
-        <View
+        <Text
           style={{
-            alignContent: "center",
-
-            flexDirection: "row",
-            justifyContent: "center",
-            alignContent: "center",
-            marginTop: "20%",
+            marginLeft: 30,
+            marginTop: -10,
+            fontSize: 25,
+            fontWeight: "bold",
+            color: "black",
           }}
         >
-          <Card
-            style={{
-              backgroundColor: "#fff",
-              width: 130,
-              height: 130,
-              marginLeft: "5%",
-            }}
-          >
-            <TouchableOpacity>
-              <Icon
-                name="money"
-                type="font-awesome"
-                color="#f50"
-                size={50}
-                style={{
-                  marginTop: 25,
+          Donor Darah Konvalesen
+        </Text>
+           <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+         
+            marginTop: 80,
+            marginBottom: 20,
+            fontSize: 25,
+            fontWeight:'bold',
 
-                  width: 55,
-                  height: 50,
-                  alignSelf: "center",
-                }}
-              />
-              <Text
-                style={{
-                  marginTop: 10,
-                  fontSize: 20,
-                  textAlign: "center",
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+          TERIMA KASIH
+        </Text>
+        <Text style={{
+            marginLeft: 30,
+            marginRight: 30,
+         
+            marginTop: -20,
+            marginBottom: 20,
+            fontSize: 18,
+            fontWeight:'normal',
 
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                Transaksi
-              </Text>
-            </TouchableOpacity>
-          </Card>
-          <Card
-            style={{
-              backgroundColor: "#fff",
-              width: 130,
-              height: 130,
-              marginLeft: "5%",
-            }}
-          >
-            <TouchableOpacity>
-              <Icon
-                name="envelope"
-                type="font-awesome"
-                color="#f50"
-                size={50}
-                style={{
-                  marginTop: 25,
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+          ANDA SUDAH MENDAFTARKAN DIRI SEBAGAI CALON DONOR PLASMA KONVALESEN,KAMI AKAN SEGERA MENGINFORMASIKAN JADWAL PENGAMBILAN CONTOH DARAH
+        </Text>
 
-                  width: 50,
-                  height: 50,
-                  alignSelf: "center",
-                }}
-              />
-              <Text
-                style={{
-                  marginTop: 10,
-                  fontSize: 20,
-                  textAlign: "center",
+        
 
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                Pesan
-              </Text>
-            </TouchableOpacity>
-          </Card>
-        </View>
+      
       </ScrollView>
-       <View
+        <View
           style={{
             alignContent: "center",
 
@@ -188,7 +155,7 @@ function index(props) {
               marginLeft: "2%",
             }}
           >
-            <TouchableOpacity >
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen13")}>
               <Text
                 style={{
                   margin: 10,
@@ -227,4 +194,5 @@ function index(props) {
   );
 }
 
-export default index;
+
+export default Konvalesen23;

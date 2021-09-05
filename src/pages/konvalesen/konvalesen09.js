@@ -30,7 +30,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index(props) {
+function Konvalesen09(props) {
    const goNextPage = (page) => {
     if (page) {
       props.navigation.replace(page);
@@ -110,7 +110,7 @@ function index(props) {
       
           }}
         >
-          SELAMAT{'\n'}ANDA LOLOS SEBAGAI{'\n'}CALON DONOR
+          ANDA LULUS DALAM TAHAP ADMINISTRASI DAN{'\n'}MASUK KE TAHAP PENGAMBILAN{'\n'}CALON DONOR
         </Text>
           
         </Card>
@@ -199,4 +199,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Konvalesen09;
