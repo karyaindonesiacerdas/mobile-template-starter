@@ -59,6 +59,7 @@ import {
 	Alur04,
 	Alur05,
 	Alur06,
+	Riwayat,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -119,6 +120,7 @@ function index() {
 				<Stack.Screen name="Alur05" component={Alur05} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur06" component={Alur06} options={{ headerShown: false }} />
 				<Stack.Screen name="PermintaanDarah" component={PermintaanDarah} options={{ headerShown: false }} />
+				<Stack.Screen name="Riwayat" component={Riwayat} options={{ headerShown: false }} />
 
 
 			</Stack.Navigator>
