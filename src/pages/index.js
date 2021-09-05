@@ -22,6 +22,8 @@ import {InfoStok01, InfoStok02, InfoStok03} from './infoStok';
 import {MobilUnit01, MobilUnit02} from './mobilUnit';
 import {Alur01, Alur02, Alur03, Alur04, Alur05, Alur06} from './alur';
 import ListUser from './user';
+import ListPendonor from './listpendonor';
+import Riwayat from './riwayat';
 export {
     Login,
     Register,
@@ -56,4 +58,6 @@ export {
     Alur06,
     DashboardAdmin,
     ListUser,
+    ListPendonor,
+    Riwayat
 };

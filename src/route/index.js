@@ -34,7 +34,9 @@ import {
     Alur05,
     Alur06,
     DashboardAdmin,
-    ListUser
+    ListUser,
+    ListPendonor,
+    Riwayat
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -203,6 +205,16 @@ function index() {
                 <Stack.Screen
                     name="ListUser"
                     component={ListUser}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="ListPendonor"
+                    component={ListPendonor}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="Riwayat"
+                    component={Riwayat}
                     options={{headerShown: false}}
                 />
             </Stack.Navigator>

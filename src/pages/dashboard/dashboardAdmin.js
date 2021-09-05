@@ -43,6 +43,27 @@ function DashboardAdmin(props) {
                         </Text>
                     </TouchableOpacity>
                 </Card>
+                <Card
+                    style={{
+                        backgroundColor: '#000',
+                        width: '40%',
+                        marginRight: '2%',
+                    }}>
+                    <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'ListPendonor')}>
+                        <Text
+                            style={{
+                                margin: 10,
+                                fontSize: 20,
+
+                                color: 'white',
+                                fontWeight: 'bold',
+                                textAlign: 'center',
+                            }}>
+                            Daftar Pendonor
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
             <Card
                     style={{
                         backgroundColor: '#000',
@@ -60,7 +81,7 @@ function DashboardAdmin(props) {
                                 fontWeight: 'bold',
                                 textAlign: 'center',
                             }}>
-                            Kembali
+                            Logout
                         </Text>
                     </TouchableOpacity>
                 </Card>

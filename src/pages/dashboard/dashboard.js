@@ -94,7 +94,7 @@ function Dashboard(props) {
                     </Card>
 
                     <Card style={styles.cardTengah}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={goNextPage.bind(this, 'Riwayat')}>
                             <Text style={styles.textTengah}>Riwayat Donor</Text>
                         </TouchableOpacity>
                     </Card>
