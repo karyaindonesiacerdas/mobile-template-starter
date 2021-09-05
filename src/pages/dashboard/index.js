@@ -189,7 +189,7 @@ function Dashboard(props) {
               marginTop:165,
             
           }}
-        ></View>
+        />
         <Content />
         <Footer>
           <FooterTab>
