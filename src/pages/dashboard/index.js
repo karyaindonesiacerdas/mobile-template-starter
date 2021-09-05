@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ImageBackground, Image, Text, View, TouchableOpacity } from 'react-native';
-import { Container, Card } from 'native-base';
+import { Container, Card,Footer,FooterTab, Button, Icon,Badge,Content,Header } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 import styles from './styles';
 import Bg from '../../image/Baground2.jpg'
@@ -179,6 +179,34 @@ function Dashboard(props) {
 						<Text style={styles.textBawah}>Kontak PMI Kota Semarang</Text>
 					</TouchableOpacity>
 				</View>
+				<View
+          style={{
+            alignContent: "center",
+
+            flexDirection: "row",
+            justifyContent: "center",
+              alignContent: "center",
+              marginTop:165,
+            
+          }}
+        ></View>
+        <Content />
+        <Footer>
+          <FooterTab>
+            <Button vertical>
+              <Icon name="search" />
+              <Text>Search</Text>
+            </Button>
+            <Button vertical>
+              <Icon active name="home" />
+              <Text>Home</Text>
+            </Button>
+            <Button vertical>
+              <Icon name="settings" />
+              <Text>Contact</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
 			</ScrollView>
 		</Container>
 	);
