@@ -17,7 +17,7 @@ import Barcode3 from './barcodetempat';
 import Kegiatan from './kegiatan';
 import Barcode2 from './barcodemobilunit';
 import Kalender from './kalender';
-import Dashboard from './dashboard';
+import {Dashboard, DashboardAdmin} from './dashboard';
 import Kuisioner from './kuisioner';
 import konvalesen02 from './konvalesen/konvalesen02';
 import Konvalesen03 from './konvalesen/konvalesen03';
@@ -37,24 +37,11 @@ import Konvalesen17 from './konvalesen/konvalesen17';
 import Konvalesen19 from './konvalesen/konvalesen19';
 import Konvalesen22 from './konvalesen/konvalesen22';
 import Konvalesen23 from './konvalesen/konvalesen23';
-import InfoStok01 from '../pages/infoStok/InfoStok01';
-import InfoStok02 from './infoStok/infoStok02';
-import InfoStok03 from './infoStok/infoStok03';
+import { InfoStok01, InfoStok02, InfoStok03 } from './infoStok';
 import MobilUnit01 from './mobilUnit/mobilUnit01';
 import MobilUnit02 from './mobilUnit/mobilUnit02';
-import MobilUnit03 from './mobilUnit/mobilUnit03';
-import MobilUnit04 from './mobilUnit/mobilUnit04';
-import MobilUnit05 from './mobilUnit/mobilUnit05';
-import MobilUnit06 from './mobilUnit/mobilUnit06';
-import MobilUnit07 from './mobilUnit/mobilUnit07';
-import MobilUnit08 from './mobilUnit/mobilUnit08';
+import {Alur01,Alur02,Alur03,Alur04,Alur05,Alur06} from './alur';
 import PermintaanDarah from './permintaandarah';
-import Alur01 from './alur/alur01';
-import Alur02 from './alur/alur02';
-import Alur03 from './alur/alur03';
-import Alur04 from './alur/alur04';
-import Alur05 from './alur/alur05';
-import Alur06 from './alur/alur06';
 export {
 	Login,
 	Register,
@@ -100,17 +87,12 @@ export {
 	InfoStok03,
 	MobilUnit01,
 	MobilUnit02,
-	MobilUnit03,
-	MobilUnit04,
-	MobilUnit05,
-	MobilUnit06,
-	MobilUnit07,
-	MobilUnit08,
-	PermintaanDarah,
+    DashboardAdmin,
 	Alur01,
 	Alur02,
 	Alur03,
 	Alur04,
 	Alur05,
 	Alur06,
+	PermintaanDarah,
 };

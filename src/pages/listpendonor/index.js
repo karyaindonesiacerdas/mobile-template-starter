@@ -1,27 +1,78 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Alert,
     ImageBackground,
     Image,
     Text,
     View,
+    StyleSheet,
     TextInput,
     TouchableOpacity,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
+import {CheckBox} from 'react-native-elements';
 import {Container, Card} from 'native-base';
 import {
     ScrollView,
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
-import styles from './styles';
+import styles from "../styles/styles";
+import {
+    Table,
+    TableWrapper,
+    Row,
+    Rows,
+    Col,
+} from 'react-native-table-component';
+import {PENDONOR} from '../../config/api';
+import Axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function InfoStok01(props) {
+function ListPendonor(props) {
+    const [tableData] = useState([['NAMA','KTP', 'KODE PENDONOR']])
+    const [res, setRes] = useState({
+        data: [],
+    });
+    useEffect(() => {
+        async function getToken() {
+            const token = await AsyncStorage.getItem('token')
+            var t = new Date().toISOString().slice(0, 10);
+            const url = PENDONOR;
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + token
+            };
+            const body = {
+                ktp : "",
+                donor_id : "",
+            };
+            Axios.post(`${url}/api/simaba/pendonor`, JSON.stringify(body), {
+                headers,
+            })
+                .then(r => {
+                    if (r.data.code == 200) {
+                        setRes(r.data);
+                    } else {
+                        console.log('Error', r.data.message);
+                    }
+                })
+                .catch(err => {
+                    console.log('error : ', err);
+                });
+        }
+        getToken()
+        },[]);
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
         }
     };
+        res?.data?.map((dat) =>
+        tableData.push([
+            dat.nama,
+            dat.ktp,
+            dat.kode_pendonor,
+        ])
+    )
     return (
         <Container>
             <Image
@@ -49,11 +100,11 @@ function InfoStok01(props) {
                 <Text
                     style={{
                         marginLeft: 30,
-                        marginTop: 25,
+                        marginTop: 10,
                         fontSize: 35,
                         fontWeight: 'bold',
                     }}>
-                    Informasi Stok &
+                    Pendonor
                 </Text>
                 <Text
                     style={{
@@ -63,90 +114,52 @@ function InfoStok01(props) {
                         fontWeight: 'bold',
                         color: 'red',
                     }}>
-                    Kebutuhan Darah
+                    Daftar Pendonor
                 </Text>
+                <Card
+                    style={{
+                        backgroundColor: '#70282b',
+                        width: '90%',
+                        alignSelf: 'center',
+                        marginTop: 30,
+                        marginBottom: 30,
+                    }}>
+                    <TouchableOpacity>
+                        <Text
+                            style={{
+                                margin: 10,
+                                fontSize: 15,
+                                borderRadius: 10,
+                                textAlign: 'center',
+                                fontWeight: 'bold',
+
+                                color: 'white',
+                            }}>
+                            </Text>
+                    </TouchableOpacity>
+                </Card>
 
                 <View
                     style={{
-                        alignContent: 'center',
-
-                        flexDirection: 'row',
+                        width: '90%',
                         justifyContent: 'center',
-                        alignContent: 'center',
-                        marginTop: '15%',
+                        alignSelf: 'center',
                     }}>
-                    <Card
-                        style={{
-                            backgroundColor: '#fff',
-                            width: 130,
-                            height: 150,
-
-                            marginRight: '5%',
+                    <Table
+                        borderStyle={{
+                            borderWidth: 1,
+                            justifyContent: 'center',
+                            alignContent: 'center',
                         }}>
-                        <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'InfoStok02')}>
-                            <Icon
-                                name="plus"
-                                type="font-awesome"
-                                color="red"
-                                size={50}
-                                style={{
-                                    marginTop: 25,
-
-                                    width: 55,
-                                    height: 50,
-                                    alignSelf: 'center',
-                                }}
+                        <TableWrapper style={styles.wrapper}>
+                            <Rows
+                                data={tableData}
+                                flexArr={[1, 1, 1]}
+                                style={styles.row}
+                                textStyle={styles.text}
                             />
-                            <Text
-                                style={{
-                                    marginTop: 10,
-                                    marginBottom: 10,
-                                    fontSize: 20,
-                                    textAlign: 'center',
-
-                                    color: 'black',
-                                    fontWeight: 'bold',
-                                }}>
-                                Kebutuhan Darah
-                            </Text>
-                        </TouchableOpacity>
-                    </Card>
-                    <Card
-                        style={{
-                            backgroundColor: '#fff',
-                            width: 130,
-                            height: 150,
-                            marginLeft: '5%',
-                        }}>
-                        <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'InfoStok03')}>
-                            <Icon
-                                name="tint"
-                                type="font-awesome"
-                                color="red"
-                                size={50}
-                                style={{
-                                    marginTop: 25,
-
-                                    width: 50,
-                                    height: 50,
-                                    alignSelf: 'center',
-                                }}
-                            />
-                            <Text
-                                style={{
-                                    marginTop: 10,
-                                    fontSize: 20,
-                                    textAlign: 'center',
-
-                                    color: 'black',
-                                    fontWeight: 'bold',
-                                }}>
-                                Stok {'\n'}Darah
-                            </Text>
-                        </TouchableOpacity>
-                    </Card>
+                        </TableWrapper>
+                    </Table>
                 </View>
             </ScrollView>
             <View
@@ -156,7 +169,7 @@ function InfoStok01(props) {
                     flexDirection: 'row',
                     justifyContent: 'center',
                     alignContent: 'center',
-                    marginTop: 30,
+
                     bottom: 10,
                 }}>
                 <Card
@@ -166,7 +179,7 @@ function InfoStok01(props) {
                         marginRight: '2%',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'Dashboard')}>
+                        onPress={goNextPage.bind(this, 'DashboardAdmin')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -192,6 +205,7 @@ function InfoStok01(props) {
                 source={require('../../asset/footer.png')}
                 style={{
                     width: '100%',
+
                     backgroundColor: '#fff',
                     padding: 0,
                     paddingVertical: 90,
@@ -207,4 +221,4 @@ function InfoStok01(props) {
     );
 }
 
-export default InfoStok01;
+export default ListPendonor;

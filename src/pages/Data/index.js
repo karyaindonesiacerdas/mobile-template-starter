@@ -21,29 +21,100 @@ import { Button } from "react-native-elements/dist/buttons/Button";
 
 
 function Data(props) {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
-  const [check3, setCheck3] = useState(false);
-  const [check4, setCheck4] = useState(false);
-  const [check5, setCheck5] = useState(false);
-  const [check6, setCheck6] = useState(false);
-  const [check7, setCheck7] = useState(false);
-  const [check8, setCheck8] = useState(false);
-  const [check9, setCheck9] = useState(false);
-  const [check10, setCheck10] = useState(false);
-  const [check11, setCheck11] = useState(false);
-  const [check12, setCheck12] = useState(false);
-  const [check13, setCheck13] = useState(false);
-  const [check14, setCheck14] = useState(false);
-  const [check15, setCheck15] = useState(false);
-  const [check16, setCheck16] = useState(false);
-    const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
+  const [pekerjaan, setPekerjaan] = React.useState([
+    { label: 'PNS', value: 'pns', checked: false },
+    { label: 'Swasta', value: 'swasta', checked: false },
+    { label: 'Polri', value: 'polri', checked: false },
+    { label: 'Petani', value: 'petani', checked: false },
+    { label: 'BUMN', value: 'bumn', checked: false },
+    { label: 'Pelajar', value: 'pelajar', checked: false },
+    { label: 'Wirausaha', value: 'wirausaha', checked: false },
+    { label: 'Lain-lain', value: 'lain-lain', checked: false },
+  ])
+  const [gologanDarah, setGolonganDarah] = React.useState([
+    { label: 'A', value: 'A', checked: false },
+    { label: 'B', value: 'B', checked: false },
+    { label: 'O', value: 'O', checked: false },
+    { label: 'AB', value: 'AB', checked: false },
+    { label: 'Tidak Tahu', value: 'X', checked: false },
+  ])
+  const [rhesus, setRhesus] = React.useState([
+    { label: 'Positif', value: '+', checked: false },
+    { label: 'Negatif', value: '-', checked: false },
+    { label: 'Tidak Tahu', value: 'X', checked: false },
+  ])
+  const [input] = useState({
+    pekerjaan : '',
+    golongan_darah: '',
+    rhesus : '',
+  })
+  const pekerjaanHandler = (index) => {
+    const newValue = pekerjaan.map((checkbox, i) => {
+     if (i !== index)
+       return {
+         ...checkbox,
+         checked: false,
+       }
+     if (i === index) {
+       const item = {
+         ...checkbox,
+         checked: !checkbox.checked,
+       }
+       input.pekerjaan = checkbox.value
+       return item
+     }
+    return checkbox
+  })
+  setPekerjaan(newValue)
+  }
+
+  const golonganDarahHandler = (index) => {
+    const newValue = gologanDarah.map((checkbox, i) => {
+     if (i !== index)
+       return {
+         ...checkbox,
+         checked: false,
+       }
+     if (i === index) {
+       const item = {
+         ...checkbox,
+         checked: !checkbox.checked,
+       }
+       input.golongan_darah = checkbox.value
+       return item
+     }
+    return checkbox
+  })
+  setGolonganDarah(newValue)
+  }
+
+  const rhesusHandler = (index) => {
+    const newValue = rhesus.map((checkbox, i) => {
+     if (i !== index)
+       return {
+         ...checkbox,
+         checked: false,
+       }
+     if (i === index) {
+       const item = {
+         ...checkbox,
+         checked: !checkbox.checked,
+       }
+       input.rhesus = checkbox.value
+       return item
+     }
+    return checkbox
+  })
+  setRhesus(newValue)
+  }
+
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)
     }
   }
+  console.log(input)
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -80,39 +151,37 @@ function Data(props) {
               <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
                 Donor Darah Biasa
               </Text>
-
-                 <Text style={{ marginLeft:30, marginTop:30,fontSize: 17, color: "black" }}>
-                Tempat dan Tanggal Lahir (update otomatis) apabila usia kurang dari 17 tahun tidak lolos (otomatis)
-              </Text>
                <Text style={{ marginLeft:30, marginTop:30,fontSize: 15,fontWeight: "bold", color: "black" }}>
                 Pekerjaan (Pilih salah satu)
               </Text>
-            
-
-            
-
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}><CheckBox title='PNS' style={{width:"70%" }} checked={check1}
-              onPress={() => setCheck1(!check1)}  />
-           
-                 <CheckBox title='Swasta' style={{width:"70%" }}checked={check2}
-              onPress={() => setCheck2(!check2)}   />
-                <CheckBox title='Polri' style={{width:"70%" }} checked={check3}
-              onPress={() => setCheck3(!check3)}  />
-                <CheckBox title='Petani' style={{width:"70%" }} checked={check4}
-              onPress={() => setCheck4(!check4)}  />
-                </View>
-               
-                <View><CheckBox title='BUMN' style={{width:"70%" }} checked={check5}
-              onPress={() => setCheck5(!check5)}  />
-                <CheckBox title='Pelajar' style={{width:"70%" }}  checked={check6}
-              onPress={() => setCheck6(!check6)} />
-                <CheckBox title='Wirausaha' style={{width:"70%" }}  checked={check7}
-              onPress={() => setCheck7(!check7)} />
-                <CheckBox title='Lain-lain' style={{width:"70%" }} checked={check8}
-              onPress={() => setCheck8(!check8)}  />
-                </View>             
-               
+              <View>
+              {pekerjaan.map((checkbox, i) => {
+                if (i < pekerjaan.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => pekerjaanHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })
+                  }
+              </View>
+              <View>
+              {pekerjaan.map((checkbox, i) => {
+                if (i >= pekerjaan.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => pekerjaanHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })}
+              </View>
               </View>
 
                <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black", textShadowColor:'#fff',
@@ -121,54 +190,68 @@ function Data(props) {
    }}>
                 Golongan Darah
               </Text>
-          
-
-            
-
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}><CheckBox title='A' style={{width:"70%" }}checked={check9}
-              onPress={() => setCheck9(!check9)}  />
-           
-                 <CheckBox title='B' style={{width:"70%" }} checked={check10}
-              onPress={() => setCheck10(!check10)}   />
-                <CheckBox title='O' style={{width:"70%" }} checked={check11}
-              onPress={() => setCheck11(!check11)}  />
-               
-                </View>
-               
-                <View><CheckBox title='AB' style={{width:"70%" }}checked={check12}
-              onPress={() => setCheck12(!check12)}   />
-                <CheckBox title='X (Tidak tahu)' style={{width:"70%" }}checked={check13}
-              onPress={() => setCheck13(!check13)}   />
-           
-                </View>             
-               
+              <View>
+              {gologanDarah.map((checkbox, i) => {
+                if (i < gologanDarah.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => golonganDarahHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })
+                  }
+                  </View>
+                  <View>
+              {gologanDarah.map((checkbox, i) => {
+                if (i >= gologanDarah.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => golonganDarahHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })}
               </View>
-
-               <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black" , textShadowColor:'#fff',
+              </View>
+              <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black" , textShadowColor:'#fff',
     textShadowOffset:{width: 1, height: 1},
     textShadowRadius:10,}}>
                 Rhesus
               </Text>
-            
-
-            
-
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}>
-           
-                 <CheckBox title='Positif' style={{width:"70%" }}  checked={check14}
-              onPress={() => setCheck14(!check14)} />
-                <CheckBox title='X (Tidak Tahu)' style={{width:"70%" }}checked={check15}
-              onPress={() => setCheck15(!check15)}   />
-               
-                </View>
-               
-                <View><CheckBox title='Negatif' style={{width:"70%" }} checked={check16}
-              onPress={() => setCheck16(!check16)}  />
-            
-           
-                </View>             
+              <View>
+              {rhesus.map((checkbox, i) => {
+                if (i < rhesus.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => rhesusHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })
+                  }
+                  </View>
+                  <View>
+              {rhesus.map((checkbox, i) => {
+                if (i >= rhesus.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => rhesusHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })}
+              </View>             
               </View>
               <Text
           style={{

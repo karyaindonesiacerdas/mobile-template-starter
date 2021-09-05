@@ -3,34 +3,12 @@ import { Alert, ImageBackground, Image, Text, View } from "react-native";
 import {
   Container,
   Card,
-  button,
 } from "native-base";
 import {TouchableOpacity} from 'react-native'
-import {Formik} from 'formik';
-//from "react-native-gesture-handler";
 import styles from "../styles/styles";
-import * as Yup from 'yup';
-// import {authLogin} from '../../../config/api';
 import Bg from '../image/Baground2.jpg'
 
 function Home(props) {
-  // const mutation = useMutation(authRegister, {
-    //     onSettled: (data, error, variables, context) => {
-    //         Toast.show({
-    //             text: data.message,
-    //             type: data.type,
-    //             duration: 2000,
-    //             buttonText: 'Okay',
-    //         });
-    //         if (data?.code == 200) {
-    //             AsyncStorage.setItem('token', data.data);
-    //             setTimeout(() => {
-    //                 props.navigation.replace('HomeApp');
-    //             }, 2000);
-    //             return;
-    //         }
-    //     },
-    // });
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)

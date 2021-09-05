@@ -10,7 +10,7 @@ import {
 } from 'native-base';
 import React from 'react';
 
-function index() {
+function Account() {
     return (
         <Container>
             <Content>
@@ -53,4 +53,4 @@ function index() {
     );
 }
 
-export default index;
+export default Account;
