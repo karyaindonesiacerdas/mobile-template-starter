@@ -96,7 +96,7 @@ function Dashboard(props) {
 				</View>
 
 				<View style={styles.viewAtas}>
-					<TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, '')}>
+					<TouchableOpacity style={styles.cardStyle} onPress={goNextPage.bind(this, 'Alur01')}>
 						<Image
 							source={require('../image/alur.png')}
 							style={{

@@ -49,6 +49,12 @@ import MobilUnit06 from './mobilUnit/mobilUnit06';
 import MobilUnit07 from './mobilUnit/mobilUnit07';
 import MobilUnit08 from './mobilUnit/mobilUnit08';
 import PermintaanDarah from './permintaandarah';
+import Alur01 from './alur/alur01';
+import Alur02 from './alur/alur02';
+import Alur03 from './alur/alur03';
+import Alur04 from './alur/alur04';
+import Alur05 from './alur/alur05';
+import Alur06 from './alur/alur06';
 export {
 	Login,
 	Register,
@@ -101,4 +107,10 @@ export {
 	MobilUnit07,
 	MobilUnit08,
 	PermintaanDarah,
+	Alur01,
+	Alur02,
+	Alur03,
+	Alur04,
+	Alur05,
+	Alur06,
 };

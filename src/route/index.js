@@ -53,6 +53,12 @@ import {
 	MobilUnit07,
 	MobilUnit08,
 	PermintaanDarah,
+	Alur01,
+	Alur02,
+	Alur03,
+	Alur04,
+	Alur05,
+	Alur06,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -113,6 +119,12 @@ function index() {
 				<Stack.Screen name="MobilUnit07" component={MobilUnit07} options={{ headerShown: false }} />
 				<Stack.Screen name="MobilUnit08" component={MobilUnit08} options={{ headerShown: false }} />
 				<Stack.Screen name="PermintaanDarah" component={PermintaanDarah} options={{ headerShown: false }} />
+				<Stack.Screen name="Alur01" component={Alur01} options={{ headerShown: false }} />
+				<Stack.Screen name="Alur02" component={Alur02} options={{ headerShown: false }} />
+				<Stack.Screen name="Alur03" component={Alur03} options={{ headerShown: false }} />
+				<Stack.Screen name="Alur04" component={Alur04} options={{ headerShown: false }} />
+				<Stack.Screen name="Alur05" component={Alur05} options={{ headerShown: false }} />
+				<Stack.Screen name="Alur06" component={Alur06} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

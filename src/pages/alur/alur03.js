@@ -13,7 +13,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index(props) {
+function Alur03(props) {
   const goNextPage = (page) => {
     if (page) {
       props.navigation.replace(page);
@@ -176,4 +176,4 @@ function index(props) {
     </Container>
   );
 }
-export default index;
+export default Alur03;

@@ -10,7 +10,7 @@ import { Container, Card } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index(props) {
+function Alur01(props) {
   const goNextPage = (page) => {
     if (page) {
       props.navigation.replace(page);
@@ -136,4 +136,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Alur01;
