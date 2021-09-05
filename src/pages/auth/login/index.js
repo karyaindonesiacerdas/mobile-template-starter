@@ -24,7 +24,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login(props) {
     const handleSubmitLogin = value => {
-            const url = USER_MANAGEMENT;
+        console.log(value)
+        const url = USER_MANAGEMENT;
         const headers = {
             'Content-Type': 'application/json',
         };
@@ -36,6 +37,7 @@ function Login(props) {
             headers,
         })
             .then(r => {
+                console.log(r)
                 if (r.data.code == 200) {
                     AsyncStorage.setItem('token', r.data.token);
                     AsyncStorage.setItem('role', r.data.role);

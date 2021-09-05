@@ -68,7 +68,7 @@ const Stack = createNativeStackNavigator();
 function index() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator initialRouteName="Dashboard">
+			<Stack.Navigator initialRouteName="LoadingStart">
 				<Stack.Screen name="LoadingStart" component={LoadingStart} options={{ headerShown: false }} />
 				<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 				<Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
