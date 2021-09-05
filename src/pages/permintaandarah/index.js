@@ -23,11 +23,22 @@ import { Button } from "react-native-elements/dist/buttons/Button";
 function PermintaanDarah(props) {
     const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
+  const [check3, setCheck3] = useState(false);
+  const [check4, setCheck4] = useState(false);
+  const [check5, setCheck5] = useState(false);
+  const [check6, setCheck6] = useState(false);
+  const [check7, setCheck7] = useState(false);
+  const [check8, setCheck8] = useState(false);
   const [check9, setCheck9] = useState(false);
   const [check10, setCheck10] = useState(false);
   const [check11, setCheck11] = useState(false);
   const [check12, setCheck12] = useState(false);
   const [check13, setCheck13] = useState(false);
+  const [check14, setCheck14] = useState(false);
+  const [check15, setCheck15] = useState(false);
+  const [check16, setCheck16] = useState(false);
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)
@@ -165,7 +176,7 @@ function PermintaanDarah(props) {
         >
           Jenis Kelamin
         </Text>
-        <View style={{marginTop:10,marginLeft:30,marginRight:170, flexDirection: "row",justifyContent: "space-between"}}>
+        <View style={{marginTop:10,marginLeft:30,marginRight:60, flexDirection: "row",justifyContent: "space-between"}}>
                 <View style={{}}><CheckBox title='Laki-Laki' style={{width:"70%" }}checked={check9}
               onPress={() => setCheck9(!check9)}  />
                
@@ -176,6 +187,72 @@ function PermintaanDarah(props) {
            
                 </View>             
                
+              </View>
+              <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          No.Rekam Medis
+        </Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+   
+        />
+        <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black", textShadowColor:'#fff',
+    textShadowOffset:{width: 1, height: 1},
+    textShadowRadius:10,
+   }}>
+                Golongan Darah
+              </Text>
+              <View style={{marginTop:10,marginLeft:30,marginRight:100, flexDirection: "row",justifyContent: "space-between"}}>
+                <View style={{}}><CheckBox title='A' style={{width:"70%" }}checked={check1}
+              onPress={() => setCheck1(!check1)}  />
+           
+                 <CheckBox title='B' style={{width:"70%" }} checked={check2}
+              onPress={() => setCheck2(!check2)}   />
+               
+                </View>
+               
+                <View><CheckBox title='AB' style={{width:"70%" }}checked={check3}
+              onPress={() => setCheck3(!check3)}   />
+              
+              <CheckBox title='O' style={{width:"70%" }} checked={check11}
+              onPress={() => setCheck11(!check11)}  />
+           
+                </View>             
+               
+              </View>
+              <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black" , textShadowColor:'#fff',
+    textShadowOffset:{width: 1, height: 1},
+    textShadowRadius:10,}}>
+                Rhesus
+              </Text>
+            
+
+            
+
+              <View style={{marginTop:10,marginLeft:30,marginRight:70, flexDirection: "row",justifyContent: "space-between"}}>
+                <View style={{}}>
+           
+                 <CheckBox title='Positif' style={{width:"70%" }}  checked={check14}
+              onPress={() => setCheck14(!check14)} />
+               
+                </View>
+               
+                <View><CheckBox title='Negatif' style={{width:"70%" }} checked={check16}
+              onPress={() => setCheck16(!check16)}  />
+            
+           
+                </View>             
               </View>
         
         <View
@@ -193,7 +270,7 @@ function PermintaanDarah(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'KegiatanDonor')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Home')} >
               <Text
                 style={{
                   margin: 10,
@@ -212,7 +289,7 @@ function PermintaanDarah(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Data')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
               <Text
                 style={{
                   margin: 10,
