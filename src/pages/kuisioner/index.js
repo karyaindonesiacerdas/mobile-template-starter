@@ -32,6 +32,7 @@ function Kuisioner(props) {
         { number: 4, label: 'Dalam waktu 3 hari (72 jam) terakhir apakah anda minum jamu', value: 'TIDAK', yes: false, no: false },
         { number: 5, label: 'Dalam waktu 1 minggu terakhir apakah anda mencabut gigi ?', value: 'TIDAK', yes: false, no: false },
         { number: 6, label: 'Dalam waktu 2 minggu terakhir apakah anda mengalami demam lebih dari 38 C', value: 'TIDAK', yes: false, no: false },
+<<<<<<< HEAD
         { number: 7, label: 'Untuk donor wanita, dalam waktu 6 minggu terakhir apakah anda saat ini sedang hamil', value: 'TIDAK', yes: false, no: false },
         { number: 8, label: 'Dalam 8 minggu terakhir apakah anda mendonorkan darah, trombosit atau plasma ?', value: 'TIDAK', yes: false, no: false },
         { number: 9, label: 'Dalam 8 minggu terakhir apakah anda menerima vaksinasi atau suntikan lainya?', value: 'TIDAK', yes: false, no: false },
@@ -69,6 +70,45 @@ function Kuisioner(props) {
         { number: 41, label: 'Apakah anda pernah menderita perdarahan atau penyakit berhubungan dengan darah ?', value: 'TIDAK', yes: false, no: false },
         { number: 42, label: 'Apakah anda pernah berhubungan seksual dengan orang yang tinggal di afrika', value: 'TIDAK', yes: false, no: false },
         { number: 43, label: 'Apakah anda pernah tinggal di afrika ?', value: 'TIDAK', yes: false, no: false },
+=======
+        { number: 7, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 8, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 9, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 10, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 11, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 12, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 13, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 14, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 15, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 16, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 17, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 18, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 19, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 20, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 21, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 22, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 23, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 24, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 25, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 26, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 27, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 28, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 29, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 30, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 31, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 32, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 33, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 34, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 35, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 36, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 37, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 38, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 39, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 40, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 41, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 42, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 43, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+>>>>>>> 7d3807047421b1c24e3a3f34984e8c7f22dca167
       ])
     
     const [k1, setK1] = useState({yes: false, no: false, value: 'TIDAK'})
@@ -162,7 +202,7 @@ function Kuisioner(props) {
                         <TableWrapper style={styles.wrapper}>
                             <Row
                                 data={['No', 'Pernyataan', '   Ya','Tidak']}
-                                flexArr={[1, 8, 1, 1,]}
+                                flexArr={[-1, 6, 1, 1,]}
                                 style={styles.row}
                                 textStyle={styles.text}
                             />
@@ -170,7 +210,7 @@ function Kuisioner(props) {
                                 kuesioner.map((dat, i) =>(
                                     <Row
                                     data={[dat.number,dat.label,<CheckBox
-                                    style={{width:"10%"}}
+                                    style={{width:"0%"}}
                                     checked={dat.yes}
                                   onPress={() => 
                                     kuesionerHandler('yes',i)
@@ -181,7 +221,7 @@ function Kuisioner(props) {
                                 checked={dat.no}
                                   onPress={() => kuesionerHandler('no',i)}
                                 />]}
-                                    flexArr={[1, 8, 1, 1]}
+                                    flexArr={[-1, 6, 1, 1]}
                                     style={styles.head}
                                     textStyle={styles.text}
                                     key={i}

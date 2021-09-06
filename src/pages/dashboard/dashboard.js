@@ -88,7 +88,8 @@ function Dashboard(props) {
 
                 <View style={styles.viewAtas}>
                     <Card style={styles.cardTengah}>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'EditProfil')}>
                             <Text style={styles.textTengah}>Edit Profil</Text>
                         </TouchableOpacity>
                     </Card>
