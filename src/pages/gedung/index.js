@@ -164,7 +164,41 @@ function Gedung(props) {
         >
           Jam 07.39 s.d. 20.30 WIB
         </Text>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 20,
+            fontSize: 20,
+            fontWeight: "bold",
 
+            textAlign: "justify",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Pelayanan Permintaan Darah
+        </Text>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+      
+            fontSize: 18,
+ 
+
+            textAlign: "justify",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          24 Jam{'\n'}
+          Hari Minggu dan Libur Nasional tetap buka
+        </Text>
 
         <View
           style={{
@@ -173,7 +207,7 @@ function Gedung(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:290,
+              marginTop:230,
             
           }}
         >
