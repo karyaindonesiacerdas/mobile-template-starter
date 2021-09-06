@@ -34,7 +34,7 @@ function Dashboard(props) {
             />
             <ScrollView>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, '')}>
+                        onPress={goNextPage.bind(this, 'Konvalesen14')}>
                         <Image
                             source={require('../image/pesan.jpg')}
                             style={{
