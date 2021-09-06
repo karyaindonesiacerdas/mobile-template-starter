@@ -142,17 +142,6 @@ function Home(props) {
                
               </TouchableOpacity>
             </Card>
-            <View
-          style={{
-            alignContent: "center",
-
-            flexDirection: "row",
-            justifyContent: "center",
-              alignContent: "center",
-              marginTop:290,
-            
-          }}
-        />
             <Card
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}

@@ -44,6 +44,8 @@ import Riwayat from './riwayat';
 import {Alur01,Alur02,Alur03,Alur04,Alur05,Alur06} from './alur';
 import PermintaanDarah from './permintaandarah';
 import EditProfil from './edit-profile';
+import ListUser from './user';
+import ListPendonor from './listpendonor';
 export {
 	Login,
 	Register,
@@ -99,4 +101,6 @@ export {
 	Alur06,
 	PermintaanDarah,
 	EditProfil,
+	ListUser,
+	ListPendonor
 };

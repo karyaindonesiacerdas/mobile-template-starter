@@ -55,6 +55,9 @@ import {
 	Alur05,
 	Alur06,
 	EditProfil,
+	DashboardAdmin,
+	ListUser,
+	ListPendonor,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -117,6 +120,9 @@ function index() {
 				<Stack.Screen name="Alur06" component={Alur06} options={{ headerShown: false }} />
 				<Stack.Screen name="PermintaanDarah" component={PermintaanDarah} options={{ headerShown: false }} />
 				<Stack.Screen name="EditProfil" component={EditProfil} options={{ headerShown: false }} />
+				<Stack.Screen name="DashboardAdmin" component={DashboardAdmin} options={{ headerShown: false }} />
+				<Stack.Screen name="ListUser" component={ListUser} options={{ headerShown: false }} />
+				<Stack.Screen name="ListPendonor" component={ListPendonor} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

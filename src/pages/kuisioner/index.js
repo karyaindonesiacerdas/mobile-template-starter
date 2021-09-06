@@ -26,8 +26,8 @@ import {
 
 function Kuisioner(props) {
     const [kuesioner, setKuesioner] = useState([
-        { number: 1, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: '', yes: false, no: false },
-        { number: 2, label: 'Apakah anda semalam tidur minimal 4 jam ?', value: '', yes: false, no: false },
+        { number: 1, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: undefined, yes: false, no: false },
+        { number: 2, label: 'Apakah anda semalam tidur minimal 4 jam ?', value: undefined, yes: false, no: false },
         { number: 3, label: 'Dalam waktu 3 hari (72 jam) terakhir apakah anda minum obat', value: '', yes: false, no: false },
         { number: 4, label: 'Dalam waktu 3 hari (72 jam) terakhir apakah anda minum jamu', value: '', yes: false, no: false },
         { number: 5, label: 'Dalam waktu 1 minggu terakhir apakah anda mencabut gigi ?', value: '', yes: false, no: false },
@@ -71,9 +71,6 @@ function Kuisioner(props) {
         { number: 43, label: 'Apakah anda pernah tinggal di afrika ?', value: '', yes: false, no: false },
       ])
     
-    const [k1, setK1] = useState({yes: false, no: false, value: 'TIDAK'})
-    const [k2, setK2] = useState({yes: false, no: false, value: 'TIDAK'})
-    const [k3, setK3] = useState({yes: false, no: false, value: 'TIDAK'})
     const kuesionerHandler = (stat, index) => {
         const newValue = kuesioner.map((checkbox, i) => {
             if (i === index && stat == 'yes')
@@ -96,12 +93,18 @@ function Kuisioner(props) {
          setKuesioner(newValue)
     }
     const goNextPage = page => {
-        if (page) {
-            props.navigation.replace(page);
+        var input = RefactorInput(kuesioner)
+        if (page === 'Berhasil') {
+            if (input.count !== 43){
+                alert(`semua kuesioner harus diisi, sisa : ${43-input.count}`)
+            }else {
+                props.navigation.replace(page);
+            }
+        }else {
+            props.navigation.replace(page)
         }
     };
-    var input = RefactorInput(kuesioner)
-    console.log(input)
+    // console.log(input)
     return (
         <Container>
             <Image
@@ -249,7 +252,13 @@ function Kuisioner(props) {
 export default Kuisioner;
 
 function RefactorInput(val) {
+    var count = 0
     var t = new Date().toISOString().slice(0, 10);
+    for (let i=0;i< val.length; i++){
+        if (val[i].value !== undefined && val[i].value !== '') {
+            count++
+        }
+    }
     var input = {
         kode_calon_pendonor: '',
         tanggal: t,
@@ -298,6 +307,7 @@ function RefactorInput(val) {
         41:val[40].value,
         42:val[41].value,
         43:val[42].value,
+        count: count,
     }
     return input
 }
