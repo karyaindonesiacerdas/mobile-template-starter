@@ -43,6 +43,7 @@ import MobilUnit02 from './mobilUnit/mobilUnit02';
 import Riwayat from './riwayat';
 import {Alur01,Alur02,Alur03,Alur04,Alur05,Alur06} from './alur';
 import PermintaanDarah from './permintaandarah';
+import EditProfil from './edit-profile';
 export {
 	Login,
 	Register,
@@ -97,4 +98,5 @@ export {
 	Alur05,
 	Alur06,
 	PermintaanDarah,
+	EditProfil,
 };

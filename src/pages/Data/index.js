@@ -22,7 +22,7 @@ import { Button } from "react-native-elements/dist/buttons/Button";
 
 function Data(props) {
   const [number, onChangeNumber] = React.useState(null);
-  const [pekerjaan, set] = React.useState([
+  const [pekerjaan, setPekerjaan] = React.useState([
     { label: 'PNS', value: 'pns', checked: false },
     { label: 'Swasta', value: 'swasta', checked: false },
     { label: 'Polri', value: 'polri', checked: false },
