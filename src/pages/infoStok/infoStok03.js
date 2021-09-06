@@ -34,14 +34,14 @@ function InfoStok03(props) {
         tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB']], 
     });
     const [tableData, setTableData] = useState([
-        ['Whole Blood', '0', '0', '0', '0', '0'],
-        ['Packed Red Cell', '0', '0', '0', '0', '0'],
-        ['Thrombocyte Concentrate', '0', '0', '0', '0', '0'],
-        ['Fresh Frozen Plasma', '0', '0', '0', '0', '0'],
+        ['WB', '0', '0', '0', '0', '0'],
+        ['PRC', '0', '0', '0', '0', '0'],
+        ['TC', '0', '0', '0', '0', '0'],
+        ['FFP', '0', '0', '0', '0', '0'],
         ['AHF', '0', '0', '0', '0', '0'],
-        ['Leucodepleted', '0', '0', '0', '0', '0'],
-        ['Leucoreduce', '0', '0', '0', '0', '0'],
-        ['Plasma Konvalesen', '0', '0', '0', '0', '0'],
+        ['LD', '0', '0', '0', '0', '0'],
+        ['LR', '0', '0', '0', '0', '0'],
+        ['PK', '0', '0', '0', '0', '0'],
     ],)
     useEffect(() => {
         const url = STOK_DARAH;
@@ -64,7 +64,7 @@ function InfoStok03(props) {
                     ];
                     setTableData([
                         [
-                            'Whole Blood',
+                            'WB',
                             res.data.data[0].wb_a,
                             res.data.data[0].wb_b,
                             res.data.data[0].wb_ab,
@@ -72,7 +72,7 @@ function InfoStok03(props) {
                             res.data.data[0].subtotal_wb,
                         ],
                         [
-                            'Packed Red Cell',
+                            'PRC',
                             res.data.data[0].prc_a,
                             res.data.data[0].prc_b,
                             res.data.data[0].prc_ab,
@@ -80,7 +80,7 @@ function InfoStok03(props) {
                             res.data.data[0].subtotal_prc,
                         ],
                         [
-                            'Thrombocyte Concentrate',
+                            'TC',
                             res.data.data[0].tc_a,
                             res.data.data[0].tc_b,
                             res.data.data[0].tc_ab,
@@ -88,7 +88,7 @@ function InfoStok03(props) {
                             res.data.data[0].subtotal_tc,
                         ],
                         [
-                            'Fresh Frozen Plasma',
+                            'FFP',
                             res.data.data[0].ffp_a,
                             res.data.data[0].ffp_b,
                             res.data.data[0].ffp_ab,
@@ -104,7 +104,7 @@ function InfoStok03(props) {
                             res.data.data[0].subtotal_ahf,
                         ],
                         [
-                            'Leucodepleted',
+                            'LD',
                             res.data.data[0].ld_a,
                             res.data.data[0].ld_b,
                             res.data.data[0].ld_ab,
@@ -112,7 +112,7 @@ function InfoStok03(props) {
                             res.data.data[0].subtotal_ld,
                         ],
                         [
-                            'Leucoreduce',
+                            'LR',
                             res.data.data[0].lr_a,
                             res.data.data[0].lr_b,
                             res.data.data[0].lr_ab,
@@ -120,7 +120,7 @@ function InfoStok03(props) {
                             res.data.data[0].subtotal_lr,
                         ],
                         [
-                            'Plasma Konvalesen',
+                            'PK',
                             res.data.data[0].pk_a,
                             res.data.data[0].pk_b,
                             res.data.data[0].pk_ab,
@@ -257,6 +257,15 @@ function InfoStok03(props) {
                             />
                         </TableWrapper>
                     </Table>
+                    <Text>Keterangan :</Text>
+                <Text>*WB = Whole Blood</Text>
+                <Text>*PRC = Packed Red Cell</Text>
+                <Text>*TC = Thrombocyte Concentrate</Text>
+                <Text>*FFP = Fresh Frozen Plasma</Text>
+                <Text>*AHF = AHF</Text>
+                <Text>*LD = Leucodepleted</Text>
+                <Text>*LR = Leucoreduce</Text>
+                <Text>*PK = Plasma Konvalesen</Text>
                 </View>
             </ScrollView>
             <View

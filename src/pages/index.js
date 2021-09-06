@@ -4,7 +4,7 @@ import Home from './home';
 import LoadingStart from './loading';
 import Account from './account';
 import KegiatanDonor from './kegiatan donor';
-import DonorBiasa from './donorbiasa';
+import DonorBiasa from './DonorBiasa';
 import Data from './Data';
 import Berhasil from './berhasil';
 import Pilih from './pilih';
@@ -40,6 +40,7 @@ import Konvalesen23 from './konvalesen/konvalesen23';
 import { InfoStok01, InfoStok02, InfoStok03 } from './infoStok';
 import MobilUnit01 from './mobilUnit/mobilUnit01';
 import MobilUnit02 from './mobilUnit/mobilUnit02';
+import Riwayat from './riwayat';
 export {
 	Login,
 	Register,
@@ -85,5 +86,6 @@ export {
 	InfoStok03,
 	MobilUnit01,
 	MobilUnit02,
-    DashboardAdmin
+    DashboardAdmin,
+    Riwayat
 };

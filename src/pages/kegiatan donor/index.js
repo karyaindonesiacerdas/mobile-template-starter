@@ -112,59 +112,29 @@ function KegiatanDonor(props) {
                     </TouchableOpacity>
                 </Card>
             </View>
-            <View
-                style={{
-                    alignContent: 'center',
-
+            <View style={{
                     flexDirection: 'row',
                     justifyContent: 'center',
                     alignContent: 'center',
-                    marginTop: 250,
                 }}>
-                <Card
-                    style={{
-                        backgroundColor: '#000',
-                        width: '40%',
-                        marginRight: '2%',
-                    }}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={goNextPage.bind(this, 'Home')}>
-                        <Text
-                            style={{
-                                margin: 10,
-                                fontSize: 20,
-
-                                color: 'white',
-                                fontWeight: 'bold',
-                                textAlign: 'center',
-                            }}>
-                            Kembali
-                        </Text>
-                    </TouchableOpacity>
-                </Card>
-                <Card
-                    style={{
-                        backgroundColor: '#000',
-                        width: '40%',
-                        marginLeft: '2%',
-                    }}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={goNextPage.bind(this, 'DonorBiasa')}>
-                        <Text
-                            style={{
-                                margin: 10,
-                                fontSize: 20,
-                                textAlign: 'center',
-
-                                color: 'white',
-                                fontWeight: 'bold',
-                            }}>
-                            Selanjutnya
-                        </Text>
-                    </TouchableOpacity>
-                </Card>
+            <Card
+            style={{
+              backgroundColor: "#000",width: "40%", marginRight:"2%" }}
+          >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Home')} >
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 15,
+                  color: "white",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Kembali
+              </Text>
+            </TouchableOpacity>
+          </Card>
             </View>
         </Container>
     );

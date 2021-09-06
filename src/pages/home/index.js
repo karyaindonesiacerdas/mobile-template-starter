@@ -142,18 +142,7 @@ function Home(props) {
                
               </TouchableOpacity>
             </Card>
-            <View
-          style={{
-            alignContent: "center",
-
-            flexDirection: "row",
-            justifyContent: "center",
-              alignContent: "center",
-              marginTop:250,
-            
-          }}
-        >
-          <Card
+            <Card
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
@@ -171,26 +160,6 @@ function Home(props) {
               </Text>
             </TouchableOpacity>
           </Card>
-          <Card
-            style={{
-              backgroundColor: "#000",width: "40%",marginLeft:"2%"
-            }}
-          >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'KegiatanDonor')} >
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20, textAlign:'center',
-
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
-                Selanjutnya
-              </Text>
-            </TouchableOpacity>
-          </Card>
-        </View>
     </Container>
   );
 }
