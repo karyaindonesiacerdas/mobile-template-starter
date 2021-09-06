@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
 import { CheckBox } from 'react-native-elements';
 import {
@@ -7,9 +7,10 @@ import {
   Title,
   Left,
    HStack,
- 
+  Input,
   Card,
-  
+  Item,
+
 } from "native-base";
 import {
   ScrollView,
@@ -18,12 +19,24 @@ import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
 import { Button } from "react-native-elements/dist/buttons/Button";
+import { Formik } from "formik";
 
 
 function DonorBiasa(props) {
-    const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-  const goNextPage = page => {
+  const [input, setInput] = useState({
+    ktp:'',
+    nama:'',
+    alamat:'',
+    kelurahan:'',
+    kecamatan:'',
+    wilayah:'',
+    nomor_telepon:'',
+})
+  const refactorInput = (value)=>{
+    setInput(value)
+    props.navigation.replace('Data', {payload: input})
+  }
+  const goNextPage = (page) => {
     if (page) {
       props.navigation.replace(page)
     }
@@ -49,24 +62,38 @@ function DonorBiasa(props) {
           width: 54,
           height: 60,
           margin:20,
-       
           right:10,
           top:10,
         }}
       ></Image>
       <ScrollView>
-     
-  
-     
         <Text style={{ marginLeft:30, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "red" }}>
                 Daftar
               </Text>
               <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
                 Donor Darah Biasa
               </Text>
-
-                 
-              <Text
+              <Formik 
+                initialValues={{
+                        ktp:'',
+                        nama:'',
+                        alamat:'',
+                        kelurahan:'',
+                        kecamatan:'',
+                        wilayah:'',
+                        nomor_telepon:'',
+                    }}
+                    onSubmit={value => {
+                        refactorInput(value);
+                    }}>
+                    {({
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        values,
+                    }) => (
+                      <View>
+                      <Text
           style={{
             marginLeft: 30,
             marginTop: 20,
@@ -80,12 +107,14 @@ function DonorBiasa(props) {
         >
           No.KTP
         </Text>
-
-        <TextInput
+          <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
+          onChangeText={handleChange('ktp')}
+          onBlur={handleBlur('ktp')}
+          value={values.ktp}
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -100,12 +129,14 @@ function DonorBiasa(props) {
         >
           Nama Lengkap
         </Text>
-
-        <TextInput
+        <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
+          onChangeText={handleChange('nama')}
+          onBlur={handleBlur('nama')}
+          value={values.nama}
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -120,12 +151,13 @@ function DonorBiasa(props) {
         >
           Alamat Lengkap
         </Text>
-
-        <TextInput
+          <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
-        />
+          onChangeText={handleChange('alamat')}
+          onBlur={handleBlur('alamat')}
+          value={values.alamat}
+        /></Item>
         <Text
           style={{
             marginLeft: 30,
@@ -140,12 +172,14 @@ function DonorBiasa(props) {
         >
           Kelurahan
         </Text>
-
-        <TextInput
+          <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
+          onChangeText={handleChange('kelurahan')}
+          onBlur={handleBlur('kelurahan')}
+          value={values.kelurahan}
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -160,12 +194,14 @@ function DonorBiasa(props) {
         >
           Kecamatan
         </Text>
-
-        <TextInput
+          <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
+          onChangeText={handleChange('kecamatan')}
+          onBlur={handleBlur('kecamatan')}
+          value={values.kecamatan}
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -180,12 +216,14 @@ function DonorBiasa(props) {
         >
           Kab/Kota
         </Text>
-        <TextInput
+        <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
+          onChangeText={handleChange('wilayah')}
+          onBlur={handleBlur('wilayah')}
+          value={values.wilayah}
         />
-        
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -201,24 +239,25 @@ function DonorBiasa(props) {
         >
           No.Telp
         </Text>
-
-        <TextInput
+          <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
-        />
+          onChangeText={handleChange('nomor_telepon')}
+          onBlur={handleBlur('nomor_telepon')}
+          value={values.nomor_telepon}
+        />  
+        </Item>
         <View
-          style={{
-            alignContent: "center",
+        style={{
+          alignContent: "center",
 
-            flexDirection: "row",
-            justifyContent: "center",
-              alignContent: "center",
-              marginTop:80,
-            
-          }}
-        >
-          <Card
+          flexDirection: "row",
+          justifyContent: "center",
+            alignContent: "center",
+            marginTop:80,
+          
+        }}>
+        <Card
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
@@ -241,23 +280,24 @@ function DonorBiasa(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Data')} >
+            <TouchableOpacity onPress={handleSubmit}>
               <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20, textAlign:'center',
-
-                  color: "white",
-                  fontWeight: "bold",
+              style={{
+                margin: 10,
+                fontSize: 20, textAlign:'center',
+                color: "white",
+                fontWeight: "bold",
                 }}
               >
                   Selanjutnya
               </Text>
             </TouchableOpacity>
           </Card>
+          </View>
         </View>
-          
- </ScrollView>
+        )}
+        </Formik>
+    </ScrollView>
     </Container>
   );
 }

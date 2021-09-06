@@ -46,12 +46,7 @@ import {
 	InfoStok03,
 	MobilUnit01,
 	MobilUnit02,
-	MobilUnit03,
-	MobilUnit04,
-	MobilUnit05,
-	MobilUnit06,
-	MobilUnit07,
-	MobilUnit08,
+    Riwayat,
 	PermintaanDarah,
 	Alur01,
 	Alur02,
@@ -59,7 +54,6 @@ import {
 	Alur04,
 	Alur05,
 	Alur06,
-	Riwayat,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -113,6 +107,7 @@ function index() {
 				<Stack.Screen name="InfoStok03" component={InfoStok03} options={{ headerShown: false }} />
 				<Stack.Screen name="MobilUnit01" component={MobilUnit01} options={{ headerShown: false }} />
 				<Stack.Screen name="MobilUnit02" component={MobilUnit02} options={{ headerShown: false }} />
+                <Stack.Screen name="Riwayat" component={Riwayat} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur01" component={Alur01} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur02" component={Alur02} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur03" component={Alur03} options={{ headerShown: false }} />
@@ -120,9 +115,6 @@ function index() {
 				<Stack.Screen name="Alur05" component={Alur05} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur06" component={Alur06} options={{ headerShown: false }} />
 				<Stack.Screen name="PermintaanDarah" component={PermintaanDarah} options={{ headerShown: false }} />
-				<Stack.Screen name="Riwayat" component={Riwayat} options={{ headerShown: false }} />
-
-
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
