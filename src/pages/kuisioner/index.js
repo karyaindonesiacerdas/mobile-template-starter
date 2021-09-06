@@ -132,7 +132,7 @@ function Kuisioner(props) {
                 <Text
                     style={{
                         marginLeft: 10,
-                        marginTop: -10,
+                        marginTop: 10,
                         fontSize: 25,
                         fontWeight: 'bold',
                         color: 'red',

@@ -33,6 +33,19 @@ function Dashboard(props) {
                 style={styles.logoSehat}
             />
             <ScrollView>
+                    <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'Konvalesen14')}>
+                        <Image
+                            source={require('../image/pesan.jpg')}
+                            style={{
+                                marginTop: 20,
+                                width: 50,
+                                height: 50,
+                                marginRight:290,
+                                alignSelf: 'center',
+                            }}
+                        />
+                    </TouchableOpacity>
                 <View style={styles.viewAtas}>
                     <TouchableOpacity
                         style={{

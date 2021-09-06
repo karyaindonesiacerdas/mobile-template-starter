@@ -26,7 +26,6 @@ import {
 
 const CONTENT = {
     tableData: [
-        ['No', 'Pernyataan', '   Ya','Tidak'],
         ['1', 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing ', '',''],
         ['2', 'Apakah anda semalam tidur minimal 4 jam ? ', '',''],
         ['3', 'Dalam waktu 3 hari (72 jam) terakhir apakah anda minum obat ', '',''],
@@ -72,15 +71,78 @@ const CONTENT = {
         ['43', 'Apakah anda pernah tinggal di afrika ? ', '',''],
     ],
 };
-function Konvalesen06(props) {
-    const [check1, setCheck1] = useState(false);
-    const [check2, setCheck2] = useState(false);
+function Konvalesen05(props) {
+    const [kuesioner, setKuesioner] = useState([
+        { number: 1, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 2, label: 'Apakah anda semalam tidur minimal 4 jam ?', value: 'TIDAK', yes: false, no: false },
+        { number: 3, label: 'Dalam waktu 3 hari (72 jam) terakhir apakah anda minum obat', value: 'TIDAK', yes: false, no: false },
+        { number: 4, label: 'Dalam waktu 3 hari (72 jam) terakhir apakah anda minum jamu', value: 'TIDAK', yes: false, no: false },
+        { number: 5, label: 'Dalam waktu 1 minggu terakhir apakah anda mencabut gigi ?', value: 'TIDAK', yes: false, no: false },
+        { number: 6, label: 'Dalam waktu 2 minggu terakhir apakah anda mengalami demam lebih dari 38 C', value: 'TIDAK', yes: false, no: false },
+        { number: 7, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 8, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 9, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 10, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 11, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 12, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 13, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 14, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 15, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 16, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 17, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 18, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 19, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 20, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 21, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 22, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 23, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 24, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 25, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 26, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 27, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 28, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 29, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 30, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 31, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 32, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 33, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 34, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 35, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 36, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 37, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 38, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 39, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 40, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 41, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 42, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+        { number: 43, label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing', value: 'TIDAK', yes: false, no: false },
+      ])
+    
+    const [k1, setK1] = useState({yes: false, no: false, value: 'TIDAK'})
+    const [k2, setK2] = useState({yes: false, no: false, value: 'TIDAK'})
+    const [k3, setK3] = useState({yes: false, no: false, value: 'TIDAK'})
+    var input = {
+        1:'',
+    }
+    const kuesionerHandler = (stat, index) => {
+        let res = kuesioner
+        if (stat === 'yes'){
+             res[index].yes = true,
+             res[index].no= false,
+             res[index].value= 'YA'
+           } else {
+            res[index].yes = false,
+            res[index].no= true,
+            res[index].value= 'TIDAK'
+         }
+      setKuesioner(res)
+    }
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
         }
     };
-
+    input[1] = kuesioner[0].value
     return (
         <Container>
             <Image
@@ -108,7 +170,7 @@ function Konvalesen06(props) {
                 <Text
                     style={{
                         marginLeft: 10,
-                        marginTop: -10,
+                        marginTop: 10,
                         fontSize: 25,
                         fontWeight: 'bold',
                         color: 'red',
@@ -124,9 +186,8 @@ function Konvalesen06(props) {
                         fontWeight: 'bold',
                         color: 'black',
                     }}>
-                    Donor Darah Konvalesen
+                    Donor Darah Biasa
                 </Text>
-
                 <View
                     style={{
                         width: '90%',
@@ -152,12 +213,32 @@ function Konvalesen06(props) {
                                 heightArr={[28, 28]}
                                 textStyle={styles.text}
                             />
-                            <Rows
-                                data={CONTENT.tableData}
-                                flexArr={[1, 8, 1, 1,]}
+                            <Row
+                                data={['No', 'Pernyataan', '   Ya','Tidak']}
+                                flexArr={[-1, 6, 1, 1,]}
                                 style={styles.row}
                                 textStyle={styles.text}
                             />
+                            {
+                                kuesioner.map((dat, i) =>(
+                                    <Row
+                                    data={[dat.number,dat.label,<CheckBox
+                                    style={{width:"0%"}}
+                                    checked={dat.yes}
+                                  onPress={() => kuesionerHandler('yes',i)}
+                                />,
+                                <CheckBox
+                                style={{width:"10%"}}
+                                checked={dat.no}
+                                  onPress={() => kuesionerHandler('no',i)}
+                                />]}
+                                    flexArr={[-1, 6, 1, 1]}
+                                    style={styles.head}
+                                    textStyle={styles.text}
+                                    key={i}
+                                />
+                                ))   
+                            }  
                         </TableWrapper>
                     </Table>
                 </View>
@@ -216,4 +297,4 @@ function Konvalesen06(props) {
     );
 }
 
-export default Konvalesen06;
+export default Konvalesen05;

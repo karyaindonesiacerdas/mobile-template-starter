@@ -110,7 +110,7 @@ function Konvalesen09(props) {
       
           }}
         >
-          ANDA LULUS DALAM TAHAP ADMINISTRASI DAN{'\n'}MASUK KE TAHAP PENGAMBILAN{'\n'}CALON DONOR
+          ANDA LULUS DALAM TAHAP ADMINISTRASI DAN{'\n'}MASUK KE TAHAP PENGAMBILAN{'\n'}CONTOH DARAH
         </Text>
           
         </Card>
