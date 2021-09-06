@@ -63,13 +63,13 @@ function Konvalesen10(props) {
             textAlign: "center",
           }}
         >
-          Pilih {'\n'}Tempat Donormu
+          PILIH LOKASI AMBIL {'\n'}CONTOH DARAH
         </Text>
 
         <Card
           style={{
             backgroundColor: "#70282b",
-            marginTop: 40,
+            marginTop: 80,
             marginBottom: 20,
             width: "86%",
             marginLeft: "7%",
