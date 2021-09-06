@@ -207,7 +207,7 @@ function Gedung(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:230,
+              marginTop:210,
             
           }}
         >
