@@ -3,13 +3,9 @@ import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-nativ
 import { CheckBox } from 'react-native-elements';
 import {
   Container,
-  Header,
-  Title,
-  Left,
-   HStack,
- 
+ Item,
+ Input,
   Card,
-  
 } from "native-base";
 import {
   ScrollView,
@@ -17,11 +13,9 @@ import {
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
-import { Button } from "react-native-elements/dist/buttons/Button";
-
+import { Formik } from "formik";
 
 function Data(props) {
-  const [number, onChangeNumber] = React.useState(null);
   const [pekerjaan, setPekerjaan] = React.useState([
     { label: 'PNS', value: 'pns', checked: false },
     { label: 'Swasta', value: 'swasta', checked: false },
@@ -113,7 +107,8 @@ function Data(props) {
       props.navigation.replace(page)
     }
   }
-  console.log(input)
+  const submitData = (value) => {
+  }
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -252,6 +247,21 @@ function Data(props) {
               })}
               </View>             
               </View>
+              <Formik
+              initialValues={{
+                bb:0,
+            }}
+            onSubmit={value => {
+                submitData(value);
+                goNextPage.bind(this, 'Kuesioner')
+            }}>
+            {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                values,
+            }) => (
+              <View>
               <Text
           style={{
             marginLeft: 30,
@@ -266,12 +276,14 @@ function Data(props) {
         >
           Berat badan (Pilih)
         </Text>
-
-        <TextInput
+          <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
+          onChangeText={handleChange('bb')}
+          onBlur={handleBlur('bb')}
+          value={values.bb}         
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -320,7 +332,7 @@ function Data(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kuisioner')} >
+            <TouchableOpacity style={styles.button} onPress={handleSubmit} >
               <Text
                 style={{
                   margin: 10,
@@ -335,6 +347,8 @@ function Data(props) {
             </TouchableOpacity>
           </Card>
         </View>
+        </View>)}
+        </Formik>
           
  </ScrollView>
     </Container>

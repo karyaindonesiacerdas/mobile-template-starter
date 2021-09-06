@@ -24,7 +24,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login(props) {
     const handleSubmitLogin = value => {
-        console.log(value)
         const url = USER_MANAGEMENT;
         const headers = {
             'Content-Type': 'application/json',
@@ -37,11 +36,15 @@ function Login(props) {
             headers,
         })
             .then(r => {
-                console.log(r)
                 if (r.data.code == 200) {
-                    AsyncStorage.setItem('token', r.data.token);
-                    AsyncStorage.setItem('role', r.data.role);
-                    switch (r.data.role) {
+                    AsyncStorage.setItem('token', r.data.data.token);
+                    AsyncStorage.setItem('role', r.data.data.role);
+                    AsyncStorage.setItem('exp', r.data.data.exp);
+                    AsyncStorage.setItem('ktp', r.data.data.ktp);
+                    AsyncStorage.setItem('tempat_lahir', r.data.data.tempat_lahir);
+                    AsyncStorage.setItem('tanggal_lahir', r.data.data.tanggal_lahir);
+                    AsyncStorage.setItem('status_menikah', r.data.data.status_menikah);
+                    switch (r.data.data.role) {
                         case "pendonor":
                         props.navigation.replace('Dashboard');
                         break

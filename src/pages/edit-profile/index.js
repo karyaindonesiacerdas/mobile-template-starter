@@ -3,13 +3,9 @@ import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-nativ
 import { CheckBox } from 'react-native-elements';
 import {
   Container,
-  Header,
-  Title,
-  Left,
-   HStack,
- 
   Card,
-  
+  Item,
+  Input
 } from "native-base";
 import {
   ScrollView,
@@ -17,28 +13,12 @@ import {
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
-import { Button } from "react-native-elements/dist/buttons/Button";
-
+import { Formik } from "formik";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { USER_MANAGEMENT } from "../../config/api";
+import Axios from 'axios';
 
 function EditProfil(props) {
-    const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
-  const [check3, setCheck3] = useState(false);
-  const [check4, setCheck4] = useState(false);
-  const [check5, setCheck5] = useState(false);
-  const [check6, setCheck6] = useState(false);
-  const [check7, setCheck7] = useState(false);
-  const [check8, setCheck8] = useState(false);
-  const [check9, setCheck9] = useState(false);
-  const [check10, setCheck10] = useState(false);
-  const [check11, setCheck11] = useState(false);
-  const [check12, setCheck12] = useState(false);
-  const [check13, setCheck13] = useState(false);
-  const [check14, setCheck14] = useState(false);
-  const [check15, setCheck15] = useState(false);
-  const [check16, setCheck16] = useState(false);
   const [pekerjaan, setPekerjaan] = React.useState([
     { label: 'PNS', value: 'pns', checked: false },
     { label: 'Swasta', value: 'swasta', checked: false },
@@ -54,20 +34,21 @@ function EditProfil(props) {
     { label: 'B', value: 'B', checked: false },
     { label: 'O', value: 'O', checked: false },
     { label: 'AB', value: 'AB', checked: false },
+    { label: 'X (Tidak tahu)', value: 'X', checked: false },
   ])
   const [jeniskelamin, setJenisKelamin] = React.useState([
-    { label: 'Laki-Laki', value: '+', checked: false },
-    { label: 'Perempuan', value: '-', checked: false },
+    { label: 'Laki-Laki', value: 'laki-laki', checked: false },
+    { label: 'Perempuan', value: 'perempuan', checked: false },
   ])
   const [statusmenikah, setStatusMenikah] = React.useState([
-    { label: 'Sudah Menikah', value: '+', checked: false },
-    { label: 'Belum Menikah', value: '-', checked: false },
+    { label: 'Sudah Menikah', value: '1', checked: false },
+    { label: 'Belum Menikah', value: '0', checked: false },
   ])
   const [input] = useState({
     pekerjaan : '',
-    gologanDarah:'',
-    jeniskelamin:'',
-    statusmenikah:'',
+    gologan_darah:'',
+    jenis_kelamin:'',
+    status_menikah:'',
   })
   const pekerjaanHandler = (index) => {
     const newValue = pekerjaan.map((checkbox, i) => {
@@ -100,7 +81,7 @@ function EditProfil(props) {
          ...checkbox,
          checked: !checkbox.checked,
        }
-       input.golongan_darah = checkbox.value
+       input.gologan_darah = checkbox.value
        return item
      }
     return checkbox
@@ -119,7 +100,7 @@ function EditProfil(props) {
          ...checkbox,
          checked: !checkbox.checked,
        }
-       input.jeniskelamin = checkbox.value
+       input.jenis_kelamin = checkbox.value
        return item
      }
     return checkbox
@@ -138,7 +119,7 @@ function EditProfil(props) {
          ...checkbox,
          checked: !checkbox.checked,
        }
-       input.statusmenikah = checkbox.value
+       input.status_menikah = checkbox.value
        return item
      }
     return checkbox
@@ -150,7 +131,44 @@ function EditProfil(props) {
       props.navigation.replace(page)
     }
   }
-  console.log(input)
+  const submitData =(value) => {
+    async function submit(){
+      const token = await AsyncStorage.getItem('token')
+      const url = USER_MANAGEMENT;
+      const headers = {
+          'Content-Type': 'application/json',
+          'Authorization' : 'Bearer ' + token
+      };
+      const body = {
+        ktp: value.ktp,
+        nama: value.nama,
+        tempat_lahir: value.tempat_lahir,
+        tanggal_lahir: value.tanggal_lahir,
+        jenis_kelamin: input.jenis_kelamin,
+        status_menikah: input.status_menikah
+      };
+      console.log(body)
+      Axios.put(`${url}/api/simaba/user/update`, JSON.stringify(body), {
+          headers,
+      })
+          .then(r => {
+              if (r.data.code == 200) {
+                AsyncStorage.setItem('ktp', value.ktp);
+                AsyncStorage.setItem('tempat_lahir', value.tempat_lahir);
+                AsyncStorage.setItem('tanggal_lahir', value.tanggal_lahir);
+                AsyncStorage.setItem('status_menikah', input.status_menikah);
+                alert('sukses melengkapi profil')
+                props.navigation.replace('Dashboard')
+              } else {
+                  console.log('Error', r.data.message);
+              }
+          })
+          .catch(err => {
+              console.log('error : ', err);
+          });
+    }
+    submit()
+  }
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -188,7 +206,23 @@ function EditProfil(props) {
                 Profil
               </Text>
 
-                 
+                 <Formik initialValues={{
+                        ktp:'',
+                        nama:'',
+                        tempat_lahir:'',
+                        tanggal_lahir:'',
+                    }}
+                    onSubmit={value => {
+                        submitData(value);
+                        goNextPage.bind(this, 'Dashboard')
+                    }}>
+                    {({
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        values,
+                    }) => (
+                      <View>
               <Text
           style={{
             marginLeft: 30,
@@ -203,12 +237,15 @@ function EditProfil(props) {
         >
           No.KTP
         </Text>
-
-        <TextInput
+        <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
+          onChangeText={handleChange('ktp')}
+          onBlur={handleBlur('ktp')}
+          value={values.ktp}
    
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -223,12 +260,14 @@ function EditProfil(props) {
         >
           Nama
         </Text>
-
-        <TextInput
+          <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
+          onChangeText={handleChange('nama')}
+          onBlur={handleBlur('nama')}
+          value={values.nama}
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -243,12 +282,14 @@ function EditProfil(props) {
         >
           Tempat Lahir
         </Text>
-
-        <TextInput
+          <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
+          onChangeText={handleChange('tempat_lahir')}
+          onBlur={handleBlur('tempat_lahir')}
+          value={values.tempat_lahir}
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -263,12 +304,15 @@ function EditProfil(props) {
         >
           Tanggal Lahir
         </Text>
-
-        <TextInput
+          <Item>
+        <Input
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
+          onChangeText={handleChange('tanggal_lahir')}
+          onBlur={handleBlur('tanggal_lahir')}
+          value={values.tanggal_lahir}
+          placeholder={"Contoh: 1982-12-28"}
         />
+        </Item>
          <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black" , textShadowColor:'#fff',
     textShadowOffset:{width: 1, height: 1},
     textShadowRadius:10,}}>
@@ -338,7 +382,7 @@ function EditProfil(props) {
               })}
               </View>             
               </View>
-              <Text
+              {/* <Text
           style={{
             marginLeft: 30,
             marginTop: 20,
@@ -437,7 +481,7 @@ function EditProfil(props) {
           style={styles.input}
           onChangeText={onChangeNumber}
    
-        />
+        /> */}
          <Text style={{ marginLeft:30, marginTop:30,fontSize: 15,fontWeight: "bold", color: "black" }}>
                 Pekerjaan (Pilih salah satu)
               </Text>
@@ -569,7 +613,7 @@ function EditProfil(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
+            <TouchableOpacity style={styles.button} onPress={handleSubmit} >
               <Text
                 style={{
                   margin: 10,
@@ -584,7 +628,9 @@ function EditProfil(props) {
             </TouchableOpacity>
           </Card>
         </View>
-          
+        </View>
+        )}
+          </Formik>
  </ScrollView>
     </Container>
   );

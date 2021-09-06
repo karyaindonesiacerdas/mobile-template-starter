@@ -104,7 +104,6 @@ function Kuisioner(props) {
             props.navigation.replace(page)
         }
     };
-    // console.log(input)
     return (
         <Container>
             <Image

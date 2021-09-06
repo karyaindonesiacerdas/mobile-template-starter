@@ -13,7 +13,10 @@ import Bg from '../../image/Baground2.jpg';
 
 function Dashboard(props) {
     const goNextPage = page => {
-        if (page) {
+        if (page === 'Logout') {
+            AsyncStorage.clear();
+            props.navigation.replace(page);
+        }else {
             props.navigation.replace(page);
         }
     };

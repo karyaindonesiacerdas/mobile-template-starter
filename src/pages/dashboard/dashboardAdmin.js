@@ -21,6 +21,18 @@ function DashboardAdmin(props) {
 
     return (
         <Container>
+            <Image
+                source={Bg}
+                style={{width: '100%', height: '100%', position: 'absolute'}}
+            />
+            <Image
+                source={require('../image/logo.png')}
+                style={styles.logoUDD}
+            />
+            <Image
+                source={require('../image/Logo2.png')}
+                style={styles.logoSehat}
+            />
             <Text>DASHBOARD ADMIN</Text>
             <Card
                     style={{
