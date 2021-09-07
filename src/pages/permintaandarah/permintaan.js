@@ -28,7 +28,7 @@ function PermintaanDarah1(props) {
     { label: 'Packed Red Cell (PRC) Pediatric Biasa', value: 'Packed Red Cell (PRC) Pediatric Biasa', checked: false },
     { label: 'Washed Erytrocyte (WE)', value: 'Washed Erytrocyte (WE)', checked: false },
     { label: 'Trombosite Concentrate (TC) Biasa', value: 'Trombosite Concentrate (TC) Biasa', checked: false },
-    { label: 'Trombosite Concentrate (TC) Leukodepleted', value: 'Trombosite Concentrate (TC) Leukodepleted', checked: false },
+    { label: 'Trombosite Concentrate (TC) Apheresis Leukodepleted', value: 'Trombosite Concentrate (TC) Leukodepleted', checked: false },
     { label: 'Fresh Frozen Plasma (FFP)', value: 'Fresh Frozen Plasma (FFP)', checked: false },
     { label: 'Cryoprecipitate', value: 'Cryoprecipitate', checked: false },
     { label: 'Plasma Konvalesen', value: 'Plasma Konvalesen', checked: false },
@@ -162,7 +162,7 @@ function PermintaanDarah1(props) {
         </Text>
         </View>
         </View>
-              <View style={{marginTop:0,marginLeft:-10,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View style={{marginTop:0,marginLeft:-10,marginRight:100, flexDirection: "row",justifyContent: "space-between"}}>
               <View>
               {pekerjaan.map((checkbox, i) => {
                 if (i < pekerjaan.length/1){
@@ -191,7 +191,7 @@ function PermintaanDarah1(props) {
               })}
               </View>
               </View>
-              <View style={{marginTop:0,marginLeft:-10,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View style={{marginTop:0,marginLeft:-10,marginRight:110, flexDirection: "row",justifyContent: "space-between"}}>
               <View>
               {kosong.map((checkbox, i) => {
                 if (i < kosong.length/1){
