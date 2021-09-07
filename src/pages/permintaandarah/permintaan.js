@@ -271,7 +271,7 @@ function PermintaanDarah1(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'PermintaanSukses')} >
               <Text
                 style={{
                   margin: 10,
