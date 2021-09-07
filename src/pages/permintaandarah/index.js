@@ -23,26 +23,88 @@ import { Button } from "react-native-elements/dist/buttons/Button";
 function PermintaanDarah(props) {
     const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
-  const [check3, setCheck3] = useState(false);
-  const [check4, setCheck4] = useState(false);
-  const [check5, setCheck5] = useState(false);
-  const [check6, setCheck6] = useState(false);
-  const [check7, setCheck7] = useState(false);
-  const [check8, setCheck8] = useState(false);
-  const [check9, setCheck9] = useState(false);
-  const [check10, setCheck10] = useState(false);
-  const [check11, setCheck11] = useState(false);
-  const [check12, setCheck12] = useState(false);
-  const [check13, setCheck13] = useState(false);
-  const [check14, setCheck14] = useState(false);
-  const [check15, setCheck15] = useState(false);
-  const [check16, setCheck16] = useState(false);
+  const [jeniskelamin, setJenisKelamin] = React.useState([
+    { label: 'Laki-Laki', value: 'laki-laki', checked: false },
+    { label: 'Perempuan', value: 'perempuan', checked: false },
+  ])
+  const [gologanDarah, setGolonganDarah] = React.useState([
+    { label: 'A', value: 'A', checked: false },
+    { label: 'B', value: 'B', checked: false },
+    { label: 'O', value: 'O', checked: false },
+    { label: 'AB', value: 'AB', checked: false },
+  ])
+  const [rhesus, setRhesus] = React.useState([
+    { label: 'Positif', value: '+', checked: false },
+    { label: 'Negatif', value: '-', checked: false },
+  ])
+  const [input] = useState({
+    gologan_darah:'',
+    jenis_kelamin:'',
+    rhesus : '',
+  })
+  const golonganDarahHandler = (index) => {
+    const newValue = gologanDarah.map((checkbox, i) => {
+     if (i !== index)
+       return {
+         ...checkbox,
+         checked: false,
+       }
+     if (i === index) {
+       const item = {
+         ...checkbox,
+         checked: !checkbox.checked,
+       }
+       input.gologan_darah = checkbox.value
+       return item
+     }
+    return checkbox
+  })
+  setGolonganDarah(newValue)
+  }
+  const jeniskelaminHandler = (index) => {
+    const newValue = jeniskelamin.map((checkbox, i) => {
+     if (i !== index)
+       return {
+         ...checkbox,
+         checked: false,
+       }
+     if (i === index) {
+       const item = {
+         ...checkbox,
+         checked: !checkbox.checked,
+       }
+       input.jenis_kelamin = checkbox.value
+       return item
+     }
+    return checkbox
+  })
+  setJenisKelamin(newValue)
+  }
+  const rhesusHandler = (index) => {
+    const newValue = rhesus.map((checkbox, i) => {
+     if (i !== index)
+       return {
+         ...checkbox,
+         checked: false,
+       }
+     if (i === index) {
+       const item = {
+         ...checkbox,
+         checked: !checkbox.checked,
+       }
+       input.rhesus = checkbox.value
+       return item
+     }
+    return checkbox
+  })
+  setRhesus(newValue)
+  }
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)
     }
+  }
+  const submitData = (value) => {
   }
   return (
     <Container>
@@ -162,31 +224,39 @@ function PermintaanDarah(props) {
           onChangeText={onChangeNumber}
    
         />
-         <Text
-          style={{
-            marginLeft: 30,
-            marginTop: 20,
-            fontSize: 15,
-            fontWeight: "normal",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          Jenis Kelamin
-        </Text>
-        <View style={{marginTop:10,marginLeft:30,marginRight:60, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}><CheckBox title='Laki-Laki' style={{width:"70%" }}checked={check9}
-              onPress={() => setCheck9(!check9)}  />
-               
-                </View>
-               
-                <View><CheckBox title='Perempuan' style={{width:"70%" }}checked={check12}
-              onPress={() => setCheck12(!check12)}   />
-           
-                </View>             
-               
+         <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black" , textShadowColor:'#fff',
+    textShadowOffset:{width: 1, height: 1},
+    textShadowRadius:10,}}>
+                jenis kelamin
+              </Text>
+              <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View>
+              {jeniskelamin.map((checkbox, i) => {
+                if (i < jeniskelamin.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => jeniskelaminHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })
+                  }
+                  </View>
+                  <View>
+              {jeniskelamin.map((checkbox, i) => {
+                if (i >= jeniskelamin.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => jeniskelaminHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })}
+              </View>             
               </View>
               <Text
           style={{
@@ -213,46 +283,68 @@ function PermintaanDarah(props) {
    }}>
                 Golongan Darah
               </Text>
-              <View style={{marginTop:10,marginLeft:30,marginRight:100, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}><CheckBox title='A' style={{width:"70%" }}checked={check1}
-              onPress={() => setCheck1(!check1)}  />
-           
-                 <CheckBox title='B' style={{width:"70%" }} checked={check2}
-              onPress={() => setCheck2(!check2)}   />
-               
-                </View>
-               
-                <View><CheckBox title='AB' style={{width:"70%" }}checked={check3}
-              onPress={() => setCheck3(!check3)}   />
-              
-              <CheckBox title='O' style={{width:"70%" }} checked={check11}
-              onPress={() => setCheck11(!check11)}  />
-           
-                </View>             
-               
+              <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View>
+              {gologanDarah.map((checkbox, i) => {
+                if (i < gologanDarah.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => golonganDarahHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })
+                  }
+                  </View>
+                  <View>
+              {gologanDarah.map((checkbox, i) => {
+                if (i >= gologanDarah.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => golonganDarahHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })}
+              </View>
               </View>
               <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black" , textShadowColor:'#fff',
     textShadowOffset:{width: 1, height: 1},
     textShadowRadius:10,}}>
                 Rhesus
               </Text>
-            
-
-            
-
-              <View style={{marginTop:10,marginLeft:30,marginRight:70, flexDirection: "row",justifyContent: "space-between"}}>
-                <View style={{}}>
-           
-                 <CheckBox title='Positif' style={{width:"70%" }}  checked={check14}
-              onPress={() => setCheck14(!check14)} />
-               
-                </View>
-               
-                <View><CheckBox title='Negatif' style={{width:"70%" }} checked={check16}
-              onPress={() => setCheck16(!check16)}  />
-            
-           
-                </View>             
+              <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <View>
+              {rhesus.map((checkbox, i) => {
+                if (i < rhesus.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => rhesusHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })
+                  }
+                  </View>
+                  <View>
+              {rhesus.map((checkbox, i) => {
+                if (i >= rhesus.length/2){
+                  return <CheckBox
+                  style={{width:"70%"}}
+                    title={checkbox.label}
+                    checked={checkbox.checked}
+                    onPress={() => rhesusHandler(i)}
+                    key={i}
+                  /> 
+                }
+              })}
+              </View>             
               </View>
         
         <View
@@ -289,7 +381,7 @@ function PermintaanDarah(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'PermintaanDarah1')} >
               <Text
                 style={{
                   margin: 10,

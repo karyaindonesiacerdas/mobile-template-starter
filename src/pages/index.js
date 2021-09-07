@@ -46,6 +46,7 @@ import PermintaanDarah from './permintaandarah';
 import EditProfil from './edit-profile';
 import ListUser from './user';
 import ListPendonor from './listpendonor';
+import PermintaanDarah1 from './permintaandarah/permintaan';
 export {
 	Login,
 	Register,
@@ -102,5 +103,6 @@ export {
 	PermintaanDarah,
 	EditProfil,
 	ListUser,
-	ListPendonor
+	ListPendonor,
+	PermintaanDarah1,
 };

@@ -58,6 +58,7 @@ import {
 	DashboardAdmin,
 	ListUser,
 	ListPendonor,
+	PermintaanDarah1,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -123,6 +124,7 @@ function index() {
 				<Stack.Screen name="DashboardAdmin" component={DashboardAdmin} options={{ headerShown: false }} />
 				<Stack.Screen name="ListUser" component={ListUser} options={{ headerShown: false }} />
 				<Stack.Screen name="ListPendonor" component={ListPendonor} options={{ headerShown: false }} />
+				<Stack.Screen name="PermintaanDarah1" component={PermintaanDarah1} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
