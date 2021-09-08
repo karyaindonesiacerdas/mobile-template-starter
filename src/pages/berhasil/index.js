@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   ImageBackground,
@@ -29,15 +29,43 @@ import {
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
+import { PENDONOR } from "../../config/api";
 
 function Berhasil(props) {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+  const [res, setRes] = useState({});
+  useEffect(() => {
+    async function getData() {
+      const token = await AsyncStorage.getItem('token')
+      const url = PENDONOR;
+      const headers = {
+          'Content-Type': 'application/json',
+          'Authorization' : 'Bearer ' + token
+      };
+      const body = {
+        kode_calon_pendonor: "c4r4f5hvd5isn6r6di6g"
+      };
+      Axios.post(`${url}/api/simaba/user`, JSON.stringify(body), {
+          headers,
+      })
+          .then(r => {
+              if (r.data.code == 200) {
+                  setRes(r.data);
+              } else {
+                  console.log('Error', r.data.message);
+              }
+          })
+          .catch(err => {
+              console.log('error : ', err);
+          });
+  }
+  getData()
+  },[]);
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)
     }
   }
+  console.log(res.data[0].status)
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -141,7 +169,7 @@ function Berhasil(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Data')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kuisioner')} >
               <Text
                 style={{
                   margin: 10,

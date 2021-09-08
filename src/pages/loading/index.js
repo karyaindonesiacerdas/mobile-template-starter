@@ -1,24 +1,38 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {View} from 'native-base';
 import React from 'react';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {ActivityIndicator} from 'react-native';
+import SyncStorage from 'sync-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const loading = true;
 
 function LoadingStart(props) {
     useEffect(() => {
         async function checkToken() {
+            var date = new Date().toLocaleDateString()
+            date = `20${date.slice(6,8)}-${date.slice(0,2)}-${date.slice(3,5)}T${new Date().toLocaleTimeString()}`
+            const role = await AsyncStorage.getItem('role');
             const token = await AsyncStorage.getItem('token');
-            if (token) {
-                props.navigation.replace('HomeApp');
+            const exp = await AsyncStorage.getItem('exp');
+            if (exp > date){
+                checkRole(role)
             } else {
                 props.navigation.replace('Login');
             }
         }
+        function checkRole(role) {
+            switch (role) {
+                case 'pendonor':
+                    props.navigation.replace('Dashboard');
+                    break;
+                case 'admin':
+                    props.navigation.replace('DashboardAdmin');
+                    break;
+            }
+            }
         checkToken();
     }, []);
-
     return (
         loading && (
             <View

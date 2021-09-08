@@ -29,7 +29,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index(props) {
+function Konvalesen05(props) {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
   const goNextPage = (page) => {
@@ -106,25 +106,11 @@ function index(props) {
           onChangeText={onChangeNumber}
    
         />
-        <Text
-          style={{
-            marginLeft: 30,
-            marginTop: 0,
-            fontSize: 15,
-            color: "black",
-            fontWeight: "bold",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          {'>'} 45 kg (Apabila kurang dari tidak lolos)
-        </Text>
 
         <TextInput
           style={{
             height: 40,
-
+            
             marginRight: 30,
             marginLeft: 30,
             backgroundColor: "#bebebe",
@@ -222,7 +208,7 @@ function index(props) {
             marginTop: 10,
           }}
           onChangeText={onChangeNumber}
-          placeholder="<14 hari dari negatif atau sembuh tidak lolos"
+          placeholder="- ≥14 hari dari negatif atau sembuh tidak lolos"
           value={number}
          
         />
@@ -236,7 +222,7 @@ function index(props) {
             flexDirection: "row",
             justifyContent: "center",
             alignContent: "center",
-            marginTop: 30,
+            marginTop: 180,
             marginBottom: 10,
           }}
         >
@@ -309,4 +295,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Konvalesen05;

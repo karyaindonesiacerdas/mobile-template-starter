@@ -20,7 +20,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index(props) {
+function Konvalesen11(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const goNextPage = (page) => {
@@ -83,8 +83,8 @@ function index(props) {
         source={require("../../asset/imagePeta.png")}
         style={{
         
-          width: 150,
-          height: 100,
+          width: 200,
+          height: 200,
           margin: 20,
           alignSelf:'center',
 
@@ -141,7 +141,7 @@ function index(props) {
             textShadowRadius: 10,
           }}
         >
-          Pelayanan Donor Setiap Hari 
+          Pelayanan Donor Darah
         </Text>
         <Text
           style={{
@@ -158,7 +158,41 @@ function index(props) {
             textShadowRadius: 10,
           }}
         >
-          Jam 07.39 s.d. 20.30 WIB
+         Setiap Hari Jam 07.39 s.d. 20.30 WIB
+        </Text>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "bold",
+
+            textAlign: "justify",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Pelayanan Permintaan Darah
+        </Text>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+      
+            fontSize: 15,
+ 
+
+            textAlign: "justify",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+         24 Jam {'\n'} Hari Minggu dan Libur Nasional Tetap buka
         </Text>
 
 
@@ -244,4 +278,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Konvalesen11;

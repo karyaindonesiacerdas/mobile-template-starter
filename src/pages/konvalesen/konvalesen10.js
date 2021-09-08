@@ -19,7 +19,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index(props) {
+function Konvalesen10(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
    const goNextPage = (page) => {
@@ -63,13 +63,13 @@ function index(props) {
             textAlign: "center",
           }}
         >
-          Pilih {'\n'}Tempat Donormu
+          PILIH LOKASI AMBIL {'\n'}CONTOH DARAH
         </Text>
 
         <Card
           style={{
             backgroundColor: "#70282b",
-            marginTop: 40,
+            marginTop: 80,
             marginBottom: 20,
             width: "86%",
             marginLeft: "7%",
@@ -98,7 +98,7 @@ function index(props) {
             marginLeft: "7%",
           }}
         >
-          <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen16")}>
+          <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen17")}>
             <Text
               style={{
                 margin: 10,
@@ -157,7 +157,7 @@ function index(props) {
               marginRight: "2%",
             }}
           >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen01")}>
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen09")}>
               <Text
                 style={{
                   margin: 10,
@@ -205,4 +205,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Konvalesen10;

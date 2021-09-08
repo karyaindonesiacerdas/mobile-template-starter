@@ -129,7 +129,9 @@ function Kalender(props) {
                     </Table>
                 </View>
                 <View style={{}}>
-                    <CheckBox title='Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan' style={{width:"70%" }}   />
+                    <CheckBox title='Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan' style={{width:"70%" }}checked={check1}
+              onPress={() => setCheck1(!check1)}
+              style={{ width: "70%" }}   />
           </View>
                 <View
                     style={{

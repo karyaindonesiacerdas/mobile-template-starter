@@ -22,7 +22,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index(props) {
+function Konvalesen03(props) {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
   const goNextPage = (page) => {
@@ -64,7 +64,7 @@ function index(props) {
                 Daftar
               </Text>
               <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
-                Donor Darah Biasa
+                Donor Darah Konvalesen
               </Text>
 
                  <Text style={{ marginLeft:30, marginTop:20,fontSize: 15, color: "black" }}>
@@ -157,7 +157,7 @@ function index(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:30,
+              marginTop:130,
               marginBottom:10,
             
           }}
@@ -166,7 +166,7 @@ function index(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen02")}
+            <TouchableOpacity onPress={goNextPage.bind(this, "konvalesen02")}
             >
               <Text
                 style={{
@@ -233,4 +233,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Konvalesen03;

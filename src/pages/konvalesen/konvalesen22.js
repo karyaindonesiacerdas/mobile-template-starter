@@ -16,7 +16,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function index(props) {
+function Konvalesen22(props) {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
    const goNextPage = (page) => {
@@ -223,4 +223,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Konvalesen22;
