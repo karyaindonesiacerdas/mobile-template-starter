@@ -6,6 +6,8 @@ import {
  Item,
  Input,
   Card,
+  Content,
+  Icon,
 } from "native-base";
 import {
   ScrollView,
@@ -147,7 +149,7 @@ function PermintaanDarah1(props) {
         <View>
         <Text
           style={{
-            marginLeft: 220,
+            marginLeft: 180,
             marginTop: 20,
             fontSize: 15,
             fontWeight: "bold",
@@ -189,9 +191,151 @@ function PermintaanDarah1(props) {
                   /> 
                 }
               })}
+                           <View style={{
+          marginTop:15,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        <View style={{
+          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        <View style={{
+          marginTop:30,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        <View style={{
+          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        <View style={{
+          marginTop:30,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        
+       
               </View>
               </View>
-              <View style={{marginTop:0,marginLeft:-10,marginRight:110, flexDirection: "row",justifyContent: "space-between"}}>
+              <View style={{marginTop:0,marginLeft:-10,marginRight:140, flexDirection: "row",justifyContent: "space-between"}}>
               <View>
               {kosong.map((checkbox, i) => {
                 if (i < kosong.length/1){
@@ -206,7 +350,6 @@ function PermintaanDarah1(props) {
               })
                   }
               </View>
-              </View>
               <View>
               {kosong.map((checkbox, i) => {
                 if (i >= kosong.length/1){
@@ -219,6 +362,203 @@ function PermintaanDarah1(props) {
                   /> 
                 }
               })}
+              <View style={{
+          marginTop:15,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        <View style={{
+          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        <View style={{
+          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        <View style={{
+          marginTop:30,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        <View style={{
+          marginTop:30,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        <View style={{
+          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+        <View style={{
+          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
+          alignContent: "center",
+          }}>
+                <View style={{}}>
+              <Content>
+          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
+        </Content>
+        </View>
+        <TouchableOpacity>
+        <Icon type="FontAwesome5" name="minus-circle" />
+        </TouchableOpacity>
+        <Text style={{
+            marginTop: 0,
+            fontSize: 20,
+            fontWeight:'normal',
+
+            textAlign: "center",
+            color: "black",
+      
+          }}
+        >
+         1
+        </Text>
+        <TouchableOpacity>
+<Icon type="FontAwesome5" name="plus-circle" />
+</TouchableOpacity>
+        </View>
+              </View>
               </View>
 
               <Formik
