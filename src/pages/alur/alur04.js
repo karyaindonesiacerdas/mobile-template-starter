@@ -5,13 +5,18 @@ import {
   Text,
   View,
   TouchableOpacity,
+
 } from "react-native";
-import { Icon } from "react-native-elements";
 import { Container, Card } from "native-base";
 import {ScrollView,} from "react-native-gesture-handler";
 import styles from "./styles";
 
+
+
+
 function index(props) {
+
+
   const goNextPage = (page) => {
     if (page) {
       props.navigation.replace(page);
@@ -38,61 +43,12 @@ function index(props) {
         </Text>
 
         <View style={styles.viewContainer}>
-          <Card style={styles.flowCardRed}>
-            <TouchableOpacity>
-              <Text style={styles.textInCard}>
-                Login
-              </Text>
-            </TouchableOpacity>
-          </Card>
-
-          <Icon
-            name="arrow-down"
-            type="font-awesome"
-            color="#007dc3"
-            size={30}
-            style={{marginTop: 0,alignSelf: "center"}}/>
-          <Card style={styles.flowCardMarroon}>
-            <TouchableOpacity>
-              <Text style={styles.textInCard}>
-                Pilih fitur {"\n"}
-                <B>Syarat dan Pendaftaran Permintaan Darah</B>
-              </Text>
-            </TouchableOpacity>
-          </Card>
-          <Icon
-            name="arrow-down"
-            type="font-awesome"
-            color="#007dc3"
-            size={30}
-            style={{marginTop: 0,alignSelf: "center"}}
-          />
-          <Card style={styles.flowCardRed}>
-            <TouchableOpacity>
-              <Text style={styles.textInCard}>
-                Mengisi form yang disediakan
-              </Text>
-            </TouchableOpacity>
-          </Card>
-
-          <Icon
-            name="arrow-down"
-            type="font-awesome"
-            color="#007dc3"
-            size={30}
-            style={{marginTop: 0,alignSelf: "center" }}
-          />
-          <Card style={styles.flowCardMarroon}>
-            <TouchableOpacity>
-              <Text style={styles.textInCard}>
-                <B>Melihat keterdsediaan darah:</B>
-                {"\n"}1. Jika darah tersedia maka segera membawa sampel darah
-                dan form permintaan darah dari Rumah Sakit ke UDD PMI Kota
-                Semarang{"\n"}2. Jika darah tidah tersedia maka akan mendapatkan
-                pemberitahuan
-              </Text>
-            </TouchableOpacity>
-          </Card>
+           <Image
+           resizeMode={'cover'}
+        source={require("../../asset/alur04.png")}
+        style={{width: '100%', height: 510, marginBottom:50}}></Image>
+          
+         
 
           <View style={styles.viewBackForward2}>
             <Card

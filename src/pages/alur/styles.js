@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
 
+
+
+
 const styles = StyleSheet.create({
   cardStyle: {
     backgroundColor: "red",
@@ -73,6 +76,25 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
   },
+   textInCards2: {
+    margin: 10,
+    fontSize: 15,
+    color: "white",
+  },
+  textInCards3: {
+    margin: 20,
+    fontSize: 15,
+    color: "black",
+  },
+   textInCards4: {
+    fontSize: 15,
+    color: "black",
+  },
+   textInCards5: {
+    fontSize: 15,
+    color: "black",
+    marginRight:5,
+  },
   imageBackgroundStyle: {
     width: "100%",
     zIndex: -1,
@@ -104,8 +126,18 @@ const styles = StyleSheet.create({
     alignContent: "center",
     marginTop: "5%",
   },
+   viewContainer2: {
+     width:'100%',
+    alignContent: "center",
+    marginRight: "5%",
+    marginLeft: "5%",
+    justifyContent: "center",
+    alignContent: "center",
+    marginTop: "5%",
+  },
   flowCardRed: { backgroundColor: "#da251c", borderRadius: 10 },
-  flowCardMarroon: { backgroundColor: "#70282b", borderRadius: 10 },
+  flowCardMarroon: { backgroundColor: "#70282b", borderRadius: 10,zIndex:1 },
+  flowCardPeach: { backgroundColor: "#fbe0d5", borderRadius: 10, marginTop:-20 },
 });
 
 export default styles;

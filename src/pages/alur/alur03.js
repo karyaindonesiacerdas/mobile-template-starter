@@ -19,6 +19,9 @@ function index(props) {
       props.navigation.replace(page);
     }
   };
+   const B = (props) => (
+    <Text style={{ fontWeight: "bold" }}>{props.children}</Text>
+  );
 
   return (
     <Container>
@@ -34,29 +37,15 @@ function index(props) {
           Alur Donor
         </Text>
         <Text style={styles.headerText2}>
-          Konvalesen
+          Darah Konvalesen
         </Text>
 
         <View style={styles.viewContainer}>
-          <Card style={styles.flowCardMarroon}>
-            <TouchableOpacity>
-              <Text style={styles.textInCard}>
-                Login
-              </Text>
-            </TouchableOpacity>
-          </Card>
-
-          <Icon
-            name="arrow-down"
-            type="font-awesome"
-            color="#007dc3"
-            size={30}
-            style={{marginTop: 0,alignSelf: "center",}}/>
 
           <Card style={styles.flowCardRed}>
             <TouchableOpacity>
               <Text style={styles.textInCard}>
-                Melengkapi Informasi Pribadi
+                Pendaftaran Donor
               </Text>
             </TouchableOpacity>
           </Card>
@@ -70,7 +59,7 @@ function index(props) {
           <Card style={styles.flowCardMarroon}>
             <TouchableOpacity>
               <Text style={styles.textInCard}>
-                Mengisi form Pendaftaran
+                Verifikasi Data Donor
               </Text>
             </TouchableOpacity>
           </Card>
@@ -84,7 +73,7 @@ function index(props) {
           <Card style={styles.flowCardRed}>
             <TouchableOpacity>
               <Text style={styles.textInCard}>
-                Mengisi Kuesioner & Informed Consent
+                Pemeriksaan Hb dan golongan darah
               </Text>
             </TouchableOpacity>
           </Card>
@@ -95,11 +84,62 @@ function index(props) {
             size={30}
             style={{marginTop: 0,alignSelf: "center",}}/>
           <Card style={styles.flowCardMarroon}>
-            <TouchableOpacity>
-              <Text style={styles.textInCard}>
-                Melihat jadwal dan lokasi pengambilan sampel
+    
+               <TouchableOpacity>
+              <Text style={{ marginTop:20, marginLeft: 20,marginRight:20,  fontSize: 15, color: "white",}}>
+                <B>Pemeriksaan kesehatan</B>
               </Text>
+              
+              <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={{fontSize: 15, color: "white",marginRight:5}}>
+                a.
+              </Text>
+
+               <Text style={{fontSize: 15, color: "white"}}>
+                 Pengukuran tekanan darah
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={{fontSize: 15, color: "white",marginRight:5}}>
+                b.
+              </Text>
+
+               <Text style={{fontSize: 15, color: "white"}}>
+                  Pengukuran berat badan
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={{fontSize: 15, color: "white",marginRight:5}}>
+                c. 
+              </Text>
+
+               <Text style={{fontSize: 15, color: "white"}}>
+                 Pemeriksaan nadi
+              </Text>
+              </View>
+              <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={{fontSize: 15, color: "white",marginRight:5}}>
+                d. 
+              </Text>
+
+               <Text style={{fontSize: 15, color: "white"}}>
+                 Pemeriksaan suhu tubuh
+              </Text>
+              </View>
+              <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={{fontSize: 15, color: "white",marginRight:5}}>
+                e. 
+              </Text>
+
+               <Text style={{fontSize: 15, color: "white", marginBottom:20}}>
+                 Wawancara riwayat kesehatan
+              </Text>
+              </View>
+             
             </TouchableOpacity>
+
+             
+       
           </Card>
           <Icon
             name="arrow-down"
@@ -107,11 +147,40 @@ function index(props) {
             color="#007dc3"
             size={30}
             style={{marginTop: 0,alignSelf: "center",}} />
-          <Card style={styles.flowCardRed} >
-            <TouchableOpacity>
-              <Text style={styles.textInCard} >
-                Melihat hasil uji sampel
+         <Card style={styles.flowCardRed}>
+             <TouchableOpacity>
+              <Text style={{ marginTop:20, marginLeft: 20,marginRight:20,  fontSize: 15, color: "white",}}>
+                <B>Pengujian</B>
               </Text>
+              
+              <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={{fontSize: 15, color: "white",marginRight:5}}>
+                a.
+              </Text>
+
+               <Text style={{fontSize: 15, color: "white"}}>
+                 Pemeriksaan titer antibody
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={{fontSize: 15, color: "white",marginRight:5}}>
+                b.
+              </Text>
+
+               <Text style={{fontSize: 15, color: "white"}}>
+                  Pemeriksaan golongan darah dan skrining antibody
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={{fontSize: 15, color: "white",marginRight:5}}>
+                c. 
+              </Text>
+
+               <Text style={{fontSize: 15, color: "white", marginBottom:20}}>
+                 Pemeriksaan infeksi menular lewat transfusi darah
+              </Text>
+              </View>
+             
             </TouchableOpacity>
           </Card>
 
@@ -124,7 +193,7 @@ function index(props) {
           <Card style={styles.flowCardMarroon}>
             <TouchableOpacity>
               <Text style={styles.textInCard}>
-                Jika lolos akan tercetak barcode/ID ID Donor
+                Pengambilan Darah Donor
               </Text>
             </TouchableOpacity>
           </Card>
@@ -135,17 +204,92 @@ function index(props) {
             color="#007dc3"
             size={30}
             style={{marginTop: 0,alignSelf: "center"}}/>
-          <Card
-            style={{
-              backgroundColor: "#da251c",
-              borderRadius: 10,
-              marginBottom: 30,
-            }}
-          >
+         <Card style={styles.flowCardMarroon}>
             <TouchableOpacity>
               <Text style={styles.textInCard}>
-                Tunjukkan Barcode/ID ke petugas UDD PMI
+                Refreshment area
               </Text>
+            </TouchableOpacity>
+          </Card>
+          <Card style={styles.flowCardPeach}>
+            <TouchableOpacity>
+              <Text style={{ marginTop:20, marginLeft: 20,marginRight:20,  fontSize: 15, color: "black",}}>
+                Pendonor setelah mendonorkan darah dapat beristirahat sebentar sambil minum air putih atau makan makanan kecil{'\n'}{'\n'}
+                <B>Tips setelah donor :</B>
+              </Text>
+              
+              <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={styles.textInCards5}>
+                a.
+              </Text>
+
+               <Text style={styles.textInCards4}>
+                 Membatasi aktivitas fisik Anda selama setidaknya 5 jam setelah donor
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={styles.textInCards5}>
+                b.
+              </Text>
+
+               <Text style={styles.textInCards4}>
+                  Melepaskan plester setidaknya 4-5 jam setelah Anda selesai donor Darah
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={styles.textInCards5}>
+                c. 
+              </Text>
+
+               <Text style={styles.textInCards4}>
+                 Menghindari panas
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={styles.textInCards5}>
+                d.
+              </Text>
+
+               <Text style={styles.textInCards4}>
+                  Menghindari untuk berdiri dalam waktu yang lama
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={styles.textInCards5}>
+                e.
+              </Text>
+
+               <Text style={styles.textInCards4}>
+                  Jika Anda merokok, sebaiknya Anda tidak merokok selama 2 jam setelah Donor
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={styles.textInCards5}>
+                f. 
+              </Text>
+
+               <Text style={styles.textInCards4}>
+                 Jika Anda minum alkohol, sebaiknya Anda tidak minum alkohol sampai 24 jam setelah donor
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row",}}>
+                <Text style={styles.textInCards5}>
+                g. 
+              </Text>
+
+               <Text style={styles.textInCards4}>
+                 Minum banyak cairan untuk menggantikan cairan tubuh Anda yang hilang
+              </Text>
+              </View>
+               <View style={{marginRight:20, marginLeft:20,flexDirection: "row", marginBottom:20}}>
+                <Text style={styles.textInCards5}>
+                h. 
+              </Text>
+
+               <Text style={styles.textInCards4}>
+                 Makan makanan yang mengandung: zat besi tinggi, vitamin C, asamfolat, riboflavin (vitamin B2) dan vitamin B6
+              </Text>
+              </View>
             </TouchableOpacity>
           </Card>
           <View style={styles.viewBackForward2}>

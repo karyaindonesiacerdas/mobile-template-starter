@@ -4,7 +4,7 @@ import Home from './home';
 import LoadingStart from './loading';
 import Account from './account';
 import KegiatanDonor from './kegiatan donor';
-import DonorBiasa from './DonorBiasa';
+import DonorBiasa from './donorbiasa';
 import Data from './Data';
 import Berhasil from './berhasil';
 import Pilih from './pilih';
