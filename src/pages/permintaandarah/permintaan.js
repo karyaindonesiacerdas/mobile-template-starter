@@ -215,7 +215,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -245,7 +245,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -275,7 +275,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+        0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -305,7 +305,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -335,7 +335,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -396,7 +396,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -426,7 +426,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -456,7 +456,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -486,7 +486,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -516,7 +516,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -546,7 +546,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
@@ -576,7 +576,7 @@ function PermintaanDarah1(props) {
       
           }}
         >
-         1
+         0
         </Text>
         <TouchableOpacity>
 <Icon type="FontAwesome5" name="plus-circle" />
