@@ -20,10 +20,17 @@ import {
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
+import { PENDONOR } from "../../config/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Barcode2(props) {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+  const [ktp, setKtp] = useState('');
+  const url = `${PENDONOR}/api/simaba/pendonor/image/${ktp}`
+  async function loadID(){
+    const ktp = await AsyncStorage.getItem('ktp')
+    setKtp(ktp)
+  }
+  loadID()
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)
@@ -176,7 +183,7 @@ function Barcode2(props) {
           Scan barcode untuk cetak formulir donor
         </Text>
         <Image
-        source={require("../image/barcode.png")}
+        source={{uri:url}}
         style={{
         
           width: 250,
