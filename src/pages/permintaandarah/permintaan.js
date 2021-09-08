@@ -204,6 +204,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -232,6 +234,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -260,6 +264,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+            marginRight:5,
+            marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -288,6 +294,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -316,6 +324,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -375,6 +385,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -403,6 +415,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -431,6 +445,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -459,6 +475,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -487,6 +505,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -515,6 +535,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
@@ -543,6 +565,8 @@ function PermintaanDarah1(props) {
         <Icon type="FontAwesome5" name="minus-circle" />
         </TouchableOpacity>
         <Text style={{
+          marginRight:5,
+          marginLeft:5,
             marginTop: 0,
             fontSize: 20,
             fontWeight:'normal',
