@@ -4,7 +4,7 @@ import { Container, Card } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 import styles from './styles';
 
-function index(props) {
+function Alur04(props) {
 	const goNextPage = (page) => {
 		if (page) {
 			props.navigation.replace(page);
