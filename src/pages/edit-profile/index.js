@@ -5,7 +5,9 @@ import {
   Container,
   Card,
   Item,
-  Input
+  Input,
+  Content,
+  Icon,
 } from "native-base";
 import {
   ScrollView,
@@ -205,7 +207,72 @@ function EditProfil(props) {
               <Text style={{ marginLeft:30, marginTop:-10,fontSize: 30,fontWeight: "bold",  color: "red" }}>
                 Profil
               </Text>
-
+              <View style={{flexDirection: 'row', justifyContent: 'space-between',borderWidth:1, padding: 10}}>
+              <Card
+            style={{
+              backgroundColor: "grey",width: "60%", marginRight:"5%" }}
+          >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
+          <Icon name='person' style={{fontSize: 150, color: 'black', marginLeft:40,marginRight:50}} />
+          </TouchableOpacity>
+          </Card>
+          <View style={{}}>
+          <Card
+            style={{
+              backgroundColor: "grey",width: "60%", marginRight:"30%" }}
+          >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+             
+                  color: "white",
+                  fontWeight: "bold",textAlign:'center',
+                }}
+              >
+                Camera
+              </Text>
+            </TouchableOpacity>
+          </Card>
+          <Card
+            style={{
+              backgroundColor: "grey",width: "60%", marginRight:"30%" }}
+          >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+             
+                  color: "white",
+                  fontWeight: "bold",textAlign:'center',
+                }}
+              >
+                Galery
+              </Text>
+            </TouchableOpacity>
+          </Card>
+          <Card
+            style={{
+              backgroundColor: "grey",width: "60%", marginRight:"30%" }}
+          >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 20,
+             
+                  color: "white",
+                  fontWeight: "bold",textAlign:'center',
+                }}
+              >
+                Cancel
+              </Text>
+            </TouchableOpacity>
+          </Card>
+          </View>
+          </View>
                  <Formik initialValues={{
                         ktp:'',
                         nama:'',
