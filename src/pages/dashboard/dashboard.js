@@ -139,7 +139,7 @@ function Dashboard(props) {
                         />
 
                         <Text style={styles.textBawah}>
-                            Alur Donor {'\n'}Darah
+                            Alur Donor 
                         </Text>
                     </TouchableOpacity>
 
@@ -157,7 +157,7 @@ function Dashboard(props) {
                         />
 
                         <Text style={styles.textBawah}>
-                            Persyaratan Donor {'\n'}& pendaftaran
+                            Persyaratan & pendaftaran
                         </Text>
                     </TouchableOpacity>
 
@@ -175,7 +175,7 @@ function Dashboard(props) {
                         />
 
                         <Text style={styles.textBawah}>
-                            Info Stok & Kebutuhan Darah
+                             Stok & Kebutuhan 
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -210,21 +210,21 @@ function Dashboard(props) {
                         />
 
                         <Text style={styles.textBawah}>
-                            Konseling Donor Darah Online
+                            Konseling Donor 
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.cardStyle}>
                         <Image
                             source={require('../image/download.png')}
                             style={{
-                                marginTop: 5,
+                                marginTop: 10,
                                 width: 120,
                                 height: 60,
                                 alignSelf: 'center',
                             }}
                         />
                         <Text style={styles.textBawah}>
-                            Kontak PMI Kota Semarang
+                            Kontak 
                         </Text>
                     </TouchableOpacity>
                 </View>
