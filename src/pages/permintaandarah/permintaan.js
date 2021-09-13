@@ -84,9 +84,7 @@ function PermintaanDarah1(props) {
       newArr[key] = {checked: item.checked, label: item.label, value: item.value, num: item.num -1}; // replace e.target.value with whatever you want to change it to
       console.info("newArr", newArr)
       setPekerjaan(newArr); // ??
-    } else {
-      alert("Maaf Tidak bisa")
-    }
+    } 
     
   }
 
