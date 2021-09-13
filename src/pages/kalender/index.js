@@ -9,7 +9,7 @@ import {
     TextInput
 } from 'react-native';
 import {CheckBox} from 'react-native-elements';
-import {Container, Card} from 'native-base';
+import {Container, Card, DatePicker} from 'native-base';
 import {
     ScrollView,
     TouchableWithoutFeedback,
@@ -24,6 +24,10 @@ import {
     Col,
 } from 'react-native-table-component';
 import Bg from '../../image/Baground2.jpg'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { PENDONOR } from '../../config/api';
+import Axios from  'axios'
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const CONTENT = {
     tableHead: ['                                             Agustus 2021'],
@@ -40,13 +44,47 @@ const CONTENT = {
 };
 function Kalender(props) {
     const [check1, setCheck1] = useState(false);
-    const [check2, setCheck2] = useState(false);
+    const [date, setDate] = useState(null);
+    const [pickerVis, setPickerVis] = useState(false);
+
+    async function submitHandler(value){
+        const ktp = await AsyncStorage.getItem('ktp')
+        const token = await AsyncStorage.getItem('token')
+        const url = PENDONOR;
+        const headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Bearer ' + token
+        };
+        const body = {
+            ktp: ktp,
+            lokasi: 'gedung udd'
+        };
+        console.log(body)
+        Axios.put(`${url}/api/simaba/pendonor/update/lokasi`, JSON.stringify(body), {
+            headers,
+        })
+            .then(res => {
+              console.log(res.data)
+                if (res.data.code === 200) { 
+                    props.navigation.replace('Barcode');
+                } else {
+                    console.log('Error', res.data.message);
+                }
+            })
+            .catch(err => {
+                console.log('test : ', err);
+            });
+    }
     const goNextPage = page => {
+        submitHandler()
         if (page) {
             props.navigation.replace(page);
         }
     };
-
+    // const [datevalue, setDate] = useState(new Date());
+    const _onDateChange = (e, newDate) => {
+      setDate(newDate);
+    };
     return (
         <Container>
             <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -72,6 +110,16 @@ function Kalender(props) {
                     top: 10,
                 }}></Image>
             <ScrollView>
+            {/* <DateTimePicker
+            value={new Date(2018, 12, 31)}
+testID="dateTimePicker"
+timeZoneOffsetInMinutes={0}
+value={date}
+mode='date'
+is24Hour={true}
+display="default"
+onChange={() => { setDate(new Date()); setPickerVis(true)}}
+/> */}
                 <Text
                     style={{
                         marginLeft: 30,
@@ -80,7 +128,7 @@ function Kalender(props) {
                         fontWeight: 'bold',
                         color: 'red',
                     }}>
-                    Gdeung UDD
+                    Gedung UDD
                 </Text>
                 <Text
                     style={{

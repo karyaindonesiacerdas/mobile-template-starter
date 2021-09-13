@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   ImageBackground,
@@ -20,10 +20,19 @@ import {
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
+import { PENDONOR } from "../../config/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Barcode(props) {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+  const [ktp, setKtp] = useState('');
+  const url = `${PENDONOR}/api/simaba/pendonor/image/${ktp}`
+  useEffect(() => {
+  async function loadID(){
+    const ktp = await AsyncStorage.getItem('ktp')
+    setKtp(ktp)
+  }
+  loadID()
+  },[])
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)
@@ -116,17 +125,14 @@ function Barcode(props) {
           Scan barcode untuk cetak formulir donor
         </Text>
         <Image
-        source={require("../image/barcode.png")}
+        source={{uri: url+ '?' + new Date(), cache: "reload"}}
         style={{
-        
-          width: 250,
-          height: 250,
+          width: 200,
+          height: 200,
           margin: 20,
           alignSelf:'center',
-
-          
         }}
-      ></Image>
+      />
 
        
         <Text
