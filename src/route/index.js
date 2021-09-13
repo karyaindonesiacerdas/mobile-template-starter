@@ -58,6 +58,8 @@ import {
 	DashboardAdmin,
 	ListUser,
 	ListPendonor,
+	PermintaanDarah1,
+	PermintaanSukses,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -67,7 +69,7 @@ const Stack = createNativeStackNavigator();
 function index() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator initialRouteName="LoadingStart">
+			<Stack.Navigator initialRouteName="PermintaanDarah1">
 				<Stack.Screen name="LoadingStart" component={LoadingStart} options={{ headerShown: false }} />
 				<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 				<Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
@@ -123,6 +125,8 @@ function index() {
 				<Stack.Screen name="DashboardAdmin" component={DashboardAdmin} options={{ headerShown: false }} />
 				<Stack.Screen name="ListUser" component={ListUser} options={{ headerShown: false }} />
 				<Stack.Screen name="ListPendonor" component={ListPendonor} options={{ headerShown: false }} />
+				<Stack.Screen name="PermintaanDarah1" component={PermintaanDarah1} options={{ headerShown: false }} />
+				<Stack.Screen name="PermintaanSukses" component={PermintaanSukses} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
