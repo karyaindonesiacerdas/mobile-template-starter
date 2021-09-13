@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
+import { Alert, ImageBackground, Image, Text, View,TextInput, Dimensions } from "react-native";
 import { CheckBox } from 'react-native-elements';
 import {
   Container,
@@ -19,29 +19,24 @@ import { Formik } from "formik";
 
 function PermintaanDarah1(props) {
   const [pekerjaan, setPekerjaan] = React.useState([
-    { label: 'Whole Blood (WB) Biasa', value: 'Whole Blood (WB) Biasa', checked: false },
-    { label: 'Whole Blood (WB) Segar', value: 'Whole Blood (WB) Segar', checked: false },
-    { label: 'Packed Red Cell (PRC) Biasa', value: 'Packed Red Cell (PRC) Biasa', checked: false },
-    { label: 'Packed Red Cell (PRC) Leukodepleted', value: 'Packed Red Cell (PRC) Leukodepleted', checked: false },
-    { label: 'Packed Red Cell (PRC) Pediatric Leukodepleted', value: 'Packed Red Cell (PRC) Pediatric Leukodepleted', checked: false },
-    
-  ])
-  const [kosong, setKosong] = React.useState([
-    { label: 'Packed Red Cell (PRC) Pediatric Biasa', value: 'Packed Red Cell (PRC) Pediatric Biasa', checked: false },
-    { label: 'Washed Erytrocyte (WE)', value: 'Washed Erytrocyte (WE)', checked: false },
-    { label: 'Trombosite Concentrate (TC) Biasa', value: 'Trombosite Concentrate (TC) Biasa', checked: false },
-    { label: 'Trombosite Concentrate (TC) Apheresis Leukodepleted', value: 'Trombosite Concentrate (TC) Leukodepleted', checked: false },
-    { label: 'Fresh Frozen Plasma (FFP)', value: 'Fresh Frozen Plasma (FFP)', checked: false },
-    { label: 'Cryoprecipitate', value: 'Cryoprecipitate', checked: false },
-    { label: 'Plasma Konvalesen', value: 'Plasma Konvalesen', checked: false },
-    
+    { label: 'Whole Blood (WB) Biasa', value: 'Whole Blood (WB) Biasa', checked: false, num: 0 },
+    { label: 'Whole Blood (WB) Segar', value: 'Whole Blood (WB) Segar', checked: false, num: 0 },
+    { label: 'Packed Red Cell (PRC) Biasa', value: 'Packed Red Cell (PRC) Biasa', checked: false, num: 0 },
+    { label: 'Packed Red Cell (PRC) Leukodepleted', value: 'Packed Red Cell (PRC) Leukodepleted', checked: false, num: 0 },
+    { label: 'Packed Red Cell (PRC) Pediatric Leukodepleted', value: 'Packed Red Cell (PRC) Pediatric Leukodepleted', checked: false, num: 0 },
+    { label: 'Packed Red Cell (PRC) Pediatric Biasa', value: 'Packed Red Cell (PRC) Pediatric Biasa', checked: false, num: 0 },
+    { label: 'Washed Erytrocyte (WE)', value: 'Washed Erytrocyte (WE)', checked: false, num: 0 },
+    { label: 'Trombosite Concentrate (TC) Biasa', value: 'Trombosite Concentrate (TC) Biasa', checked: false, num: 0 },
+    { label: 'Trombosite Concentrate (TC) Apheresis Leukodepleted', value: 'Trombosite Concentrate (TC) Leukodepleted', checked: false, num: 0 },
+    { label: 'Fresh Frozen Plasma (FFP)', value: 'Fresh Frozen Plasma (FFP)', checked: false, num: 0 },
+    { label: 'Cryoprecipitate', value: 'Cryoprecipitate', checked: false, num: 0 },
+    { label: 'Plasma Konvalesen', value: 'Plasma Konvalesen', checked: false, num: 0 },
   ])
   const [input] = useState({
     pekerjaan : '',
-    kosong: '',
   })
   const pekerjaanHandler = (index) => {
-    const newValue = pekerjaan.map((checkbox, i) => {
+    const newValue = pekerjaan.map((data, i) => {
      if (i !== index)
        return {
          ...checkbox,
@@ -59,25 +54,6 @@ function PermintaanDarah1(props) {
   })
   setPekerjaan(newValue)
   }
-  const kosongHandler = (index) => {
-    const newValue = kosong.map((checkbox, i) => {
-     if (i !== index)
-       return {
-         ...checkbox,
-         checked: false,
-       }
-     if (i === index) {
-       const item = {
-         ...checkbox,
-         checked: !checkbox.checked,
-       }
-       input.kosong = checkbox.value
-       return item
-     }
-    return checkbox
-  })
-  setKosong(newValue)
-  }
   
   const goNextPage = page => {
     if (page) {
@@ -88,6 +64,32 @@ function PermintaanDarah1(props) {
   }
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
+
+  const plusNum = (item, key) => {
+    let newArr = [...pekerjaan]; // copying the old datas array
+    if (item.num < 4) {
+      newArr[key] = {checked: item.checked, label: item.label, value: item.value, num: item.num +1}; // replace e.target.value with whatever you want to change it to
+      console.info("newArr", newArr)
+      setPekerjaan(newArr); // ??
+    } else {
+      alert("sudah melebihi jumlah maksimal!")
+    }
+    
+  }
+
+  const minusNum = (item, key) => {
+    let newArr = [...pekerjaan]; // copying the old datas array
+    console.info("num", item.num)
+    if (item.num > 0) {
+      newArr[key] = {checked: item.checked, label: item.label, value: item.value, num: item.num -1}; // replace e.target.value with whatever you want to change it to
+      console.info("newArr", newArr)
+      setPekerjaan(newArr); // ??
+    } else {
+      alert("Maaf Tidak bisa")
+    }
+    
+  }
+
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -157,434 +159,54 @@ function PermintaanDarah1(props) {
             textShadowColor: "#fff",
             textShadowOffset: { width: 1, height: 1 },
             textShadowRadius: 10,
-            alignContent:"space-around"
+            alignContent:"space-around",
+            marginBottom: 10
           }}
         >
           Jumlah
         </Text>
         </View>
-        </View>
-              <View style={{marginTop:0,marginLeft:-10,marginRight:100, flexDirection: "row",justifyContent: "space-between"}}>
-              <View>
-              {pekerjaan.map((checkbox, i) => {
-                if (i < pekerjaan.length/1){
-                  return <CheckBox
-                  style={{width:"70%"}}
-                    title={checkbox.label}
-                    checked={checkbox.checked}
-                    onPress={() => pekerjaanHandler(i)}
-                    key={i}
-                  /> 
-                }
-              })
-                  }
-              </View>
-              <View>
-              {pekerjaan.map((checkbox, i) => {
-                if (i >= pekerjaan.length/1){
-                  return <CheckBox
-                  style={{width:"70%"}}
-                    title={checkbox.label}
-                    checked={checkbox.checked}
-                    onPress={() => pekerjaanHandler(i)}
-                    key={i}
-                  /> 
-                }
-              })}
-                           <View style={{
-          marginTop:15,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        <View style={{
-          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        <View style={{
-          marginTop:30,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-            marginRight:5,
-            marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-        0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        <View style={{
-          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        <View style={{
-          marginTop:30,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        
-       
-              </View>
-              </View>
-              <View style={{marginTop:0,marginLeft:-10,marginRight:140, flexDirection: "row",justifyContent: "space-between"}}>
-              <View>
-              {kosong.map((checkbox, i) => {
-                if (i < kosong.length/1){
-                  return <CheckBox
-                  style={{width:"70%"}}
-                    title={checkbox.label}
-                    checked={checkbox.checked}
-                    onPress={() => kosongHandler(i)}
-                    key={i}
-                  /> 
-                }
-              })
-                  }
-              </View>
-              <View>
-              {kosong.map((checkbox, i) => {
-                if (i >= kosong.length/1){
-                  return <CheckBox
-                  style={{width:"70%"}}
-                    title={checkbox.label}
-                    checked={checkbox.checked}
-                    onPress={() => kosongHandler(i)}
-                    key={i}
-                  /> 
-                }
-              })}
-              <View style={{
-          marginTop:15,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        <View style={{
-          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        <View style={{
-          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        <View style={{
-          marginTop:30,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        <View style={{
-          marginTop:30,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        <View style={{
-          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-        <View style={{
-          marginTop:25,marginLeft:10,marginRight:70, flexDirection: "row",justifyContent: "center",
-          alignContent: "center",
-          }}>
-                <View style={{}}>
-              <Content>
-          <Icon name='chatbox' style={{fontSize:20,marginTop:5,}} />
-        </Content>
-        </View>
-        <TouchableOpacity>
-        <Icon type="FontAwesome5" name="minus-circle" />
-        </TouchableOpacity>
-        <Text style={{
-          marginRight:5,
-          marginLeft:5,
-            marginTop: 0,
-            fontSize: 20,
-            fontWeight:'normal',
-
-            textAlign: "center",
-            color: "black",
-      
-          }}
-        >
-         0
-        </Text>
-        <TouchableOpacity>
-<Icon type="FontAwesome5" name="plus-circle" />
-</TouchableOpacity>
-        </View>
-              </View>
               </View>
 
+
+{/* ============================ */}
+
+{pekerjaan.map((item, key) => {
+        return (
+          <View key={key} style={{flexDirection: 'row', justifyContent: 'space-between', borderWidth: 2, padding: 5}}>
+            <Text style={{marginLeft: 10}}>{item.value}</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center', marginRight: 20}}>
+            <TouchableOpacity>
+              <Icon type="FontAwesome5" name="minus-circle" onPress={() => minusNum(item, key)} />
+            </TouchableOpacity>
+            <Text style={{
+              marginRight:5,
+              marginLeft:5,
+                marginTop: 0,
+                fontSize: 20,
+                fontWeight:'normal',
+
+                textAlign: "center",
+                color: "black",
+          
+              }}
+            >
+              {item.num}
+            </Text>
+            <TouchableOpacity>
+              <Icon type="FontAwesome5" name="plus-circle" onPress={() => plusNum(item, key)} />
+            </TouchableOpacity>
+            </View>
+          </View>
+        )
+      })}
+
+        {/* ============================ */}
+
+
+
+
+              
               <Formik
               initialValues={{
                 bb:0,

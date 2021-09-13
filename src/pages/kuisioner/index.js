@@ -23,6 +23,9 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KUESIONER } from '../../config/api';
+import Axios from 'axios';
 
 function Kuisioner(props) {
     const [kuesioner, setKuesioner] = useState([
@@ -98,12 +101,45 @@ function Kuisioner(props) {
             if (input.count !== 43){
                 alert(`semua kuesioner harus diisi, sisa : ${43-input.count}`)
             }else {
+                submit(input)
                 props.navigation.replace(page);
             }
         }else {
             props.navigation.replace(page)
         }
     };
+    async function submit(input) {
+        const token = await AsyncStorage.getItem('token')
+        const nama = await AsyncStorage.getItem('nama')
+        const kode_calon_pendonor = await AsyncStorage.getItem('kode_calon_pendonor')
+        const ktp = await AsyncStorage.getItem('ktp')
+        const url = KUESIONER;
+          const headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token
+          };
+          input.kode_calon_pendonor = kode_calon_pendonor
+          input.ktp = ktp
+          input.nama = nama
+          const body = input;
+          Axios.post(`${url}/api/simaba/kuesioner/create`, JSON.stringify(body), {
+              headers,
+          })
+              .then(res => {
+                console.log(res.data)
+                  if (res.data.code === 200) {
+                      alert(
+                          'sukses submit kuesioner',
+                      );
+                      props.navigation.replace('Berhasil');
+                  } else {
+                      console.log('Error', res.data.message);
+                  }
+              })
+              .catch(err => {
+                  console.log('test : ', err);
+              });
+      }
     return (
         <Container>
             <Image

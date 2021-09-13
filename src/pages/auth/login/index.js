@@ -17,7 +17,6 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 //import styles from "../styles/styles";
 import * as Yup from 'yup';
 import Bg from '../../image/Background.png';
-import SyncStorage from 'sync-storage';
 import Axios from 'axios';
 import {USER_MANAGEMENT} from '../../../config/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -44,6 +43,7 @@ function Login(props) {
                     AsyncStorage.setItem('tempat_lahir', r.data.data.tempat_lahir);
                     AsyncStorage.setItem('tanggal_lahir', r.data.data.tanggal_lahir);
                     AsyncStorage.setItem('status_menikah', r.data.data.status_menikah);
+                    AsyncStorage.setItem('nama', r.data.data.nama);
                     switch (r.data.data.role) {
                         case "pendonor":
                         props.navigation.replace('Dashboard');
@@ -83,11 +83,11 @@ function Login(props) {
                     height: 150,
                     margin: 10,
                     right: 126,
-                    top: 130,
-                }}></Image>
+                    top: 15,
+                }}/>
             <Content contentContainerStyle={styles.container}>
                 <View style={styles.logo}>
-                    <Text style={{fontWeight: 'bold', fontSize: 40}}>
+                    <Text style={{fontWeight: 'bold', fontSize: 30}}>
                         LOGIN
                     </Text>
                 </View>
@@ -192,9 +192,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 25,
         height: 50,
-        marginBottom: 20,
+        marginBottom: 10,
         justifyContent: 'center',
-        padding: 20,
+        padding: 10,
     },
     inputText: {
         height: 50,

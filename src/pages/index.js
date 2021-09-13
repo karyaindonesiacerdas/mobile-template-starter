@@ -1,10 +1,10 @@
 import Login from './auth/login';
 import Register from './auth/register';
-import Home from './alur/alur02';
+import Home from './home';
 import LoadingStart from './loading';
 import Account from './account';
 import KegiatanDonor from './kegiatan donor';
-import DonorBiasa from './donorbiasa';
+import DonorBiasa from './DonorBiasa';
 import Data from './Data';
 import Berhasil from './berhasil';
 import Pilih from './pilih';
@@ -48,6 +48,7 @@ import ListUser from './user';
 import ListPendonor from './listpendonor';
 import PermintaanDarah1 from './permintaandarah/permintaan';
 import PermintaanSukses from './permintaandarah/sukses';
+
 export {
 	Login,
 	Register,
