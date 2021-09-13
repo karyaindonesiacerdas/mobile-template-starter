@@ -14,8 +14,6 @@ import styles from '../styles/styles';
 import Bg from '../../image/Baground2.jpg';
 
 function Pilih(props) {
-    const [check1, setCheck1] = useState(false);
-    const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
