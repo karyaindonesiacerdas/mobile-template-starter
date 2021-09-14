@@ -201,8 +201,8 @@ function Kuisioner(props) {
                         }}>
                         <TableWrapper style={styles.wrapper}>
                             <Row
-                                data={['No', 'Pernyataan', '   Ya','Tidak']}
-                                flexArr={[-1, 6, 1, 1,]}
+                                data={['No', 'Pernyataan', '       Ya','    Tidak']}
+                                flexArr={[0.7, 7, 1.76, 1.749,]}
                                 style={styles.row}
                                 textStyle={styles.text}
                             />
@@ -221,7 +221,7 @@ function Kuisioner(props) {
                                 checked={dat.no}
                                   onPress={() => kuesionerHandler('no',i)}
                                 />]}
-                                    flexArr={[-1, 6, 1, 1]}
+                                    flexArr={[0.6, 6, 1.5, 1.5]}
                                     style={styles.head}
                                     textStyle={styles.text}
                                     key={i}

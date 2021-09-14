@@ -360,7 +360,8 @@ function PermintaanDarah(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:80,
+              marginTop:50,
+              marginBottom:20,
             
           }}
         >
