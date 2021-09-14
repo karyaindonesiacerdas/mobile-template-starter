@@ -14,7 +14,6 @@ import {
 } from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
-import Bg from '../../image/Baground2.jpg'
 import { Formik } from "formik";
 
 function PermintaanDarah1(props) {
@@ -90,7 +89,6 @@ function PermintaanDarah1(props) {
 
   return (
     <Container>
-      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
         source={require("../image/logo.png")}
         style={{
@@ -142,14 +140,14 @@ function PermintaanDarah1(props) {
             alignContent:"space-around"
           }}
         >
-          Produk (maximal 2)
+          Produk
         </Text>
         </View>
         
         <View>
         <Text
           style={{
-            marginLeft: 180,
+            marginLeft: 260,
             marginTop: 20,
             fontSize: 15,
             fontWeight: "bold",
