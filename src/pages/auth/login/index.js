@@ -35,7 +35,6 @@ function Login(props) {
             headers,
         })
             .then(r => {
-                console.info("r.data", r.data)
                 if (r.data.code == 200) {
                     AsyncStorage.setItem('token', r.data.data.token);
                     AsyncStorage.setItem('role', r.data.data.role);
@@ -59,7 +58,7 @@ function Login(props) {
                     props.navigation.replace('Login');
                 }
             })
-            .catch(err => {console.log('error : ', err.message);
+            .catch(err => {console.log('error : ', err);
             });
         
     }
