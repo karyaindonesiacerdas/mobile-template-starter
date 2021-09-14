@@ -46,13 +46,12 @@ function Dashboard(props) {
                             source={require('../image/pesan.jpg')}
                             style={{
                                 marginTop: 20,
-                                width: 50,
-                                height: 50,
+                                width: 60,
+                                height: 60,
                                 marginRight:290,
                                 alignSelf: 'center',
                             }}
                         />
-                        <Text styles={{display: 'none'}}>{notif}</Text>
                     </TouchableOpacity>
                 <View style={styles.viewAtas}>
                     <TouchableOpacity

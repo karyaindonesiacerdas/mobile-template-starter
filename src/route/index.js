@@ -75,7 +75,7 @@ function index() {
 				<Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
 				<Stack.Screen name="KegiatanDonor" component={KegiatanDonor} options={{ headerShown: false }} />
 				<Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-				<Stack.Screen name="DonorBiasa" component={DonorBiasa} options={{ headerShown: false }} />
+				<Stack.Screen name="donorbiasa" component={DonorBiasa} options={{ headerShown: false }} />
 				<Stack.Screen name="Data" component={Data} options={{ headerShown: false }} />
 				<Stack.Screen name="Berhasil" component={Berhasil} options={{ headerShown: false }} />
 				<Stack.Screen name="Pilih" component={Pilih} options={{ headerShown: false }} />
