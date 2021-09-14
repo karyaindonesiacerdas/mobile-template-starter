@@ -92,8 +92,8 @@ function PermintaanDarah1(props) {
       <Image
         source={require("../image/logo.png")}
         style={{
-          width: 54,
-          height: 60,
+          width: 60,
+          height: 65,
           top:10,
           margin:20,
     
@@ -104,7 +104,7 @@ function PermintaanDarah1(props) {
         source={require("../image/Logo2.png")}
         style={{
           position:'absolute',
-          width: 54,
+          width: 60,
           height: 60,
           margin:20,
        
@@ -116,10 +116,10 @@ function PermintaanDarah1(props) {
      
   
      
-        <Text style={{ marginLeft:30, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "black" }}>
+        <Text style={{ marginLeft:10, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "black" }}>
                 Permintaan
               </Text>
-              <Text style={{ marginLeft:30, marginTop:-10,fontSize: 35,fontWeight: "bold",  color: "red" }}>
+              <Text style={{ marginLeft:10, marginTop:-10,fontSize: 35,fontWeight: "bold",  color: "red" }}>
                 Darah
               </Text>
               <View style={{
