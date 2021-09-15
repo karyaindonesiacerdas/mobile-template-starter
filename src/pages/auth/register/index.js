@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Container,
     Content,
@@ -17,14 +17,14 @@ import {useMutation} from 'react-query';
 import {Formik} from 'formik';
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Yup from 'yup';
+import Bg from '../../image/Baground2.jpg';
 import qs from 'qs';
 import Axios from 'axios';
-import Bg from '../../image/Baground2.jpg';
-import {USER_MANAGEMENT} from '../../../config/api';
+import {StackActions} from '@react-navigation/native';
 
 function Register(props) {
     const handleSubmitRegister = value => {
-        const url = USER_MANAGEMENT;
+        const url = 'http://sahabat-utd.id:6005';
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
         };
@@ -42,18 +42,17 @@ function Register(props) {
                     alert(
                         'anda telah terdaftar, silakan cek email untuk mendapatkan credential',
                     );
-                    props.navigation.replace('Login');
+                    props.navigation.dispatch(StackActions.replace('Login'));
                 } else {
                     console.log('Error', res.data.message);
                     alert('username sudah digunakan');
-                    props.navigation.replace('Register');
+                    props.navigation.dispatch(StackActions.replace('Register'));
                 }
             })
             .catch(err => {
                 console.log('test : ', err);
             });
     };
-
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
@@ -75,7 +74,8 @@ function Register(props) {
                     margin: 20,
 
                     left: 10,
-                }}></Image>
+                }}
+            />
             <Image
                 source={require('../../image/Logo2.png')}
                 style={{
@@ -86,7 +86,8 @@ function Register(props) {
 
                     right: 10,
                     top: 10,
-                }}></Image>
+                }}
+            />
             <Content contentContainerStyle={styles.container}>
                 <View style={styles.logo}>
                     <Text style={{fontWeight: 'bold', fontSize: 50}}>
