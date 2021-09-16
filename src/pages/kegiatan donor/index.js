@@ -7,7 +7,7 @@ import {Formik} from 'formik';
 import styles from '../styles/styles';
 import * as Yup from 'yup';
 // import {authLogin} from '../../../config/api';
-import Bg from '../image/Baground2.jpg';
+import Bg from '../image/baground3.jpeg';
 
 function KegiatanDonor(props) {
     const goNextPage = page => {
