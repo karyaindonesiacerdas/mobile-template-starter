@@ -54,16 +54,15 @@ function Home(props) {
         ></Image>
     
        
-          <Text style={{ marginLeft:20, marginTop:30,fontSize: 35,fontWeight: "bold",  color: "black" }}>
+          <Text style={{ marginLeft:20, marginTop:50,fontSize: 35,fontWeight: "bold",  color: "black" }}>
                   Persyaratan & Pendaftaran
                 </Text>
   
-          <Text style={{ marginLeft:130,marginBottom:20, marginTop:50,fontSize: 25,fontWeight: "bold",  color: "black" }}>
-                  DONOR DARAH
-                </Text>
+          
   
                 <View
               style={{
+                marginTop:80,
                 flexDirection: "row",
                 justifyContent: "center",
                 alignContent: "center",
@@ -97,7 +96,7 @@ function Home(props) {
                       color:"white",
                     }}
                   >
-                    Plasma{'\n'} Konvalesen
+                    Donor Plasma{'\n'} Konvalesen
                   </Text>
                  
                 </TouchableOpacity>
@@ -152,24 +151,36 @@ function Home(props) {
                  
                 </TouchableOpacity>
               </Card>
-              <Card style={{ backgroundColor: "#000",
-      width: "86%",marginLeft:"7%"}}>
-                <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
-                 
-                  <Text
+              <View
                     style={{
-                      margin:10,
-                      fontSize: 15,
-                      textAlign: "center",
-                      color:"white",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Kembali
-                  </Text>
-                 
-                </TouchableOpacity>
-              </Card>
+                        alignContent: 'center',
+
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        marginTop: 280,
+                    }}>
+                    <Card
+                        style={{
+                            backgroundColor: '#000',
+                            width: '40%',
+                            marginRight: '2%',
+                        }}>
+                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
+                            <Text
+                                style={{
+                                    margin: 10,
+                                    fontSize: 20,
+
+                                    color: 'white',
+                                    fontWeight: 'bold',
+                                    textAlign: 'center',
+                                }}>
+                                Kembali
+                            </Text>
+                        </TouchableOpacity>
+                    </Card>
+                </View>
       </Container>
     );
   }

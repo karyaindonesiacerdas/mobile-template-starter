@@ -21,6 +21,7 @@ import { USER_MANAGEMENT } from "../../config/api";
 import Axios from 'axios';
 
 function EditProfil(props) {
+  const [number, onChangeNumber] = React.useState(null);
   const [pekerjaan, setPekerjaan] = React.useState([
     { label: 'PNS', value: 'pns', checked: false },
     { label: 'Swasta', value: 'swasta', checked: false },

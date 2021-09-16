@@ -59,6 +59,7 @@ function Berhasil(props) {
           .then(r => {
               if (r.data.code == 200) {
                   setRes(r.data)
+                  console.info("res", r.data.data[0].status)
                   if (r.data.data[0].status == 'lolos'){
                     setKomponen(<View>
                       <Text

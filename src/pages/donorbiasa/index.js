@@ -135,7 +135,7 @@ function DonorBiasa(props) {
           style={styles.input}
           onChangeText={handleChange('nama')}
           onBlur={handleBlur('nama')}
-          value={nama.toLowerCase()}
+          value={nama?.toLowerCase()}
         />
         </Item>
         <Text

@@ -3,9 +3,13 @@ import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-nativ
 import { CheckBox } from 'react-native-elements';
 import {
   Container,
- Item,
- Input,
+  Header,
+  Title,
+  Left,
+   HStack,
+ 
   Card,
+  
 } from "native-base";
 import {
   ScrollView,
@@ -20,6 +24,7 @@ import qs from 'qs'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Data(props) {
+  const [number, onChangeNumber] = React.useState(null);
   const [pekerjaan, setPekerjaan] = React.useState([
     { label: 'PNS', value: 'pns', checked: false },
     { label: 'Swasta', value: 'swasta', checked: false },
@@ -314,21 +319,6 @@ function sleepThenAct(){
               })}
               </View>             
               </View>
-              <Formik
-              initialValues={{
-                bb:0,
-            }}
-            onSubmit={value => {
-                submitData(value);
-                goNextPage.bind(this, 'Kuesioner')
-            }}>
-            {({
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                values,
-            }) => (
-              <View>
               <Text
           style={{
             marginLeft: 30,
@@ -343,14 +333,12 @@ function sleepThenAct(){
         >
           Berat badan (Pilih)
         </Text>
-          <Item>
-        <Input
+
+        <TextInput
           style={styles.input}
-          onChangeText={handleChange('bb')}
-          onBlur={handleBlur('bb')}
-          value={values.bb}         
+          onChangeText={onChangeNumber}
+   
         />
-        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -414,8 +402,6 @@ function sleepThenAct(){
             </TouchableOpacity>
           </Card>
         </View>
-        </View>)}
-        </Formik>
           
  </ScrollView>
     </Container>

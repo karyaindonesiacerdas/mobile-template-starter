@@ -7,7 +7,7 @@ import {
   Title,
   Left,
    HStack,
- 
+ Picker,
   Card,
   
 } from "native-base";
@@ -19,9 +19,10 @@ import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
 import { Button } from "react-native-elements/dist/buttons/Button";
 
-
 function PermintaanDarah(props) {
     const [text, onChangeText] = React.useState("Useless Text");
+    const [selectedLanguage, setSelectedLanguage] = React.useState();
+
   const [number, onChangeNumber] = React.useState(null);
   const [jeniskelamin, setJenisKelamin] = React.useState([
     { label: 'Laki-Laki', value: 'laki-laki', checked: false },
@@ -142,7 +143,6 @@ function PermintaanDarah(props) {
               <Text style={{ marginLeft:30, marginTop:-10,fontSize: 30,fontWeight: "bold",  color: "red" }}>
                 Darah
               </Text>
-
                  
               <Text
           style={{
@@ -159,11 +159,17 @@ function PermintaanDarah(props) {
           Permintaan Darah
         </Text>
 
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeNumber}
-   
-        />
+        <Picker
+                style={styles.input}
+                onChangeText={onChangeNumber}
+                selectedValue={selectedLanguage}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedLanguage(itemValue)
+                }>
+                  
+                  <Picker.Item label="Rumah Sakit" value="java" />
+                  <Picker.Item label="Mandiri" value="js" />
+            </Picker>
         <Text
           style={{
             marginLeft: 30,
@@ -354,7 +360,8 @@ function PermintaanDarah(props) {
             flexDirection: "row",
             justifyContent: "center",
               alignContent: "center",
-              marginTop:80,
+              marginTop:50,
+              marginBottom:20,
             
           }}
         >

@@ -14,7 +14,6 @@ import {
 } from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
-import Bg from '../../image/Baground2.jpg'
 import { Formik } from "formik";
 
 function PermintaanDarah1(props) {
@@ -84,20 +83,17 @@ function PermintaanDarah1(props) {
       newArr[key] = {checked: item.checked, label: item.label, value: item.value, num: item.num -1}; // replace e.target.value with whatever you want to change it to
       console.info("newArr", newArr)
       setPekerjaan(newArr); // ??
-    } else {
-      alert("Maaf Tidak bisa")
-    }
+    } 
     
   }
 
   return (
     <Container>
-      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
         source={require("../image/logo.png")}
         style={{
-          width: 54,
-          height: 60,
+          width: 60,
+          height: 65,
           top:10,
           margin:20,
     
@@ -108,7 +104,7 @@ function PermintaanDarah1(props) {
         source={require("../image/Logo2.png")}
         style={{
           position:'absolute',
-          width: 54,
+          width: 60,
           height: 60,
           margin:20,
        
@@ -120,10 +116,10 @@ function PermintaanDarah1(props) {
      
   
      
-        <Text style={{ marginLeft:30, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "black" }}>
+        <Text style={{ marginLeft:10, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "black" }}>
                 Permintaan
               </Text>
-              <Text style={{ marginLeft:30, marginTop:-10,fontSize: 35,fontWeight: "bold",  color: "red" }}>
+              <Text style={{ marginLeft:10, marginTop:-10,fontSize: 35,fontWeight: "bold",  color: "red" }}>
                 Darah
               </Text>
               <View style={{
@@ -144,14 +140,14 @@ function PermintaanDarah1(props) {
             alignContent:"space-around"
           }}
         >
-          Produk (maximal 2)
+          Produk
         </Text>
         </View>
         
         <View>
         <Text
           style={{
-            marginLeft: 180,
+            marginLeft: 260,
             marginTop: 20,
             fontSize: 15,
             fontWeight: "bold",
