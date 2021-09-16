@@ -382,9 +382,7 @@ function Kuisioner(props) {
         input.ktp = ktp;
         input.nama = nama;
         const body = input;
-        Axios.post(`${url}/api/simaba/kuesioner/create`, JSON.stringify(body), {
-            headers,
-        })
+        Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body),headers)
             .then(res => {
                 console.info('res.data', res.data);
                 console.log(res.data);
