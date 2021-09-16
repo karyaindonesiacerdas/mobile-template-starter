@@ -10,7 +10,7 @@ import {
   Input,
   Card,
   Item,
-
+  nama,
 } from "native-base";
 import {
   ScrollView,
