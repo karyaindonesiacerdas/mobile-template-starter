@@ -119,7 +119,7 @@ function DonorBiasa(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 20,
+            marginTop: 10,
             fontSize: 15,
             fontWeight: "normal",
             color: "black",
@@ -141,7 +141,7 @@ function DonorBiasa(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 20,
+            marginTop: 10,
             fontSize: 15,
             fontWeight: "normal",
             color: "black",
@@ -162,7 +162,7 @@ function DonorBiasa(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 20,
+            marginTop: 10,
             fontSize: 15,
             fontWeight: "normal",
             color: "black",
@@ -184,7 +184,7 @@ function DonorBiasa(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 20,
+            marginTop: 10,
             fontSize: 15,
             fontWeight: "normal",
             color: "black",
@@ -206,7 +206,7 @@ function DonorBiasa(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 20,
+            marginTop: 10,
             fontSize: 15,
             fontWeight: "normal",
             color: "black",
@@ -228,7 +228,7 @@ function DonorBiasa(props) {
         <Text
           style={{
             marginLeft: 30,
-            marginTop: 20,
+            marginTop: 10,
             fontSize: 16,
             fontWeight: "normal",
             color: "black",
@@ -255,7 +255,7 @@ function DonorBiasa(props) {
           flexDirection: "row",
           justifyContent: "center",
             alignContent: "center",
-            marginTop:80,
+            marginTop:150,
           
         }}>
         <Card

@@ -47,7 +47,7 @@ function Login(props) {
                 }
             })
             .catch(err => {
-                console.log('test : ', err);
+                console.log('error : ', err);
             });
     };
     const goNextPage = page => {
