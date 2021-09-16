@@ -44,9 +44,8 @@ function Berhasil(props) {
       const body = {
         kode_calon_pendonor: "c4r4f5hvd5isn6r6di6g"
       };
-      Axios.post(`${url}/api/simaba/user`, JSON.stringify(body), {
-          headers,
-      })
+      Axios.post(`${url}/api/simaba/user`, JSON.stringify(body),
+          headers)
           .then(r => {
               if (r.data.code == 200) {
                   setRes(r.data)

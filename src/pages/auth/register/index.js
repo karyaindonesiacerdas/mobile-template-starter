@@ -34,9 +34,8 @@ function Register(props) {
             email: value.email,
             nomor_telepon: value.nomorTelepon,
         };
-        Axios.post(`${url}/api/simaba/user/register`, qs.stringify(body), {
-            headers,
-        })
+        Axios.post(`${url}/api/simaba/user/register`, qs.stringify(body),
+            headers)
             .then(res => {
                 if (res.data.code === 200) {
                     alert(

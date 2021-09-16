@@ -23,6 +23,9 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KUESIONER } from '../../config/api';
+import Axios from 'axios';
 
 function Kuisioner(props) {
     const [kuesioner, setKuesioner] = useState([
@@ -376,13 +379,15 @@ function Kuisioner(props) {
         const url = KUESIONER;
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token,
+            'Authorization': 'Bearer ' + token,
         };
         input.kode_calon_pendonor = kode_calon_pendonor;
         input.ktp = ktp;
         input.nama = nama;
         const body = input;
-        Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body),headers)
+        console.log(body)
+        Axios.post(`${url}/api/simaba/kuesioner/create`, JSON.stringify(body),
+            headers)
             .then(res => {
                 console.info('res.data', res.data);
                 console.log(res.data);

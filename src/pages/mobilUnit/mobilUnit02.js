@@ -55,9 +55,9 @@ function MobilUnit02(props) {
                 bulan: t.slice(5, 7),
                 hari: props.route.params.day,
             };
-            Axios.post(`${url}/api/simaba/mobil-unit`, JSON.stringify(body), {
-                headers,
-            })
+            Axios.post(`${url}/api/simaba/mobil-unit`, JSON.stringify(body),
+                headers
+            )
                 .then(r => {
                     if (r.data.code == 200) {
                         setRes(r.data);

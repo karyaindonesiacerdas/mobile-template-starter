@@ -52,7 +52,8 @@ function ListUser(props) {
             };
             const body = {
             };
-            Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body),headers)
+            Axios.post(`${url}/api/simaba/user`, JSON.stringify(body),
+                headers)
                 .then(r => {
                     if (r.data.code == 200) {
                         setRes(r.data);

@@ -151,7 +151,8 @@ function EditProfil(props) {
         status_menikah: input.status_menikah
       };
       console.log(body)
-      Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body),headers)
+      Axios.put(`${url}/api/simaba/user/update`, JSON.stringify(body),
+          headers)
           .then(r => {
               if (r.data.code == 200) {
                 AsyncStorage.setItem('ktp', value.ktp);
