@@ -18,30 +18,29 @@ import {
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
+import { Button } from "react-native-elements/dist/buttons/Button";
 import { Formik } from "formik";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 function DonorBiasa(props) {
-  const [ktp, setKtp] = useState('')
-  const [nama, setNama] = useState('')
+  const [input, setInput] = useState({
+    ktp:'',
+    nama:'',
+    alamat:'',
+    kelurahan:'',
+    kecamatan:'',
+    wilayah:'',
+    nomor_telepon:'',
+})
   const refactorInput = (value)=>{
-    value.ktp = ktp
-    value.nama = nama
-    props.navigation.replace('Data', {payload: value})
+    setInput(value)
+    props.navigation.replace('Data', {payload: input})
   }
   const goNextPage = (page) => {
     if (page) {
       props.navigation.replace(page)
     }
   }
-  async function getDataId(){
-    const ktp_str = await AsyncStorage.getItem('ktp')
-    const nama_str = await AsyncStorage.getItem('nama')
-    setKtp(ktp_str)
-    setNama(nama_str)
-  }
-  getDataId()
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -82,7 +81,7 @@ function DonorBiasa(props) {
                         kelurahan:'',
                         kecamatan:'',
                         wilayah:'',
-                        nomor_telepon_wa:'',
+                        nomor_telepon:'',
                     }}
                     onSubmit={value => {
                         refactorInput(value);
@@ -113,7 +112,7 @@ function DonorBiasa(props) {
           style={styles.input}
           onChangeText={handleChange('ktp')}
           onBlur={handleBlur('ktp')}
-          value={ktp}
+          value={values.ktp}
         />
         </Item>
         <Text
@@ -157,7 +156,7 @@ function DonorBiasa(props) {
           style={styles.input}
           onChangeText={handleChange('alamat')}
           onBlur={handleBlur('alamat')}
-          value={values.alamat.toLowerCase()}
+          value={values.alamat}
         /></Item>
         <Text
           style={{
@@ -178,7 +177,7 @@ function DonorBiasa(props) {
           style={styles.input}
           onChangeText={handleChange('kelurahan')}
           onBlur={handleBlur('kelurahan')}
-          value={values.kelurahan.toLowerCase()}
+          value={values.kelurahan}
         />
         </Item>
         <Text
@@ -200,7 +199,7 @@ function DonorBiasa(props) {
           style={styles.input}
           onChangeText={handleChange('kecamatan')}
           onBlur={handleBlur('kecamatan')}
-          value={values.kecamatan.toLowerCase()}
+          value={values.kecamatan}
         />
         </Item>
         <Text
@@ -222,7 +221,7 @@ function DonorBiasa(props) {
           style={styles.input}
           onChangeText={handleChange('wilayah')}
           onBlur={handleBlur('wilayah')}
-          value={values.wilayah.toLowerCase()}
+          value={values.wilayah}
         />
         </Item>
         <Text
@@ -243,9 +242,9 @@ function DonorBiasa(props) {
           <Item>
         <Input
           style={styles.input}
-          onChangeText={handleChange('nomor_telepon_wa')}
-          onBlur={handleBlur('nomor_telepon_wa')}
-          value={values.nomor_telepon_wa}
+          onChangeText={handleChange('nomor_telepon')}
+          onBlur={handleBlur('nomor_telepon')}
+          value={values.nomor_telepon}
         />  
         </Item>
         <View
