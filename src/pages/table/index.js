@@ -24,9 +24,6 @@ import {
     Col,
 } from 'react-native-table-component';
 import Bg from '../../image/Baground2.jpg'
-import Axios from 'axios'
-import { PENDONOR } from '../../config/api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CONTENT = {
     tableHead: ['                   JADWAL KEGIATAN DONOR DARAH SENIN'],
@@ -38,36 +35,9 @@ const CONTENT = {
     ],
 };
 function table(props) {
-    async function submitHandler(value){
-        const ktp = await AsyncStorage.getItem('ktp')
-        const token = await AsyncStorage.getItem('token')
-        const url = PENDONOR;
-        const headers = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Bearer ' + token
-        };
-        const body = {
-            ktp: ktp,
-            lokasi: 'mobil unit'
-        };
-        console.log(body)
-        Axios.put(`${url}/api/simaba/pendonor/update/lokasi`, JSON.stringify(body), {
-            headers,
-        })
-            .then(res => {
-              console.log(res.data)
-                if (res.data.code === 200) { 
-                    props.navigation.replace('Barcode2');
-                } else {
-                    console.log('Error', res.data.message);
-                }
-            })
-            .catch(err => {
-                console.log('test : ', err);
-            });
-    }
+    const [check1, setCheck1] = useState(false);
+    const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
-        submitHandler()
         if (page) {
             props.navigation.replace(page);
         }

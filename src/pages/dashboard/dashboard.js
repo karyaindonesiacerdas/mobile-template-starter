@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
     ImageBackground,
     Image,
@@ -12,10 +12,6 @@ import styles from './styles';
 import Bg from '../../image/Baground2.jpg';
 
 function Dashboard(props) {
-    const [notif, setNotif] = useState(0)
-    useEffect(() => 
-        setNotif(1)
-    )
     const goNextPage = page => {
         if (page === 'Logout') {
             AsyncStorage.clear();
@@ -229,23 +225,6 @@ function Dashboard(props) {
                         />
                         <Text style={styles.textBawah}>
                             Kontak 
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.viewAtas}>
-                <TouchableOpacity style={styles.cardStyle}
-                    onPress={goNextPage.bind(this, 'Berhasil')}>
-                        <Image
-                            source={require('../../image/warning.png')}
-                            style={{
-                                marginTop: 5,
-                                width: 120,
-                                height: 60,
-                                alignSelf: 'center',
-                            }}
-                        />
-                        <Text style={styles.textBawah}>
-                            Pendonor
                         </Text>
                     </TouchableOpacity>
                 </View>

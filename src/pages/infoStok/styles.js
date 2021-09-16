@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   head: {  backgroundColor: 'orange',  },
   wrapper: { flexDirection: 'row' },
   title: {  backgroundColor: '#2ecc71'},
-  row: { width:"100%", backgroundColor: '#fff'},
+  row: { width:"100%"},
   text: { textAlign: 'center',padding:5,fontSize:10 },
   textHead: { textAlign: 'center',padding:5,fontSize:12, fontWeight:'bold' },
 });

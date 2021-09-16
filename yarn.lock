@@ -1131,7 +1131,7 @@
     "sudo-prompt" "^9.0.0"
     "wcwidth" "^1.0.1"
 
-"@react-native-community/datetimepicker@^3.0.2", "@react-native-community/datetimepicker@^3.5.2":
+"@react-native-community/datetimepicker@^3.0.2":
   "integrity" "sha512-TWRuAtr/DnrEcRewqvXMLea2oB+YF+SbtuYLHguALLxNJQLl/RFB7aTNZeF+OoH75zKFqtXECXV1/uxQUpA+sg=="
   "resolved" "https://registry.npmjs.org/@react-native-community/datetimepicker/-/datetimepicker-3.5.2.tgz"
   "version" "3.5.2"
