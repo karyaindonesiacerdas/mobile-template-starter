@@ -32,9 +32,7 @@ function Login(props) {
             email: value.email,
             password: value.password,
         };
-        Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body), {
-            headers,
-        })
+        Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body),headers,)
             .then(res => {
                 if (res.data.code == 200) {
                     SyncStorage.set('token', res.data.token);
