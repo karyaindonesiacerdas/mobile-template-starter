@@ -18,10 +18,6 @@ import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
 import { Formik } from "formik";
-import { PENDONOR } from "../../config/api";
-import Axios from 'axios'
-import qs from 'qs'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Data(props) {
   const [number, onChangeNumber] = React.useState(null);
@@ -116,70 +112,7 @@ function Data(props) {
       props.navigation.replace(page)
     }
   }
-  function sleepFor(sleepDuration){
-    var now = new Date().getTime();
-    while(new Date().getTime() < now + sleepDuration){ 
-        /* Do nothing */ 
-    }
-}
-
-function sleepThenAct(){
-    sleepFor(1000);
-    console.log("Hello, JavaScript sleep!");
-}
   const submitData = (value) => {
-    var data = props.route.params.payload
-    async function submit() {
-      const token = await AsyncStorage.getItem('token')
-      const status_menikah = await AsyncStorage.getItem('status_menikah')
-      const tempat_lahir = await AsyncStorage.getItem('tempat_lahir')
-      const tanggal_lahir = await AsyncStorage.getItem('tanggal_lahir')
-      // sleepThenAct()
-      const url = PENDONOR;
-        const headers = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Bearer ' + token
-        };
-        const body = {
-            ktp: data.ktp,
-            nama: data.nama,
-            alamat: data.alamat,
-            kelurahan: data.kelurahan,
-            kecamatan: data.kecamatan,
-            wilayah: data.wilayah,
-            nomor_telepon_wa: data.nomor_telepon_wa,
-            berat_badan: value.bb,
-            jenis_donor: 'biasa',
-            tempat_lahir: tempat_lahir,
-            tanggal_lahir: tanggal_lahir,
-            pekerjaan: input.pekerjaan,
-            golongan_darah: input.golongan_darah,
-            rhesus: input.rhesus,
-            status_menikah: status_menikah,
-        };
-        console.log(body)
-        Axios.post(`${url}/api/simaba/calon-pendonor/create`, qs.stringify(body), {
-            headers,
-        })
-            .then(res => {
-              console.log(res.data)
-                if (res.data.code === 200) {
-                    alert(
-                        'sukses mendaftar sebagai calon pendonor, silahkan isi kuesioner',
-                    );
-                    AsyncStorage.setItem('kode_calon_pendonor', res.data.kode_pendonor) 
-                    props.navigation.replace('Kuisioner');
-                } else {
-                    console.log('Error', res.data.message);
-                    alert('cek kembali inputan Anda');
-                }
-            })
-            .catch(err => {
-                alert('semua form harus diisi')
-                console.log('test : ', err);
-            });
-    }
-    submit()
   }
   return (
     <Container>

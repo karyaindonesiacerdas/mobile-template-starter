@@ -30,30 +30,21 @@ import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/Baground2.jpg'
 import { PENDONOR } from "../../config/api";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Axios from 'axios';
 
 function Berhasil(props) {
-  const [res, setRes] = useState({
-    data: [{
-      status : ''
-    }
-    ]}
-  );
-  const [komponen, setKomponen] = useState(<View><Text>Loading . . .</Text></View>)
+  const [res, setRes] = useState({});
   useEffect(() => {
     async function getData() {
       const token = await AsyncStorage.getItem('token')
-      const kode_calon_pendonor = await AsyncStorage.getItem('kode_calon_pendonor')
       const url = PENDONOR;
       const headers = {
           'Content-Type': 'application/json',
           'Authorization' : 'Bearer ' + token
       };
       const body = {
-        kode_calon_pendonor: kode_calon_pendonor
+        kode_calon_pendonor: "c4r4f5hvd5isn6r6di6g"
       };
-      Axios.post(`${url}/api/simaba/calon-pendonor`, JSON.stringify(body), {
+      Axios.post(`${url}/api/simaba/user`, JSON.stringify(body), {
           headers,
       })
           .then(r => {
@@ -115,16 +106,12 @@ function Berhasil(props) {
   }
   getData()
   },[]);
-
-  const goNextPage = (page, status) => {
+  const goNextPage = page => {
     if (page) {
-      if (status === 'lolos'){
-        props.navigation.replace(page)
-      }else {
-        props.navigation.replace('Dashboard')
-      }
+      props.navigation.replace(page)
     }
   }
+  console.log(res.data[0].status)
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -183,7 +170,35 @@ function Berhasil(props) {
             marginLeft: "7%",
           }}
         >
-           {komponen}
+           <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+         
+            marginTop: 20,
+            marginBottom: 20,
+            fontSize: 20,
+            fontWeight:'bold',
+
+            textAlign: "center",
+            color: "white",
+      
+          }}
+        >
+          SELAMAT{'\n'}ANDA LOLOS SEBAGAI{'\n'}CALON PENDONOR
+        </Text>
+          
+        </Card>
+
+        <Card
+          style={{
+            backgroundColor: "#000",
+            marginTop: 30,
+            marginBottom: 20,
+            width: "86%",
+            marginLeft: "7%",
+          }}
+        >
           </Card>
           <View
           style={{
@@ -200,7 +215,7 @@ function Berhasil(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kuisioner', res.data[0].status)} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kuisioner')} >
               <Text
                 style={{
                   margin: 10,
@@ -219,7 +234,7 @@ function Berhasil(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih', res.data[0].status)} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih')} >
               <Text
                 style={{
                   margin: 10,

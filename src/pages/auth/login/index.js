@@ -18,9 +18,11 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Yup from 'yup';
 import {authLogin} from '../../../config/api';
 import Bg from '../../image/Background.png';
+import SyncStorage from 'sync-storage';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
 import SyncStorage from 'sync-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login(props) {
     const handleSubmitLogin = value => {
@@ -32,14 +34,36 @@ function Login(props) {
             email: value.email,
             password: value.password,
         };
+
         Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body), {
             headers,
         })
-            .then(res => {
-                if (res.data.code == 200) {
-                    SyncStorage.set('token', res.data.token);
-                    alert('sukses login');
-                    props.navigation.replace('Home');
+            .then(r => {
+                if (r.data.code == 200) {
+                    AsyncStorage.setItem('token', r.data.data.token);
+                    AsyncStorage.setItem('role', r.data.data.role);
+                    AsyncStorage.setItem('exp', r.data.data.exp);
+                    AsyncStorage.setItem('ktp', r.data.data.ktp);
+                    AsyncStorage.setItem(
+                        'tempat_lahir',
+                        r.data.data.tempat_lahir,
+                    );
+                    AsyncStorage.setItem(
+                        'tanggal_lahir',
+                        r.data.data.tanggal_lahir,
+                    );
+                    AsyncStorage.setItem(
+                        'status_menikah',
+                        r.data.data.status_menikah,
+                    );
+                    switch (r.data.data.role) {
+                        case 'pendonor':
+                            props.navigation.replace('Dashboard');
+                            break;
+                        case 'admin':
+                            props.navigation.replace('DashboardAdmin');
+                            break;
+                    }
                 } else {
                     console.log('Error', res.data.message);
                     alert('email atau password salah');
@@ -47,7 +71,7 @@ function Login(props) {
                 }
             })
             .catch(err => {
-                console.log('test : ', err);
+                console.log('error : ', err);
             });
     };
     const goNextPage = page => {
@@ -72,11 +96,10 @@ function Login(props) {
                     margin: 10,
                     right: 126,
                     top: 130,
-                }}
-            />
+                }}></Image>
             <Content contentContainerStyle={styles.container}>
                 <View style={styles.logo}>
-                    <Text style={{fontWeight: 'bold', fontSize: 30}}>
+                    <Text style={{fontWeight: 'bold', fontSize: 40}}>
                         LOGIN
                     </Text>
                 </View>
@@ -180,9 +203,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 25,
         height: 50,
-        marginBottom: 10,
+        marginBottom: 20,
         justifyContent: 'center',
-        padding: 10,
+        padding: 20,
     },
     inputText: {
         height: 50,
