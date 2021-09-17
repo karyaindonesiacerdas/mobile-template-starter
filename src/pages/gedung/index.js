@@ -18,7 +18,7 @@ import {
 } from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
-import Bg from '../../image/Baground2.jpg'
+import Bg from '../../image/baground3.jpeg'
 
 function Gedung(props) {
   const [check1, setCheck1] = useState(false);
