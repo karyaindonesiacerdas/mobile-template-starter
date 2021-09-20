@@ -304,7 +304,7 @@ function EditProfil(props) {
         >
           No.KTP
         </Text>
-        <Item>
+        <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('ktp')}
@@ -327,7 +327,7 @@ function EditProfil(props) {
         >
           Nama
         </Text>
-          <Item>
+        <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('nama')}
@@ -349,7 +349,7 @@ function EditProfil(props) {
         >
           Tempat Lahir
         </Text>
-          <Item>
+        <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('tempat_lahir')}
@@ -371,7 +371,7 @@ function EditProfil(props) {
         >
           Tanggal Lahir
         </Text>
-          <Item>
+        <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('tanggal_lahir')}
