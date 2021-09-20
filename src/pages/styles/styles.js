@@ -99,13 +99,12 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    
-    marginRight: 30,
-    marginLeft: 30,
-    backgroundColor:'#bebebe',
-  
-    padding: 10,
   },
+  item: {
+    marginLeft: 30,
+    marginRight: 30,
+    backgroundColor:'#bebebe',
+  }
 });
 
 export default styles;

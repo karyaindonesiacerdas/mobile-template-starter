@@ -107,14 +107,14 @@ function DonorBiasa(props) {
         >
           No.KTP
         </Text>
-          <Item>
-        <Input
-          style={styles.input}
-          onChangeText={handleChange('ktp')}
-          onBlur={handleBlur('ktp')}
-          value={values.ktp}
-        />
-        </Item>
+          <Item style={styles.item}>
+            <Input
+              style={styles.input}
+              onChangeText={handleChange('ktp')}
+              onBlur={handleBlur('ktp')}
+              value={values.ktp}
+            />
+          </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -129,7 +129,7 @@ function DonorBiasa(props) {
         >
           Nama Lengkap
         </Text>
-        <Item>
+        <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('nama')}
@@ -151,7 +151,7 @@ function DonorBiasa(props) {
         >
           Alamat Lengkap
         </Text>
-          <Item>
+          <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('alamat')}
@@ -172,7 +172,7 @@ function DonorBiasa(props) {
         >
           Kelurahan
         </Text>
-          <Item>
+          <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('kelurahan')}
@@ -194,7 +194,7 @@ function DonorBiasa(props) {
         >
           Kecamatan
         </Text>
-          <Item>
+          <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('kecamatan')}
@@ -216,7 +216,7 @@ function DonorBiasa(props) {
         >
           Kab/Kota
         </Text>
-        <Item>
+        <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('wilayah')}
@@ -239,7 +239,7 @@ function DonorBiasa(props) {
         >
           No.Telp
         </Text>
-          <Item>
+          <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('nomor_telepon')}
