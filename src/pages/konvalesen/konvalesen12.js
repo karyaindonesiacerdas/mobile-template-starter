@@ -23,7 +23,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
-import Bg from '../../image/Baground2.jpg'
+import Bg from '../../image/baground3.jpeg'
 
 const CONTENT = {
     tableHead: ['                                             Agustus 2021'],

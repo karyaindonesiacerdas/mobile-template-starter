@@ -55,9 +55,9 @@ function MobilUnit02(props) {
                 bulan: t.slice(5, 7),
                 hari: props.route.params.day,
             };
-            Axios.post(`${url}/api/simaba/mobil-unit`, JSON.stringify(body), {
-                headers,
-            })
+            Axios.post(`${url}/api/simaba/mobil-unit`, JSON.stringify(body),
+                headers
+            )
                 .then(r => {
                     if (r.data.code == 200) {
                         setRes(r.data);
@@ -138,7 +138,7 @@ function MobilUnit02(props) {
                     <TouchableOpacity>
                         <Text
                             style={{
-                                margin: 10,
+                                margin: 0,
                                 fontSize: 15,
                                 borderRadius: 10,
                                 textAlign: 'center',

@@ -16,7 +16,7 @@ import {
 } from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
-import Bg from '../../image/Baground2.jpg'
+import Bg from '../../image/baground3.jpeg'
 import { Formik } from "formik";
 
 function Data(props) {

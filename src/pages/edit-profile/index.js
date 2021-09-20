@@ -14,7 +14,7 @@ import {
 } from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
-import Bg from '../../image/Baground2.jpg'
+import Bg from '../../image/baground3.jpeg'
 import { Formik } from "formik";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { USER_MANAGEMENT } from "../../config/api";
@@ -151,9 +151,8 @@ function EditProfil(props) {
         status_menikah: input.status_menikah
       };
       console.log(body)
-      Axios.put(`${url}/api/simaba/user/update`, JSON.stringify(body), {
-          headers,
-      })
+      Axios.put(`${url}/api/simaba/user/update`, JSON.stringify(body),
+          headers)
           .then(r => {
               if (r.data.code == 200) {
                 AsyncStorage.setItem('ktp', value.ktp);

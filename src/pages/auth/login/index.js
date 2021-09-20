@@ -18,7 +18,6 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Yup from 'yup';
 import {authLogin} from '../../../config/api';
 import Bg from '../../image/Background.png';
-import SyncStorage from 'sync-storage';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
 import SyncStorage from 'sync-storage';
@@ -35,9 +34,7 @@ function Login(props) {
             password: value.password,
         };
 
-        Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body), {
-            headers,
-        })
+        Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body),headers)
             .then(r => {
                 if (r.data.code == 200) {
                     AsyncStorage.setItem('token', r.data.data.token);

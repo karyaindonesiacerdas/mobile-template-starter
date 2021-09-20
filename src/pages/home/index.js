@@ -6,7 +6,7 @@ import {
 } from "native-base";
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
-import Bg from '../image/Baground2.jpg'
+import Bg from '../image/baground3.jpeg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Home(props) {

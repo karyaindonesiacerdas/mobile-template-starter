@@ -9,7 +9,8 @@ import {
 import {Container, Card} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
 import styles from './styles';
-import Bg from '../../image/Baground2.jpg';
+import Bg from '../../image/baground3.jpeg';
+import AsyncStorage from 'sync-storage';
 
 function Dashboard(props) {
     const goNextPage = page => {
