@@ -7,7 +7,6 @@ import {
   Title,
   Left,
    HStack,
- Picker,
   Card,
   
 } from "native-base";

@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
+  color:"black",
   },
   item: {
     marginLeft: 30,
