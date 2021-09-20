@@ -138,7 +138,7 @@ function MobilUnit02(props) {
                     <TouchableOpacity>
                         <Text
                             style={{
-                                margin: 10,
+                                margin: 0,
                                 fontSize: 15,
                                 borderRadius: 10,
                                 textAlign: 'center',
