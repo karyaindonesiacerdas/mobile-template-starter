@@ -34,7 +34,7 @@ function DonorBiasa(props) {
 })
   const refactorInput = (value)=>{
     setInput(value)
-    props.navigation.replace('Data', {payload: input})
+    props.navigation.navigate('Data', {payload: value})
   }
   const goNextPage = (page) => {
     if (page) {
