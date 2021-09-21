@@ -153,6 +153,7 @@ function MobilUnit02(props) {
 
                 <View
                     style={{
+                        marginTop:-20,
                         width: '90%',
                         justifyContent: 'center',
                         alignSelf: 'center',
@@ -223,24 +224,6 @@ function MobilUnit02(props) {
                         marginLeft: '5%',
                     }}></View>
             </View>
-
-            <ImageBackground
-                // resizeMethod={'auto'}
-                source={require('../../asset/footer.png')}
-                style={{
-                    width: '100%',
-
-                    backgroundColor: '#fff',
-                    padding: 0,
-                    paddingVertical: 90,
-                    position: 'absolute',
-                    zIndex: -1,
-                    bottom: 0,
-                }}
-                imageStyle={{
-                    resizeMode: 'cover',
-                    alignSelf: 'flex-end',
-                }}></ImageBackground>
         </Container>
     );
 }

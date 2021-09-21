@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
   color:"black",
   },
   item: {
+    height:30,
     marginLeft: 30,
     marginRight: 30,
     backgroundColor:'#bebebe',
