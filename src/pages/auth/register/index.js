@@ -1,11 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
     Container,
     Content,
     Item,
     Input,
-    Spinner,
-    Toast,
     ListItem,
     CheckBox,
     Body,
@@ -13,9 +11,8 @@ import {
     View,
     Text,
 } from 'native-base';
-import {useMutation} from 'react-query';
 import {Formik} from 'formik';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import * as Yup from 'yup';
 import Bg from '../../image/Baground2.jpg';
 import qs from 'qs';

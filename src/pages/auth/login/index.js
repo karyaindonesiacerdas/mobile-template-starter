@@ -1,26 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, {} from 'react';
 import {
     Container,
     Content,
     Item,
     Input,
-    Spinner,
-    Toast,
     Button,
     View,
     Text,
 } from 'native-base';
-import {useMutation} from 'react-query';
 import {Formik} from 'formik';
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 //from "react-native-gesture-handler";
 //import styles from "../styles/styles";
 import * as Yup from 'yup';
-import {authLogin} from '../../../config/api';
 import Bg from '../../image/Background.png';
 import Axios from 'axios';
-import {StackActions} from '@react-navigation/native';
-import SyncStorage from 'sync-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login(props) {
