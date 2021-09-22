@@ -18,6 +18,10 @@ import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/baground3.jpeg'
 import { Formik } from "formik";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { PENDONOR } from '../../config/api';
+import Axios from 'axios';
+import qs from 'qs';
 
 function Data(props) {
   const [number, onChangeNumber] = React.useState(null);
@@ -44,6 +48,14 @@ function Data(props) {
     { label: 'Tidak Tahu', value: 'X', checked: false },
   ])
   const [input] = useState({
+    jenis_donor : '',
+    ktp : '',
+    nama : '',
+    nomor_telepon : '',
+    wilayah : '',
+    kecamatan : '',
+    kelurahan : '',
+    alamat : '',
     pekerjaan : '',
     golongan_darah: '',
     rhesus : '',
@@ -108,11 +120,50 @@ function Data(props) {
   }
 
   const goNextPage = page => {
-    if (page) {
-      props.navigation.replace(page)
+    if (page === 'DonorBiasa') {
+      props.navigation.goBack()
+    }else if (page === 'Kuisioner'){
+      setInputData(props.route.params)
+      submitData(input)
     }
   }
-  const submitData = (value) => {
+  
+  const setInputData = params =>{
+    input.alamat = params.payload.alamat
+    input.jenis_donor = 'biasa'
+    input.ktp = params.payload.ktp
+    input.nama = params.payload.nama
+    input.nomor_telepon = params.payload.nomor_telepon
+    input.wilayah = params.payload.wilayah
+    input.kecamatan = params.payload.kecamatan
+    input.kelurahan = params.payload.kelurahan
+    
+  }
+  async function submitData (value) {
+    const token = await AsyncStorage.getItem('token');
+    const url = PENDONOR;
+    const body = value;
+    
+    Axios.post(`${url}/api/simaba/calon-pendonor/create`, qs.stringify(body),
+    {headers:{
+      Authorization :'Bearer ' +token,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    }})
+    .then(res => {
+        console.info('res.data', res.data);
+        console.log(res.data);
+        if (res.data.code === 200) {
+            alert('sukses submit kuesioner');
+            AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
+            props.navigation.navigate('Kuisioner',{kode_pendonor : res.data.kode_pendonor});
+        } else {
+            console.log('Error', res.data.message);
+        }
+    })
+    .catch(err => {
+        console.log('test : ', err);
+    });
+
   }
   return (
     <Container>

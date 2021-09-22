@@ -377,17 +377,17 @@ function Kuisioner(props) {
         );
         const ktp = await AsyncStorage.getItem('ktp');
         const url = KUESIONER;
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
-        };
+       
         input.kode_calon_pendonor = kode_calon_pendonor;
         input.ktp = ktp;
         input.nama = nama;
         const body = input;
         console.log(body)
-        Axios.post(`${url}/api/simaba/kuesioner/create`, JSON.stringify(body),
-            headers)
+        Axios.post(`${url}/api/simaba/kuesioner/create`, body,
+        {headers:{
+            Authorization :'Bearer ' +token,
+            'Content-Type': 'application/json',
+          }})
             .then(res => {
                 console.info('res.data', res.data);
                 console.log(res.data);
@@ -399,7 +399,7 @@ function Kuisioner(props) {
                 }
             })
             .catch(err => {
-                console.log('test : ', err);
+                console.log('test : ', err.response);
             });
     }
     return (
