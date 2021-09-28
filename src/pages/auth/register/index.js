@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Container,
     Content,
     Item,
     Input,
+    Spinner,
+    Toast,
     ListItem,
     CheckBox,
     Body,
@@ -11,8 +13,9 @@ import {
     View,
     Text,
 } from 'native-base';
+import {useMutation} from 'react-query';
 import {Formik} from 'formik';
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Yup from 'yup';
 import Bg from '../../image/Baground2.jpg';
 import qs from 'qs';
@@ -175,9 +178,22 @@ function Register(props) {
                                 style={styles.registerBtn}>
                                 <Text>Register</Text>
                             </Button>
-                        </View>
+                        </View>        
                     )}
-                </Formik>
+                  </Formik>
+                  <TouchableOpacity onPress={goNextPage.bind(this, 'Login')}>
+                    <Text
+                        style={{
+                            margin: 10,
+                            fontSize: 20,
+                            textAlign: 'center',
+                            color: 'white',
+                            fontWeight: 'normal',
+                        }}>
+                        Login
+                    </Text>
+                </TouchableOpacity>
+                
             </Content>
         </Container>
     );
