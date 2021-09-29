@@ -178,9 +178,22 @@ function Register(props) {
                                 style={styles.registerBtn}>
                                 <Text>Register</Text>
                             </Button>
-                        </View>
+                        </View>        
                     )}
-                </Formik>
+                  </Formik>
+                  <TouchableOpacity onPress={goNextPage.bind(this, 'Login')}>
+                    <Text
+                        style={{
+                            margin: 10,
+                            fontSize: 20,
+                            textAlign: 'center',
+                            color: 'white',
+                            fontWeight: 'normal',
+                        }}>
+                        Login
+                    </Text>
+                </TouchableOpacity>
+                
             </Content>
         </Container>
     );

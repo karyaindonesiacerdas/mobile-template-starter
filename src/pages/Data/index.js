@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
+import { Alert, ImageBackground, Image, Text, View,TextInput ,Item ,Input} from "react-native";
 import { CheckBox } from 'react-native-elements';
 import {
   Container,
@@ -59,6 +59,9 @@ function Data(props) {
     pekerjaan : '',
     golongan_darah: '',
     rhesus : '',
+    berat_badan : '',
+    jenis_kelamin : '',
+    tanggal_lahir : '',
   })
   const pekerjaanHandler = (index) => {
     const newValue = pekerjaan.map((checkbox, i) => {
@@ -141,9 +144,14 @@ function Data(props) {
   }
   async function submitData (value) {
     const token = await AsyncStorage.getItem('token');
+    const tanggal_lahir = await AsyncStorage.getItem('tanggal_lahir');
+    const jenis_kelamin = await AsyncStorage.getItem('jenis_kelamin');
     const url = PENDONOR;
+    value.tanggal_lahir = tanggal_lahir
+    value.jenis_kelamin = jenis_kelamin
+    value.berat_badan = 60
     const body = value;
-    
+    console.log(body)
     Axios.post(`${url}/api/simaba/calon-pendonor/create`, qs.stringify(body),
     {headers:{
       Authorization :'Bearer ' +token,
@@ -153,7 +161,7 @@ function Data(props) {
         console.info('res.data', res.data);
         console.log(res.data);
         if (res.data.code === 200) {
-            alert('sukses submit kuesioner');
+            alert('sukses menambahkan pendonor');
             AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
             props.navigation.navigate('Kuisioner',{kode_pendonor : res.data.kode_pendonor});
         } else {

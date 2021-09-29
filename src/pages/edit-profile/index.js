@@ -138,10 +138,7 @@ function EditProfil(props) {
     async function submit(){
       const token = await AsyncStorage.getItem('token')
       const url = USER_MANAGEMENT;
-      const headers = {
-          'Content-Type': 'application/json',
-          'Authorization' : 'Bearer ' + token
-      };
+      
       const body = {
         ktp: value.ktp,
         nama: value.nama,
@@ -151,18 +148,24 @@ function EditProfil(props) {
         status_menikah: input.status_menikah
       };
       console.log(body)
-      Axios.put(`${url}/api/simaba/user/update`, JSON.stringify(body),
-          headers)
+      Axios.put(`${url}/api/simaba/user/update`, body,
+      {headers:{
+        Authorization :'Bearer ' +token,
+        'Content-Type': 'application/json',
+      }})
           .then(r => {
               if (r.data.code == 200) {
-                AsyncStorage.setItem('ktp', value.ktp);
-                AsyncStorage.setItem('tempat_lahir', value.tempat_lahir);
-                AsyncStorage.setItem('tanggal_lahir', value.tanggal_lahir);
-                AsyncStorage.setItem('status_menikah', input.status_menikah);
+                AsyncStorage.setItem('role', r.data.data.role);
+                AsyncStorage.setItem('exp', r.data.data.exp);
+                AsyncStorage.setItem('ktp', r.data.data.ktp);
+                AsyncStorage.setItem('tempat_lahir',r.data.data.tempat_lahir);
+                AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
+                AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
+                AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
                 alert('sukses melengkapi profil')
                 props.navigation.replace('Dashboard')
               } else {
-                  console.log('Error', r.data.message);
+                  console.log('Error', r.data.code);
               }
           })
           .catch(err => {
