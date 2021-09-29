@@ -7,7 +7,7 @@ import {
   Title,
   Left,
    HStack,
- 
+ Item,
   Card,
   
 } from "native-base";
@@ -80,12 +80,13 @@ function Kegiatan(props) {
         >
           Instansi / Koordinator Donor
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -100,12 +101,13 @@ function Kegiatan(props) {
         >
           Alamat Tempat Donor
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -121,11 +123,13 @@ function Kegiatan(props) {
           Nama Koordinator
         </Text>
 
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -140,12 +144,13 @@ function Kegiatan(props) {
         >
           No.Telp
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -160,12 +165,13 @@ function Kegiatan(props) {
         >
           Target
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -180,12 +186,13 @@ function Kegiatan(props) {
         >
           Kriteria Pelaksanaan Donor
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         <Text style={{
             marginLeft: 30,
             marginTop:20,
@@ -219,12 +226,13 @@ function Kegiatan(props) {
         >
           Hari
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         </View>
         <View>
         <Text
@@ -242,12 +250,13 @@ function Kegiatan(props) {
         >
           Tanggal
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         </View>
         
         <View>
@@ -266,12 +275,13 @@ function Kegiatan(props) {
         >
           Waktu
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         </View>
         </View>
         <Text
@@ -290,11 +300,13 @@ function Kegiatan(props) {
           Upload Surat Permohonan
         </Text>
 
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         <View
           style={{
             alignContent: "center",

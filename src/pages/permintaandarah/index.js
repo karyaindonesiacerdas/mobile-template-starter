@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
+import { Image, Text, View,TextInput } from "react-native";
 import { CheckBox } from 'react-native-elements';
 import {
   Container,
-  Header,
-  Title,
-  Left,
-   HStack,
- Picker,
   Card,
-  
+  Picker,
+  Item,
 } from "native-base";
 import {
   ScrollView,
@@ -17,7 +13,6 @@ import {
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/baground3.jpeg'
-import { Button } from "react-native-elements/dist/buttons/Button";
 
 function PermintaanDarah(props) {
     const [text, onChangeText] = React.useState("Useless Text");
@@ -158,18 +153,18 @@ function PermintaanDarah(props) {
         >
           Permintaan Darah
         </Text>
-
+        <Item style={styles.item}>
         <Picker
-                style={styles.input}
-                onChangeText={onChangeNumber}
-                selectedValue={selectedLanguage}
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedLanguage(itemValue)
-                }>
-                  
-                  <Picker.Item label="Rumah Sakit" value="java" />
-                  <Picker.Item label="Mandiri" value="js" />
-            </Picker>
+        style={styles.input}
+            onChangeText={onChangeNumber}
+            selectedValue={selectedLanguage}
+            onValueChange={(itemValue, itemIndex) =>
+              setSelectedLanguage(itemValue)
+            }>
+              <Picker.Item label="Rumah Sakit" value="java" />
+              <Picker.Item label="Mandiri" value="js" />
+        </Picker>
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -184,12 +179,13 @@ function PermintaanDarah(props) {
         >
           Tanggal Permintaan
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
    
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -204,12 +200,12 @@ function PermintaanDarah(props) {
         >
           Nama Pasien
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeNumber}
-   
         />
+        </Item>
         <Text
           style={{
             marginLeft: 30,
@@ -224,12 +220,11 @@ function PermintaanDarah(props) {
         >
           Rumah Sakit
         </Text>
-
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
-        />
+          onChangeText={onChangeNumber}/>
+          </Item>
          <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black" , textShadowColor:'#fff',
     textShadowOffset:{width: 1, height: 1},
     textShadowRadius:10,}}>
@@ -278,11 +273,11 @@ function PermintaanDarah(props) {
         >
           No.Rekam Medis
         </Text>
+        <Item style={styles.item}>
         <TextInput
           style={styles.input}
-          onChangeText={onChangeNumber}
-   
-        />
+          onChangeText={onChangeNumber}/>
+          </Item>
         <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black", textShadowColor:'#fff',
     textShadowOffset:{width: 1, height: 1},
     textShadowRadius:10,
