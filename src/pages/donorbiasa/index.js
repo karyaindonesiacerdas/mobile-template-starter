@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
 import { CheckBox } from 'react-native-elements';
 import {
@@ -23,23 +23,24 @@ import { Formik } from "formik";
 
 
 function DonorBiasa(props) {
-  const [input, setInput] = useState({
-    ktp:'',
-    nama:'',
-    alamat:'',
-    kelurahan:'',
-    kecamatan:'',
-    wilayah:'',
-    nomor_telepon:'',
-})
+  const [input, setInput] = useState({})
+
   const refactorInput = (value)=>{
     setInput(value)
+    console.log(input)
     props.navigation.navigate('Data', {payload: value})
   }
   const goNextPage = (page) => {
     if (page) {
       props.navigation.replace(page)
     }
+  }
+  useEffect(() => {
+    update_field_data()
+  },[]);
+
+  async function update_field_data(){
+
   }
   return (
     <Container>
@@ -107,14 +108,16 @@ function DonorBiasa(props) {
         >
           No.KTP
         </Text>
-          <Item style={styles.item}>
-            <Input
-              style={styles.input}
-              onChangeText={handleChange('ktp')}
-              onBlur={handleBlur('ktp')}
-              value={values.ktp}
-            />
-          </Item>
+          <Item>
+        <Input
+          style={styles.input}
+          onChangeText={handleChange('ktp')}
+          onBlur={handleBlur('ktp')}
+          value={values.ktp}
+          keyboardType="numeric"
+          // editable={false}
+        />
+        </Item>
         <Text
           style={{
             marginLeft: 30,

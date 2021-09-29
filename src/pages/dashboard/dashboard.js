@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     ImageBackground,
     Image,
@@ -10,9 +10,19 @@ import {Container, Card} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
 import styles from './styles';
 import Bg from '../../image/baground3.jpeg';
-import AsyncStorage from 'sync-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Dashboard(props) {
+    
+    useEffect(() => {
+        checkProfile()
+      },[]);
+    async function checkProfile() {
+        const ktp = await AsyncStorage.getItem('ktp')
+        if (ktp==null){
+            props.navigation.replace('EditProfil');
+        }
+    }
     const goNextPage = page => {
         if (page === 'Logout') {
             AsyncStorage.clear();

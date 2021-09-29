@@ -35,10 +35,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
 function Berhasil(props) {
   const [res, setRes] = useState({});
+  const [komponent, setKomponen] = useState(null)
   useEffect(() => {
     async function getData() {
       const token = await AsyncStorage.getItem('token')
       const url = PENDONOR;
+      AsyncStorage.setItem('kode_pendonor', props.route.params.kode_pendonor);
       const headers = {
           'Content-Type': 'application/json',
           'Authorization' : 'Bearer ' + token
@@ -53,49 +55,48 @@ function Berhasil(props) {
               if (r.data.code == 200) {
                   setRes(r.data)
                   console.log("res", r.data.data[0].status)
-                  if (r.data.data[0].status === 'berhasil'){
+                  if (r.data.data[0].status === 'lolos'){
                     setKomponen(<View>
                       <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-         
-            marginTop: 20,
-            marginBottom: 20,
-            fontSize: 20,
-            fontWeight:'bold',
+                        style={{
+                        marginLeft: 30,
+                        marginRight: 30,
+                    
+                        marginTop: 20,
+                        marginBottom: 20,
+                        fontSize: 20,
+                        fontWeight:'bold',
 
-            textAlign: "center",
-            color: "white",
-      
-          }}
-        >
-          SELAMAT{'\n'}ANDA LOLOS SEBAGAI{'\n'}CALON PENDONOR
-        </Text>
-                    </View>)
-                  }else {
+                        textAlign: "center",
+                        color: "white",
+                  
+                      }}
+                      >
+                   SELAMAT{'\n'}ANDA LOLOS SEBAGAI{'\n'}CALON PENDONOR
+                  </Text>
+                </View>)}else {
                     setKomponen(<View>
                       <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-         
-            marginTop: 20,
-            marginBottom: 20,
-            fontSize: 20,
-            fontWeight:'bold',
+                        style={{
+                        marginLeft: 30,
+                        marginRight: 30,
+                    
+                        marginTop: 20,
+                        marginBottom: 20,
+                        fontSize: 20,
+                        fontWeight:'bold',
 
-            textAlign: "center",
-            color: "white",
-      
-          }}
-        >
-          MAAF{'\n'}ANDA TIDAK MEMENUHI{'\n'}KRITERIA CALON DONOR
-        </Text>
-        {/* <Text>Alasan tidak memenuhi kriteria : </Text>
-        <Text>1. Berat badan kurang dari 45 kg </Text>
-        <Text>2. Usia kurang dari 17 tahun </Text>
-        <Text>3. Jawaban kuesioner yang tidak sesuai</Text> */}
+                        textAlign: "center",
+                        color: "white",
+                    
+                        }}
+                      >
+                       MAAF{'\n'}ANDA TIDAK MEMENUHI{'\n'}KRITERIA CALON DONOR
+                    </Text>
+                        {/* <Text>Alasan tidak memenuhi kriteria : </Text>
+                        <Text>1. Berat badan kurang dari 45 kg </Text>
+                        <Text>2. Usia kurang dari 17 tahun </Text>
+                        <Text>3. Jawaban kuesioner yang tidak sesuai</Text> */}
                     </View>)
                   }
               } else {
@@ -171,23 +172,7 @@ function Berhasil(props) {
             marginLeft: "7%",
           }}
         >
-           <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-         
-            marginTop: 20,
-            marginBottom: 20,
-            fontSize: 20,
-            fontWeight:'bold',
-
-            textAlign: "center",
-            color: "white",
-      
-          }}
-        >
-          SELAMAT{'\n'}ANDA LOLOS SEBAGAI{'\n'}CALON PENDONOR
-        </Text>
+           {komponent}
           
         </Card>
 

@@ -155,10 +155,13 @@ function EditProfil(props) {
       }})
           .then(r => {
               if (r.data.code == 200) {
-                AsyncStorage.setItem('ktp', value.ktp);
-                AsyncStorage.setItem('tempat_lahir', value.tempat_lahir);
-                AsyncStorage.setItem('tanggal_lahir', value.tanggal_lahir);
-                AsyncStorage.setItem('status_menikah', input.status_menikah);
+                AsyncStorage.setItem('role', r.data.data.role);
+                AsyncStorage.setItem('exp', r.data.data.exp);
+                AsyncStorage.setItem('ktp', r.data.data.ktp);
+                AsyncStorage.setItem('tempat_lahir',r.data.data.tempat_lahir);
+                AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
+                AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
+                AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
                 alert('sukses melengkapi profil')
                 props.navigation.replace('Dashboard')
               } else {
