@@ -73,7 +73,7 @@ function Kalender(props) {
         const lokasi = props.route.params.location;
         const url = PENDONOR;
         const body = {
-            ktp : '123123121111111',
+            ktp : ktp,
             lokasi : lokasi,
             jadwal : jadwal
         }
