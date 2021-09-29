@@ -372,9 +372,7 @@ function Kuisioner(props) {
     async function submit(input) {
         const token = await AsyncStorage.getItem('token');
         const nama = await AsyncStorage.getItem('nama');
-        const kode_calon_pendonor = await AsyncStorage.getItem(
-            'kode_calon_pendonor',
-        );
+        const kode_calon_pendonor = props.route.params.kode_pendonor
         const ktp = await AsyncStorage.getItem('ktp');
         const url = KUESIONER;
        
@@ -393,7 +391,7 @@ function Kuisioner(props) {
                 console.log(res.data);
                 if (res.data.code === 200) {
                     alert('sukses submit kuesioner');
-                    props.navigation.replace('Berhasil');
+                    props.navigation.navigate('Berhasil',{kode_pendonor : kode_calon_pendonor});
                 } else {
                     console.log('Error', res.data.message);
                 }

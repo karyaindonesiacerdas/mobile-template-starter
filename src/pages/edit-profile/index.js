@@ -138,10 +138,7 @@ function EditProfil(props) {
     async function submit(){
       const token = await AsyncStorage.getItem('token')
       const url = USER_MANAGEMENT;
-      const headers = {
-          'Content-Type': 'application/json',
-          'Authorization' : 'Bearer ' + token
-      };
+      
       const body = {
         ktp: value.ktp,
         nama: value.nama,
@@ -151,8 +148,11 @@ function EditProfil(props) {
         status_menikah: input.status_menikah
       };
       console.log(body)
-      Axios.put(`${url}/api/simaba/user/update`, JSON.stringify(body),
-          headers)
+      Axios.put(`${url}/api/simaba/user/update`, body,
+      {headers:{
+        Authorization :'Bearer ' +token,
+        'Content-Type': 'application/json',
+      }})
           .then(r => {
               if (r.data.code == 200) {
                 AsyncStorage.setItem('ktp', value.ktp);
@@ -162,7 +162,7 @@ function EditProfil(props) {
                 alert('sukses melengkapi profil')
                 props.navigation.replace('Dashboard')
               } else {
-                  console.log('Error', r.data.message);
+                  console.log('Error', r.data.code);
               }
           })
           .catch(err => {

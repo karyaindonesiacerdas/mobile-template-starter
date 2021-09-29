@@ -24,6 +24,7 @@ import {
     Col,
 } from 'react-native-table-component';
 import Bg from '../../image/baground3.jpeg'
+import CalendarPicker from 'react-native-calendar-picker';
 
 const CONTENT = {
     tableHead: ['                                             Agustus 2021'],
@@ -100,33 +101,9 @@ function Kalender(props) {
                         justifyContent: 'center',
                         alignSelf: 'center',
                     }}>
-                    <Table
-                        borderStyle={{
-                            borderWidth: 1,
-                            justifyContent: 'center',
-                            alignContent: 'center',
-                        }}>
-                        <Row
-                            data={CONTENT.tableHead}
-                            flexArr={[1, 2, 1, 1]}
-                            style={styles.head}
-                            textStyle={styles.text}
+                     <CalendarPicker
+                        // onDateChange={this.onDateChange}
                         />
-                        <TableWrapper style={styles.wrapper}>
-                            <Col
-                                data={CONTENT.tableTitle}
-                                style={styles.title}
-                                heightArr={[28, 28]}
-                                textStyle={styles.text}
-                            />
-                            <Rows
-                                data={CONTENT.tableData}
-                                flexArr={[1, 1, 1]}
-                                style={styles.row}
-                                textStyle={styles.text}
-                            />
-                        </TableWrapper>
-                    </Table>
                 </View>
                 <View style={{}}>
                     <CheckBox title='Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan' style={{width:"70%" }}checked={check1}

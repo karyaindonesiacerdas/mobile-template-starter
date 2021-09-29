@@ -7,7 +7,8 @@ import {
   Title,
   Left,
    HStack,
- 
+ Item,
+ Picker,
   Card,
   
 } from "native-base";
@@ -25,6 +26,7 @@ import qs from 'qs';
 
 function Data(props) {
   const [number, onChangeNumber] = React.useState(null);
+  const [selectedLanguage, setSelectedLanguage] = React.useState();
   const [pekerjaan, setPekerjaan] = React.useState([
     { label: 'PNS', value: 'pns', checked: false },
     { label: 'Swasta', value: 'swasta', checked: false },
@@ -153,7 +155,7 @@ function Data(props) {
         console.info('res.data', res.data);
         console.log(res.data);
         if (res.data.code === 200) {
-            alert('sukses submit kuesioner');
+            alert('sukses');
             AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
             props.navigation.navigate('Kuisioner',{kode_pendonor : res.data.kode_pendonor});
         } else {
@@ -317,12 +319,89 @@ function Data(props) {
         >
           Berat badan (Pilih)
         </Text>
-
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeNumber}
-   
-        />
+        <Item style={styles.item}>
+        <Picker
+        style={styles.input}
+            onChangeText={onChangeNumber}
+            selectedValue={selectedLanguage}
+            onValueChange={(itemValue, itemIndex) =>
+              setSelectedLanguage(itemValue)
+            }>
+              <Picker.Item label="0" value="0" />
+              <Picker.Item label="25" value="1" />
+              <Picker.Item label="26" value="2" />
+              <Picker.Item label="27" value="3" />
+              <Picker.Item label="28" value="4" />
+              <Picker.Item label="29" value="5" />
+              <Picker.Item label="30" value="6" />
+              <Picker.Item label="31" value="7" />
+              <Picker.Item label="32" value="8" />
+              <Picker.Item label="33" value="9" />
+              <Picker.Item label="34" value="10" />
+              <Picker.Item label="35" value="11" />
+              <Picker.Item label="36" value="12" />
+              <Picker.Item label="37" value="13" />
+              <Picker.Item label="38" value="14" />
+              <Picker.Item label="39" value="15" />
+              <Picker.Item label="40" value="16" />
+              <Picker.Item label="41" value="17" />
+              <Picker.Item label="42" value="18" />
+              <Picker.Item label="43" value="19" />
+              <Picker.Item label="44" value="20" />
+              <Picker.Item label="45" value="21" />
+              <Picker.Item label="46" value="22" />
+              <Picker.Item label="47" value="23" />
+              <Picker.Item label="48" value="24" />
+              <Picker.Item label="49" value="25" />
+              <Picker.Item label="50" value="26" />
+              <Picker.Item label="51" value="27" />
+              <Picker.Item label="52" value="28" />
+              <Picker.Item label="53" value="29" />
+              <Picker.Item label="54" value="30" />
+              <Picker.Item label="55" value="31" />
+              <Picker.Item label="56" value="32" />
+              <Picker.Item label="57" value="33" />
+              <Picker.Item label="58" value="34" />
+              <Picker.Item label="59" value="35" />
+              <Picker.Item label="60" value="36" />
+              <Picker.Item label="61" value="37" />
+              <Picker.Item label="62" value="38" />
+              <Picker.Item label="63" value="39" />
+              <Picker.Item label="64" value="40" />
+              <Picker.Item label="65" value="41" />
+              <Picker.Item label="66" value="42" />
+              <Picker.Item label="67" value="43" />
+              <Picker.Item label="68" value="44" />
+              <Picker.Item label="69" value="45" />
+              <Picker.Item label="70" value="46" />
+              <Picker.Item label="71" value="47" />
+              <Picker.Item label="72" value="48" />
+              <Picker.Item label="73" value="49" />
+              <Picker.Item label="74" value="50" />
+              <Picker.Item label="75" value="51" />
+              <Picker.Item label="76" value="52" />
+              <Picker.Item label="77" value="53" />
+              <Picker.Item label="78" value="54" />
+              <Picker.Item label="79" value="55" />
+              <Picker.Item label="80" value="56" />
+              <Picker.Item label="81" value="57" />
+              <Picker.Item label="82" value="58" />
+              <Picker.Item label="83" value="59" />
+              <Picker.Item label="84" value="60" />
+              <Picker.Item label="85" value="61" />
+              <Picker.Item label="86" value="62" />
+              <Picker.Item label="87" value="63" />
+              <Picker.Item label="88" value="64" />
+              <Picker.Item label="89" value="65" />
+              <Picker.Item label="90" value="66" />
+              <Picker.Item label="91" value="67" />
+              <Picker.Item label="92" value="68" />
+              <Picker.Item label="93" value="69" />
+              <Picker.Item label="94" value="70" />
+              <Picker.Item label="95" value="71" />
+              <Picker.Item label="96" value="72" />
+        </Picker>
+        </Item>
         <Text
           style={{
             marginLeft: 30,

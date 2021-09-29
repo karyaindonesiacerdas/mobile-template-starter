@@ -10,16 +10,16 @@ import Bg from '../image/baground3.jpeg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Home(props) {
-//   useEffect(() => {
-//     async function checkData() {
-//         const ktp_ls = await AsyncStorage.getItem('ktp');
-//         if (!ktp_ls) {
-//           alert('mohon melengkapi data diri sebelum mendaftar donor')
-//           props.navigation.replace('EditProfil')
-//         }
-//     }
-//     checkData()
-// }, []);
+  useEffect(() => {
+    async function checkData() {
+        const ktp_ls = await AsyncStorage.getItem('ktp');
+        if (!ktp_ls) {
+          alert('mohon melengkapi data diri sebelum mendaftar donor')
+          props.navigation.replace('EditProfil')
+        }
+    }
+    checkData()
+}, []);
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)

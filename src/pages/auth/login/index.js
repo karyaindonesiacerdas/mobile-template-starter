@@ -1,20 +1,26 @@
-import React, {} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Container,
     Content,
     Item,
     Input,
+    Spinner,
+    Toast,
     Button,
     View,
     Text,
 } from 'native-base';
+import {useMutation} from 'react-query';
 import {Formik} from 'formik';
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 //from "react-native-gesture-handler";
 //import styles from "../styles/styles";
 import * as Yup from 'yup';
+import {authLogin} from '../../../config/api';
 import Bg from '../../image/Background.png';
 import Axios from 'axios';
+import {StackActions} from '@react-navigation/native';
+import SyncStorage from 'sync-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login(props) {
@@ -35,21 +41,16 @@ function Login(props) {
                     AsyncStorage.setItem('role', r.data.data.role);
                     AsyncStorage.setItem('exp', r.data.data.exp);
                     AsyncStorage.setItem('ktp', r.data.data.ktp);
-                    AsyncStorage.setItem(
-                        'tempat_lahir',
-                        r.data.data.tempat_lahir,
-                    );
-                    AsyncStorage.setItem(
-                        'tanggal_lahir',
-                        r.data.data.tanggal_lahir,
-                    );
-                    AsyncStorage.setItem(
-                        'status_menikah',
-                        r.data.data.status_menikah,
-                    );
-                    switch (r.data.data.role) {
+                    AsyncStorage.setItem('tempat_lahir',r.data.data.tempat_lahir);
+                    AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
+                    AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
+                    AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
+                    // AsyncStorage.setItem('nomor_telepon',r.data.data.nomor_telepon);
+                    // AsyncStorage.setItem('golongan_darah',r.data.data.golongan_darah);
+                    switch
+                    (r.data.data.role) {
                         case 'pendonor':
-                            props.navigation.replace('Dashboard');
+                            props.navigation.navigate('Dashboard');
                             break;
                         case 'admin':
                             props.navigation.replace('DashboardAdmin');

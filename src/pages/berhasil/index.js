@@ -31,6 +31,8 @@ import styles from "../styles/styles";
 import Bg from '../../image/baground3.jpeg'
 import { PENDONOR } from "../../config/api";
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Axios from 'axios';
 function Berhasil(props) {
   const [res, setRes] = useState({});
   useEffect(() => {
@@ -42,15 +44,16 @@ function Berhasil(props) {
           'Authorization' : 'Bearer ' + token
       };
       const body = {
-        kode_calon_pendonor: "c4r4f5hvd5isn6r6di6g"
+        kode_calon_pendonor: props.route.params.kode_pendonor
       };
-      Axios.post(`${url}/api/simaba/user`, JSON.stringify(body),
+      console.log(body)
+      Axios.post(`${url}/api/simaba/calon-pendonor`, JSON.stringify(body),
           headers)
           .then(r => {
               if (r.data.code == 200) {
                   setRes(r.data)
-                  console.info("res", r.data.data[0].status)
-                  if (r.data.data[0].status == 'lolos'){
+                  console.log("res", r.data.data[0].status)
+                  if (r.data.data[0].status === 'berhasil'){
                     setKomponen(<View>
                       <Text
           style={{
@@ -110,7 +113,6 @@ function Berhasil(props) {
       props.navigation.replace(page)
     }
   }
-  console.log(res.data[0].status)
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
