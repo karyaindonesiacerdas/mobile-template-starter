@@ -107,7 +107,8 @@ function Berhasil(props) {
               console.log('error : ', err);
           });
   }
-  getData()
+  setTimeout(()=>{
+    getData()}, 1000)
   },[]);
   const goNextPage = page => {
     if (page) {
