@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Alert,
   ImageBackground,
@@ -24,30 +24,37 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PENDONOR } from '../../config/api';
 import Axios from 'axios';
 
+
 function Barcode(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
+  const [komponent, setKomponen] = useState(null)
+  const url = PENDONOR;
+  const ktp = 123123121111111
   
   useEffect(() => {
-    Axios.get(`${url}/api/simaba/pendonor/qr`, body,
-    {headers:{
-        Authorization :'Bearer ' +token,
-        'Content-Type': 'application/json',
-      }})
-        .then(res => {
-            console.info('res.data', res.data);
-            console.log(res.data);
-            if (res.data.code === 200) {
-                alert('sukses update jadwal');
-                props.navigation.replace('Barcode');
-            } else {
-                console.log('Error', res.data.message);
-            }
-        })
-        .catch(err => {
-            console.log('test : ', err.response);
-        });
+    const qrCode = getQrcode()
   }, []);
+
+  async function getQrcode(){
+    const res = await Axios.get(`${url}/api/simaba/pendonor/image/${ktp}`);
+    const qrCode = res.data
+    setKomponen(
+    
+      <Image
+      source={{uri : qrCode}}
+      style={{
+      
+        width: 250,
+        height: 250,
+        margin: 20,
+        alignSelf:'center',
+
+        
+      }}
+    ></Image>)
+    console.log(res)
+  }
 
   const goNextPage = page => {
     if (page) {
@@ -140,18 +147,7 @@ function Barcode(props) {
         >
           Scan barcode untuk cetak formulir donor
         </Text>
-        <Image
-        source={require("../image/barcode.png")}
-        style={{
-        
-          width: 250,
-          height: 250,
-          margin: 20,
-          alignSelf:'center',
-
-          
-        }}
-      ></Image>
+        {komponent}
 
        
         <Text

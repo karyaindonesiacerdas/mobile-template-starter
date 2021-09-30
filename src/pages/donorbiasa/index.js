@@ -20,14 +20,19 @@ import styles from "../styles/styles";
 import Bg from '../../image/baground3.jpeg'
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { Formik } from "formik";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function DonorBiasa(props) {
-  const [input, setInput] = useState({})
-
+  const [input, setInput] = useState({ktp : "", nama : ""})
+  const [ktp , setKTP] =useState('')
+  const [nama_pendonor , setNama] =useState('')
+  const [telepon , setTelepon] =useState('')
+  
   const refactorInput = (value)=>{
-    setInput(value)
-    console.log(input)
+    value.ktp = ktp
+    value.nama = nama_pendonor
+    value.nomor_telepon = telepon
     props.navigation.navigate('Data', {payload: value})
   }
   const goNextPage = (page) => {
@@ -36,11 +41,19 @@ function DonorBiasa(props) {
     }
   }
   useEffect(() => {
+    
     update_field_data()
+    console.log(ktp)
+    console.log(nama_pendonor)
   },[]);
 
   async function update_field_data(){
-
+    const valuektp = await AsyncStorage.getItem('ktp')
+    const valuenama = await AsyncStorage.getItem('nama')
+    const valuetelepon = await AsyncStorage.getItem('nomor_telepon')
+    setKTP(valuektp)
+    setNama(valuenama)
+    setTelepon(valuetelepon)
   }
   return (
     <Container>
@@ -108,14 +121,15 @@ function DonorBiasa(props) {
         >
           No.KTP
         </Text>
-          <Item>
+          <Item style={styles.item}>
         <Input
           style={styles.input}
           onChangeText={handleChange('ktp')}
           onBlur={handleBlur('ktp')}
-          value={values.ktp}
+          value={ktp}
+          // defaultValue={valuektp}
           keyboardType="numeric"
-          // editable={false}
+          editable={false}
         />
         </Item>
         <Text
@@ -137,7 +151,8 @@ function DonorBiasa(props) {
           style={styles.input}
           onChangeText={handleChange('nama')}
           onBlur={handleBlur('nama')}
-          value={nama?.toLowerCase()}
+          value={nama_pendonor}
+          editable={false}
         />
         </Item>
         <Text
@@ -247,7 +262,8 @@ function DonorBiasa(props) {
           style={styles.input}
           onChangeText={handleChange('nomor_telepon')}
           onBlur={handleBlur('nomor_telepon')}
-          value={values.nomor_telepon}
+          value={telepon}
+          editable={false}
         />  
         </Item>
         <View
