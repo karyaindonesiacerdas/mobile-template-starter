@@ -24,37 +24,30 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PENDONOR } from '../../config/api';
 import Axios from 'axios';
 
-
 function Barcode(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
-  const [komponent, setKomponen] = useState(null)
-  const url = PENDONOR;
-  const ktp = 123123121111111
   
-  useEffect(() => {
-    const qrCode = getQrcode()
-  }, []);
-
-  async function getQrcode(){
-    const res = await Axios.get(`${url}/api/simaba/pendonor/image/${ktp}`);
-    const qrCode = res.data
-    setKomponen(
-    
-      <Image
-      source={{uri : qrCode}}
-      style={{
-      
-        width: 250,
-        height: 250,
-        margin: 20,
-        alignSelf:'center',
-
-        
-      }}
-    ></Image>)
-    console.log(res)
-  }
+  // useEffect(() => {
+  //   Axios.get(`${url}/api/simaba/pendonor/qr`, body,
+  //   {headers:{
+  //       Authorization :'Bearer ' +token,
+  //       'Content-Type': 'application/json',
+  //     }})
+  //       .then(res => {
+  //           console.info('res.data', res.data);
+  //           console.log(res.data);
+  //           if (res.data.code === 200) {
+  //               alert('sukses update jadwal');
+  //               props.navigation.replace('Barcode');
+  //           } else {
+  //               console.log('Error', res.data.message);
+  //           }
+  //       })
+  //       .catch(err => {
+  //           console.log('test : ', err.response);
+  //       });
+  // }, []);
 
   const goNextPage = page => {
     if (page) {
@@ -147,7 +140,18 @@ function Barcode(props) {
         >
           Scan barcode untuk cetak formulir donor
         </Text>
-        {komponent}
+        <Image
+        source={require("../image/frame.png")}
+        style={{
+        
+          width: 250,
+          height: 250,
+          margin: 20,
+          alignSelf:'center',
+
+          
+        }}
+      ></Image>
 
        
         <Text
@@ -156,7 +160,7 @@ function Barcode(props) {
             marginRight: 30,
       
             fontSize: 15,
-            marginTop:20,
+            marginTop:-10,
  
 
             textAlign: "center",
@@ -166,7 +170,7 @@ function Barcode(props) {
             textShadowRadius: 10,
           }}
         >
-          Keterangan :{'\n'}Berlaku 24 jam{'\n'}(Terinformasi masa berlaku)
+          Keterangan :{'\n'}(berlaku pada tanggal 02-10-2021)
         </Text>
         
 
