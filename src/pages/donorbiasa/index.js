@@ -108,8 +108,8 @@ function DonorBiasa(props) {
         >
           No.KTP
         </Text>
-          <Item>
-        <Input
+        <Item style={styles.item}>
+                          <Input
           style={styles.input}
           onChangeText={handleChange('ktp')}
           onBlur={handleBlur('ktp')}

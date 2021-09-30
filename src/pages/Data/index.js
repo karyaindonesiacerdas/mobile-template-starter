@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, ImageBackground, Image, Text, View,TextInput ,Item ,Input} from "react-native";
+import { Alert, ImageBackground, Image, Text, View,TextInput  ,Input} from "react-native";
 import { CheckBox } from 'react-native-elements';
 import {
   Container,
