@@ -23,6 +23,7 @@ import Bg from '../../image/baground3.jpeg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PENDONOR } from '../../config/api';
 import Axios from 'axios';
+import BarcodeCreatorViewManager, { BarcodeFormat } from 'react-native-barcode-creator';
 
 
 function Barcode(props) {
@@ -41,18 +42,12 @@ function Barcode(props) {
     const qrCode = res.data
     setKomponen(
     
-      <Image
-      source={{uri : qrCode}}
-      style={{
-      
-        width: 250,
-        height: 250,
-        margin: 20,
-        alignSelf:'center',
-
-        
-      }}
-    ></Image>)
+      <BarcodeCreatorViewManager
+        value={ktp}
+        background={"#000000"}
+        foregroundColor={"#FFFFFF"}
+        format={BarcodeFormat.QR}
+        style={styles.box} />)
     console.log(res)
   }
 

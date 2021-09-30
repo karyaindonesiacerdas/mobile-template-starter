@@ -1,40 +1,63 @@
-import React, { Component } from "react";
-import { Alert, ImageBackground, Image, Text, View,TextInput,TouchableOpacity, } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
+import { CheckBox } from 'react-native-elements';
 import {
   Container,
   Header,
   Title,
   Left,
-  Right,
-  Button,
-  Body,
-  Content,
+   HStack,
+  Input,
   Card,
-  CardItem,
-  Footer,
-  FooterTab,
-  Icon,
+  Item,
+  nama,
 } from "native-base";
 import {
   ScrollView,
-  TouchableWithoutFeedback,
-  
 } from "react-native-gesture-handler";
-import styles from "./styles";
+import {TouchableOpacity} from 'react-native'
+import styles from "../styles/styles";
+import Bg from '../../image/baground3.jpeg'
+import { Button } from "react-native-elements/dist/buttons/Button";
+import { Formik } from "formik";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 function Konvalesen03(props) {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
+  const [input, setInput] = useState({ktp : "", nama : ""})
+  const [ktp , setKTP] =useState('')
+  const [nama_pendonor , setNama] =useState('')
+  const [telepon , setTelepon] =useState('')
+  
+  const refactorInput = (value)=>{
+    value.ktp = ktp
+    value.nama = nama_pendonor
+    value.nomor_telepon = telepon
+    props.navigation.navigate('Konvalesen04', {payload: value})
+  }
   const goNextPage = (page) => {
     if (page) {
-      props.navigation.replace(page);
+      props.navigation.replace(page)
     }
-  };
+  }
+  useEffect(() => {
+    
+    update_field_data()
+  },[]);
+
+  async function update_field_data(){
+    const valuektp = await AsyncStorage.getItem('ktp')
+    const valuenama = await AsyncStorage.getItem('nama')
+    const valuetelepon = await AsyncStorage.getItem('nomor_telepon')
+    setKTP(valuektp)
+    setNama(valuenama)
+    setTelepon(valuetelepon)
+  }
   return (
     <Container>
-      
+      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
-        source={require("../../asset/logoUDD.png")}
+        source={require("../image/logo.png")}
         style={{
           width: 54,
           height: 60,
@@ -45,129 +68,217 @@ function Konvalesen03(props) {
         }}
       ></Image>
       <Image
-        source={require("../../asset/logoSehat.png")}
+        source={require("../image/Logo2.png")}
         style={{
           position:'absolute',
           width: 54,
           height: 60,
           margin:20,
-       
           right:10,
           top:10,
         }}
       ></Image>
       <ScrollView>
-     
-  
-     
-        <Text style={{ marginLeft:30, marginTop:25,fontSize: 35,fontWeight: "bold",  color: "red" }}>
+        <Text style={{ marginLeft:30, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "red" }}>
                 Daftar
               </Text>
               <Text style={{ marginLeft:30, marginTop:-10,fontSize: 25,fontWeight: "bold",  color: "black" }}>
                 Donor Darah Konvalesen
               </Text>
-
-                 <Text style={{ marginLeft:30, marginTop:20,fontSize: 15, color: "black" }}>
-                No. KTP
-              </Text>
-
-              <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder=""
-        keyboardType="numeric"
-      />
-         <Text style={{ marginLeft:30, marginTop:10,fontSize: 15, color: "black" }}>
-                Nama Lengkap
-              </Text>
-
-              <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        
-      />
-       <Text style={{ marginLeft:30, marginTop:10,fontSize: 15, color: "black" }}>
-                Alamat Lengkap
-              </Text>
-
-              <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        
-      />
-       <Text style={{ marginLeft:30, marginTop:10,fontSize: 15, color: "black" }}>
-                Kelurahan (Pilih)
-              </Text>
-
-              <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        
-      />
-       <Text style={{ marginLeft:30, marginTop:10,fontSize: 15, color: "black" }}>
-                Kecamatan (Pilih)
-              </Text>
-
-              <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        
-      />
-       <Text style={{ marginLeft:30, marginTop:10,fontSize: 15, color: "black" }}>
-                Kab / Kota (Pilih)
-              </Text>
-
-              <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        
-      />
-       <Text style={{ marginLeft:30, marginTop:10,fontSize: 15, color: "black" }}>
-                No. Telp.
-              </Text>
-
-              <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        keyboardType="numeric"
-        
-      />
-      
-
-             
-             
-        
-            
-              
-            
-
-              
-
-  <View
+              <Formik 
+                initialValues={{
+                        ktp:'',
+                        nama:'',
+                        alamat:'',
+                        kelurahan:'',
+                        kecamatan:'',
+                        wilayah:'',
+                        nomor_telepon:'',
+                    }}
+                    onSubmit={value => {
+                        refactorInput(value);
+                    }}>
+                    {({
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        values,
+                    }) => (
+                      <View>
+                      <Text
           style={{
-            alignContent: "center",
-
-            flexDirection: "row",
-            justifyContent: "center",
-              alignContent: "center",
-              marginTop:130,
-              marginBottom:10,
-            
+            marginLeft: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
           }}
         >
-          <Card
+          No.KTP
+        </Text>
+          <Item style={styles.item}>
+        <Input
+          style={styles.input}
+          onChangeText={handleChange('ktp')}
+          onBlur={handleBlur('ktp')}
+          value={ktp}
+          // defaultValue={valuektp}
+          keyboardType="numeric"
+          editable={false}
+        />
+        </Item>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 10,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Nama Lengkap
+        </Text>
+        <Item style={styles.item}>
+        <Input
+          style={styles.input}
+          onChangeText={handleChange('nama')}
+          onBlur={handleBlur('nama')}
+          value={nama_pendonor}
+          editable={false}
+        />
+        </Item>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 10,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Alamat Lengkap
+        </Text>
+          <Item style={styles.item}>
+        <Input
+          style={styles.input}
+          onChangeText={handleChange('alamat')}
+          onBlur={handleBlur('alamat')}
+          value={values.alamat}
+        /></Item>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 10,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Kelurahan
+        </Text>
+          <Item style={styles.item}>
+        <Input
+          style={styles.input}
+          onChangeText={handleChange('kelurahan')}
+          onBlur={handleBlur('kelurahan')}
+          value={values.kelurahan}
+        />
+        </Item>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 10,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Kecamatan
+        </Text>
+          <Item style={styles.item}>
+        <Input
+          style={styles.input}
+          onChangeText={handleChange('kecamatan')}
+          onBlur={handleBlur('kecamatan')}
+          value={values.kecamatan}
+        />
+        </Item>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 10,
+            fontSize: 15,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Kab/Kota
+        </Text>
+        <Item style={styles.item}>
+        <Input
+          style={styles.input}
+          onChangeText={handleChange('wilayah')}
+          onBlur={handleBlur('wilayah')}
+          value={values.wilayah}
+        />
+        </Item>
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 10,
+            fontSize: 16,
+            fontWeight: "normal",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+            alignContent:"space-around"
+          }}
+        >
+          No.Telp
+        </Text>
+          <Item style={styles.item}>
+        <Input
+          style={styles.input}
+          onChangeText={handleChange('nomor_telepon')}
+          onBlur={handleBlur('nomor_telepon')}
+          value={telepon}
+          editable={false}
+        />  
+        </Item>
+        <View
+        style={{
+          alignContent: "center",
+
+          flexDirection: "row",
+          justifyContent: "center",
+            alignContent: "center",
+            marginTop:150,
+          
+        }}>
+        <Card
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity onPress={goNextPage.bind(this, "konvalesen02")}
-            >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'konvalesen02')} >
               <Text
                 style={{
                   margin: 10,
@@ -186,49 +297,24 @@ function Konvalesen03(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen04")}>
+            <TouchableOpacity onPress={handleSubmit}>
               <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20, textAlign:'center',
-
-                  color: "white",
-                  fontWeight: "bold",
+              style={{
+                margin: 10,
+                fontSize: 20, textAlign:'center',
+                color: "white",
+                fontWeight: "bold",
                 }}
               >
-                Selanjutnya
+                  Selanjutnya
               </Text>
             </TouchableOpacity>
           </Card>
+          </View>
         </View>
-          
- </ScrollView>
- 
-               
-             <ImageBackground
-  // resizeMethod={'auto'}
-  source={require("../../asset/footer.png")}
-  style={{
-    width: "100%",
-
-  
-    backgroundColor:'#fff',
-    padding: 0,
-    paddingVertical: 90,
-    position: 'absolute',
-    zIndex:-1,
-  bottom:0
-  }}
-  imageStyle={{
-    resizeMode: "cover",
-    alignSelf: "flex-end"
-  }}
->
-  
-</ImageBackground>
-       
-     
-     
+        )}
+        </Formik>
+    </ScrollView>
     </Container>
   );
 }
