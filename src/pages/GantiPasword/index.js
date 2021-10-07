@@ -124,7 +124,7 @@ function Kegiatan(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
               <Text
                 style={{
                   margin: 10,
