@@ -165,8 +165,9 @@ function Register(props) {
                                 </View>
                             )}
                             <ListItem>
-                                <CheckBox checked={check1}
-              onPress={() => setCheck1(!check1)} />
+                                <CheckBox checked={false} color=""
+                                checked={check1}
+                                onPress={() => setCheck1(!check1)} />
                                 <Body>
                                     <Text>
                                         I Agree All the statements in Terms of

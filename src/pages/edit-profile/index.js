@@ -155,13 +155,12 @@ function EditProfil(props) {
       }})
           .then(r => {
               if (r.data.code == 200) {
-                AsyncStorage.setItem('role', r.data.data.role);
-                AsyncStorage.setItem('exp', r.data.data.exp);
-                AsyncStorage.setItem('ktp', r.data.data.ktp);
-                AsyncStorage.setItem('tempat_lahir',r.data.data.tempat_lahir);
-                AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
-                AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
-                AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
+                // AsyncStorage.setItem('exp', r.data.data.exp);
+                // AsyncStorage.setItem('ktp', r.data.data.ktp);
+                // AsyncStorage.setItem('tempat_lahir',r.data.data.tempat_lahir);
+                // AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
+                // AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
+                // AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
                 alert('sukses melengkapi profil')
                 props.navigation.replace('Dashboard')
               } else {
@@ -634,7 +633,7 @@ function EditProfil(props) {
             style={{
               backgroundColor: "grey",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'GantiPasword')} >
               <Text
                 style={{
                   margin: 10,
