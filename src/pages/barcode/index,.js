@@ -29,26 +29,26 @@ function Barcode(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   
-  // useEffect(() => {
-  //   Axios.get(`${url}/api/simaba/pendonor/qr`, body,
-  //   {headers:{
-  //       Authorization :'Bearer ' +token,
-  //       'Content-Type': 'application/json',
-  //     }})
-  //       .then(res => {
-  //           console.info('res.data', res.data);
-  //           console.log(res.data);
-  //           if (res.data.code === 200) {
-  //               alert('sukses update jadwal');
-  //               props.navigation.replace('Barcode');
-  //           } else {
-  //               console.log('Error', res.data.message);
-  //           }
-  //       })
-  //       .catch(err => {
-  //           console.log('test : ', err.response);
-  //       });
-  // }, []);
+  useEffect(() => {
+    Axios.get(`${url}/api/simaba/pendonor/qr`, body,
+    {headers:{
+        Authorization :'Bearer ' +token,
+        'Content-Type': 'application/json',
+      }})
+        .then(res => {
+            console.info('res.data', res.data);
+            console.log(res.data);
+            if (res.data.code === 200) {
+                alert('sukses update jadwal');
+                // props.navigation.replace('Barcode');
+            } else {
+                console.log('Error', res.data.message);
+            }
+        })
+        .catch(err => {
+            console.log('test : ', err.response);
+        });
+  }, []);
 
   const goNextPage = page => {
     if (page) {

@@ -34,10 +34,12 @@ function Register(props) {
             email: value.email,
             nomor_telepon: value.nomorTelepon,
         };
+        console.log(body)
         Axios.post(`${url}/api/simaba/user/register`, qs.stringify(body),
             headers)
             .then(res => {
                 if (res.data.code === 200) {
+                    console.log()
                     alert(
                         'anda telah terdaftar, silakan cek email untuk mendapatkan credential',
                     );
