@@ -23,6 +23,7 @@ import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
 
 function Register(props) {
+    const [check1, setCheck1] = useState(false);
     const handleSubmitRegister = value => {
         const url = 'http://sahabat-utd.id:6005';
         const headers = {
@@ -166,7 +167,9 @@ function Register(props) {
                                 </View>
                             )}
                             <ListItem>
-                                <CheckBox checked={false} color="red" />
+                                <CheckBox checked={false} color=""
+                                checked={check1}
+                                onPress={() => setCheck1(!check1)} />
                                 <Body>
                                     <Text>
                                         I Agree All the statements in Terms of

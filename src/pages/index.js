@@ -48,6 +48,7 @@ import ListUser from './user';
 import ListPendonor from './listpendonor';
 import PermintaanDarah1 from './permintaandarah/permintaan';
 import PermintaanSukses from './permintaandarah/sukses';
+import GantiPasword from './GantiPasword';
 
 export {
 	Login,
@@ -108,4 +109,5 @@ export {
 	ListPendonor,
 	PermintaanDarah1,
 	PermintaanSukses,
+	GantiPasword,
 };
