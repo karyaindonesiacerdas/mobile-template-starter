@@ -515,7 +515,7 @@ function Kuisioner(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Data')}>
+                            onPress={goNextPage.bind(this, 'Dashboard')}>
                             <Text
                                 style={{
                                     margin: 10,

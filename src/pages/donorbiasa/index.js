@@ -43,8 +43,6 @@ function DonorBiasa(props) {
   useEffect(() => {
     
     update_field_data()
-    console.log(ktp)
-    console.log(nama_pendonor)
   },[]);
 
   async function update_field_data(){

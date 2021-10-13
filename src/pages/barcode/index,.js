@@ -23,31 +23,32 @@ import Bg from '../../image/baground3.jpeg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PENDONOR } from '../../config/api';
 import Axios from 'axios';
+import BarcodeCreatorViewManager, { BarcodeFormat } from 'react-native-barcode-creator';
 
 function Barcode(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   
-  // useEffect(() => {
-  //   Axios.get(`${url}/api/simaba/pendonor/qr`, body,
-  //   {headers:{
-  //       Authorization :'Bearer ' +token,
-  //       'Content-Type': 'application/json',
-  //     }})
-  //       .then(res => {
-  //           console.info('res.data', res.data);
-  //           console.log(res.data);
-  //           if (res.data.code === 200) {
-  //               alert('sukses update jadwal');
-  //               props.navigation.replace('Barcode');
-  //           } else {
-  //               console.log('Error', res.data.message);
-  //           }
-  //       })
-  //       .catch(err => {
-  //           console.log('test : ', err.response);
-  //       });
-  // }, []);
+  useEffect(() => {
+    Axios.get(`${url}/api/simaba/pendonor/qr`, body,
+    {headers:{
+        Authorization :'Bearer ' +token,
+        'Content-Type': 'application/json',
+      }})
+        .then(res => {
+            console.info('res.data', res.data);
+            console.log(res.data);
+            if (res.data.code === 200) {
+                alert('sukses update jadwal');
+                // props.navigation.replace('Barcode');
+            } else {
+                console.log('Error', res.data.message);
+            }
+        })
+        .catch(err => {
+            console.log('test : ', err.response);
+        });
+  }, []);
 
   const goNextPage = page => {
     if (page) {
