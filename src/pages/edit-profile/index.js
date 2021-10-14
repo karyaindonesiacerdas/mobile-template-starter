@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
 import { CheckBox } from 'react-native-elements';
 import {
@@ -15,10 +15,11 @@ import {
 import {TouchableOpacity} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/baground3.jpeg'
-import { Formik } from "formik";
+import { Formik,Form } from "formik";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { USER_MANAGEMENT } from "../../config/api";
 import Axios from 'axios';
+import * as Yup from 'yup'
 
 function EditProfil(props) {
   const [number, onChangeNumber] = React.useState(null);
@@ -32,6 +33,8 @@ function EditProfil(props) {
     { label: 'Wirausaha', value: 'wirausaha', checked: false },
     { label: 'Lain-lain', value: 'lain-lain', checked: false },
   ])
+  
+  // const { value , handleSubmit , reset } = userForm();
   const [gologanDarah, setGolonganDarah] = React.useState([
     { label: 'A', value: 'A', checked: false },
     { label: 'B', value: 'B', checked: false },
@@ -47,6 +50,7 @@ function EditProfil(props) {
     { label: 'Sudah Menikah', value: '1', checked: false },
     { label: 'Belum Menikah', value: '0', checked: false },
   ])
+
   const [input] = useState({
     pekerjaan : '',
     gologan_darah:'',
@@ -138,41 +142,72 @@ function EditProfil(props) {
     async function submit(){
       const token = await AsyncStorage.getItem('token')
       const url = USER_MANAGEMENT;
-      
+      console.log(value)
       const body = {
         ktp: value.ktp,
         nama: value.nama,
         tempat_lahir: value.tempat_lahir,
         tanggal_lahir: value.tanggal_lahir,
         jenis_kelamin: input.jenis_kelamin,
-        status_menikah: input.status_menikah
+        status_menikah: input.status_menikah,
+        golongan_darah : input.gologan_darah,
+        pekerjaan : input.pekerjaan,
+        
+
       };
-      console.log(body)
-      Axios.put(`${url}/api/simaba/user/update`, body,
-      {headers:{
-        Authorization :'Bearer ' +token,
-        'Content-Type': 'application/json',
-      }})
-          .then(r => {
-              if (r.data.code == 200) {
-                // AsyncStorage.setItem('exp', r.data.data.exp);
-                // AsyncStorage.setItem('ktp', r.data.data.ktp);
-                // AsyncStorage.setItem('tempat_lahir',r.data.data.tempat_lahir);
-                // AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
-                // AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
-                // AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
-                alert('sukses melengkapi profil')
-                props.navigation.replace('Dashboard')
-              } else {
-                  console.log('Error', r.data.code);
-              }
-          })
-          .catch(err => {
-              console.log('error : ', err);
-          });
+      console.log(input)
+      if(input.jenis_kelamin == "" || input.status_menikah == "" || input.gologan_darah == "" || input.pekerjaan == ""){
+        alert('Lengkapi Data Profile')
+      }else{
+        Axios.put(`${url}/api/simaba/user/update`, body,
+        {headers:{
+          Authorization :'Bearer ' +token,
+          'Content-Type': 'application/json',
+        }})
+            .then(r => {
+                if (r.data.code == 200) {
+                  console.log(r.data)
+                  // AsyncStorage.setItem('exp', r.data.data.exp);
+                  // AsyncStorage.setItem('ktp', r.data.data.ktp);
+                  // AsyncStorage.setItem('tempat_lahir',r.data.data.tempat_lahir);
+                  // AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
+                  // AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
+                  // AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
+                  alert('sukses melengkapi profil')
+                  props.navigation.replace('Dashboard')
+                } else {
+                    console.log('Error', r.data);
+                }
+            })
+            .catch(err => {
+                console.log('error : ', err);
+            });
+      }
+
+
     }
     submit()
   }
+  useEffect(() => {
+    },[]);
+
+  const formSchema = Yup.object().shape({
+    ktp : Yup.string()
+    .min(10, 'Invalid KTP Number !')
+    .max(16, 'Invalid KTP Number !')
+    .required('Required !'),
+    nama : Yup.string()
+    .required('Required !'),
+    tempat_lahir : Yup.string()
+    .required('Required !'),
+    tanggal_lahir : Yup.string()
+    .required('Required !')
+    // jeniskelamin : Yup.string()
+    // .required('Required !'),
+    // statusmenikah : Yup.string()
+    // .required('Required !')
+  })
+
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -280,16 +315,23 @@ function EditProfil(props) {
                         nama:'',
                         tempat_lahir:'',
                         tanggal_lahir:'',
+                        jeniskelamin : '',
+                        statusmenikah : '',
                     }}
+                    validationSchema={formSchema}        
                     onSubmit={value => {
+                      console.log(value);
                         submitData(value);
                         goNextPage.bind(this, 'Dashboard')
-                    }}>
+                    }}            
+                    >
                     {({
                         handleChange,
                         handleBlur,
                         handleSubmit,
                         values,
+                        errors,
+                        touched
                     }) => (
                       <View>
               <Text
@@ -315,6 +357,17 @@ function EditProfil(props) {
    
         />
         </Item>
+        {errors.ktp && touched.ktp ? (
+             <Text  style={{
+              marginLeft: 30,
+              fontSize: 15,
+              fontWeight: "normal",
+              color: "red",
+              textShadowColor: "#fff",
+              textShadowOffset: { width: 1, height: 1 },
+              textShadowRadius: 10,
+            }}>{errors.ktp}</Text>
+           ) : null}
         <Text
           style={{
             marginLeft: 30,
@@ -337,6 +390,17 @@ function EditProfil(props) {
           value={values.nama}
         />
         </Item>
+        {errors.nama && touched.nama ? (
+             <Text  style={{
+              marginLeft: 30,
+              fontSize: 15,
+              fontWeight: "normal",
+              color: "red",
+              textShadowColor: "#fff",
+              textShadowOffset: { width: 1, height: 1 },
+              textShadowRadius: 10,
+            }}>{errors.nama}</Text>
+           ) : null}
         <Text
           style={{
             marginLeft: 30,
@@ -359,6 +423,17 @@ function EditProfil(props) {
           value={values.tempat_lahir}
         />
         </Item>
+        {errors.tempat_lahir && touched.tempat_lahir ? (
+             <Text  style={{
+              marginLeft: 30,
+              fontSize: 15,
+              fontWeight: "normal",
+              color: "red",
+              textShadowColor: "#fff",
+              textShadowOffset: { width: 1, height: 1 },
+              textShadowRadius: 10,
+            }}>{errors.tempat_lahir}</Text>
+           ) : null}
         <Text
           style={{
             marginLeft: 30,
@@ -382,6 +457,17 @@ function EditProfil(props) {
           placeholder={"Contoh: 1982-12-28"}
         />
         </Item>
+        {errors.tanggal_lahir && touched.tanggal_lahir ? (
+             <Text  style={{
+              marginLeft: 30,
+              fontSize: 15,
+              fontWeight: "normal",
+              color: "red",
+              textShadowColor: "#fff",
+              textShadowOffset: { width: 1, height: 1 },
+              textShadowRadius: 10,
+            }}>{errors.tanggal_lahir}</Text>
+           ) : null}
          <Text style={{ marginLeft:30, marginTop:20,fontSize: 15,fontWeight: "bold", color: "black" , textShadowColor:'#fff',
     textShadowOffset:{width: 1, height: 1},
     textShadowRadius:10,}}>
