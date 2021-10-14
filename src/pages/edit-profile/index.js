@@ -12,17 +12,19 @@ import {
 import {
   ScrollView,
 } from "react-native-gesture-handler";
-import {TouchableOpacity} from 'react-native'
+import {TouchableOpacity,PermissionsAndroid} from 'react-native'
 import styles from "../styles/styles";
 import Bg from '../../image/baground3.jpeg'
 import { Formik,Form } from "formik";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { USER_MANAGEMENT } from "../../config/api";
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker'; 
 import Axios from 'axios';
 import * as Yup from 'yup'
 
 function EditProfil(props) {
-  const [number, onChangeNumber] = React.useState(null);
+  const [filebase64, setBase64] = React.useState(null);
+
   const [pekerjaan, setPekerjaan] = React.useState([
     { label: 'PNS', value: 'pns', checked: false },
     { label: 'Swasta', value: 'swasta', checked: false },
@@ -142,7 +144,6 @@ function EditProfil(props) {
     async function submit(){
       const token = await AsyncStorage.getItem('token')
       const url = USER_MANAGEMENT;
-      console.log(value)
       const body = {
         ktp: value.ktp,
         nama: value.nama,
@@ -152,10 +153,11 @@ function EditProfil(props) {
         status_menikah: input.status_menikah,
         golongan_darah : input.gologan_darah,
         pekerjaan : input.pekerjaan,
-        
-
+        gambar : filebase64
+      
       };
-      console.log(input)
+      console.log(body)
+    
       if(input.jenis_kelamin == "" || input.status_menikah == "" || input.gologan_darah == "" || input.pekerjaan == ""){
         alert('Lengkapi Data Profile')
       }else{
@@ -189,6 +191,7 @@ function EditProfil(props) {
     submit()
   }
   useEffect(() => {
+    setBase64("/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAAAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3BhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADTLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAwADEANv/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIASwBLAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQr/xAAZEAEAAgMAAAAAAAAAAAAAAAAAAcECMXH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAv/EABoRAQEBAAMBAAAAAAAAAAAAAAARAQISITH/2gAMAwEAAhEDEQA/AMP4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBN35lAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEjeXahQVx3rtl8gAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/9k=")
     },[]);
 
   const formSchema = Yup.object().shape({
@@ -207,6 +210,116 @@ function EditProfil(props) {
     // statusmenikah : Yup.string()
     // .required('Required !')
   })
+  const [filePath, setFilePath] = useState({});
+  
+  const requestCameraPermission = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          {
+            title: 'Camera Permission',
+            message: 'App needs camera permission',
+          },
+        );
+        // If CAMERA Permission is granted
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      } catch (err) {
+        console.warn(err);
+        return false;
+      }
+    } else return true;
+  };
+
+  const requestExternalWritePermission = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          {
+            title: 'External Storage Write Permission',
+            message: 'App needs write permission',
+          },
+        );
+        // If WRITE_EXTERNAL_STORAGE Permission is granted
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      } catch (err) {
+        console.warn(err);
+        alert('Write permission err', err);
+      }
+      return false;
+    } else return true;
+  };
+
+  const captureImage = async (type) => {
+    let options = {
+      mediaType: type,
+      maxWidth: 300,
+      maxHeight: 550,
+      quality: 1,
+      videoQuality: 'low',
+      durationLimit: 30, //Video max duration in seconds
+      saveToPhotos: true,
+      includeBase64	: true
+    };
+    let isCameraPermitted = await requestCameraPermission();
+    let isStoragePermitted = await requestExternalWritePermission();
+    if (isCameraPermitted && isStoragePermitted) {
+      launchCamera(options, (response) => {
+        
+        if (response.didCancel) {
+          alert('User cancelled camera picker');
+          return;
+        } else if (response.errorCode == 'camera_unavailable') {
+          alert('Camera not available on device');
+          return;
+        } else if (response.errorCode == 'permission') {
+          alert('Permission not satisfied');
+          return;
+        } else if (response.errorCode == 'others') {
+          alert(response.errorMessage);
+          return;
+        }
+       
+        setFilePath(response.assets[0]);
+        setBase64(response.assets[0].base64)
+      });
+    }
+  };
+
+  const chooseFile = (type) => {
+    let options = {
+      mediaType: type,
+      maxWidth: 300,
+      maxHeight: 550,
+      quality: 1,
+      includeBase64	: true
+    };
+    launchImageLibrary(options, (response) => {
+      
+      if (response.didCancel) {
+        alert('User cancelled camera picker');
+        return;
+      } else if (response.errorCode == 'camera_unavailable') {
+        alert('Camera not available on device');
+        return;
+      } else if (response.errorCode == 'permission') {
+        alert('Permission not satisfied');
+        return;
+      } else if (response.errorCode == 'others') {
+        alert(response.errorMessage);
+        return;
+      }
+
+      setFilePath(response.assets[0]);
+      setBase64(response.assets[0].base64)      
+    });
+    
+  };
+  const removePhoto = () =>{
+    setFilePath(null)
+  };
+
 
   return (
     <Container>
@@ -246,19 +359,26 @@ function EditProfil(props) {
               </Text>
               <View style={{flexDirection: 'row', justifyContent: 'space-between',borderWidth:1, padding: 10}}>
               <Card
-            style={{
-              backgroundColor: "grey",width: "60%", marginRight:"5%" }}
-          >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
-          <Icon name='person' style={{fontSize: 150, color: 'black', marginLeft:40,marginRight:50}} />
-          </TouchableOpacity>
+                style={{
+                  width: "60%", marginRight:"5%" }}
+              >
+            <Image
+              source= {{ uri :'data:image/jpeg;base64,' + filebase64 }}
+              style={{
+                marginTop: 15,
+                width:  150,
+                height: 150,
+                marginBottom: 10,
+                alignSelf: "center",
+                marginTop: 15, }}
+            />
           </Card>
           <View style={{}}>
           <Card
             style={{
               backgroundColor: "grey",width: "60%", marginRight:"30%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
+            <TouchableOpacity style={styles.button} onPress={() => captureImage('photo')} >
               <Text
                 style={{
                   margin: 10,
@@ -276,7 +396,7 @@ function EditProfil(props) {
             style={{
               backgroundColor: "grey",width: "60%", marginRight:"30%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
+            <TouchableOpacity style={styles.button} onPress={() => chooseFile('photo')} >
               <Text
                 style={{
                   margin: 10,
@@ -294,7 +414,7 @@ function EditProfil(props) {
             style={{
               backgroundColor: "grey",width: "60%", marginRight:"30%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, '')} >
+            <TouchableOpacity style={styles.button} onPress={() => removePhoto()}  >
               <Text
                 style={{
                   margin: 10,
@@ -320,7 +440,6 @@ function EditProfil(props) {
                     }}
                     validationSchema={formSchema}        
                     onSubmit={value => {
-                      console.log(value);
                         submitData(value);
                         goNextPage.bind(this, 'Dashboard')
                     }}            
