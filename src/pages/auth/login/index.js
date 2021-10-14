@@ -37,6 +37,7 @@ function Login(props) {
         Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body),headers)
             .then(r => {
                 if (r.data.code == 200) {
+                    console.log(r.data.data)
                     AsyncStorage.setItem('token', r.data.data.token);
                     AsyncStorage.setItem('role', r.data.data.role);
                     AsyncStorage.setItem('exp', r.data.data.exp);
