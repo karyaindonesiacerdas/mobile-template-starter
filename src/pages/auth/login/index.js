@@ -71,6 +71,7 @@ function Login(props) {
                 console.log('error : ', err);
             });
     };
+    
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);

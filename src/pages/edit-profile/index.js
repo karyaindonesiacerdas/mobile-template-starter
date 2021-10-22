@@ -17,43 +17,87 @@ import styles from "../styles/styles";
 import Bg from '../../image/baground3.jpeg'
 import { Formik,Form } from "formik";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { USER_MANAGEMENT } from "../../config/api";
+import { PENDONOR, USER_MANAGEMENT } from "../../config/api";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker'; 
 import Axios from 'axios';
 import * as Yup from 'yup'
 import base64 from 'react-native-base64'
 
 function EditProfil(props) {
+  const [ktp, setKtp] = useState(null);
+  const [nama, setNama] = useState(null);
+  const [tempat_lahir, setTempatLahir] = useState(null);
+  const [tanggal_lahir, setTanggalLahir] = useState(null);
+  const [jeniskelamin, setJenisKelamin] = React.useState(null)
+  const [status_menikah, setStatusMenikah] = React.useState(0)
+  const [pekerjaan, setPekerjaan] = React.useState([]);
+  const [pekerjaanInitial, setPekerjaanInitial] = React.useState(null);
+  const [gologanDarah, setGolonganDarah] = React.useState([])
   const [filebase64, setBase64] = React.useState(null);
   const [gambar, setGambar] = React.useState('');
 
-  const [pekerjaan, setPekerjaan] = React.useState([
-    { label: 'PNS', value: 'pns', checked: false },
-    { label: 'Swasta', value: 'swasta', checked: false },
-    { label: 'Polri', value: 'polri', checked: false },
-    { label: 'Petani', value: 'petani', checked: false },
-    { label: 'BUMN', value: 'bumn', checked: false },
-    { label: 'Pelajar', value: 'pelajar', checked: false },
-    { label: 'Wirausaha', value: 'wirausaha', checked: false },
-    { label: 'Lain-lain', value: 'lain-lain', checked: false },
-  ])
-  
-  // const { value , handleSubmit , reset } = userForm();
-  const [gologanDarah, setGolonganDarah] = React.useState([
-    { label: 'A', value: 'A', checked: false },
-    { label: 'B', value: 'B', checked: false },
-    { label: 'O', value: 'O', checked: false },
-    { label: 'AB', value: 'AB', checked: false },
-    { label: 'X (Tidak tahu)', value: 'X', checked: false },
-  ])
-  const [jeniskelamin, setJenisKelamin] = React.useState([
-    { label: 'Laki-Laki', value: 'laki-laki', checked: false },
-    { label: 'Perempuan', value: 'perempuan', checked: false },
-  ])
-  const [statusmenikah, setStatusMenikah] = React.useState([
-    { label: 'Sudah Menikah', value: '1', checked: false },
-    { label: 'Belum Menikah', value: '0', checked: false },
-  ])
+  useEffect(() => {
+    async function getUser() {
+      const token = await AsyncStorage.getItem('token')
+      const url = USER_MANAGEMENT;
+
+      // TOKEN
+      var _ktp = await AsyncStorage.getItem('ktp')
+      var _nama = await AsyncStorage.getItem('nama')
+      var _tempat_lahir = await AsyncStorage.getItem('tempat_lahir')
+      var _tanggal_lahir = await AsyncStorage.getItem('tanggal_lahir')
+      var _jenis_kelamin = await AsyncStorage.getItem('jenis_kelamin')
+      var _status_menikah = await AsyncStorage.getItem('status_menikah')
+      var _golongan_darah = await AsyncStorage.getItem('golongan_darah')
+      var _pekerjaan = await AsyncStorage.getItem('pekerjaan')
+      var _gambar = await AsyncStorage.getItem('gambar')
+
+      Axios.post(`${url}/api/simaba/user`, {},
+        {headers:{
+          Authorization :'Bearer ' +token,
+          'Content-Type': 'application/json',
+        }})
+        .then(r => {
+            if (r.data.code == 200) {
+              setKtp(_ktp || r.data?.data?.[0].ktp)
+              setNama(_nama, r.data?.data?.[0].nama)
+              setTempatLahir(_tempat_lahir || r.data?.data?.[0].tempat_lahir)
+              setTanggalLahir(_tanggal_lahir || r.data?.data?.[0].tanggal_lahir)
+              setJenisKelamin(_jenis_kelamin || r.data?.data?.[0].jenis_kelamin);
+              setStatusMenikah(_status_menikah || r.data?.data?.[0].status_menikah)
+              setPekerjaanInitial(r.data?.data?.[0].pekerjaan);
+              console.info(_pekerjaan || r.data?.data?.[0].pekerjaan, _pekerjaan || r.data?.data?.[0].pekerjaan === 'swasta' ? true : false)
+              setPekerjaan([
+                { label: 'PNS', value: 'pns', checked: _pekerjaan == 'pns' ? true : false || r.data?.data?.[0].pekerjaan == 'pns' ? true : false },
+                { label: 'Swasta', value: 'swasta', checked: _pekerjaan == 'swasta' ? true : false || r.data?.data?.[0].pekerjaan == 'swasta' ? true : false },
+                { label: 'Polri', value: 'polri', checked: _pekerjaan == 'polri' ? true : false || r.data?.data?.[0].pekerjaan == 'polri' ? true : false },
+                { label: 'Petani', value: 'petani', checked: _pekerjaan == 'petani' ? true : false || r.data?.data?.[0].pekerjaan == 'petani' ? true : false },
+                { label: 'BUMN', value: 'bumn', checked: _pekerjaan == 'bumn' ? true : false || r.data?.data?.[0].pekerjaan == 'bumn' ? true : false },
+                { label: 'Pelajar', value: 'pelajar', checked: _pekerjaan == 'pelajar' ? true : false || r.data?.data?.[0].pekerjaan == 'pelajar' ? true : false },
+                { label: 'Wirausaha', value: 'wirausaha', checked: _pekerjaan == 'wirausaha' ? true : false || r.data?.data?.[0].pekerjaan == 'wirausaha' ? true : false },
+                { label: 'Lain-lain', value: 'lain-lain', checked: _pekerjaan == 'lain-lain' ? true : false || r.data?.data?.[0].pekerjaan == 'lain-lain' ? true : false },
+              ]);
+              console.info(_golongan_darah || r.data?.data?.[0].golongan_darah);
+              setGolonganDarah([
+                { label: 'A', value: 'A', checked: _golongan_darah == 'A' ? true : false || r.data?.data?.[0].golongan_darah == 'A' ? true : false },
+                { label: 'B', value: 'B', checked: _golongan_darah == 'B' ? true : false || r.data?.data?.[0].golongan_darah == 'B' ? true : false },
+                { label: 'O', value: 'O', checked: _golongan_darah == 'O' ? true : false || r.data?.data?.[0].golongan_darah == 'O' ? true : false },
+                { label: 'AB', value: 'AB', checked: _golongan_darah == 'AB' ? true : false || r.data?.data?.[0].golongan_darah == 'AB' ? true : false },
+                { label: 'X (Tidak tahu)', value: 'X', checked: _golongan_darah == 'X' ? true : false || r.data?.data?.[0].golongan_darah == 'X' ? true : false },
+              ]);
+              setBase64(_gambar || null);
+            } else {
+                console.error('Error', r.data);
+            }
+        })
+        .catch(err => {
+            console.error('error : ', err);
+        });
+    } 
+
+    getUser()
+  }, []);
+
 
   const [input] = useState({
     pekerjaan : '',
@@ -78,7 +122,8 @@ function EditProfil(props) {
      }
     return checkbox
   })
-  setPekerjaan(newValue)
+  console.info(newValue)
+    setPekerjaan(newValue)
   }
   const golonganDarahHandler = (index) => {
     const newValue = gologanDarah.map((checkbox, i) => {
@@ -99,7 +144,7 @@ function EditProfil(props) {
   })
   setGolonganDarah(newValue)
   }
-  const jeniskelaminHandler = (index) => {
+  const jeniskelaminHandler = (val) => {
     const newValue = jeniskelamin.map((checkbox, i) => {
      if (i !== index)
        return {
@@ -118,24 +163,8 @@ function EditProfil(props) {
   })
   setJenisKelamin(newValue)
   }
-  const statusmenikahHandler = (index) => {
-    const newValue = statusmenikah.map((checkbox, i) => {
-     if (i !== index)
-       return {
-         ...checkbox,
-         checked: false,
-       }
-     if (i === index) {
-       const item = {
-         ...checkbox,
-         checked: !checkbox.checked,
-       }
-       input.status_menikah = checkbox.value
-       return item
-     }
-    return checkbox
-  })
-  setStatusMenikah(newValue)
+  const statusmenikahHandler = (val) => {
+    setStatusMenikah(val)
   }
   const goNextPage = page => {
     if (page) {
@@ -143,6 +172,7 @@ function EditProfil(props) {
     }
   }
   const submitData =(value) => {
+
     async function submit(){
       const token = await AsyncStorage.getItem('token')
       const url = USER_MANAGEMENT;
@@ -151,16 +181,16 @@ function EditProfil(props) {
         nama: value.nama,
         tempat_lahir: value.tempat_lahir,
         tanggal_lahir: value.tanggal_lahir,
-        jenis_kelamin: input.jenis_kelamin,
-        status_menikah: input.status_menikah,
+        jenis_kelamin: value.jeniskelamin,
+        status_menikah: value.statusmenikah,
         golongan_darah : input.gologan_darah,
-        pekerjaan : input.pekerjaan,
+        pekerjaan : input.pekerjaan || pekerjaanInitial,
         gambar : filebase64
       
       };
-      console.log(body)
-    
-      if(input.jenis_kelamin == "" || input.status_menikah == "" || input.gologan_darah == "" || input.pekerjaan == ""){
+      console.log("BODY---",body)
+
+      if(!jeniskelamin || !status_menikah || !gologanDarah || !pekerjaan){
         alert('Lengkapi Data Profile')
       }else{
         Axios.put(`${url}/api/simaba/user/update`, body,
@@ -170,13 +200,16 @@ function EditProfil(props) {
         }})
             .then(r => {
                 if (r.data.code == 200) {
-                  console.log(r.data)
-                  // AsyncStorage.setItem('exp', r.data.data.exp);
-                  // AsyncStorage.setItem('ktp', r.data.data.ktp);
-                  // AsyncStorage.setItem('tempat_lahir',r.data.data.tempat_lahir);
-                  // AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
-                  // AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
-                  // AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
+                  AsyncStorage.setItem('ktp', body.ktp.toString());
+                  AsyncStorage.setItem('nama', body.nama.toString());
+                  AsyncStorage.setItem('tempat_lahir', body.tempat_lahir.toString());
+                  AsyncStorage.setItem('tanggal_lahir', body.tanggal_lahir.toString());
+                  AsyncStorage.setItem('jenis_kelamin', body.jenis_kelamin.toString());
+                  AsyncStorage.setItem('status_menikah', body.status_menikah.toString());
+                  AsyncStorage.setItem('golongan_darah', body.golongan_darah.toString());
+                  AsyncStorage.setItem('pekerjaan', body.pekerjaan.toString());
+                  AsyncStorage.setItem('gambar', body.gambar.toString());
+
                   alert('sukses melengkapi profil')
                   props.navigation.replace('Dashboard')
                 } else {
@@ -184,7 +217,7 @@ function EditProfil(props) {
                 }
             })
             .catch(err => {
-                console.log('error : ', err);
+                console.log('error : ', err.message);
             });
       }
 
@@ -192,6 +225,9 @@ function EditProfil(props) {
     }
     submit()
   }
+
+  
+
   useEffect(() => {
     get_profile_image()
     setBase64("/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAAAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3BhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADTLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAwADEANv/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIASwBLAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQr/xAAZEAEAAgMAAAAAAAAAAAAAAAAAAcECMXH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAv/EABoRAQEBAAMBAAAAAAAAAAAAAAARAQISITH/2gAMAwEAAhEDEQA/AMP4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBN35lAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEjeXahQVx3rtl8gAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/9k=")
@@ -430,7 +466,7 @@ function EditProfil(props) {
                   width: "60%", marginRight:"5%" }}
               >
             <Image
-              source= {{ uri :'data:image/jpeg;base64,' + filebase64 }}
+              source= {{ uri : 'data:image/jpeg;base64,' + filebase64 }}
               style={{
                 marginTop: 15,
                 width:  150,
@@ -498,13 +534,15 @@ function EditProfil(props) {
           </View>
           </View>
                  <Formik initialValues={{
-                        ktp:'',
-                        nama:'',
-                        tempat_lahir:'',
-                        tanggal_lahir:'',
-                        jeniskelamin : '',
-                        statusmenikah : '',
+                        ktp: ktp,
+                        nama: nama,
+                        tempat_lahir: tempat_lahir,
+                        tanggal_lahir:tanggal_lahir,
+                        jeniskelamin : jeniskelamin,
+                        statusmenikah : status_menikah,
+                        pekerjaan : pekerjaan,
                     }}
+                    enableReinitialize
                     validationSchema={formSchema}        
                     onSubmit={value => {
                         submitData(value);
@@ -514,6 +552,7 @@ function EditProfil(props) {
                     {({
                         handleChange,
                         handleBlur,
+                        setFieldValue,
                         handleSubmit,
                         values,
                         errors,
@@ -660,32 +699,19 @@ function EditProfil(props) {
                 jenis kelamin
               </Text>
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
+              <CheckBox
+                  style={{width:"70%"}}
+                    title={'laki-laki'}
+                    checked={values.jeniskelamin == 'laki-laki' ? true : false}
+                    onPress={() => setFieldValue('jeniskelamin', 'laki-laki')}
+                  /> 
+                  <CheckBox
+                  style={{width:"70%"}}
+                    title={'perempuan'}
+                    checked={values.jeniskelamin == 'perempuan' ? true : false}
+                    onPress={() => setFieldValue('jeniskelamin', 'perempuan')}
+                  /> 
               <View>
-              {jeniskelamin.map((checkbox, i) => {
-                if (i < jeniskelamin.length/2){
-                  return <CheckBox
-                  style={{width:"70%"}}
-                    title={checkbox.label}
-                    checked={checkbox.checked}
-                    onPress={() => jeniskelaminHandler(i)}
-                    key={i}
-                  /> 
-                }
-              })
-                  }
-                  </View>
-                  <View>
-              {jeniskelamin.map((checkbox, i) => {
-                if (i >= jeniskelamin.length/2){
-                  return <CheckBox
-                  style={{width:"70%"}}
-                    title={checkbox.label}
-                    checked={checkbox.checked}
-                    onPress={() => jeniskelaminHandler(i)}
-                    key={i}
-                  /> 
-                }
-              })}
               </View>             
               </View>
               
@@ -695,33 +721,18 @@ function EditProfil(props) {
                 Status Menikah
               </Text>
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
-              <View>
-              {statusmenikah.map((checkbox, i) => {
-                if (i < statusmenikah.length/2){
-                  return <CheckBox
+                  <CheckBox
                   style={{width:"70%"}}
-                    title={checkbox.label}
-                    checked={checkbox.checked}
-                    onPress={() => statusmenikahHandler(i)}
-                    key={i}
-                  /> 
-                }
-              })
-                  }
-                  </View>
-                  <View>
-              {statusmenikah.map((checkbox, i) => {
-                if (i >= statusmenikah.length/2){
-                  return <CheckBox
+                    title={'Sudah Menikah'}
+                    checked={values.statusmenikah == 1 ? true : false}
+                    onPress={() => setFieldValue('statusmenikah', 1)}
+                  />
+                  <CheckBox
                   style={{width:"70%"}}
-                    title={checkbox.label}
-                    checked={checkbox.checked}
-                    onPress={() => statusmenikahHandler(i)}
-                    key={i}
-                  /> 
-                }
-              })}
-              </View>             
+                    title={'Belum Menikah'}
+                    checked={values.statusmenikah == 0 ? true : false}
+                    onPress={() => setFieldValue('statusmenikah', 0)}
+                  />
               </View>
               {/* <Text
           style={{
@@ -829,6 +840,7 @@ function EditProfil(props) {
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
               <View>
               {pekerjaan.map((checkbox, i) => {
+                // console.info(checkbox.value, checkbox.checked ? 'ada' : 'tidak');
                 if (i < pekerjaan.length/2){
                   return <CheckBox
                   style={{width:"70%"}}
@@ -864,11 +876,12 @@ function EditProfil(props) {
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
               <View>
               {gologanDarah.map((checkbox, i) => {
+                // console.info("__DATA__",gologanDarah)
                 if (i < gologanDarah.length/2){
                   return <CheckBox
                   style={{width:"70%"}}
                     title={checkbox.label}
-                    checked={checkbox.checked}
+                    checked={Boolean(checkbox.checked)}
                     onPress={() => golonganDarahHandler(i)}
                     key={i}
                   /> 
@@ -882,7 +895,7 @@ function EditProfil(props) {
                   return <CheckBox
                   style={{width:"70%"}}
                     title={checkbox.label}
-                    checked={checkbox.checked}
+                    checked={Boolean(checkbox.checked)}
                     onPress={() => golonganDarahHandler(i)}
                     key={i}
                   /> 
