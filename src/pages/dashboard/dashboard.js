@@ -23,7 +23,7 @@ function Dashboard(props) {
     async function checkProfile() {
         const ktp = await AsyncStorage.getItem('ktp')
         if (ktp==null){
-            props.navigation.replace('EditProfil');
+            // props.navigation.replace('EditProfil');
         }
     }
 
@@ -52,7 +52,7 @@ function Dashboard(props) {
           });
     }
     const goNextPage = page => {
-        if (page === 'Logout') {
+        if (page === 'Login') {
             AsyncStorage.clear();
             props.navigation.replace(page);
         }else {
