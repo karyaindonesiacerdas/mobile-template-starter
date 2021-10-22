@@ -34,7 +34,6 @@ function Dashboard(props) {
       const body = {
        email : ''
       };
-      console.log(body)
       Axios.post(`${url}/api/simaba/user`, body,
       {headers:{
         Authorization :'Bearer ' +token,

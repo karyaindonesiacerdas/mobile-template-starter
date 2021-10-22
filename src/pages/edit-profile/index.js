@@ -21,9 +21,11 @@ import { USER_MANAGEMENT } from "../../config/api";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker'; 
 import Axios from 'axios';
 import * as Yup from 'yup'
+import base64 from 'react-native-base64'
 
 function EditProfil(props) {
   const [filebase64, setBase64] = React.useState(null);
+  const [gambar, setGambar] = React.useState('');
 
   const [pekerjaan, setPekerjaan] = React.useState([
     { label: 'PNS', value: 'pns', checked: false },
@@ -191,8 +193,31 @@ function EditProfil(props) {
     submit()
   }
   useEffect(() => {
+    get_profile_image()
     setBase64("/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAAAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3BhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADTLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAwADEANv/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIASwBLAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQr/xAAZEAEAAgMAAAAAAAAAAAAAAAAAAcECMXH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAv/EABoRAQEBAAMBAAAAAAAAAAAAAAARAQISITH/2gAMAwEAAhEDEQA/AMP4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBN35lAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEjeXahQVx3rtl8gAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/9k=")
     },[]);
+
+    async function get_profile_image(){
+       const token = await AsyncStorage.getItem('token')
+       const gambar_str = await AsyncStorage.getItem('gambar')
+       if (gambar_str){
+        setGambar(gambar_str.substring(15))
+        console.log(gambar_str)
+       }
+       const url = USER_MANAGEMENT;
+       const get_url = `${url}/api/simaba/image-profile/${gambar}`
+       console.log(get_url)
+       Axios.get(get_url,
+      {headers:{
+        Authorization :'Bearer ' +token
+      }})
+          .then(r => {
+            console.log(r)
+          })
+          .catch(err => {
+                console.log(err)
+          });
+    }
 
   const formSchema = Yup.object().shape({
     ktp : Yup.string()
@@ -280,8 +305,13 @@ function EditProfil(props) {
           alert(response.errorMessage);
           return;
         }
-       
-        setFilePath(response.assets[0]);
+
+        const img = {
+          uri: response.assets[0].uri,
+          type: response.assets[0].type,
+          name: response.assets[0].fileName
+        }
+        setFilePath(img);
         setBase64(response.assets[0].base64)
       });
     }
@@ -310,14 +340,51 @@ function EditProfil(props) {
         alert(response.errorMessage);
         return;
       }
-
-      setFilePath(response.assets[0]);
+      console.log(response)
+      const img = {
+        uri: response.assets[0].uri,
+        type: response.assets[0].type,
+        name: response.assets[0].fileName
+      }
+      setFilePath(img);
       setBase64(response.assets[0].base64)      
     });
     
   };
-  const removePhoto = () =>{
-    setFilePath(null)
+  const savePhoto = () =>{
+    async function submit_photo(){
+      const token = await AsyncStorage.getItem('token')
+      const email = await AsyncStorage.getItem('email')
+      const url = USER_MANAGEMENT;
+      const body =  new FormData();
+      body.append('email',email);
+      body.append('gambar',filePath);
+      console.log(body)
+        Axios.put(`${url}/api/simaba/user/image-profile`, body,
+        {headers:{
+          Authorization :'Bearer ' +token,
+          'Content-Type': "multipart/form-data",
+        }})
+            .then(r => {
+                if (r.data.code == 200) {
+                  console.log(r.data)
+                  // AsyncStorage.setItem('exp', r.data.data.exp);
+                  // AsyncStorage.setItem('ktp', r.data.data.ktp);
+                  // AsyncStorage.setItem('tempat_lahir',r.data.data.tempat_lahir);
+                  // AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
+                  // AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
+                  // AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
+                  alert('sukses melengkapi profil')
+                  props.navigation.replace('Dashboard')
+                } else {
+                    console.log('Error', r.data);
+                }
+            })
+            .catch(err => {
+                console.log('error : ', err);
+            });
+      }
+    submit_photo()
   };
 
 
@@ -414,7 +481,7 @@ function EditProfil(props) {
             style={{
               backgroundColor: "grey",width: "60%", marginRight:"30%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={() => removePhoto()}  >
+            <TouchableOpacity style={styles.button} onPress={() => savePhoto()}  >
               <Text
                 style={{
                   margin: 10,
@@ -424,7 +491,7 @@ function EditProfil(props) {
                   fontWeight: "bold",textAlign:'center',
                 }}
               >
-                Cancel
+                Save
               </Text>
             </TouchableOpacity>
           </Card>

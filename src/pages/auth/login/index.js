@@ -48,6 +48,9 @@ function Login(props) {
                     AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
                     AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
                     AsyncStorage.setItem('nomor_telepon',r.data.data.nomor_telepon);
+                    AsyncStorage.setItem('email',r.data.data.email);
+                    AsyncStorage.setItem('gambar',r.data.data.gambar);
+                   
                     // AsyncStorage.setItem('golongan_darah',r.data.data.golongan_darah);
                     switch
                     (r.data.data.role) {
