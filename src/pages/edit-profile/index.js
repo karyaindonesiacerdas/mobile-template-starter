@@ -232,7 +232,7 @@ console.info("_pekerjaan",_pekerjaan)
                   AsyncStorage.setItem('pekerjaan', body.pekerjaan.toString());
                   AsyncStorage.setItem('gambar', body.gambar.toString());
 
-                  alert('11sukses melengkapi profil')
+                  alert('sukses melengkapi profil')
                   props.navigation.replace('Dashboard')
                 } else {
                     console.log('Error', r.data);
