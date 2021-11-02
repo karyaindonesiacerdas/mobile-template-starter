@@ -94,6 +94,7 @@ function Login(props) {
                     margin: 10,
                     right: 126,
                     top: 130,
+                    bottom:40,
                 }}></Image>
             <Content contentContainerStyle={styles.container}>
                 <View style={styles.logo}>

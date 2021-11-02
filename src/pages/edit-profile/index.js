@@ -24,6 +24,7 @@ import * as Yup from 'yup'
 import base64 from 'react-native-base64'
 
 function EditProfil(props) {
+  const [isLoading, setIsLoading] = useState(false);
   const [ktp, setKtp] = useState(null);
   const [nama, setNama] = useState(null);
   const [tempat_lahir, setTempatLahir] = useState(null);
@@ -32,7 +33,8 @@ function EditProfil(props) {
   const [status_menikah, setStatusMenikah] = React.useState(0)
   const [pekerjaan, setPekerjaan] = React.useState([]);
   const [pekerjaanInitial, setPekerjaanInitial] = React.useState(null);
-  const [gologanDarah, setGolonganDarah] = React.useState([])
+  const [golonganDarah, setGolonganDarah] = React.useState([])
+  const [golonganDarahInitial, setGolonganDarahInitial] = React.useState(null)
   const [filebase64, setBase64] = React.useState(null);
   const [gambar, setGambar] = React.useState('');
 
@@ -52,6 +54,16 @@ function EditProfil(props) {
       var _pekerjaan = await AsyncStorage.getItem('pekerjaan')
       var _gambar = await AsyncStorage.getItem('gambar')
 
+
+      console.info("_ktp",_ktp)
+console.info("_nama",_nama)
+console.info("_tempat_lahir",_tempat_lahir)
+console.info("_tanggal_lahir",_tanggal_lahir)
+console.info("_jenis_kelamin",_jenis_kelamin)
+console.info("_status_menikah",_status_menikah)
+console.info("_golongan_darah",_golongan_darah)
+console.info("_pekerjaan",_pekerjaan)
+
       Axios.post(`${url}/api/simaba/user`, {},
         {headers:{
           Authorization :'Bearer ' +token,
@@ -65,8 +77,11 @@ function EditProfil(props) {
               setTanggalLahir(_tanggal_lahir || r.data?.data?.[0].tanggal_lahir)
               setJenisKelamin(_jenis_kelamin || r.data?.data?.[0].jenis_kelamin);
               setStatusMenikah(_status_menikah || r.data?.data?.[0].status_menikah)
-              setPekerjaanInitial(r.data?.data?.[0].pekerjaan);
+              setPekerjaanInitial(_pekerjaan || r.data?.data?.[0].pekerjaan);
+              setGolonganDarahInitial(_golongan_darah || r.data?.data?.[0].golongan_darah);
+
               console.info(_pekerjaan || r.data?.data?.[0].pekerjaan, _pekerjaan || r.data?.data?.[0].pekerjaan === 'swasta' ? true : false)
+              
               setPekerjaan([
                 { label: 'PNS', value: 'pns', checked: _pekerjaan == 'pns' ? true : false || r.data?.data?.[0].pekerjaan == 'pns' ? true : false },
                 { label: 'Swasta', value: 'swasta', checked: _pekerjaan == 'swasta' ? true : false || r.data?.data?.[0].pekerjaan == 'swasta' ? true : false },
@@ -99,34 +114,37 @@ function EditProfil(props) {
   }, []);
 
 
+
   const [input] = useState({
     pekerjaan : '',
     gologan_darah:'',
     jenis_kelamin:'',
     status_menikah:'',
   })
+
   const pekerjaanHandler = (index) => {
     const newValue = pekerjaan.map((checkbox, i) => {
-     if (i !== index)
-       return {
-         ...checkbox,
-         checked: false,
-       }
-     if (i === index) {
-       const item = {
-         ...checkbox,
-         checked: !checkbox.checked,
-       }
-       input.pekerjaan = checkbox.value
-       return item
-     }
-    return checkbox
-  })
-  console.info(newValue)
+      if (i !== index)
+        return {
+          ...checkbox,
+          checked: false,
+        }
+      if (i === index) {
+        const item = {
+          ...checkbox,
+          checked: !checkbox.checked,
+        }
+        input.pekerjaan = checkbox.value
+        return item
+      }
+      return checkbox
+    })
+    console.info("setPekerjaan", newValue)
     setPekerjaan(newValue)
   }
+
   const golonganDarahHandler = (index) => {
-    const newValue = gologanDarah.map((checkbox, i) => {
+    const newValue = golonganDarah.map((checkbox, i) => {
      if (i !== index)
        return {
          ...checkbox,
@@ -171,9 +189,12 @@ function EditProfil(props) {
       props.navigation.replace(page)
     }
   }
+
   const submitData =(value) => {
+    console.info('value-form', value.golongan_darah.toString())
 
     async function submit(){
+      // setIsLoading(true)
       const token = await AsyncStorage.getItem('token')
       const url = USER_MANAGEMENT;
       const body = {
@@ -182,15 +203,23 @@ function EditProfil(props) {
         tempat_lahir: value.tempat_lahir,
         tanggal_lahir: value.tanggal_lahir,
         jenis_kelamin: value.jeniskelamin,
+<<<<<<< HEAD
         status_menikah: value.statusmenikah,
         golongan_darah : input.gologan_darah,
         pekerjaan : input.pekerjaan || pekerjaanInitial,
         // gambar : filebase64
+=======
+        status_menikah: value.statusmenikah.toString(),
+        golongan_darah : value.gologan_darah,
+        pekerjaan : value.pekerjaan,
+        gambar : filebase64
+>>>>>>> a6aefa70c9a11da16acd161d986301cd409f1dab
       
       };
-      console.log("BODY---",body)
+      // return;
 
-      if(!jeniskelamin || !status_menikah || !gologanDarah || !pekerjaan){
+
+      if(!jeniskelamin || !status_menikah || !golonganDarah || !pekerjaan){
         alert('Lengkapi Data Profile')
       }else{
         Axios.put(`${url}/api/simaba/user/update`, body,
@@ -200,13 +229,15 @@ function EditProfil(props) {
         }})
             .then(r => {
                 if (r.data.code == 200) {
+      console.log("11BODY---",value.golongan_darah.toString())
+
                   AsyncStorage.setItem('ktp', body.ktp.toString());
                   AsyncStorage.setItem('nama', body.nama.toString());
                   AsyncStorage.setItem('tempat_lahir', body.tempat_lahir.toString());
                   AsyncStorage.setItem('tanggal_lahir', body.tanggal_lahir.toString());
                   AsyncStorage.setItem('jenis_kelamin', body.jenis_kelamin.toString());
                   AsyncStorage.setItem('status_menikah', body.status_menikah.toString());
-                  AsyncStorage.setItem('golongan_darah', body.golongan_darah.toString());
+                  AsyncStorage.setItem('golongan_darah', value.golongan_darah.toString());
                   AsyncStorage.setItem('pekerjaan', body.pekerjaan.toString());
                   AsyncStorage.setItem('gambar', body.gambar.toString());
 
@@ -221,6 +252,7 @@ function EditProfil(props) {
             });
       }
 
+      setIsLoading(false)
 
     }
     submit()
@@ -426,7 +458,11 @@ function EditProfil(props) {
 
   return (
     <Container>
-      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+      {isLoading ? (
+        <Text>Loading....</Text>
+      ) : (
+        <React.Fragment>
+           <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
         source={require("../image/logo.png")}
         style={{
@@ -451,9 +487,6 @@ function EditProfil(props) {
         }}
       ></Image>
       <ScrollView>
-     
-  
-     
         <Text style={{ marginLeft:30, marginTop:0,fontSize: 35,fontWeight: "bold",  color: "black" }}>
                 Edit
               </Text>
@@ -540,13 +573,13 @@ function EditProfil(props) {
                         tanggal_lahir:tanggal_lahir,
                         jeniskelamin : jeniskelamin,
                         statusmenikah : status_menikah,
-                        pekerjaan : pekerjaan,
+                        pekerjaan : pekerjaanInitial,
+                        golongan_darah: golonganDarahInitial
                     }}
                     enableReinitialize
                     validationSchema={formSchema}        
                     onSubmit={value => {
                         submitData(value);
-                        goNextPage.bind(this, 'Dashboard')
                     }}            
                     >
                     {({
@@ -845,8 +878,10 @@ function EditProfil(props) {
                   return <CheckBox
                   style={{width:"70%"}}
                     title={checkbox.label}
-                    checked={checkbox.checked}
-                    onPress={() => pekerjaanHandler(i)}
+                    checked={checkbox.value == values.pekerjaan ? true : false}
+                    onPress={() => {
+                      setFieldValue('pekerjaan', checkbox.value)
+                    }}
                     key={i}
                   /> 
                 }
@@ -859,8 +894,10 @@ function EditProfil(props) {
                   return <CheckBox
                   style={{width:"70%"}}
                     title={checkbox.label}
-                    checked={checkbox.checked}
-                    onPress={() => pekerjaanHandler(i)}
+                    checked={checkbox.value == values.pekerjaan ? true : false}
+                    onPress={() => {
+                      setFieldValue('pekerjaan', checkbox.value)
+                    }}
                     key={i}
                   /> 
                 }
@@ -875,14 +912,16 @@ function EditProfil(props) {
               </Text>
               <View style={{marginTop:10,marginLeft:30,marginRight:40, flexDirection: "row",justifyContent: "space-between"}}>
               <View>
-              {gologanDarah.map((checkbox, i) => {
-                // console.info("__DATA__",gologanDarah)
-                if (i < gologanDarah.length/2){
+              {golonganDarah.map((checkbox, i) => {
+                // console.info("__DATA__",golonganDarah)
+                if (i < golonganDarah.length/2){
                   return <CheckBox
                   style={{width:"70%"}}
                     title={checkbox.label}
-                    checked={Boolean(checkbox.checked)}
-                    onPress={() => golonganDarahHandler(i)}
+                    checked={checkbox.value == values.golongan_darah ? true : false}
+                    onPress={() => {
+                      setFieldValue('golongan_darah', checkbox.value)
+                    }}
                     key={i}
                   /> 
                 }
@@ -890,13 +929,15 @@ function EditProfil(props) {
                   }
                   </View>
                   <View>
-              {gologanDarah.map((checkbox, i) => {
-                if (i >= gologanDarah.length/2){
+              {golonganDarah.map((checkbox, i) => {
+                if (i >= golonganDarah.length/2){
                   return <CheckBox
                   style={{width:"70%"}}
                     title={checkbox.label}
-                    checked={Boolean(checkbox.checked)}
-                    onPress={() => golonganDarahHandler(i)}
+                    checked={checkbox.value == values.golongan_darah ? true : false}
+                    onPress={() => {
+                      setFieldValue('golongan_darah', checkbox.value)
+                    }}
                     key={i}
                   /> 
                 }
@@ -986,6 +1027,8 @@ function EditProfil(props) {
         )}
           </Formik>
  </ScrollView>
+        </React.Fragment>
+      )}
     </Container>
   );
 }
