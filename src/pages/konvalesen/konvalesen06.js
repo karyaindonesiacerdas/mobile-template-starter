@@ -356,7 +356,7 @@ function Konvalesen06(props) {
     const goNextPage = page => {
         var input = RefactorInput(kuesioner);
 
-        if (page === 'Berhasil') {
+        if (page === 'Konvalesen07') {
             console.info(input);
             if (input.count !== 43) {
                 alert(
@@ -391,7 +391,7 @@ function Konvalesen06(props) {
                 console.log(res.data);
                 if (res.data.code === 200) {
                     alert('sukses submit kuesioner');
-                    props.navigation.navigate('Berhasil',{kode_pendonor : kode_calon_pendonor});
+                    props.navigation.navigate('Konvalesen07',{kode_pendonor : kode_calon_pendonor});
                 } else {
                     console.log('Error', res.data.message);
                 }
@@ -443,7 +443,7 @@ function Konvalesen06(props) {
                         fontWeight: 'bold',
                         color: 'black',
                     }}>
-                    Donor Darah Konvalesen
+                    Donor Darah Biasa
                 </Text>
                 <View
                     style={{

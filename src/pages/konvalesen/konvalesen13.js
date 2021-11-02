@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import {
   Alert,
   ImageBackground,
@@ -31,11 +31,18 @@ import {
 import styles from "./styles";
 
 function Konvalesen13(props) {
+  const [jadwal ,setJadwal] = useState(null)
+  const [lokasi ,setLokasi] = useState(null)
+  useEffect(() => {
+    setJadwal(props.route.params.jadwal)
+    setLokasi(props.route.params.lokasi)
+  },[]);
    const goNextPage = (page) => {
     if (page) {
       props.navigation.replace(page);
     }
   };
+
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   return (
@@ -103,9 +110,9 @@ function Konvalesen13(props) {
         >
           Terima Kasih Anda Sudah Mendaftarkan Diri Sebagai Calon Donor Plasma Konvalesen.{'\n'}
           {'\n'}
-          Jadwal Pengambilan Sampel Darah di (lokasi) pada tanggal{'\n'}
+          Jadwal Pengambilan Sampel Darah di {lokasi} pada tanggal{'\n'}
           {'\n'}
-          DD-MM-YYYY{'\n'}
+          {jadwal}
           {'\n'}
           Silahkan Datang Pada Jadwal Yang Sudah di Tentukan
         </Text>
@@ -133,7 +140,7 @@ function Konvalesen13(props) {
               marginLeft: "2%",
             }}
           >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Dashboard")}>
+            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen14")}>
               <Text
                 style={{
                   margin: 10,

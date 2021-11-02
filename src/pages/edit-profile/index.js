@@ -185,7 +185,7 @@ function EditProfil(props) {
         status_menikah: value.statusmenikah,
         golongan_darah : input.gologan_darah,
         pekerjaan : input.pekerjaan || pekerjaanInitial,
-        gambar : filebase64
+        // gambar : filebase64
       
       };
       console.log("BODY---",body)

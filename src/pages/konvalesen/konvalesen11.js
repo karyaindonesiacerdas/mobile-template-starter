@@ -25,7 +25,7 @@ function Konvalesen11(props) {
   const [check2, setCheck2] = useState(false);
   const goNextPage = (page) => {
     if (page) {
-      props.navigation.replace(page);
+      props.navigation.navigate(page, {location: 'Gedung UDD'})
     }
   };
   return (

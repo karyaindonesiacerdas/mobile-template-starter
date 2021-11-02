@@ -35,7 +35,9 @@ function Konvalesen07(props) {
   const [check2, setCheck2] = useState(false);
   const goNextPage = (page) => {
     if (page) {
-      props.navigation.replace(page);
+      const kode_calon_pendonor = props.route.params.kode_pendonor
+      console.log(kode_calon_pendonor)
+      props.navigation.navigate('Konvalesen09',{kode_pendonor : kode_calon_pendonor});
     }
   };
   return (
@@ -143,28 +145,6 @@ function Konvalesen07(props) {
             marginBottom: 10,
           }}
         >
-          <Card
-            style={{
-              backgroundColor: "#000",
-              width: "40%",
-              marginRight: "2%",
-            }}
-          >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen06")}>
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20,
-
-                  color: "white",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              >
-                Kembali
-              </Text>
-            </TouchableOpacity>
-          </Card>
           <Card
             style={{
               backgroundColor: "#000",

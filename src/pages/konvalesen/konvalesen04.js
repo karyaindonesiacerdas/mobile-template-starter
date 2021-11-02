@@ -125,7 +125,7 @@ function Konvalesen04(props) {
   const goNextPage = page => {
     if (page == 'Konvalesen05') {
       input.alamat = props.route.params.payload.alamat
-      input.jenis_donor = 'konvalesen'
+      input.jenis_donor = 'plasma konvalesen'
       input.ktp = props.route.params.payload.ktp
       input.nama = props.route.params.payload.nama
       input.nomor_telepon = props.route.params.payload.nomor_telepon

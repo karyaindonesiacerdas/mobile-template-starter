@@ -27,8 +27,13 @@ import {
   TouchableWithoutFeedback,
   
 } from "react-native-gesture-handler";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import styles from "../styles/styles";
 import DocumentPicker from 'react-native-document-picker';
+import { PENDONOR } from '../../config/api';
+import Axios from 'axios';
+import qs from 'qs';
 
 function Konvalesen05(props) {
   const [text, onChangeText] = React.useState("Useless Text");
@@ -80,16 +85,20 @@ function Konvalesen05(props) {
     value.jenis_kelamin = jenis_kelamin
     value.berat_badan = berat_badan
     value.positif_date = positif_date
-    value.negative_date = negative_date
-    value.positif_file = positif_file
-    value.negative_file = negative_file
-
-    const body = value;
+    value.tanggal_sembuh = negative_date
+    value.hasil_positif_lab = positif_file
+    value.hasil_negatif_lab = negative_file
+    console.log("+" + positif_file)
+    console.log("-" + negative_file)
+    const body = new FormData();
+    for (var key in value){
+      body.append(key,value[key])
+    }
     console.log(body)
-    Axios.post(`${url}/api/simaba/calon-pendonor/create`, qs.stringify(body),
+    Axios.post(`${url}/api/simaba/calon-pendonor/create`, body,
     {headers:{
       Authorization :'Bearer ' +token,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'multipart/form-data; boundary=${body._boundary}',
     }})
     .then(res => {
         console.info('res.data', res.data);
@@ -97,7 +106,7 @@ function Konvalesen05(props) {
         if (res.data.code === 200) {
             alert('sukses menambahkan pendonor');
             AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
-            props.navigation.navigate('Kuisioner',{kode_pendonor : res.data.kode_pendonor});
+            props.navigation.navigate('Konvalesen06',{kode_pendonor : res.data.kode_pendonor});
         } else {
             console.log('Error', res.data.message);
         }
@@ -119,7 +128,7 @@ function Konvalesen05(props) {
     //Opening Document Picker for selection of one file
     try {
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
+        type: [DocumentPicker.types.images],
         //There can me more options as well
         // DocumentPicker.types.allFiles
         // DocumentPicker.types.images
@@ -135,7 +144,12 @@ function Konvalesen05(props) {
       console.log('File Size : ' + res[0].size);
 
       //Setting the state to show single file attributes
-      setPositif_file(res[0]);
+      const img = {
+        uri: res[0].uri,
+        type: res[0].type,
+        name: res[0].name
+      }
+      setPositif_file(img);
     } catch (err) {
       //Handling any exception (If any)
       if (DocumentPicker.isCancel(err)) {
@@ -152,7 +166,7 @@ function Konvalesen05(props) {
     //Opening Document Picker for selection of one file
     try {
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
+        type: [DocumentPicker.types.images],
         //There can me more options as well
         // DocumentPicker.types.allFiles
         // DocumentPicker.types.images
@@ -167,7 +181,12 @@ function Konvalesen05(props) {
       console.log('File Name : ' + res[0].name);
       console.log('File Size : ' + res[0].size);
       //Setting the state to show single file attributes
-      setNegative_file(res[0]);
+      const img2 = {
+        uri: res[0].uri,
+        type: res[0].type,
+        name: res[0].name
+      }
+      setNegative_file(img2);
     } catch (err) {
       //Handling any exception (If any)
       if (DocumentPicker.isCancel(err)) {

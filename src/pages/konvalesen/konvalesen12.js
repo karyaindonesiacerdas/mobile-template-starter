@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
     Alert,
     ImageBackground,
@@ -24,29 +24,80 @@ import {
     Col,
 } from 'react-native-table-component';
 import Bg from '../../image/baground3.jpeg'
-
-const CONTENT = {
-    tableHead: ['                                             Agustus 2021'],
-
-    tableData: [
-        ['   Senin', '  Selasa', '   Rabu','  Kamis','  Jumat','  Sabtu',' Minggu'],
-        ['', '', '','','','','       1'],
-        ['       2', '       3', '       4','       5','       6','      7','       8'],
-        ['       9', '      10', '      11','      12','      13','     14','      15'],
-        ['      16', '      17', '      18','      19','      20','     21','      22'],
-        ['      23', '      24', '      25','      26','      27','     28','      29'],
-        ['      30', '      31', '','','','',''],
-    ],
-};
+import CalendarPicker from 'react-native-calendar-picker';
+import moment from 'moment'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { PENDONOR } from '../../config/api';
+import Axios from 'axios';
 function Konvalesen12(props) {
     const [check1, setCheck1] = useState(false);
     const [check2, setCheck2] = useState(false);
+    const [jadwal, setJadwal] = useState(Date.now())
+    const lokasi = props.route.params
+
     const goNextPage = page => {
-        if (page) {
-            props.navigation.replace(page);
+        if (page == 'Konvalesen13') {
+            submit()
+        }
+        else{
+            props.navigation.replace(page)  
         }
     };
 
+    useEffect(() => {
+        var date = new Date().getDate(); //Current Date
+        var month = new Date().getMonth() + 1; //Current Month
+        var year = new Date().getFullYear(); //Current Year
+        console.log(lokasi)
+        if (month < 10){
+            month = '0' + month;
+         }
+        if (date < 10){
+            date = '0' + date;
+        }
+        setJadwal(
+          year + '-' + month + '-' + date 
+        );
+        console.log(jadwal)
+      }, []);
+    const onDateChange = date =>{
+        date = moment(date).format('YYYY-MM-DD');
+        setJadwal(date)
+        console.log(date)
+    }
+
+    
+    async function submit() {
+        const token = await AsyncStorage.getItem('token');
+        const ktp = await AsyncStorage.getItem('ktp');
+        const lokasi = props.route.params.location;
+        const url = PENDONOR;
+        const body = {
+            ktp : ktp,
+            lokasi : lokasi,
+            jadwal : jadwal
+        }
+        console.log(body)
+        Axios.put(`${url}/api/simaba/pendonor/update/lokasi`, body,
+        {headers:{
+            Authorization :'Bearer ' +token,
+            'Content-Type': 'application/json',
+          }})
+            .then(res => {
+                console.info('res.data', res.data);
+                console.log(res.data);
+                if (res.data.code === 200) {
+                    alert('sukses update jadwal');
+                    props.navigation.navigate('Konvalesen13', {jadwal: jadwal,lokasi:lokasi})
+                } else {
+                    console.log('Error', res.data.message);
+                }
+            })
+            .catch(err => {
+                console.log('test : ', err.response);
+                props.navigation.navigate('Konvalesen13', {jadwal: jadwal})
+            });
+    }
     return (
         <Container>
             <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
@@ -100,37 +151,14 @@ function Konvalesen12(props) {
                         justifyContent: 'center',
                         alignSelf: 'center',
                     }}>
-                    <Table
-                        borderStyle={{
-                            borderWidth: 1,
-                            justifyContent: 'center',
-                            alignContent: 'center',
-                        }}>
-                        <Row
-                            data={CONTENT.tableHead}
-                            flexArr={[1, 2, 1, 1]}
-                            style={styles.head}
-                            textStyle={styles.text}
+                     <CalendarPicker
+                        onDateChange={onDateChange}
                         />
-                        <TableWrapper style={styles.wrapper}>
-                            <Col
-                                data={CONTENT.tableTitle}
-                                style={styles.title}
-                                heightArr={[28, 28]}
-                                textStyle={styles.text}
-                            />
-                            <Rows
-                                data={CONTENT.tableData}
-                                flexArr={[1, 1, 1]}
-                                style={styles.row}
-                                textStyle={styles.text}
-                            />
-                        </TableWrapper>
-                    </Table>
                 </View>
                 <View style={{}}>
-                    <CheckBox title='Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan' style={{width:"70%" }} checked={check1}
-              onPress={() => setCheck1(!check1)}   />
+                    <CheckBox title='Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan' style={{width:"70%" }}checked={check1}
+              onPress={() => setCheck1(!check1)}
+              style={{ width: "70%" }}   />
           </View>
                 <View
                     style={{
