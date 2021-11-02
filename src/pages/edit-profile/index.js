@@ -203,17 +203,10 @@ console.info("_pekerjaan",_pekerjaan)
         tempat_lahir: value.tempat_lahir,
         tanggal_lahir: value.tanggal_lahir,
         jenis_kelamin: value.jeniskelamin,
-<<<<<<< HEAD
-        status_menikah: value.statusmenikah,
-        golongan_darah : input.gologan_darah,
-        pekerjaan : input.pekerjaan || pekerjaanInitial,
-        // gambar : filebase64
-=======
         status_menikah: value.statusmenikah.toString(),
         golongan_darah : value.gologan_darah,
         pekerjaan : value.pekerjaan,
         gambar : filebase64
->>>>>>> a6aefa70c9a11da16acd161d986301cd409f1dab
       
       };
       // return;
