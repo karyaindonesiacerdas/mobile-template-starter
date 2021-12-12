@@ -34,23 +34,21 @@ function Barcode(props) {
     async function getData() {
       const token = await AsyncStorage.getItem('token')
       const ktp = await AsyncStorage.getItem('ktp')
+      const kode_pendonor = await AsyncStorage.getItem('kode_pendonor');
 
       const headers = {
           'Content-Type': 'application/json',
           'Authorization' : 'Bearer ' + token
       };
       const body = {
-        ktp: ktp
+        kode_calon_pendonor: kode_pendonor
       };
-      Axios.post(`${url}/api/simaba/pendonor`, body,
-          {headers:{
-              Authorization :'Bearer ' +token,
-              'Content-Type': 'application/json',
-            }})
+      Axios.post(`${url}/api/simaba/calon-pendonor`, body,
+         headers)
           .then(res => {
             console.log(res.data.data)
 
-            const ktp = res.data.data[0].kode_pendonor
+            const ktp = res.data.data[0].kuesioner_id
             console.log(ktp)
               setQr(
                 <View
@@ -188,7 +186,7 @@ function Barcode(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kalender')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
               <Text
                 style={{
                   margin: 10,
@@ -198,7 +196,7 @@ function Barcode(props) {
                   fontWeight: "bold",textAlign:'center',
                 }}
               >
-                Kembali
+                Dashboard
               </Text>
             </TouchableOpacity>
           </Card>

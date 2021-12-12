@@ -41,13 +41,13 @@ function Berhasil(props) {
     async function getData() {
       const token = await AsyncStorage.getItem('token')
       const url = PENDONOR;
-      AsyncStorage.setItem('kode_pendonor', props.route.params.kode_pendonor);
-      const headers = {
+      const kode_pendonor = await AsyncStorage.getItem('kode_pendonor');
+     const headers = {
           'Content-Type': 'application/json',
           'Authorization' : 'Bearer ' + token
       };
       const body = {
-        kode_calon_pendonor: props.route.params.kode_pendonor
+        kode_calon_pendonor: kode_pendonor
       };
       console.log(body)
       Axios.post(`${url}/api/simaba/calon-pendonor`, JSON.stringify(body),
@@ -56,7 +56,7 @@ function Berhasil(props) {
               if (r.data.code == 200) {
                   setRes(r.data)
                   console.log("res", r.data.data[0])
-                  if (r.data.data[0].status === 'lolos'){
+                  if (r.data.data[0].status === 'lolos admin'){
                     setKomponen(<View>
                       <Text
                         style={{
@@ -162,7 +162,7 @@ function Berhasil(props) {
           });
   }
   setTimeout(()=>{
-    getData()}, 1000)
+    getData()}, 3000)
   },[]);
   const goNextPage = page => {
     if (page) {

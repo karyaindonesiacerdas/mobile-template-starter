@@ -40,7 +40,8 @@ import Konvalesen23 from './konvalesen/konvalesen23';
 import { InfoStok01, InfoStok02, InfoStok03 } from './infoStok';
 import MobilUnit01 from './mobilUnit/mobilUnit01';
 import MobilUnit02 from './mobilUnit/mobilUnit02';
-import Riwayat from './riwayat';
+import Riwayat from './riwayat/';
+import RiwayatDetail from './riwayat/details';
 import {Alur01,Alur02,Alur03,Alur04,Alur05,Alur06} from './alur';
 import PermintaanDarah from './permintaandarah';
 import EditProfil from './edit-profile';
@@ -97,6 +98,7 @@ export {
 	MobilUnit02,
     DashboardAdmin,
     Riwayat,
+	RiwayatDetail,
 	Alur01,
 	Alur02,
 	Alur03,

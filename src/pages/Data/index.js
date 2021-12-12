@@ -148,31 +148,16 @@ function Data(props) {
     const token = await AsyncStorage.getItem('token');
     const tanggal_lahir = await AsyncStorage.getItem('tanggal_lahir');
     const jenis_kelamin = await AsyncStorage.getItem('jenis_kelamin');
-    const url = PENDONOR;
+    const url_pendonor = PENDONOR;
     value.tanggal_lahir = tanggal_lahir
     value.jenis_kelamin = jenis_kelamin
     value.berat_badan = berat_badan
     const body = value;
+
+    
     console.log(body)
-    Axios.post(`${url}/api/simaba/calon-pendonor/create`, qs.stringify(body),
-    {headers:{
-      Authorization :'Bearer ' +token,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    }})
-    .then(res => {
-        console.info('res.data', res.data);
-        console.log(res.data);
-        if (res.data.code === 200) {
-            alert('sukses menambahkan pendonor');
-            AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
-            props.navigation.navigate('Kuisioner',{kode_pendonor : res.data.kode_pendonor});
-        } else {
-            console.log('Error', res.data.message);
-        }
-    })
-    .catch(err => {
-        console.log('test : ', err);
-    });
+    // AsyncStorage.setItem('data_calon_donor', body);
+    props.navigation.navigate('Kuisioner',{data_calon_donor : body});
 
   }
   return (

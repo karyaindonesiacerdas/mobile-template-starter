@@ -47,6 +47,7 @@ import {
 	MobilUnit01,
 	MobilUnit02,
     Riwayat,
+	RiwayatDetail,
 	PermintaanDarah,
 	Alur01,
 	Alur02,
@@ -115,6 +116,7 @@ function index() {
 				<Stack.Screen name="MobilUnit01" component={MobilUnit01} options={{ headerShown: false }} />
 				<Stack.Screen name="MobilUnit02" component={MobilUnit02} options={{ headerShown: false }} />
                 <Stack.Screen name="Riwayat" component={Riwayat} options={{ headerShown: false }} />
+				<Stack.Screen name="RiwayatDetail" component={RiwayatDetail} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur01" component={Alur01} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur02" component={Alur02} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur03" component={Alur03} options={{ headerShown: false }} />
