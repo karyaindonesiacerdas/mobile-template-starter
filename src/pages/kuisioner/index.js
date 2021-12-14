@@ -402,7 +402,6 @@ function Kuisioner(props) {
                                 console.info('res.data', res.data);
                                 console.log(res.data);
                                 if (res.data.code === 200) {
-                                    alert('sukses submit kuesioner');
                                     props.navigation.navigate('Berhasil',{transaksi : res.data.transaksi});
                                 } else {
                                     console.log('Error', res.data.message);

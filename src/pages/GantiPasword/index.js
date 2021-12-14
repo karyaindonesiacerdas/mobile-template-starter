@@ -38,12 +38,12 @@ function Kegiatan(props) {
       const body = {
         email: value.email,
         new_password: value.new_password,
+        nik : value.nik
       };
       console.log(body)
     
       Axios.put(`${url}/api/simaba/user/change-password`, body,
       {headers:{
-        Authorization :'Bearer ' +token,
         'Content-Type': 'application/json',
       }})
           .then(r => {
@@ -101,16 +101,19 @@ function Kegiatan(props) {
               <Formik
                     initialValues={{
                         email: '',
+                        nik : '',
                         new_password: '',
                     }}
                     validationSchema={Yup.object({
                         email: Yup.string()
                             .email('Invalid email address')
                             .required('Required'),
+                        nik: Yup.string()
+                            .required('Required'),
                     })}
                     onSubmit={value => {
                         submitData(value);
-                        goNextPage.bind(this, 'EditProfil');
+                        goNextPage.bind(this, 'Dashboard');
                     }}>
                     {({
                         handleChange,
@@ -140,6 +143,29 @@ function Kegiatan(props) {
                           onChangeText={handleChange('email')}
                           onBlur={handleBlur('email')}
                           value={values.email}
+                          underlineColorAndroid="transparent"
+                        />
+                        </Item>
+                        <Text
+                          style={{
+                            marginLeft: 30,
+                            marginTop: 20,
+                            fontSize: 15,
+                            fontWeight: "normal",
+                            color: "black",
+                            textShadowColor: "#fff",
+                            textShadowOffset: { width: 1, height: 1 },
+                            textShadowRadius: 10,
+                          }}
+                        >
+                          NIK
+                        </Text>
+                        <Item style={styles.item}>
+                        <Input
+                          style={styles.input}
+                          onChangeText={handleChange('nik')}
+                          onBlur={handleBlur('nik')}
+                          value={values.nik}
                           underlineColorAndroid="transparent"
                         />
                         </Item>

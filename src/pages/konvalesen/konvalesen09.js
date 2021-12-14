@@ -56,7 +56,7 @@ function Konvalesen09(props) {
               if (r.data.code == 200) {
                   setRes(r.data)
                   console.log("res", r.data.data[0])
-                  if (r.data.data[0].status === 'lolos'){
+                  if (r.data.data[0].status === 'lolos admin'){
                     setKomponen(<View>
                       <Text
                         style={{
@@ -162,7 +162,7 @@ function Konvalesen09(props) {
           });
   }
   setTimeout(()=>{
-    getData()}, 1000)
+    getData()}, 3000)
   },[]);
   const goNextPage = page => {
     if (page) {

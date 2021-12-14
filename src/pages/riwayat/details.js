@@ -22,8 +22,7 @@ function RiwayatDetail(props) {
     })
     const [action , setAction] = useState()
 	const goNextPage = (page) => {
-        alert('a')
-		if (page) {
+        if (page) {
             AsyncStorage.setItem('kode_pendonor', detail.kode_calon_pendonor);
 			props.navigation.replace(page);
 		}
@@ -81,15 +80,40 @@ function RiwayatDetail(props) {
                             }
                         }else{
                             if(r.data.data[0].status === 'lolos admin'){
-
+                                setAction(
+                                <Card style={styles.flowCardMarroon}>
+                                    <TouchableOpacity onPress={() => goNextPage( 'Konvalesen10')}>
+                                        <Text style={styles.textInCard}>Pilih Lokasi Pengambilan Sampel</Text>
+                                    </TouchableOpacity>
+                                </Card>)
                             }else if (r.data.data[0].status === 'location_sample_set'){
-
+                                setAction(
+                                    <Card style={styles.flowCardMarroon}>
+                                        <TouchableOpacity onPress={() => goNextPage( 'Konvalesen10')}>
+                                            <Text style={styles.textInCard}>Tampilkan Barcode</Text>
+                                        </TouchableOpacity>
+                                    </Card>)
                             }else if (r.data.data[0].status === 'lolos sample'){
-
+                                setAction(<Card style={styles.flowCardMarroon}>
+                                    <TouchableOpacity onPress={() => goNextPage( 'Konvalesen16')}>
+                                        <Text style={styles.textInCard}>Pilih Lokasi Donor</Text>
+                                    </TouchableOpacity>
+                                </Card>)
                             }else if (r.data.data[0].status === 'location_set'){
-
+                                setAction(
+                                    <Card style={styles.flowCardMarroon}>
+                                        <TouchableOpacity onPress={() => goNextPage( 'Konvalesen10')}>
+                                            <Text style={styles.textInCard}>Tampilkan Barcode</Text>
+                                        </TouchableOpacity>
+                                    </Card>)
                             }else{
-                                
+                                setAction(
+                                    <Card style={styles.flowCardMarroon}>
+                                <TouchableOpacity onPress={() => goNextPage.bind(this, 'Home')}>
+                                    <Text style={styles.textInCard}>Daftar Donor Baru</Text>
+                                </TouchableOpacity>
+                                 </Card>
+                                )
                             }
                         }
                     } else {
@@ -195,7 +219,7 @@ function RiwayatDetail(props) {
             </Card>
             {action}
             <Card style={styles.flowCardMarroon}>
-                <TouchableOpacity onPress={() => goNextPage.bind(this, 'Riwayat')}>
+                <TouchableOpacity onPress={() => goNextPage('Riwayat')}>
                     <Text style={styles.textInCard}>Riwayat Donor</Text>
                 </TouchableOpacity>
             </Card>

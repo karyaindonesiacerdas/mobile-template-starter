@@ -390,7 +390,6 @@ function Konvalesen06(props) {
                 console.info('res.data', res.data);
                 console.log(res.data);
                 if (res.data.code === 200) {
-                    alert('sukses submit kuesioner');
                     props.navigation.navigate('Konvalesen07',{kode_pendonor : kode_calon_pendonor});
                 } else {
                     console.log('Error', res.data.message);

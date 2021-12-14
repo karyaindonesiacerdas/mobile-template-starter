@@ -78,7 +78,7 @@ function Konvalesen12(props) {
             jadwal : jadwal
         }
         console.log(body)
-        Axios.put(`${url}/api/simaba/pendonor/update/lokasi`, body,
+        Axios.put(`${url}/api/simaba/pendonor/update/lokasisample`, body,
         {headers:{
             Authorization :'Bearer ' +token,
             'Content-Type': 'application/json',
@@ -87,7 +87,6 @@ function Konvalesen12(props) {
                 console.info('res.data', res.data);
                 console.log(res.data);
                 if (res.data.code === 200) {
-                    alert('sukses update jadwal');
                     props.navigation.navigate('Konvalesen13', {jadwal: jadwal,lokasi:lokasi})
                 } else {
                     console.log('Error', res.data.message);
