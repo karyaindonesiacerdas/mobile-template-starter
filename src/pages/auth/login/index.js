@@ -12,7 +12,7 @@ import {
 } from 'native-base';
 import {useMutation} from 'react-query';
 import {Formik} from 'formik';
-import {Image, StyleSheet, TouchableOpacity,ImageBackground } from 'react-native';
+import {Image, StyleSheet, TouchableOpacity,ImageBackground,Alert } from 'react-native';
 //from "react-native-gesture-handler";
 //import styles from "../styles/styles";
 import * as Yup from 'yup';
@@ -21,7 +21,6 @@ import Bg from '../../image/Background.png';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { BottomAlert } from 'react-native-modal-bottom-alert';
 
 function Login(props) {
     const handleSubmitLogin = value => {
@@ -36,7 +35,7 @@ function Login(props) {
 
         Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body),headers)
             .then(r => {
-                console.log(r.data)
+                
                 if (r.data.code == 200) {
                     console.log(r.data.data)
                     AsyncStorage.setItem('token', r.data.data.token);
@@ -63,8 +62,9 @@ function Login(props) {
                             break;
                     }
                 } else {
-                    console.log('Error', r.data.message);
-                    alert('email atau password salah');
+                    Alert.alert("Gagal","Email Atau Password Tidak Cocok",
+                    [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
+                   )
                 }
             })
             .catch(err => {

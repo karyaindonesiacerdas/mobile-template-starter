@@ -59,7 +59,18 @@ function Riwayat(props) {
                             color: 'black'
                         }}
                     >
-                        <B>Status : {item.status}</B>
+                        <B>Jenis Donor : {item.jenis_donor.toUpperCase()}</B>
+                    </Text>
+                    <Text
+                        style={{
+                            marginBottom: 10,
+                            marginLeft: 20,
+                            marginRight: 20,
+                            fontSize: 15,
+                            color: 'black'
+                        }}
+                    >
+                        <B>Status : {item.status.toUpperCase()}</B>
                     </Text>
                     <Text
                         style={{

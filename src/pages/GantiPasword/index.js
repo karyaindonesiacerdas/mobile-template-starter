@@ -15,7 +15,7 @@ import {
 } from 'native-base';
 import {useMutation} from 'react-query';
 import {Formik} from 'formik';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Alert, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Yup from 'yup';
 import Bg from '../../image/Baground2.jpg';
 import qs from 'qs';
@@ -48,17 +48,30 @@ function Kegiatan(props) {
       }})
           .then(r => {
               if (r.data.code == 200) {
-                alert('Sukses Update Password')
-                props.navigation.replace('EditProfil')
+                Alert.alert("Berhasil","Password Berhasil Di Update",
+                [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+                )
+                AsyncStorage.setItem('token', '');
+                props.navigation.replace('Login')
               } else {
-                  console.log('Error', r.data);
+                Alert.alert("Gagal","Email & NIK Tidak Cocok",
+                [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
+               )
+               props.navigation.replace('GantiPasword')
               }
           })
           .catch(err => {
               console.log('error : ', err);
           });
     }
-    submit()
+    if(value.new_password_confirm == value.new_password){
+      submit()
+    }
+    else{
+      Alert.alert("Gagal","Konfirmasi Password Harus Sama Dengan Password Baru",
+       [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+      )
+    }
   }
   const goNextPage = page => {
     if (page) {
@@ -95,7 +108,7 @@ function Kegiatan(props) {
         
   
      
-        <Text style={{ marginLeft:100, marginTop:100,fontSize: 35,fontWeight: "bold",  color: "black" }}>
+        <Text style={{ textAlign:'center', marginTop:100,fontSize: 35,fontWeight: "bold",  color: "black" }}>
                 Ganti Pasword
               </Text>                 
               <Formik
@@ -103,6 +116,7 @@ function Kegiatan(props) {
                         email: '',
                         nik : '',
                         new_password: '',
+                        new_password_confirm : '',
                     }}
                     validationSchema={Yup.object({
                         email: Yup.string()
@@ -126,7 +140,7 @@ function Kegiatan(props) {
                             <Text
                           style={{
                             marginLeft: 30,
-                            marginTop: 90,
+                            marginTop: 70,
                             fontSize: 15,
                             fontWeight: "normal",
                             color: "black",
@@ -181,7 +195,7 @@ function Kegiatan(props) {
                             textShadowRadius: 10,
                           }}
                         >
-                          Pasword Baru
+                          Password Baru
                         </Text>
                         <Item style={styles.item}>
                         <Input
@@ -189,6 +203,31 @@ function Kegiatan(props) {
                           onChangeText={handleChange('new_password')}
                           onBlur={handleBlur('new_password')}
                           value={values.new_password}
+                          underlineColorAndroid="transparent"
+                          secureTextEntry={true}
+                  
+                        />
+                        </Item>
+                        <Text
+                          style={{
+                            marginLeft: 30,
+                            marginTop: 20,
+                            fontSize: 15,
+                            fontWeight: "normal",
+                            color: "black",
+                            textShadowColor: "#fff",
+                            textShadowOffset: { width: 1, height: 1 },
+                            textShadowRadius: 10,
+                          }}
+                        >
+                          Konfirmasi Password Baru
+                        </Text>
+                        <Item style={styles.item}>
+                        <Input
+                          style={styles.input}
+                          onChangeText={handleChange('new_password_confirm')}
+                          onBlur={handleBlur('new_password_confirm')}
+                          value={values.new_password_confirm}
                           underlineColorAndroid="transparent"
                           secureTextEntry={true}
                   
