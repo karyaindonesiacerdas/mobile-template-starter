@@ -35,48 +35,62 @@ function Riwayat(props) {
     );
     const ItemView = ({item}) => {
         return (
-            <View style={styles.viewContainer}>
-                <Card style={styles.flowCardPeach}>
-                    <TouchableOpacity>
-                        <Text
-                            style={{
-                                marginTop: 20,
-                                marginBottom: 10,
-                                marginLeft: 20,
-                                marginRight: 20,
-                                fontSize: 15,
-                                color: 'black',
-                            }}>
-                            <B>Transaksi ID : {item.kuesioner_id}</B>
-                        </Text>
-                        <Text
-                            style={{
-                                marginBottom: 10,
-                                marginLeft: 20,
-                                marginRight: 20,
-                                fontSize: 15,
-                                color: 'black',
-                            }}>
-                            <B>Status : {item.status}</B>
-                        </Text>
-                        <Text
-                            style={{
-                                marginBottom: 10,
-                                marginLeft: 20,
-                                marginRight: 20,
-                                fontSize: 15,
-                                color: 'black',
-                            }}>
-                            <B>Jadwal Donor :{item.jadwal_donor}</B>
-                        </Text>
-                    </TouchableOpacity>
-                </Card>
-                <Card style={styles.flowCardMarroon}>
-                    <TouchableOpacity onPress={() => gotoDetails(item)}>
-                        <Text style={styles.textInCard}>Donor Details</Text>
-                    </TouchableOpacity>
-                </Card>
-            </View>
+          <View style={styles.viewContainer}>
+            <Card style={styles.flowCardPeach}>
+                <TouchableOpacity>
+                    <Text
+                        style={{
+                            marginTop: 20,
+                            marginBottom: 10,
+                            marginLeft: 20,
+                            marginRight: 20,
+                            fontSize: 15,
+                            color: 'black'
+                        }}
+                    >
+                        <B>Transaksi ID : {item.kuesioner_id}</B>
+                    </Text>
+                    <Text
+                        style={{
+                            marginBottom: 10,
+                            marginLeft: 20,
+                            marginRight: 20,
+                            fontSize: 15,
+                            color: 'black'
+                        }}
+                    >
+                        <B>Jenis Donor : {item.jenis_donor.toUpperCase()}</B>
+                    </Text>
+                    <Text
+                        style={{
+                            marginBottom: 10,
+                            marginLeft: 20,
+                            marginRight: 20,
+                            fontSize: 15,
+                            color: 'black'
+                        }}
+                    >
+                        <B>Status : {item.status.toUpperCase()}</B>
+                    </Text>
+                    <Text
+                        style={{
+                            marginBottom: 10,
+                            marginLeft: 20,
+                            marginRight: 20,
+                            fontSize: 15,
+                            color: 'black'
+                        }}
+                    >
+                        <B>Jadwal Donor :{item.jadwal_donor}</B>
+                    </Text>
+                </TouchableOpacity>
+            </Card>
+            <Card style={styles.flowCardMarroon}>
+                <TouchableOpacity onPress={() => gotoDetails(item)}>
+                    <Text style={styles.textInCard}>Donor Details</Text>
+                </TouchableOpacity>
+            </Card>
+        </View>
         );
     };
 
