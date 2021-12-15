@@ -46,7 +46,12 @@ function InfoStok02(props) {
         ],
     });
     const CONTENT = {
-        tableHead: [`Informasi kebutuhan Darah\nTanggal ${res.data[0].waktu.slice(0,10)} Pukul ${res.data[0].waktu.slice(11,16)} `],
+        tableHead: [
+            `Informasi kebutuhan Darah\nTanggal ${res.data[0].waktu.slice(
+                0,
+                10,
+            )} Pukul ${res.data[0].waktu.slice(11, 16)} `,
+        ],
 
         tableData: [
             [
@@ -66,10 +71,8 @@ function InfoStok02(props) {
         const headers = {
             'Content-Type': 'application/json',
         };
-        const body = {}
-        Axios.post(`${url}/api/simaba/resipien`, JSON.stringify(body),
-            headers
-        )
+        const body = {};
+        Axios.post(`${url}/api/simaba/resipien`, JSON.stringify(body), headers)
             .then(r => {
                 if (r.data.code == 200) {
                     setRes(r.data);
@@ -80,11 +83,11 @@ function InfoStok02(props) {
             .catch(err => {
                 console.log('tes : ', err);
             });
-    },[]);
+    }, []);
 
     const goNextPage = page => {
         if (page) {
-            props.navigation.replace(page);
+            props.navigation.navigate(page);
         }
     };
     res.data.map((dat, i) =>

@@ -24,7 +24,7 @@ import {
     Col,
 } from 'react-native-table-component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { KUESIONER } from '../../config/api';
+import {KUESIONER} from '../../config/api';
 import Axios from 'axios';
 
 function Konvalesen06(props) {
@@ -366,31 +366,34 @@ function Konvalesen06(props) {
                 submit(input);
             }
         } else {
-            props.navigation.replace(page);
+            props.navigation.navigate(page);
         }
     };
     async function submit(input) {
         const token = await AsyncStorage.getItem('token');
         const nama = await AsyncStorage.getItem('nama');
-        const kode_calon_pendonor = props.route.params.kode_pendonor
+        const kode_calon_pendonor = props.route.params.kode_pendonor;
         const ktp = await AsyncStorage.getItem('ktp');
         const url = KUESIONER;
-       
+
         input.kode_calon_pendonor = kode_calon_pendonor;
         input.ktp = ktp;
         input.nama = nama;
         const body = input;
-        console.log(body)
-        Axios.post(`${url}/api/simaba/kuesioner/create`, body,
-        {headers:{
-            Authorization :'Bearer ' +token,
-            'Content-Type': 'application/json',
-          }})
+        console.log(body);
+        Axios.post(`${url}/api/simaba/kuesioner/create`, body, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+        })
             .then(res => {
                 console.info('res.data', res.data);
                 console.log(res.data);
                 if (res.data.code === 200) {
-                    props.navigation.navigate('Konvalesen07',{kode_pendonor : kode_calon_pendonor});
+                    props.navigation.navigate('Konvalesen07', {
+                        kode_pendonor: kode_calon_pendonor,
+                    });
                 } else {
                     console.log('Error', res.data.message);
                 }

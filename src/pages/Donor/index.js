@@ -29,7 +29,7 @@ function index(props) {
             });
             if (data?.code == 200) {
                 setTimeout(() => {
-                    props.navigation.replace('LoadingStart');
+                    props.navigation.navigate('LoadingStart');
                 }, 2000);
                 return;
             }
@@ -123,7 +123,9 @@ function index(props) {
                                     <Label>Username</Label>
                                     <Item regular>
                                         <Input
-                                            onChangeText={handleChange('username')}
+                                            onChangeText={handleChange(
+                                                'username',
+                                            )}
                                             onBlur={handleBlur('username')}
                                             value={values.username}
                                             placeholder="Username"
@@ -165,7 +167,9 @@ function index(props) {
                                     <Item regular>
                                         <Input
                                             style={styles.inputText}
-                                            onChangeText={handleChange('password')}
+                                            onChangeText={handleChange(
+                                                'password',
+                                            )}
                                             onBlur={handleBlur('password')}
                                             value={values.password}
                                             secureTextEntry={true}

@@ -19,7 +19,7 @@ import styles from './styles';
 function InfoStok01(props) {
     const goNextPage = page => {
         if (page) {
-            props.navigation.replace(page);
+            props.navigation.navigate(page);
         }
     };
     return (

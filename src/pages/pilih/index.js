@@ -17,11 +17,10 @@ function Pilih(props) {
     const [check1, setCheck1] = useState(false);
     const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
-        if (page != 'Berhasil' ) {
-            props.navigation.replace(page);
-        }else
-        {
-            props.navigation.goBack()
+        if (page != 'Berhasil') {
+            props.navigation.navigate(page);
+        } else {
+            props.navigation.goBack();
         }
     };
     return (

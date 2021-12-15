@@ -15,7 +15,7 @@ import {
     ScrollView,
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
-import styles from "../styles/styles";
+import styles from '../styles/styles';
 import {
     Table,
     TableWrapper,
@@ -36,24 +36,22 @@ function ListUser(props) {
         4: 'Jumat',
         5: 'Sabtu',
         6: 'Minggu',
-    }
-    const [tableData] = useState([['NAMA','EMAIL', 'ROLE']])
+    };
+    const [tableData] = useState([['NAMA', 'EMAIL', 'ROLE']]);
     const [res, setRes] = useState({
         data: [],
     });
     useEffect(() => {
         async function getToken() {
-            const token = await AsyncStorage.getItem('token')
+            const token = await AsyncStorage.getItem('token');
             var t = new Date().toISOString().slice(0, 10);
             const url = USER_MANAGEMENT;
             const headers = {
                 'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + token
+                Authorization: 'Bearer ' + token,
             };
-            const body = {
-            };
-            Axios.post(`${url}/api/simaba/user`, JSON.stringify(body),
-                headers)
+            const body = {};
+            Axios.post(`${url}/api/simaba/user`, JSON.stringify(body), headers)
                 .then(r => {
                     if (r.data.code == 200) {
                         setRes(r.data);
@@ -65,20 +63,14 @@ function ListUser(props) {
                     console.log('error : ', err);
                 });
         }
-        getToken()
-        },[]);
+        getToken();
+    }, []);
     const goNextPage = page => {
         if (page) {
-            props.navigation.replace(page);
+            props.navigation.navigate(page);
         }
     };
-        res?.data?.map((dat) =>
-        tableData.push([
-            dat.nama,
-            dat.email,
-            dat.role,
-        ])
-    )
+    res?.data?.map(dat => tableData.push([dat.nama, dat.email, dat.role]));
     return (
         <Container>
             <Image
@@ -140,8 +132,7 @@ function ListUser(props) {
                                 fontWeight: 'bold',
 
                                 color: 'white',
-                            }}>
-                            </Text>
+                            }}></Text>
                     </TouchableOpacity>
                 </Card>
 

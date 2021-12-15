@@ -10,27 +10,30 @@ const loading = true;
 function LoadingStart(props) {
     useEffect(() => {
         async function checkToken() {
-            var date = new Date().toLocaleDateString()
-            date = `20${date.slice(6,8)}-${date.slice(0,2)}-${date.slice(3,5)}T${new Date().toLocaleTimeString()}`
+            var date = new Date().toLocaleDateString();
+            date = `20${date.slice(6, 8)}-${date.slice(0, 2)}-${date.slice(
+                3,
+                5,
+            )}T${new Date().toLocaleTimeString()}`;
             const role = await AsyncStorage.getItem('role');
             const token = await AsyncStorage.getItem('token');
             const exp = await AsyncStorage.getItem('exp');
-            if (exp > date){
-                checkRole(role)
+            if (exp > date) {
+                checkRole(role);
             } else {
-                props.navigation.replace('Login');
+                props.navigation.navigate('Login');
             }
         }
         function checkRole(role) {
             switch (role) {
                 case 'pendonor':
-                    props.navigation.replace('Dashboard');
+                    props.navigation.navigate('Dashboard');
                     break;
                 case 'admin':
-                    props.navigation.replace('DashboardAdmin');
+                    props.navigation.navigate('DashboardAdmin');
                     break;
             }
-            }
+        }
         checkToken();
     }, []);
     return (

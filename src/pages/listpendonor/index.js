@@ -15,7 +15,7 @@ import {
     ScrollView,
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
-import styles from "../styles/styles";
+import styles from '../styles/styles';
 import {
     Table,
     TableWrapper,
@@ -28,25 +28,28 @@ import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function ListPendonor(props) {
-    const [tableData] = useState([['NAMA','KTP', 'KODE PENDONOR']])
+    const [tableData] = useState([['NAMA', 'KTP', 'KODE PENDONOR']]);
     const [res, setRes] = useState({
         data: [],
     });
     useEffect(() => {
         async function getToken() {
-            const token = await AsyncStorage.getItem('token')
+            const token = await AsyncStorage.getItem('token');
             var t = new Date().toISOString().slice(0, 10);
             const url = PENDONOR;
             const headers = {
                 'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + token
+                Authorization: 'Bearer ' + token,
             };
             const body = {
-                ktp : "",
-                donor_id : "",
+                ktp: '',
+                donor_id: '',
             };
-            Axios.post(`${url}/api/simaba/pendonor`, JSON.stringify(body),
-                headers)
+            Axios.post(
+                `${url}/api/simaba/pendonor`,
+                JSON.stringify(body),
+                headers,
+            )
                 .then(r => {
                     if (r.data.code == 200) {
                         setRes(r.data);
@@ -58,20 +61,16 @@ function ListPendonor(props) {
                     console.log('error : ', err);
                 });
         }
-        getToken()
-        },[]);
+        getToken();
+    }, []);
     const goNextPage = page => {
         if (page) {
-            props.navigation.replace(page);
+            props.navigation.navigate(page);
         }
     };
-        res?.data?.map((dat) =>
-        tableData.push([
-            dat.nama,
-            dat.ktp,
-            dat.kode_pendonor,
-        ])
-    )
+    res?.data?.map(dat =>
+        tableData.push([dat.nama, dat.ktp, dat.kode_pendonor]),
+    );
     return (
         <Container>
             <Image
@@ -133,8 +132,7 @@ function ListPendonor(props) {
                                 fontWeight: 'bold',
 
                                 color: 'white',
-                            }}>
-                            </Text>
+                            }}></Text>
                     </TouchableOpacity>
                 </Card>
 

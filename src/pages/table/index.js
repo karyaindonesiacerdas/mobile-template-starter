@@ -6,7 +6,7 @@ import {
     Text,
     View,
     StyleSheet,
-    TextInput
+    TextInput,
 } from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Container, Card} from 'native-base';
@@ -23,7 +23,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
-import Bg from '../../image/baground3.jpeg'
+import Bg from '../../image/baground3.jpeg';
 
 const CONTENT = {
     tableHead: ['                   JADWAL KEGIATAN DONOR DARAH SENIN'],
@@ -39,13 +39,16 @@ function table(props) {
     const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
         if (page) {
-            props.navigation.replace(page);
+            props.navigation.navigate(page);
         }
     };
 
     return (
         <Container>
-            <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+            <Image
+                source={Bg}
+                style={{width: '100%', height: '100%', position: 'absolute'}}
+            />
             <Image
                 source={require('../image/logo.png')}
                 style={{
@@ -184,7 +187,9 @@ function table(props) {
                             width: '40%',
                             marginRight: '2%',
                         }}>
-                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih')} >
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={goNextPage.bind(this, 'Pilih')}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -204,7 +209,9 @@ function table(props) {
                             width: '40%',
                             marginLeft: '2%',
                         }}>
-                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Barcode2')} >
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={goNextPage.bind(this, 'Barcode2')}>
                             <Text
                                 style={{
                                     margin: 10,
