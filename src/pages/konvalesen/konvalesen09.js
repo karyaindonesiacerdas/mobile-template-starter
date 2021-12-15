@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   ImageBackground,
   Image,
   Text,
   View,
-  TextInput, TouchableOpacity,
+  TextInput,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import {
@@ -25,23 +25,155 @@ import {
 } from "native-base";
 import {
   ScrollView,
-  TouchableWithoutFeedback,
- 
 } from "react-native-gesture-handler";
-import styles from "./styles";
+import {TouchableOpacity} from 'react-native'
+import styles from "../styles/styles";
+import Bg from '../../image/baground3.jpeg'
+import { PENDONOR } from "../../config/api";
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Axios from 'axios';
 function Konvalesen09(props) {
-   const goNextPage = (page) => {
+  const [res, setRes] = useState({});
+  const [komponent, setKomponen] = useState(null)
+  const [buttons, setButton] = useState(null)
+  useEffect(() => {
+    async function getData() {
+      const token = await AsyncStorage.getItem('token')
+      const url = PENDONOR;
+      AsyncStorage.setItem('kode_pendonor', props.route.params.kode_pendonor);
+      const headers = {
+          'Content-Type': 'application/json',
+          'Authorization' : 'Bearer ' + token
+      };
+      const body = {
+        kode_calon_pendonor: props.route.params.kode_pendonor
+      };
+      console.log(body)
+      Axios.post(`${url}/api/simaba/calon-pendonor`, JSON.stringify(body),
+          headers)
+          .then(r => {
+              if (r.data.code == 200) {
+                  setRes(r.data)
+                  console.log("res", r.data.data[0])
+                  if (r.data.data[0].status === 'lolos admin'){
+                    setKomponen(<View>
+                      <Text
+                        style={{
+                        marginLeft: 30,
+                        marginRight: 30,
+                    
+                        marginTop: 20,
+                        marginBottom: 20,
+                        fontSize: 20,
+                        fontWeight:'bold',
+
+                        textAlign: "center",
+                        color: "white",
+                  
+                      }}
+                      >
+                  ANDA LULUS DALAM TAHAP ADMINISTRASI DAN{'\n'}MASUK KE TAHAP PENGAMBILAN{'\n'}CONTOH DARAH
+                  </Text>
+                </View>
+                  )
+                setButton(
+                  <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                    }}>
+                    <Card style={styles.cardStyle}>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={goNextPage.bind(this, 'Konvalesen10')}>
+                            <Text
+                                style={{
+                                    margin: 10,
+                                    fontSize: 15,
+                                    textAlign: 'center',
+                                    fontWeight: 'bold',
+                                    color: 'white',
+                                }}>
+                                Selanjutnya
+                            </Text>
+                        </TouchableOpacity>
+                    </Card>
+                </View>
+                )
+                }else {
+                    setKomponen(<View>
+                      <Text
+                        style={{
+                        marginLeft: 30,
+                        marginRight: 30,
+                    
+                        marginTop: 20,
+                        marginBottom: 20,
+                        fontSize: 20,
+                        fontWeight:'bold',
+
+                        textAlign: "center",
+                        color: "white",
+                    
+                        }}
+                      >
+                       MAAF{'\n'}ANDA TIDAK MEMENUHI{'\n'}KRITERIA CALON DONOR
+                    </Text>
+                        {/* <Text>Alasan tidak memenuhi kriteria : </Text>
+                        <Text>1. Berat badan kurang dari 45 kg </Text>
+                        <Text>2. Usia kurang dari 17 tahun </Text>
+                        <Text>3. Jawaban kuesioner yang tidak sesuai</Text> */}
+                    </View>
+                    )
+                    setButton(
+                      <View
+                        style={{
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignContent: 'center',
+                        }}>
+                        <Card style={styles.cardStyle}>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={goNextPage.bind(this, 'Dashboard')}>
+                                <Text
+                                    style={{
+                                        margin: 10,
+                                        fontSize: 15,
+                                        textAlign: 'center',
+                                        fontWeight: 'bold',
+                                        color: 'white',
+                                    }}>
+                                    Kembali
+                                </Text>
+                            </TouchableOpacity>
+                        </Card>
+                    </View>
+                    )
+                  }
+              } else {
+                  console.log('Error', r.data.message);
+              }
+          })
+          .catch(err => {
+              console.log('error : ', err);
+          });
+  }
+  setTimeout(()=>{
+    getData()}, 3000)
+  },[]);
+  const goNextPage = page => {
     if (page) {
-      props.navigation.replace(page);
+      props.navigation.replace(page)
     }
-  };
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+  }
   return (
     <Container>
+      <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
-        source={require("../../asset/logoUDD.png")}
+        source={require("../image/logo.png")}
         style={{
           width: 54,
           height: 60,
@@ -52,7 +184,7 @@ function Konvalesen09(props) {
         }}
       ></Image>
       <Image
-        source={require("../../asset/logoSehat.png")}
+        source={require("../image/Logo2.png")}
         style={{
           position: "absolute",
           width: 54,
@@ -84,7 +216,7 @@ function Konvalesen09(props) {
             color: "black",
           }}
         >
-          Donor Darah Konvalesen
+          Donor Konvalesen
         </Text>
           <Card
           style={{
@@ -95,106 +227,22 @@ function Konvalesen09(props) {
             marginLeft: "7%",
           }}
         >
-           <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-         
-            marginTop: 20,
-            marginBottom: 20,
-            fontSize: 20,
-            fontWeight:'bold',
-
-            textAlign: "center",
-            color: "white",
-      
-          }}
-        >
-          ANDA LULUS DALAM TAHAP ADMINISTRASI DAN{'\n'}MASUK KE TAHAP PENGAMBILAN{'\n'}CONTOH DARAH
-        </Text>
+           {komponent}
           
         </Card>
 
-        
-
-      
-      </ScrollView>
-        <View
+        <Card
           style={{
-            alignContent: "center",
-
-            flexDirection: "row",
-            justifyContent: "center",
-            alignContent: "center",
+            backgroundColor: "#000",
             marginTop: 30,
-            marginBottom: 10,
-            
+            marginBottom: 20,
+            width: "86%",
+            marginLeft: "7%",
           }}
         >
-          <Card
-            style={{
-              backgroundColor: "#000",
-              width: "40%",
-              marginRight: "2%",
-            }}
-          >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen07")}>
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20,
-
-                  color: "white",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              >
-                Kembali
-              </Text>
-            </TouchableOpacity>
           </Card>
-          <Card
-            style={{
-              backgroundColor: "#000",
-              width: "40%",
-              marginLeft: "2%",
-            }}
-          >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen10")}>
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20,
-                  textAlign: "center",
-
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
-                Selanjutnya
-              </Text>
-            </TouchableOpacity>
-          </Card>
-        </View>
-
-      <ImageBackground
-        // resizeMethod={'auto'}
-        source={require("../../asset/footer.png")}
-        style={{
-          width: "100%",
-
-          backgroundColor: "#fff",
-          padding: 0,
-          paddingVertical: 90,
-          position: "absolute",
-          zIndex: -1,
-          bottom: 0,
-        }}
-        imageStyle={{
-          resizeMode: "cover",
-          alignSelf: "flex-end",
-        }}
-      ></ImageBackground>
+          {buttons}
+      </ScrollView>
     </Container>
   );
 }

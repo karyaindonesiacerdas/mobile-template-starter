@@ -45,9 +45,21 @@ function Konvalesen04(props) {
     { label: 'Tidak Tahu', value: 'X', checked: false },
   ])
   const [input] = useState({
+    jenis_donor : '',
+    ktp : '',
+    nama : '',
+    nomor_telepon : '',
+    wilayah : '',
+    kecamatan : '',
+    kelurahan : '',
+    alamat : '',
     pekerjaan : '',
     golongan_darah: '',
     rhesus : '',
+    berat_badan : '',
+    jenis_kelamin : '',
+    tanggal_lahir : '',
+    
   })
   const pekerjaanHandler = (index) => {
     const newValue = pekerjaan.map((checkbox, i) => {
@@ -108,12 +120,24 @@ function Konvalesen04(props) {
   setRhesus(newValue)
   }
 
+  
+
   const goNextPage = page => {
-    if (page) {
-      props.navigation.replace(page)
+    if (page == 'Konvalesen05') {
+      input.alamat = props.route.params.payload.alamat
+      input.jenis_donor = 'plasma konvalesen'
+      input.ktp = props.route.params.payload.ktp
+      input.nama = props.route.params.payload.nama
+      input.nomor_telepon = props.route.params.payload.nomor_telepon
+      input.wilayah = props.route.params.payload.wilayah
+      input.kecamatan = props.route.params.payload.kecamatan
+      input.kelurahan = props.route.params.payload.kelurahan
+      props.navigation.navigate('Konvalesen05', {payload: input})
+
     }
   }
   console.log(input)
+  console.log(props.route.params)
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />

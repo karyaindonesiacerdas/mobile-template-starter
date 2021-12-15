@@ -106,7 +106,18 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 30,
     backgroundColor:'#bebebe',
-  }
+  },buttonStyle: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#DDDDDD',
+    padding: 5,
+    marginLeft: 30,
+    marginRight: 30
+  },imageIconStyle: {
+    height: 20,
+    width: 20,
+    resizeMode: 'stretch',
+  },
 });
 
 export default styles;

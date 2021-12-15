@@ -23,31 +23,59 @@ import Bg from '../../image/baground3.jpeg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PENDONOR } from '../../config/api';
 import Axios from 'axios';
-
+import QRCode from "react-qr-code";
 function Barcode(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
+  const [qr , setQr] = useState(null)
   
-  // useEffect(() => {
-  //   Axios.get(`${url}/api/simaba/pendonor/qr`, body,
-  //   {headers:{
-  //       Authorization :'Bearer ' +token,
-  //       'Content-Type': 'application/json',
-  //     }})
-  //       .then(res => {
-  //           console.info('res.data', res.data);
-  //           console.log(res.data);
-  //           if (res.data.code === 200) {
-  //               alert('sukses update jadwal');
-  //               props.navigation.replace('Barcode');
-  //           } else {
-  //               console.log('Error', res.data.message);
-  //           }
-  //       })
-  //       .catch(err => {
-  //           console.log('test : ', err.response);
-  //       });
-  // }, []);
+  useEffect(() => {
+    const url = PENDONOR;
+    async function getData() {
+      const token = await AsyncStorage.getItem('token')
+      const ktp = await AsyncStorage.getItem('ktp')
+      const kode_pendonor = await AsyncStorage.getItem('kode_pendonor');
+
+      const headers = {
+          'Content-Type': 'application/json',
+          'Authorization' : 'Bearer ' + token
+      };
+      const body = {
+        kode_calon_pendonor: kode_pendonor
+      };
+      Axios.post(`${url}/api/simaba/calon-pendonor`, body,
+         headers)
+          .then(res => {
+            console.log(res.data.data)
+
+            const ktp = res.data.data[0].kuesioner_id
+            console.log(ktp)
+              setQr(
+                <View
+                  style={{
+                    alignContent: "center",
+
+                    flexDirection: "row",
+                    justifyContent: "center",
+                      alignContent: "center",
+                      marginTop:30,
+                      marginBottom:30,
+                    
+                  }}
+                >
+                <QRCode
+                size = {200}
+                value= {ktp}
+              />
+              </View>
+              )    
+          })
+          .catch(err => {
+              console.log('test : ', err.response);
+          });
+    }
+    getData()
+  }, []);
 
   const goNextPage = page => {
     if (page) {
@@ -140,40 +168,8 @@ function Barcode(props) {
         >
           Scan barcode untuk cetak formulir donor
         </Text>
-        <Image
-        source={require("../image/frame.png")}
-        style={{
         
-          width: 250,
-          height: 250,
-          margin: 20,
-          alignSelf:'center',
-
-          
-        }}
-      ></Image>
-
-       
-        <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-      
-            fontSize: 15,
-            marginTop:-10,
- 
-
-            textAlign: "center",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          Keterangan :{'\n'}(berlaku pada tanggal 02-10-2021)
-        </Text>
-        
-
+      {qr}
 
         <View
           style={{
@@ -190,7 +186,7 @@ function Barcode(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kalender')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Dashboard')} >
               <Text
                 style={{
                   margin: 10,
@@ -200,7 +196,7 @@ function Barcode(props) {
                   fontWeight: "bold",textAlign:'center',
                 }}
               >
-                Kembali
+                Dashboard
               </Text>
             </TouchableOpacity>
           </Card>

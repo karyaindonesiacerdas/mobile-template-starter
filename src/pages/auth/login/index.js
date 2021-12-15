@@ -12,7 +12,7 @@ import {
 } from 'native-base';
 import {useMutation} from 'react-query';
 import {Formik} from 'formik';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity,ImageBackground,Alert } from 'react-native';
 //from "react-native-gesture-handler";
 //import styles from "../styles/styles";
 import * as Yup from 'yup';
@@ -20,7 +20,6 @@ import {authLogin} from '../../../config/api';
 import Bg from '../../image/Background.png';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
-import SyncStorage from 'sync-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login(props) {
@@ -36,7 +35,9 @@ function Login(props) {
 
         Axios.post(`${url}/api/simaba/user/login`, JSON.stringify(body),headers)
             .then(r => {
+                
                 if (r.data.code == 200) {
+                    console.log(r.data.data)
                     AsyncStorage.setItem('token', r.data.data.token);
                     AsyncStorage.setItem('role', r.data.data.role);
                     AsyncStorage.setItem('exp', r.data.data.exp);
@@ -47,6 +48,9 @@ function Login(props) {
                     AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
                     AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
                     AsyncStorage.setItem('nomor_telepon',r.data.data.nomor_telepon);
+                    AsyncStorage.setItem('email',r.data.data.email);
+                    AsyncStorage.setItem('gambar',r.data.data.gambar);
+                   
                     // AsyncStorage.setItem('golongan_darah',r.data.data.golongan_darah);
                     switch
                     (r.data.data.role) {
@@ -58,15 +62,16 @@ function Login(props) {
                             break;
                     }
                 } else {
-                    console.log('Error', res.data.message);
-                    alert('email atau password salah');
-                    props.navigation.replace('Login');
+                    Alert.alert("Gagal","Email Atau Password Tidak Cocok",
+                    [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
+                   )
                 }
             })
             .catch(err => {
                 console.log('error : ', err);
             });
     };
+    
     const goNextPage = page => {
         if (page) {
             props.navigation.replace(page);
@@ -74,24 +79,23 @@ function Login(props) {
     };
 
     return (
-        <Container>
-            <Image
-                source={Bg}
-                style={{width: '100%', height: '100%', position: 'absolute'}}
-            />
-
-            <Image
-                source={require('../../image/logo.png')}
-                style={{
-                    position: 'absolute',
-                    width: 138,
-                    height: 150,
-                    margin: 10,
-                    right: 126,
-                    top: 130,
-                }}></Image>
+        <View style={styles.container}>
+            <ImageBackground 
+                source={Bg}resizeMode="cover"
+                style={styles.image}
+            >
             <Content contentContainerStyle={styles.container}>
                 <View style={styles.logo}>
+                <Image
+                source={require('../../image/logo.png')}
+                style={{
+                    justifyContent: 'center',
+                    width: 138,
+                    height: 150,
+                    bottom:'5%',
+                    alignItems: 'center',
+                    alignSelf:'flex-start'
+                }}></Image>
                     <Text style={{fontWeight: 'bold', fontSize: 40}}>
                         LOGIN
                     </Text>
@@ -163,10 +167,21 @@ function Login(props) {
                         </View>
                     )}
                 </Formik>
+                <TouchableOpacity onPress={goNextPage.bind(this, 'GantiPasword')}>
+                    <Text
+                        style={{
+                            marginTop: 10,
+                            fontSize: 12,
+                            textAlign: 'center',
+                            color: 'white',
+                            fontWeight: 'normal',
+                        }}>
+                        Lupa Password ?
+                    </Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={goNextPage.bind(this, 'Register')}>
                     <Text
                         style={{
-                            margin: 10,
                             fontSize: 20,
                             textAlign: 'center',
                             color: 'white',
@@ -175,8 +190,11 @@ function Login(props) {
                         Register
                     </Text>
                 </TouchableOpacity>
+                
             </Content>
-        </Container>
+            </ImageBackground>
+          
+        </View>
     );
 }
 
@@ -186,11 +204,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        padding: '10%',
-    },
+        },
+    image: {
+        flex: 1,
+        justifyContent: "center"
+      },
     logo: {
         marginBottom: 10,
         alignSelf: 'center',
+        justifyContent: 'center',
     },
     inputView: {
         backgroundColor: 'white',

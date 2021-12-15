@@ -11,20 +11,47 @@ import {ScrollView} from 'react-native-gesture-handler';
 import styles from './styles';
 import Bg from '../../image/baground3.jpeg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { USER_MANAGEMENT } from "../../config/api";
+import Axios from 'axios';
 
 function Dashboard(props) {
     
     useEffect(() => {
+        checkSession()
         checkProfile()
       },[]);
     async function checkProfile() {
         const ktp = await AsyncStorage.getItem('ktp')
         if (ktp==null){
-            props.navigation.replace('EditProfil');
+            // props.navigation.replace('EditProfil');
         }
     }
+
+    async function checkSession() {
+    const token = await AsyncStorage.getItem('token')
+    const url = USER_MANAGEMENT;
+      
+      const body = {
+       email : ''
+      };
+      Axios.post(`${url}/api/simaba/user`, body,
+      {headers:{
+        Authorization :'Bearer ' +token,
+        'Content-Type': 'application/json',
+      }})
+          .then(r => {
+              if (r.data.code == 401) {
+                AsyncStorage.clear();
+                props.navigation.replace('Login');
+            } 
+          })
+          .catch(err => {
+                AsyncStorage.clear();
+                props.navigation.replace('Login');
+          });
+    }
     const goNextPage = page => {
-        if (page === 'Logout') {
+        if (page === 'Login') {
             AsyncStorage.clear();
             props.navigation.replace(page);
         }else {

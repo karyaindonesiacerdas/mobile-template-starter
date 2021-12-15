@@ -36,17 +36,18 @@ import Axios from 'axios';
 function Berhasil(props) {
   const [res, setRes] = useState({});
   const [komponent, setKomponen] = useState(null)
+  const [buttons, setButton] = useState(null)
   useEffect(() => {
     async function getData() {
       const token = await AsyncStorage.getItem('token')
       const url = PENDONOR;
-      AsyncStorage.setItem('kode_pendonor', props.route.params.kode_pendonor);
-      const headers = {
+      const kode_pendonor = await AsyncStorage.getItem('kode_pendonor');
+     const headers = {
           'Content-Type': 'application/json',
           'Authorization' : 'Bearer ' + token
       };
       const body = {
-        kode_calon_pendonor: props.route.params.kode_pendonor
+        kode_calon_pendonor: kode_pendonor
       };
       console.log(body)
       Axios.post(`${url}/api/simaba/calon-pendonor`, JSON.stringify(body),
@@ -54,8 +55,8 @@ function Berhasil(props) {
           .then(r => {
               if (r.data.code == 200) {
                   setRes(r.data)
-                  console.log("res", r.data.data[0].status)
-                  if (r.data.data[0].status === 'lolos'){
+                  console.log("res", r.data.data[0])
+                  if (r.data.data[0].status === 'lolos admin'){
                     setKomponen(<View>
                       <Text
                         style={{
@@ -74,7 +75,34 @@ function Berhasil(props) {
                       >
                    SELAMAT{'\n'}ANDA LOLOS SEBAGAI{'\n'}CALON PENDONOR
                   </Text>
-                </View>)}else {
+                </View>
+                  )
+                setButton(
+                  <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                    }}>
+                    <Card style={styles.cardStyle}>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={goNextPage.bind(this, 'Pilih')}>
+                            <Text
+                                style={{
+                                    margin: 10,
+                                    fontSize: 15,
+                                    textAlign: 'center',
+                                    fontWeight: 'bold',
+                                    color: 'white',
+                                }}>
+                                Selanjutnya
+                            </Text>
+                        </TouchableOpacity>
+                    </Card>
+                </View>
+                )
+                }else {
                     setKomponen(<View>
                       <Text
                         style={{
@@ -97,7 +125,33 @@ function Berhasil(props) {
                         <Text>1. Berat badan kurang dari 45 kg </Text>
                         <Text>2. Usia kurang dari 17 tahun </Text>
                         <Text>3. Jawaban kuesioner yang tidak sesuai</Text> */}
-                    </View>)
+                    </View>
+                    )
+                    setButton(
+                      <View
+                        style={{
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignContent: 'center',
+                        }}>
+                        <Card style={styles.cardStyle}>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={goNextPage.bind(this, 'Dashboard')}>
+                                <Text
+                                    style={{
+                                        margin: 10,
+                                        fontSize: 15,
+                                        textAlign: 'center',
+                                        fontWeight: 'bold',
+                                        color: 'white',
+                                    }}>
+                                    Kembali
+                                </Text>
+                            </TouchableOpacity>
+                        </Card>
+                    </View>
+                    )
                   }
               } else {
                   console.log('Error', r.data.message);
@@ -108,7 +162,7 @@ function Berhasil(props) {
           });
   }
   setTimeout(()=>{
-    getData()}, 1000)
+    getData()}, 3000)
   },[]);
   const goNextPage = page => {
     if (page) {
@@ -187,55 +241,7 @@ function Berhasil(props) {
           }}
         >
           </Card>
-          <View
-          style={{
-            alignContent: "center",
-
-            flexDirection: "row",
-            justifyContent: "center",
-              alignContent: "center",
-              marginTop:370,
-            
-          }}
-        >
-          <Card
-            style={{
-              backgroundColor: "#000",width: "40%", marginRight:"2%" }}
-          >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kuisioner')} >
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20,
-             
-                  color: "white",
-                  fontWeight: "bold",textAlign:'center',
-                }}
-              >
-                Kembali
-              </Text>
-            </TouchableOpacity>
-          </Card>
-          <Card
-            style={{
-              backgroundColor: "#000",width: "40%",marginLeft:"2%"
-            }}
-          >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Pilih')} >
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 20, textAlign:'center',
-
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
-                Selanjutnya
-              </Text>
-            </TouchableOpacity>
-          </Card>
-        </View>
+          {buttons}
 
       
       </ScrollView>

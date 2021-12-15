@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, ImageBackground, Image, Text, View,TextInput } from "react-native";
+import { Alert, ImageBackground, Image, Text, View,TextInput, BackHandler } from "react-native";
 import { CheckBox } from 'react-native-elements';
 import {
   Container,
@@ -40,11 +40,35 @@ function DonorBiasa(props) {
       props.navigation.replace(page)
     }
   }
+  const backAction = () => {
+    Alert.alert("Hold on!", "Are you sure you want to go back?", [
+      {
+        text: "Cancel",
+        onPress: () => null,
+        style: "cancel"
+      },
+      { text: "YES", onPress: () => BackHandler.goBack() }
+    ]);
+    return true;
+  };
+
   useEffect(() => {
-    
     update_field_data()
-    console.log(ktp)
-    console.log(nama_pendonor)
+    BackHandler.addEventListener('hardwareBackPress', function() {
+      // this.onMainScreen and this.goBack are just examples, you need to use your own implementation here
+      // Typically you would use the navigator here to go to the last state.
+    
+      if (!this.onMainScreen()) {
+        alert(';as')
+        // this.goBack();
+        return true;
+      }
+      else{
+        alert('asd')
+      }
+      return false;
+    });
+    
   },[]);
 
   async function update_field_data(){

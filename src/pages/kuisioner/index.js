@@ -24,8 +24,9 @@ import {
     Col,
 } from 'react-native-table-component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { KUESIONER } from '../../config/api';
+import { KUESIONER, PENDONOR } from '../../config/api';
 import Axios from 'axios';
+import qs from 'qs';
 
 function Kuisioner(props) {
     const [kuesioner, setKuesioner] = useState([
@@ -366,38 +367,55 @@ function Kuisioner(props) {
                 submit(input);
             }
         } else {
-            props.navigation.replace(page);
+            props.navigation.goBack()
         }
     };
     async function submit(input) {
         const token = await AsyncStorage.getItem('token');
         const nama = await AsyncStorage.getItem('nama');
-        const kode_calon_pendonor = props.route.params.kode_pendonor
+        
+        const data_calon_donor = props.route.params.data_calon_donor
+        console.log(data_calon_donor)
         const ktp = await AsyncStorage.getItem('ktp');
         const url = KUESIONER;
-       
-        input.kode_calon_pendonor = kode_calon_pendonor;
-        input.ktp = ktp;
-        input.nama = nama;
-        const body = input;
-        console.log(body)
-        Axios.post(`${url}/api/simaba/kuesioner/create`, body,
-        {headers:{
+        const url_pendonor = PENDONOR;
+        Axios.post(`${url_pendonor}/api/simaba/calon-pendonor/create`,qs.stringify(data_calon_donor),
+            {headers:{
             Authorization :'Bearer ' +token,
-            'Content-Type': 'application/json',
-          }})
+            'Content-Type': 'application/x-www-form-urlencoded',
+            }})
             .then(res => {
                 console.info('res.data', res.data);
                 console.log(res.data);
                 if (res.data.code === 200) {
-                    alert('sukses submit kuesioner');
-                    props.navigation.navigate('Berhasil',{kode_pendonor : kode_calon_pendonor});
+                    AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
+                    input.kode_calon_pendonor = res.data.kode_pendonor;
+                    input.ktp = ktp;
+                    input.nama = nama;
+                    const body = input;
+                    Axios.post(`${url}/api/simaba/kuesioner/create`, body,
+                        {headers:{
+                            Authorization :'Bearer ' +token,
+                            'Content-Type': 'application/json',
+                        }})
+                            .then(res => {
+                                console.info('res.data', res.data);
+                                console.log(res.data);
+                                if (res.data.code === 200) {
+                                    props.navigation.navigate('Berhasil',{transaksi : res.data.transaksi});
+                                } else {
+                                    console.log('Error', res.data.message);
+                                }
+                            })
+                            .catch(err => {
+                                console.log('test : ', err.response);
+                            });
                 } else {
                     console.log('Error', res.data.message);
                 }
             })
             .catch(err => {
-                console.log('test : ', err.response);
+                console.log('test : ', err);
             });
     }
     return (
@@ -515,7 +533,7 @@ function Kuisioner(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Data')}>
+                            onPress={goNextPage.bind(this, 'Dashboard')}>
                             <Text
                                 style={{
                                     margin: 10,

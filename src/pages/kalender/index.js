@@ -87,7 +87,6 @@ function Kalender(props) {
                 console.info('res.data', res.data);
                 console.log(res.data);
                 if (res.data.code === 200) {
-                    alert('sukses update jadwal');
                     props.navigation.replace('Barcode');
                 } else {
                     console.log('Error', res.data.message);

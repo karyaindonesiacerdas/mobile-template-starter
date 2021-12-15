@@ -47,6 +47,7 @@ import {
 	MobilUnit01,
 	MobilUnit02,
     Riwayat,
+	RiwayatDetail,
 	PermintaanDarah,
 	Alur01,
 	Alur02,
@@ -60,6 +61,7 @@ import {
 	ListPendonor,
 	PermintaanDarah1,
 	PermintaanSukses,
+	GantiPasword,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -114,6 +116,7 @@ function index() {
 				<Stack.Screen name="MobilUnit01" component={MobilUnit01} options={{ headerShown: false }} />
 				<Stack.Screen name="MobilUnit02" component={MobilUnit02} options={{ headerShown: false }} />
                 <Stack.Screen name="Riwayat" component={Riwayat} options={{ headerShown: false }} />
+				<Stack.Screen name="RiwayatDetail" component={RiwayatDetail} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur01" component={Alur01} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur02" component={Alur02} options={{ headerShown: false }} />
 				<Stack.Screen name="Alur03" component={Alur03} options={{ headerShown: false }} />
@@ -127,6 +130,7 @@ function index() {
 				<Stack.Screen name="ListPendonor" component={ListPendonor} options={{ headerShown: false }} />
 				<Stack.Screen name="PermintaanDarah1" component={PermintaanDarah1} options={{ headerShown: false }} />
 				<Stack.Screen name="PermintaanSukses" component={PermintaanSukses} options={{ headerShown: false }} />
+				<Stack.Screen name="GantiPasword" component={GantiPasword} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

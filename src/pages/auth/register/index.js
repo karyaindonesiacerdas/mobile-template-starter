@@ -15,7 +15,7 @@ import {
 } from 'native-base';
 import {useMutation} from 'react-query';
 import {Formik} from 'formik';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity,Alert} from 'react-native';
 import * as Yup from 'yup';
 import Bg from '../../image/Baground2.jpg';
 import qs from 'qs';
@@ -35,17 +35,24 @@ function Register(props) {
             email: value.email,
             nomor_telepon: value.nomorTelepon,
         };
+        console.log(body)
         Axios.post(`${url}/api/simaba/user/register`, qs.stringify(body),
             headers)
             .then(res => {
                 if (res.data.code === 200) {
+                    console.log()
+                    Alert.alert("Berhasil","Anda Telah Terdaftar, Silakan Cek Email Untuk Mendapatkan Credential",
+                    [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+                    )
                     alert(
                         'anda telah terdaftar, silakan cek email untuk mendapatkan credential',
                     );
                     props.navigation.dispatch(StackActions.replace('Login'));
                 } else {
                     console.log('Error', res.data.message);
-                    alert('username sudah digunakan');
+                    Alert.alert("Gagal","Email Sudah Digunakan , Silahkan Gunakan Email Lain Atau Login",
+                    [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+                    )
                     props.navigation.dispatch(StackActions.replace('Register'));
                 }
             })
@@ -165,8 +172,9 @@ function Register(props) {
                                 </View>
                             )}
                             <ListItem>
-                                <CheckBox checked={check1}
-              onPress={() => setCheck1(!check1)} />
+                                <CheckBox checked={false} color=""
+                                checked={check1}
+                                onPress={() => setCheck1(!check1)} />
                                 <Body>
                                     <Text>
                                         I Agree All the statements in Terms of
