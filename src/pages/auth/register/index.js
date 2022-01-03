@@ -47,9 +47,6 @@ function Register(props) {
                     Alert.alert("Berhasil","Anda Telah Terdaftar, Silakan Cek Email Untuk Mendapatkan Credential",
                     [{ text: "OK", onPress: () => console.log("OK Pressed") }]
                     )
-                    alert(
-                        'anda telah terdaftar, silakan cek email untuk mendapatkan credential',
-                    );
                     props.navigation.dispatch(StackActions.navigate('Login'));
                 } else {
                     console.log('Error', res.data.message);

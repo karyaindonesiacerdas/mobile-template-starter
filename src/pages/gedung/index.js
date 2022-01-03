@@ -13,17 +13,53 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
 import styles from '../styles/styles';
 import Bg from '../../image/baground3.jpeg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {PENDONOR} from '../../config/api';
+import Axios from 'axios';
 
 function Gedung(props) {
     const [check1, setCheck1] = useState(false);
     const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
-        if (page == 'Kalender') {
-            props.navigation.navigate(page, {location: 'Gedung UDD'});
+        if (page == 'Barcode') {
+            submit();
         } else {
             props.navigation.navigate(page);
         }
     };
+    async function submit() {
+        const token = await AsyncStorage.getItem('token');
+        const ktp = await AsyncStorage.getItem('ktp');
+        const lokasi = 'Gedung UDD';
+        const url = PENDONOR;
+        const body = {
+            ktp: ktp,
+            lokasi: lokasi,
+        };
+        console.log(body);
+        Axios.put(`${url}/api/simaba/pendonor/update/lokasi`, body, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(res => {
+                console.info('res.data', res.data);
+                console.log(res.data);
+                if (res.data.code === 200) {
+                    props.navigation.navigate('Barcode');
+                } else {
+                    Alert.alert("Error", +res.data.code + '  ' + res.data.message,
+                                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                                )
+                }
+            })
+            .catch(err => {
+                Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+                                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                                )
+            });
+    }
     return (
         <Container>
             <Image
@@ -220,7 +256,7 @@ function Gedung(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Kalender')}>
+                            onPress={goNextPage.bind(this, 'Barcode')}>
                             <Text
                                 style={{
                                     margin: 10,

@@ -27,7 +27,7 @@ import styles from '../styles/styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {USER_MANAGEMENT} from '../../config/api';
 
-function Kegiatan(props) {
+function GantiPasword(props) {
   const submitData =(value) => {
     async function submit(){
       const token = await AsyncStorage.getItem('token')
@@ -240,112 +240,30 @@ function Kegiatan(props) {
                             
                           }}
                         >
-                          <Card
+                        <Card
                             style={{
-                              backgroundColor: "#000",width: "40%",marginLeft:"2%"
-                            }}
-                          >
-                            <TouchableOpacity style={styles.button} onPress={handleSubmit} >
-                              <Text
-                                style={{
-                                    marginLeft: 30,
-                                    marginTop: 90,
-                                    fontSize: 15,
-                                    fontWeight: 'normal',
-                                    color: 'black',
-                                    textShadowColor: '#fff',
-                                    textShadowOffset: {width: 1, height: 1},
-                                    textShadowRadius: 10,
-                                }}>
-                                Email
-                            </Text>
-                            <Item style={styles.item}>
-                                <Input
-                                    style={styles.input}
-                                    onChangeText={handleChange('email')}
-                                    onBlur={handleBlur('email')}
-                                    value={values.email}
-                                    underlineColorAndroid="transparent"
-                                />
-                            </Item>
-                            <Text
-                                style={{
-                                    marginLeft: 30,
-                                    marginTop: 20,
-                                    fontSize: 15,
-                                    fontWeight: 'normal',
-                                    color: 'black',
-                                    textShadowColor: '#fff',
-                                    textShadowOffset: {width: 1, height: 1},
-                                    textShadowRadius: 10,
-                                }}>
-                                NIK
-                            </Text>
-                            <Item style={styles.item}>
-                                <Input
-                                    style={styles.input}
-                                    onChangeText={handleChange('nik')}
-                                    onBlur={handleBlur('nik')}
-                                    value={values.nik}
-                                    underlineColorAndroid="transparent"
-                                />
-                            </Item>
-                            <Text
-                                style={{
-                                    marginLeft: 30,
-                                    marginTop: 20,
-                                    fontSize: 15,
-                                    fontWeight: 'normal',
-                                    color: 'black',
-                                    textShadowColor: '#fff',
-                                    textShadowOffset: {width: 1, height: 1},
-                                    textShadowRadius: 10,
-                                }}>
-                                Pasword Baru
-                            </Text>
-                            <Item style={styles.item}>
-                                <Input
-                                    style={styles.input}
-                                    onChangeText={handleChange('new_password')}
-                                    onBlur={handleBlur('new_password')}
-                                    value={values.new_password}
-                                    underlineColorAndroid="transparent"
-                                    secureTextEntry={true}
-                                />
-                            </Item>
-                            <View
-                                style={{
-                                    alignContent: 'center',
-
-                                    flexDirection: 'row',
-                                    justifyContent: 'center',
-                                    alignContent: 'center',
-                                    marginTop: 65,
-                                }}>
-                                <Card
+                                backgroundColor: '#000',
+                                width: '40%',
+                                marginLeft: '2%',
+                            }}>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={handleSubmit}>
+                                <Text
                                     style={{
-                                        backgroundColor: '#000',
-                                        width: '40%',
-                                        marginLeft: '2%',
-                                    }}>
-                                    <TouchableOpacity
-                                        style={styles.button}
-                                        onPress={handleSubmit}>
-                                        <Text
-                                            style={{
-                                                margin: 10,
-                                                fontSize: 20,
-                                                textAlign: 'center',
+                                        margin: 10,
+                                        fontSize: 20,
+                                        textAlign: 'center',
 
-                                                color: 'white',
-                                                fontWeight: 'bold',
-                                            }}>
-                                            Submit
-                                        </Text>
-                                    </TouchableOpacity>
-                                </Card>
+                                        color: 'white',
+                                        fontWeight: 'bold',
+                                    }}>
+                                    Submit
+                                </Text>
+                            </TouchableOpacity>
+                          </Card>
                             </View>
-                        </View>
+                          </View>                    
                     )}
                 </Formik>
             </ScrollView>
@@ -353,4 +271,4 @@ function Kegiatan(props) {
     );
 }
 
-export default Kegiatan;
+export default GantiPasword;

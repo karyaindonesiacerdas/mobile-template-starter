@@ -151,37 +151,31 @@ function Home(props) {
                 </TouchableOpacity>
             </Card>
             <View
-                style={{
-                    alignContent: 'center',
-
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    marginTop: 280,
-                }}>
-                <Card
-                    style={{
-                        backgroundColor: '#000',
-                        width: '40%',
-                        marginRight: '2%',
-                    }}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={goNextPage.bind(this, 'Dashboard')}>
-                        <Text
-                            style={{
-                                margin: 10,
-                                fontSize: 20,
-
-                                color: 'white',
-                                fontWeight: 'bold',
-                                textAlign: 'center',
-                            }}>
-                            Kembali
-                        </Text>
-                    </TouchableOpacity>
-                </Card>
-            </View>
+                                    style={{
+                                        flexDirection: 'row',
+                                        justifyContent: 'center',
+                                        alignContent: 'center',
+                                    }}>
+                                    <Card style={styles.cardStyle}>
+                                        <TouchableOpacity
+                                            style={styles.button}
+                                            onPress={goNextPage.bind(
+                                                this,
+                                                'Dashboard',
+                                            )}>
+                                            <Text
+                                                style={{
+                                                    margin: 10,
+                                                    fontSize: 15,
+                                                    textAlign: 'center',
+                                                    fontWeight: 'bold',
+                                                    color: 'white',
+                                                }}>
+                                                Kembali
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </Card>
+                                </View>
         </Container>
     );
 }

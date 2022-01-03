@@ -81,7 +81,7 @@ function Riwayat(props) {
                             color: 'black'
                         }}
                     >
-                        <B>Jadwal Donor :{item.jadwal_donor}</B>
+                        <B>Jadwal Donor :{item.TGL.substring(0,10)}</B>
                     </Text>
                 </TouchableOpacity>
             </Card>
@@ -265,7 +265,9 @@ function Riwayat(props) {
                     }
                 })
                 .catch(err => {
-                    console.log('error : ', err);
+                    Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+                    [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                    )
                 });
         }
         getRiwayat();

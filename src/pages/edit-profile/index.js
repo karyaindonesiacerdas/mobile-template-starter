@@ -25,10 +25,10 @@ function EditProfil(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [ktp, setKtp] = useState(null);
     const [nama, setNama] = useState(null);
-    const [tempat_lahir, setTempatLahir] = useState(null);
-    const [tanggal_lahir, setTanggalLahir] = useState(null);
-    const [jeniskelamin, setJenisKelamin] = React.useState(null);
-    const [status_menikah, setStatusMenikah] = React.useState(0);
+    const [tempat_lahir, setTempatLahir] = useState();
+    const [tanggal_lahir, setTanggalLahir] = useState();
+    const [jeniskelamin, setJenisKelamin] = React.useState();
+    const [status_menikah, setStatusMenikah] = React.useState();
     const [pekerjaan, setPekerjaan] = React.useState([]);
     const [pekerjaanInitial, setPekerjaanInitial] = React.useState(null);
     const [golonganDarah, setGolonganDarah] = React.useState([]);
@@ -272,8 +272,32 @@ function EditProfil(props) {
                     console.error('error : ', err);
                 });
         }
+        // async function get_profile_image() {
+        //     const token = await AsyncStorage.getItem('token');
+        //     const gambar_str = await AsyncStorage.getItem('gambar');
+        //     if (gambar_str) {
+        //         setGambar(gambar_str.substring(15));
+        //         console.log(gambar_str);
+        //     }
+        //     const url = USER_MANAGEMENT;
+        //     const get_url = `${url}/api/simaba/image-profile/${gambar}`;
+        //     console.log(get_url);
+        //     Axios.get(get_url, {
+        //         headers: {
+        //             Authorization: 'Bearer ' + token,
+        //         },
+        //     })
+        //         .then(r => {
+        //             console.log(r);
+        //         })
+        //         .catch(err => {
+        //             console.log(err);
+        //         });
+        // }
 
         getUser();
+        setIsLoading(false);
+        // get_profile_image();
     }, []);
 
     const [input] = useState({
@@ -352,8 +376,6 @@ function EditProfil(props) {
     };
 
     const submitData = value => {
-        console.info('value-form', value.golongan_darah.toString());
-
         async function submit() {
             // setIsLoading(true)
             const token = await AsyncStorage.getItem('token');
@@ -364,21 +386,12 @@ function EditProfil(props) {
                 tempat_lahir: value.tempat_lahir,
                 tanggal_lahir: value.tanggal_lahir,
                 jenis_kelamin: value.jeniskelamin,
-                status_menikah: value.statusmenikah.toString(),
+                status_menikah: value.status_menikah,
                 golongan_darah: value.gologan_darah,
                 pekerjaan: value.pekerjaan,
                 gambar: filebase64,
             };
-            // return;
-
-            if (
-                !jeniskelamin ||
-                !status_menikah ||
-                !golonganDarah ||
-                !pekerjaan
-            ) {
-                alert('Lengkapi Data Profile');
-            } else {
+            console.log(body)
                 Axios.put(`${url}/api/simaba/user/update`, body, {
                     headers: {
                         Authorization: 'Bearer ' + token,
@@ -418,56 +431,29 @@ function EditProfil(props) {
                                 'pekerjaan',
                                 body.pekerjaan.toString(),
                             );
+                            if (body.gambar){
                             AsyncStorage.setItem(
                                 'gambar',
                                 body.gambar.toString(),
-                            );
+                            );}
 
-                            alert('sukses melengkapi profil');
-                            props.navigation.navigate('Dashboard');
+                            Alert.alert("Berhasil","Profile Berhasil Di Perbarui",
+                                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                                )
                         } else {
-                            console.log('Error', r.data);
+                            Alert.alert("Gagal",r.data.message,
+                                [{ text: "Coba Lagi", onPress: () => console.log('Ok')}]
+                                )
                         }
                     })
                     .catch(err => {
                         console.log('error : ', err.message);
                     });
-            }
 
             setIsLoading(false);
         }
         submit();
     };
-
-    useEffect(() => {
-        get_profile_image();
-        setBase64(
-            '/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAAAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3BhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADTLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAwADEANv/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIASwBLAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQr/xAAZEAEAAgMAAAAAAAAAAAAAAAAAAcECMXH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAv/EABoRAQEBAAMBAAAAAAAAAAAAAAARAQISITH/2gAMAwEAAhEDEQA/AMP4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBN35lAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEjeXahQVx3rtl8gAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/9k=',
-        );
-    }, []);
-
-    async function get_profile_image() {
-        const token = await AsyncStorage.getItem('token');
-        const gambar_str = await AsyncStorage.getItem('gambar');
-        if (gambar_str) {
-            setGambar(gambar_str.substring(15));
-            console.log(gambar_str);
-        }
-        const url = USER_MANAGEMENT;
-        const get_url = `${url}/api/simaba/image-profile/${gambar}`;
-        console.log(get_url);
-        Axios.get(get_url, {
-            headers: {
-                Authorization: 'Bearer ' + token,
-            },
-        })
-            .then(r => {
-                console.log(r);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
 
     const formSchema = Yup.object().shape({
         ktp: Yup.string()
@@ -619,8 +605,9 @@ function EditProfil(props) {
                         // AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
                         // AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
                         // AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
-                        alert('sukses melengkapi profil');
-                        props.navigation.navigate('Dashboard');
+                        Alert.alert("Berhasil","Photo Profile Berhasil Di Perbarui",
+                                [{ text: "OK", onPress: () => console.log('Ok') }]
+                                )
                     } else {
                         console.log('Error', r.data);
                     }
@@ -792,7 +779,7 @@ function EditProfil(props) {
                                 tempat_lahir: tempat_lahir,
                                 tanggal_lahir: tanggal_lahir,
                                 jeniskelamin: jeniskelamin,
-                                statusmenikah: status_menikah,
+                                status_menikah: status_menikah,
                                 pekerjaan: pekerjaanInitial,
                                 golongan_darah: golonganDarahInitial,
                             }}
@@ -1069,14 +1056,14 @@ function EditProfil(props) {
                                             style={{width: '70%'}}
                                             title={'Sudah Menikah'}
                                             checked={
-                                                values.statusmenikah == 1
+                                                values.status_menikah == '1'
                                                     ? true
                                                     : false
                                             }
                                             onPress={() =>
                                                 setFieldValue(
-                                                    'statusmenikah',
-                                                    1,
+                                                    'status_menikah',
+                                                    '1',
                                                 )
                                             }
                                         />
@@ -1084,14 +1071,15 @@ function EditProfil(props) {
                                             style={{width: '70%'}}
                                             title={'Belum Menikah'}
                                             checked={
-                                                values.statusmenikah == 0
+                                                values.status_menikah == "0"
                                                     ? true
                                                     : false
                                             }
                                             onPress={() =>
+                                                
                                                 setFieldValue(
-                                                    'statusmenikah',
-                                                    0,
+                                                    'status_menikah',
+                                                    '0',
                                                 )
                                             }
                                         />
@@ -1266,6 +1254,7 @@ function EditProfil(props) {
                                                                     'pekerjaan',
                                                                     checkbox.value,
                                                                 );
+                                                                console.log(checkbox.value)
                                                             }}
                                                             key={i}
                                                         />
@@ -1325,6 +1314,7 @@ function EditProfil(props) {
                                                                         'golongan_darah',
                                                                         checkbox.value,
                                                                     );
+                                                                    console.log(checkbox.value)
                                                                 }}
                                                                 key={i}
                                                             />

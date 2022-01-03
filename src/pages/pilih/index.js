@@ -18,7 +18,12 @@ function Pilih(props) {
     const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
         if (page != 'Berhasil') {
-            props.navigation.navigate(page);
+            if (page == 'table'){
+                Alert.alert("Info","Saat Ini Hanya Tersedia Donor Di Gedung UDD",
+                [{ text: "Ok", onPress: () => console.log("OK Pressed") }])
+            }
+            else{
+            props.navigation.navigate(page);}
         } else {
             props.navigation.goBack();
         }
@@ -52,7 +57,7 @@ function Pilih(props) {
                 }}></Image>
             <Text
                 style={{
-                    marginLeft: 170,
+                    textAlign: 'center',
                     marginTop: 80,
                     fontSize: 50,
                     fontWeight: 'bold',
@@ -62,7 +67,7 @@ function Pilih(props) {
             </Text>
             <Text
                 style={{
-                    marginLeft: 70,
+                    alignSelf: 'center',
                     marginTop: 0,
                     fontSize: 40,
                     fontWeight: 'bold',

@@ -15,6 +15,7 @@ import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function RiwayatDetail(props) {
+    const [kode_calon_pendonor, setKode] = useState()
     const [detail, SetDetail] = useState({
         kuesioner_id: '',
         jadwal_donor: '',
@@ -23,12 +24,11 @@ function RiwayatDetail(props) {
         golongan_darah: '',
         rhesus: '',
         berat_badan: '',
-        kode_calon_pendonor: '',
+        TGL : '',
     });
     const [action, setAction] = useState();
     const goNextPage = page => {
         if (page) {
-            AsyncStorage.setItem('kode_pendonor', detail.kode_calon_pendonor);
             props.navigation.navigate(page);
         }
     };
@@ -60,7 +60,7 @@ function RiwayatDetail(props) {
             })
                 .then(r => {
                     if (r.data.code == 200) {
-                        console.log(r.data);
+                        AsyncStorage.setItem('kode_pendonor',r.data.data[0].kode_calon_pendonor);
                         SetDetail(r.data.data[0]);
                         if (r.data.data[0].jenis_donor === 'biasa') {
                             if (r.data.data[0].status === 'lolos admin') {
@@ -94,7 +94,7 @@ function RiwayatDetail(props) {
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                goNextPage.bind(this, 'Home')
+                                                goNextPage('Home')
                                             }>
                                             <Text style={styles.textInCard}>
                                                 Daftar Donor Baru
@@ -182,7 +182,9 @@ function RiwayatDetail(props) {
                     }
                 })
                 .catch(err => {
-                    console.log('error : ', err);
+                    Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+                    [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                    )
                 });
         }
         getRiwayat();
@@ -248,7 +250,7 @@ function RiwayatDetail(props) {
                                 }}>
                                 <B>
                                     Jadwal Donor :
-                                    {detail.jadwal_donor.toUpperCase()}
+                                    {detail.TGL.substring(0,10)}
                                 </B>
                             </Text>
                             <Text

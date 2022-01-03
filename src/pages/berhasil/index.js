@@ -157,7 +157,7 @@ function Berhasil(props) {
                                             </Text>
                                         </TouchableOpacity>
                                     </Card>
-                                </View>,
+                                </View>
                             );
                         }
                     } else {
