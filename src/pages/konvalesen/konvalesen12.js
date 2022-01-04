@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Alert,
     ImageBackground,
@@ -6,7 +6,7 @@ import {
     Text,
     View,
     StyleSheet,
-    TextInput
+    TextInput,
 } from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Container, Card} from 'native-base';
@@ -23,24 +23,23 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
-import Bg from '../../image/baground3.jpeg'
+import Bg from '../../image/baground3.jpeg';
 import CalendarPicker from 'react-native-calendar-picker';
-import moment from 'moment'
+import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PENDONOR } from '../../config/api';
+import {PENDONOR} from '../../config/api';
 import Axios from 'axios';
 function Konvalesen12(props) {
     const [check1, setCheck1] = useState(false);
     const [check2, setCheck2] = useState(false);
-    const [jadwal, setJadwal] = useState(Date.now())
-    const lokasi = props.route.params
+    const [jadwal, setJadwal] = useState(Date.now());
+    const lokasi = props.route.params;
 
     const goNextPage = page => {
         if (page == 'Konvalesen13') {
-            submit()
-        }
-        else{
-            props.navigation.replace(page)  
+            submit();
+        } else {
+            props.navigation.navigate(page);
         }
     };
 
@@ -48,58 +47,62 @@ function Konvalesen12(props) {
         var date = new Date().getDate(); //Current Date
         var month = new Date().getMonth() + 1; //Current Month
         var year = new Date().getFullYear(); //Current Year
-        console.log(lokasi)
-        if (month < 10){
+        console.log(lokasi);
+        if (month < 10) {
             month = '0' + month;
-         }
-        if (date < 10){
+        }
+        if (date < 10) {
             date = '0' + date;
         }
-        setJadwal(
-          year + '-' + month + '-' + date 
-        );
-        console.log(jadwal)
-      }, []);
-    const onDateChange = date =>{
+        setJadwal(year + '-' + month + '-' + date);
+        console.log(jadwal);
+    }, []);
+    const onDateChange = date => {
         date = moment(date).format('YYYY-MM-DD');
-        setJadwal(date)
-        console.log(date)
-    }
+        setJadwal(date);
+        console.log(date);
+    };
 
-    
     async function submit() {
         const token = await AsyncStorage.getItem('token');
         const ktp = await AsyncStorage.getItem('ktp');
         const lokasi = props.route.params.location;
         const url = PENDONOR;
         const body = {
-            ktp : ktp,
-            lokasi : lokasi,
-            jadwal : jadwal
-        }
-        console.log(body)
-        Axios.put(`${url}/api/simaba/pendonor/update/lokasisample`, body,
-        {headers:{
-            Authorization :'Bearer ' +token,
-            'Content-Type': 'application/json',
-          }})
+            ktp: ktp,
+            lokasi: lokasi,
+            jadwal: jadwal,
+        };
+        console.log(body);
+        Axios.put(`${url}/api/simaba/pendonor/update/lokasisample`, body, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+        })
             .then(res => {
                 console.info('res.data', res.data);
                 console.log(res.data);
                 if (res.data.code === 200) {
-                    props.navigation.navigate('Konvalesen13', {jadwal: jadwal,lokasi:lokasi})
+                    props.navigation.navigate('Konvalesen13', {
+                        jadwal: jadwal,
+                        lokasi: lokasi,
+                    });
                 } else {
                     console.log('Error', res.data.message);
                 }
             })
             .catch(err => {
                 console.log('test : ', err.response);
-                props.navigation.navigate('Konvalesen13', {jadwal: jadwal})
+                props.navigation.navigate('Konvalesen13', {jadwal: jadwal});
             });
     }
     return (
         <Container>
-            <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+            <Image
+                source={Bg}
+                style={{width: '100%', height: '100%', position: 'absolute'}}
+            />
             <Image
                 source={require('../image/logo.png')}
                 style={{
@@ -150,15 +153,17 @@ function Konvalesen12(props) {
                         justifyContent: 'center',
                         alignSelf: 'center',
                     }}>
-                     <CalendarPicker
-                        onDateChange={onDateChange}
-                        />
+                    <CalendarPicker onDateChange={onDateChange} />
                 </View>
                 <View style={{}}>
-                    <CheckBox title='Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan' style={{width:"70%" }}checked={check1}
-              onPress={() => setCheck1(!check1)}
-              style={{ width: "70%" }}   />
-          </View>
+                    <CheckBox
+                        title="Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan"
+                        style={{width: '70%'}}
+                        checked={check1}
+                        onPress={() => setCheck1(!check1)}
+                        style={{width: '70%'}}
+                    />
+                </View>
                 <View
                     style={{
                         alignContent: 'center',
@@ -174,7 +179,9 @@ function Konvalesen12(props) {
                             width: '40%',
                             marginRight: '2%',
                         }}>
-                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Konvalesen11')} >
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={goNextPage.bind(this, 'Konvalesen11')}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -194,7 +201,9 @@ function Konvalesen12(props) {
                             width: '40%',
                             marginLeft: '2%',
                         }}>
-                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Konvalesen13')} >
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={goNextPage.bind(this, 'Konvalesen13')}>
                             <Text
                                 style={{
                                     margin: 10,

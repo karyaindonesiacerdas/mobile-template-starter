@@ -21,16 +21,13 @@ import Bg from '../../image/Baground2.jpg';
 import qs from 'qs';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
-import {
-  ScrollView,
-} from "react-native-gesture-handler";
-import styles from "../styles/styles";
+import {ScrollView} from 'react-native-gesture-handler';
+import styles from '../styles/styles';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { USER_MANAGEMENT } from "../../config/api";
+import {USER_MANAGEMENT} from '../../config/api';
 
-
-function Kegiatan(props) {
+function GantiPasword(props) {
   const submitData =(value) => {
     async function submit(){
       const token = await AsyncStorage.getItem('token')
@@ -114,7 +111,7 @@ function Kegiatan(props) {
               <Formik
                     initialValues={{
                         email: '',
-                        nik : '',
+                        nik: '',
                         new_password: '',
                         new_password_confirm : '',
                     }}
@@ -122,8 +119,7 @@ function Kegiatan(props) {
                         email: Yup.string()
                             .email('Invalid email address')
                             .required('Required'),
-                        nik: Yup.string()
-                            .required('Required'),
+                        nik: Yup.string().required('Required'),
                     })}
                     onSubmit={value => {
                         submitData(value);
@@ -244,32 +240,35 @@ function Kegiatan(props) {
                             
                           }}
                         >
-                          <Card
+                        <Card
                             style={{
-                              backgroundColor: "#000",width: "40%",marginLeft:"2%"
-                            }}
-                          >
-                            <TouchableOpacity style={styles.button} onPress={handleSubmit} >
-                              <Text
-                                style={{
-                                  margin: 10,
-                                  fontSize: 20, textAlign:'center',
+                                backgroundColor: '#000',
+                                width: '40%',
+                                marginLeft: '2%',
+                            }}>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={handleSubmit}>
+                                <Text
+                                    style={{
+                                        margin: 10,
+                                        fontSize: 20,
+                                        textAlign: 'center',
 
-                                  color: "white",
-                                  fontWeight: "bold",
-                                }}
-                              >
-                                Submit
-                              </Text>
+                                        color: 'white',
+                                        fontWeight: 'bold',
+                                    }}>
+                                    Submit
+                                </Text>
                             </TouchableOpacity>
                           </Card>
-                        </View>
-                        </View>        
+                            </View>
+                          </View>                    
                     )}
-                  </Formik>              
- </ScrollView>
-    </Container>
-  );
+                </Formik>
+            </ScrollView>
+        </Container>
+    );
 }
 
-export default Kegiatan;
+export default GantiPasword;

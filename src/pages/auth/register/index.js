@@ -35,19 +35,19 @@ function Register(props) {
             email: value.email,
             nomor_telepon: value.nomorTelepon,
         };
-        console.log(body)
-        Axios.post(`${url}/api/simaba/user/register`, qs.stringify(body),
-            headers)
+        console.log(body);
+        Axios.post(
+            `${url}/api/simaba/user/register`,
+            qs.stringify(body),
+            headers,
+        )
             .then(res => {
                 if (res.data.code === 200) {
                     console.log()
                     Alert.alert("Berhasil","Anda Telah Terdaftar, Silakan Cek Email Untuk Mendapatkan Credential",
                     [{ text: "OK", onPress: () => console.log("OK Pressed") }]
                     )
-                    alert(
-                        'anda telah terdaftar, silakan cek email untuk mendapatkan credential',
-                    );
-                    props.navigation.dispatch(StackActions.replace('Login'));
+                    props.navigation.dispatch(StackActions.navigate('Login'));
                 } else {
                     console.log('Error', res.data.message);
                     Alert.alert("Gagal","Email Sudah Digunakan , Silahkan Gunakan Email Lain Atau Login",
@@ -62,7 +62,7 @@ function Register(props) {
     };
     const goNextPage = page => {
         if (page) {
-            props.navigation.replace(page);
+            props.navigation.navigate(page);
         }
     };
 
@@ -172,9 +172,12 @@ function Register(props) {
                                 </View>
                             )}
                             <ListItem>
-                                <CheckBox checked={false} color=""
-                                checked={check1}
-                                onPress={() => setCheck1(!check1)} />
+                                <CheckBox
+                                    checked={false}
+                                    color=""
+                                    checked={check1}
+                                    onPress={() => setCheck1(!check1)}
+                                />
                                 <Body>
                                     <Text>
                                         I Agree All the statements in Terms of
@@ -188,10 +191,10 @@ function Register(props) {
                                 style={styles.registerBtn}>
                                 <Text>Register</Text>
                             </Button>
-                        </View>        
+                        </View>
                     )}
-                  </Formik>
-                  <TouchableOpacity onPress={goNextPage.bind(this, 'Login')}>
+                </Formik>
+                <TouchableOpacity onPress={goNextPage.bind(this, 'Login')}>
                     <Text
                         style={{
                             margin: 10,
@@ -203,7 +206,6 @@ function Register(props) {
                         Login
                     </Text>
                 </TouchableOpacity>
-                
             </Content>
         </Container>
     );

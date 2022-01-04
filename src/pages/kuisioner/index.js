@@ -34,14 +34,14 @@ function Kuisioner(props) {
             number: 1,
             label: 'Merasa sehat hari ini, tidak sedang flu/batuk/demam/pusing',
             value: 'YA',
-            yes: true,
+            yes: false,
             no: false,
         },
         {
             number: 2,
             label: 'Apakah anda semalam tidur minimal 4 jam ?',
             value: 'YA',
-            yes: true,
+            yes: false,
             no: false,
         },
         {
@@ -49,287 +49,287 @@ function Kuisioner(props) {
             label: 'Dalam waktu 3 hari (72 jam) terakhir apakah anda minum obat',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 4,
             label: 'Dalam waktu 3 hari (72 jam) terakhir apakah anda minum jamu',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 5,
             label: 'Dalam waktu 1 minggu terakhir apakah anda mencabut gigi ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 6,
             label: 'Dalam waktu 2 minggu terakhir apakah anda mengalami demam lebih dari 38 C',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 7,
             label: 'Untuk donor wanita, dalam waktu 6 minggu terakhir apakah anda saat ini sedang hamil',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 8,
             label: 'Dalam 8 minggu terakhir apakah anda mendonorkan darah, trombosit atau plasma ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 9,
             label: 'Dalam 8 minggu terakhir apakah anda menerima vaksinasi atau suntikan lainya?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 10,
             label: 'Dalam 8 minggu terakhir apakah anda pernah kontak dengan orang yang menerima vaksinasi smallpox ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 11,
             label: 'Dalam waktu 16 minggu terakhir apakah anda mendonorkan 2 kantong melalui proses aferesis ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 12,
             label: 'Dalam waktu 24 minggu  terakhir apakah anada saat ini sedang menyusui ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 13,
             label: 'Dalam waktu 12 bulan apakah anda pernah menerima transfusi darah',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 14,
             label: 'Dalam waktu 12 bulan apakah anda pernah mendapatkan transpaltasi organ, jaringan atau sumsum tulang',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 15,
             label: 'Dalam waktu 12 bulan apakah anda pernah cangkok tulang untuk kulit ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 16,
             label: 'Dalam waktu 12 bulan apakah anda pernah tertusuk jarum medis tanpa sengaja',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 17,
             label: 'Dalam waktu 12 bulan apakah anda pernah berhubungan seksual dengan orang HIV/AIDS',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 18,
             label: 'Dalam waktu 12 bulan apakah anda pernah berhubungan seksual dengan pekerja seks komersil',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 19,
             label: 'Dalam waktu 12 bulan apakah anda pernah berhubungan seksual dengan pengguna narkoba jarum suntik ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 20,
             label: 'Dalam waktu 12 bulan apakah anda pernah berhubungan seksual dengan pengguna kosentrat faktor pembekuan ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 21,
             label: 'Donor wanita, apakah anda pernah berhubungan seksual dengan laki laki yang biseksual ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 22,
             label: 'Apakah anda pernah berhubungan seksual dengan penderita hepatitis',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 23,
             label: 'Apakah anda tinggal dengan penderita hepatitis',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 24,
             label: 'Apakah anda pernah tato',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 25,
             label: 'Apakah anda memiliki tindik telinga atau bagian tubuh lainnya',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 26,
             label: 'Apakah anda sedang atau pernah mendapat pengobatan sifilis atau GO (kencing nanah)',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 27,
             label: 'Apakah anda pernah ditahan atau/dipenjara untuk waktu lebih dari 3 hari',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 28,
             label: 'Dalam waktu 3 tahun apakah anda pernah diluar wilayah indonesia',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 29,
             label: 'Tahun 1977 hingga sekarang apakah anda menerima uang, obat atau pembayaran lain untuk seks?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 30,
             label: 'Tahun 1977 hingga sekarang laki laki : apakah anda pernah berhubungan  seksual dengan laki laki walaupun sekali ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 31,
             label: 'Tahun 1980 hingga sekarang apakah anda tinggal selama 5 tahun atau lebih di eropa (terutama inggris)',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 32,
             label: 'Apakah anda menerima transfusi darah di inggris ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 33,
             label: 'Tahun 1980 hingga 1996 apakah ada tingga lebih dari 3 bulan di inggris ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 34,
             label: 'Apakah anda pernah mendapatkan hasil positif tes HIV/AIDS',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 35,
             label: 'Apakah anda pernah menggunakan ajrum suntik untuk obat-obatan',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 36,
             label: 'Apakah anda pernah menggunakan konsetrat faktor pembekuan',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 37,
             label: 'Apakah anda pernah menderita hepatitis',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 38,
             label: 'Apakah anda pernah menderita malaria',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 39,
             label: 'Apakah anda pernah menderita kanker',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 40,
             label: 'Apakah anda pernah bermasalah dengan jantung dan paru-paru ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 41,
             label: 'Apakah anda pernah menderita perdarahan atau penyakit berhubungan dengan darah ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 42,
             label: 'Apakah anda pernah berhubungan seksual dengan orang yang tinggal di afrika',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
         {
             number: 43,
             label: 'Apakah anda pernah tinggal di afrika ?',
             value: 'TIDAK',
             yes: false,
-            no: true,
+            no: false,
         },
     ]);
 
@@ -367,7 +367,7 @@ function Kuisioner(props) {
                 submit(input);
             }
         } else {
-            props.navigation.goBack()
+            props.navigation.navigate('Data')
         }
     };
     async function submit(input) {
@@ -408,14 +408,24 @@ function Kuisioner(props) {
                                 }
                             })
                             .catch(err => {
-                                console.log('test : ', err.response);
+                                Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+                                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                                )
                             });
-                } else {
-                    console.log('Error', res.data.message);
+                } else if (res.data.code === 500){
+                    Alert.alert("Gagal","Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ",
+                    [{ text: "Cek Riwayat", onPress: () => props.navigation.replace('Riwayat') }]
+                   )
+                } else{
+                    Alert.alert("Error","Silahkan Coba Kembali",
+                    [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                    )
                 }
             })
             .catch(err => {
-                console.log('test : ', err);
+                Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                )
             });
     }
     return (

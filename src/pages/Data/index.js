@@ -147,11 +147,15 @@ function Data(props) {
   async function submitData (value) {
     const token = await AsyncStorage.getItem('token');
     const tanggal_lahir = await AsyncStorage.getItem('tanggal_lahir');
+    const tempat_lahir = await AsyncStorage.getItem('tempat_lahir');
+    const status_menikah = await AsyncStorage.getItem('status_menikah');
     const jenis_kelamin = await AsyncStorage.getItem('jenis_kelamin');
     const url_pendonor = PENDONOR;
     value.tanggal_lahir = tanggal_lahir
     value.jenis_kelamin = jenis_kelamin
     value.berat_badan = berat_badan
+    value.tempat_lahir = tempat_lahir
+    value.status_menikah = status_menikah
     const body = value;
 
     

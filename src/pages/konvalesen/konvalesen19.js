@@ -6,7 +6,7 @@ import {
     Text,
     View,
     StyleSheet,
-    TextInput
+    TextInput,
 } from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Container, Card} from 'native-base';
@@ -23,19 +23,59 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
-import Bg from '../../image/Baground2.jpg'
+import Bg from '../../image/Baground2.jpg';
 
 const CONTENT = {
     tableHead: ['                                             Agustus 2021'],
 
     tableData: [
-        ['   Senin', '  Selasa', '   Rabu','  Kamis','  Jumat','  Sabtu',' Minggu'],
-        ['', '', '','','','','       1'],
-        ['       2', '       3', '       4','       5','       6','      7','       8'],
-        ['       9', '      10', '      11','      12','      13','     14','      15'],
-        ['      16', '      17', '      18','      19','      20','     21','      22'],
-        ['      23', '      24', '      25','      26','      27','     28','      29'],
-        ['      30', '      31', '','','','',''],
+        [
+            '   Senin',
+            '  Selasa',
+            '   Rabu',
+            '  Kamis',
+            '  Jumat',
+            '  Sabtu',
+            ' Minggu',
+        ],
+        ['', '', '', '', '', '', '       1'],
+        [
+            '       2',
+            '       3',
+            '       4',
+            '       5',
+            '       6',
+            '      7',
+            '       8',
+        ],
+        [
+            '       9',
+            '      10',
+            '      11',
+            '      12',
+            '      13',
+            '     14',
+            '      15',
+        ],
+        [
+            '      16',
+            '      17',
+            '      18',
+            '      19',
+            '      20',
+            '     21',
+            '      22',
+        ],
+        [
+            '      23',
+            '      24',
+            '      25',
+            '      26',
+            '      27',
+            '     28',
+            '      29',
+        ],
+        ['      30', '      31', '', '', '', '', ''],
     ],
 };
 function Konvalesen19(props) {
@@ -43,13 +83,16 @@ function Konvalesen19(props) {
     const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
         if (page) {
-            props.navigation.replace(page);
+            props.navigation.navigate(page);
         }
     };
 
     return (
         <Container>
-            <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+            <Image
+                source={Bg}
+                style={{width: '100%', height: '100%', position: 'absolute'}}
+            />
             <Image
                 source={require('../image/logo.png')}
                 style={{
@@ -129,9 +172,13 @@ function Konvalesen19(props) {
                     </Table>
                 </View>
                 <View style={{}}>
-                    <CheckBox title='Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan' style={{width:"70%" }}checked={check1}
-              onPress={() => setCheck1(!check1)}   />
-          </View>
+                    <CheckBox
+                        title="Saya setuju untuk malakukan donor darah di gedung UDD pada tanggal yang telah di Tentukan"
+                        style={{width: '70%'}}
+                        checked={check1}
+                        onPress={() => setCheck1(!check1)}
+                    />
+                </View>
                 <View
                     style={{
                         alignContent: 'center',
@@ -147,7 +194,9 @@ function Konvalesen19(props) {
                             width: '40%',
                             marginRight: '2%',
                         }}>
-                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Konvalesen17')} >
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={goNextPage.bind(this, 'Konvalesen17')}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -167,7 +216,9 @@ function Konvalesen19(props) {
                             width: '40%',
                             marginLeft: '2%',
                         }}>
-                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Konvalesen13')} >
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={goNextPage.bind(this, 'Konvalesen13')}>
                             <Text
                                 style={{
                                     margin: 10,

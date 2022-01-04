@@ -12,7 +12,7 @@ import Bg from '../image/baground3.jpeg';
 function KegiatanDonor(props) {
     const goNextPage = page => {
         if (page) {
-            props.navigation.replace(page);
+            props.navigation.navigate(page);
         }
     };
     return (
@@ -96,27 +96,29 @@ function KegiatanDonor(props) {
                     alignContent: 'center',
                 }}>
                 <Card
-                        style={{
-                            backgroundColor: '#000',
-                            width: '40%',
-                            marginRight: '2%',
-                            borderRadius : 10
-                        }}>
-                        <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Home')} >
-                            <Text
-                                style={{
-                                    margin: 10,
-                                    fontSize: 20,
+                    style={{
+                        backgroundColor: '#000',
+                        width: '40%',
+                        marginRight: '2%',
+                        borderRadius: 10,
+                    }}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={goNextPage.bind(this, 'Home')}>
+                        <Text
+                            style={{
+                                margin: 10,
+                                fontSize: 20,
 
-                                    color: 'white',
-                                    fontWeight: 'bold',
-                                    textAlign: 'center',
-                                }}>
-                                Kembali
-                            </Text>
-                        </TouchableOpacity>
-                    </Card>
-                    <Card style={styles.cardStyle}>
+                                color: 'white',
+                                fontWeight: 'bold',
+                                textAlign: 'center',
+                            }}>
+                            Kembali
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
+                <Card style={styles.cardStyle}>
                     <TouchableOpacity
                         style={styles.button}
                         onPress={goNextPage.bind(this, 'DonorBiasa')}>

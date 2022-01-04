@@ -31,7 +31,7 @@ function InfoStok03(props) {
     const [CONTENT, setCONTENT] = useState({
         tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
         tableTitle2: ['Produk'],
-        tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB']], 
+        tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB']],
     });
     const [tableData, setTableData] = useState([
         ['WB', '0', '0', '0', '0', '0'],
@@ -42,7 +42,7 @@ function InfoStok03(props) {
         ['LD', '0', '0', '0', '0', '0'],
         ['LR', '0', '0', '0', '0', '0'],
         ['PK', '0', '0', '0', '0', '0'],
-    ],)
+    ]);
     useEffect(() => {
         const url = STOK_DARAH;
         const headers = {
@@ -51,8 +51,10 @@ function InfoStok03(props) {
         const body = {
             waktu: '',
         };
-        Axios.post(`${url}/api/simaba/stok-darah`, JSON.stringify(body),
-            headers
+        Axios.post(
+            `${url}/api/simaba/stok-darah`,
+            JSON.stringify(body),
+            headers,
         )
             .then(res => {
                 if (res.data.code == 200) {
@@ -135,10 +137,10 @@ function InfoStok03(props) {
             .catch(err => {
                 console.log('err : ', err);
             });
-    },[]);
+    }, []);
     const goNextPage = page => {
         if (page) {
-            props.navigation.replace(page);
+            props.navigation.navigate(page);
         }
     };
     return (
@@ -258,14 +260,14 @@ function InfoStok03(props) {
                         </TableWrapper>
                     </Table>
                     <Text>Keterangan :</Text>
-                <Text>*WB = Whole Blood</Text>
-                <Text>*PRC = Packed Red Cell</Text>
-                <Text>*TC = Thrombocyte Concentrate</Text>
-                <Text>*FFP = Fresh Frozen Plasma</Text>
-                <Text>*AHF = AHF</Text>
-                <Text>*LD = Leucodepleted</Text>
-                <Text>*LR = Leucoreduce</Text>
-                <Text>*PK = Plasma Konvalesen</Text>
+                    <Text>*WB = Whole Blood</Text>
+                    <Text>*PRC = Packed Red Cell</Text>
+                    <Text>*TC = Thrombocyte Concentrate</Text>
+                    <Text>*FFP = Fresh Frozen Plasma</Text>
+                    <Text>*AHF = AHF</Text>
+                    <Text>*LD = Leucodepleted</Text>
+                    <Text>*LR = Leucoreduce</Text>
+                    <Text>*PK = Plasma Konvalesen</Text>
                 </View>
             </ScrollView>
             <View
