@@ -1,4 +1,4 @@
-package com.mobiletemplatestarter;
+package com.pmi.sahabatudd;
 
 import com.facebook.react.ReactActivity;
 
