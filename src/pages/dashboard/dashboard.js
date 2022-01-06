@@ -81,7 +81,7 @@ function Dashboard(props) {
     async function checkProfile() {
         const ktp = await AsyncStorage.getItem('ktp');
         if (ktp == null) {
-            // props.navigation.navigate('EditProfil');
+            props.navigation.navigate('EditProfil');
         }
     }
 
@@ -137,19 +137,31 @@ function Dashboard(props) {
                 style={styles.logoSehat}
             />
             <ScrollView>
+                <View>
+                <Card style={{
+                    		backgroundColor: '#e60013',
+                            width: 120,
+                            borderRadius: 10,
+                            marginRight: 15,
+                            alignSelf : 'flex-end'
+                }}>
+                        <TouchableOpacity
+                            onPress={goNextPage.bind(this, 'Login')}>
+                            <Text style={styles.textTengah}>Logout</Text>
+                        </TouchableOpacity>
+                </Card>
                 <TouchableOpacity
-                    onPress={goNextPage.bind(this, 'Konvalesen14')}>
+                    onPress={goNextPage.bind(this, 'Riwayat')}>
                     <Image
                         source={require('../image/pesan.jpg')}
                         style={{
-                            marginTop: 20,
                             width: 60,
-                            height: 60,
-                            marginRight: 290,
-                            alignSelf: 'center',
-                        }}
+                            height: 60,  
+                            margin: 10,
+                            alignSelf: 'flex-start'}}
                     />
                 </TouchableOpacity>
+                </View>
                 <View style={styles.viewAtas}>
                     <TouchableOpacity
                         style={{
@@ -204,6 +216,14 @@ function Dashboard(props) {
                 </View>
 
                 <View style={styles.viewAtas}>
+                    
+                    <Card style={styles.cardTengah}>
+                        <TouchableOpacity
+                            onPress={goNextPage.bind(this, 'KartuDonor')}>
+                            <Text style={styles.textTengah}>Kartu Donor</Text>
+                        </TouchableOpacity>
+                    </Card>
+
                     <Card style={styles.cardTengah}>
                         <TouchableOpacity
                             onPress={goNextPage.bind(this, 'EditProfil')}>
@@ -215,13 +235,6 @@ function Dashboard(props) {
                         <TouchableOpacity
                             onPress={goNextPage.bind(this, 'Riwayat')}>
                             <Text style={styles.textTengah}>Riwayat Donor</Text>
-                        </TouchableOpacity>
-                    </Card>
-
-                    <Card style={styles.cardTengah}>
-                        <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'Login')}>
-                            <Text style={styles.textTengah}>Logout</Text>
                         </TouchableOpacity>
                     </Card>
                 </View>
