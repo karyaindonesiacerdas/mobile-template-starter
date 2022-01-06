@@ -126,11 +126,12 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.mobiletemplatestarter"
+        applicationId "com.pmi.sahabatudd"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -141,11 +142,11 @@ android {
         }
     }
     signingConfigs {
-        release {
-            storeFile file('your_key_name.keystore')
-            storePassword 'sahabat12345'
-            keyAlias 'your_key_alias'
-            keyPassword 'sahabat12345'
+         release {
+            storeFile file('sahabat_udd.keystore')
+            storePassword 'sahabat12345678'
+            keyAlias 'sahabat_udd'
+            keyPassword 'sahabat12345678'
         }
     }
     buildTypes {
@@ -155,7 +156,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -184,6 +185,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation 'com.android.support:multidex:1.0.3'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
