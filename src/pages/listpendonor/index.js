@@ -46,7 +46,7 @@ function ListPendonor(props) {
                 donor_id: '',
             };
             Axios.post(
-                `${url}/api/simaba/pendonor`,
+                `${PENDONOR}/simaba/pendonor`,
                 JSON.stringify(body),
                 headers,
             )

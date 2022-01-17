@@ -51,7 +51,7 @@ function ListUser(props) {
                 Authorization: 'Bearer ' + token,
             };
             const body = {};
-            Axios.post(`${url}/api/simaba/user`, JSON.stringify(body), headers)
+            Axios.post(`${USER_MANAGEMENT}/simaba`, JSON.stringify(body), headers)
                 .then(r => {
                     if (r.data.code == 200) {
                         setRes(r.data);

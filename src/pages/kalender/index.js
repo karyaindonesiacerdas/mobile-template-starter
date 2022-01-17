@@ -36,7 +36,7 @@ function Kalender(props) {
     const lokasi = props.route.params;
 
     const goNextPage = page => {
-        if (page == 'Barcode') {
+        if (page == 'BarcodeDonor') {
             submit();
         } else {
             props.navigation.navigate(page);
@@ -74,7 +74,7 @@ function Kalender(props) {
             jadwal: jadwal,
         };
         console.log(body);
-        Axios.put(`${url}/api/simaba/pendonor/update/lokasi`, body, {
+        Axios.put(`${PENDONOR}/simaba/update/lokasi`, body, {
             headers: {
                 Authorization: 'Bearer ' + token,
                 'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ function Kalender(props) {
                 console.info('res.data', res.data);
                 console.log(res.data);
                 if (res.data.code === 200) {
-                    props.navigation.navigate('Barcode');
+                    props.navigation.navigate('BarcodeDonor');
                 } else {
                     console.log('Error', res.data.message);
                 }
@@ -177,7 +177,7 @@ function Kalender(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Gedung')}>
+                            onPress={goNextPage.bind(this, 'lokasiGedung')}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -199,7 +199,7 @@ function Kalender(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Barcode')}>
+                            onPress={goNextPage.bind(this, 'BarcodeDonor')}>
                             <Text
                                 style={{
                                     margin: 10,

@@ -26,6 +26,10 @@ function EditProfil(props) {
     const [ktp, setKtp] = useState(null);
     const [nama, setNama] = useState(null);
     const [tempat_lahir, setTempatLahir] = useState();
+    const [alamat, setAlamat] = useState();
+    const [kecamatan, setKecamatan] = useState();
+    const [kelurahan, setKelurahan] = useState();
+    const [wilayah, setWilayah] = useState();
     const [tanggal_lahir, setTanggalLahir] = useState();
     const [jeniskelamin, setJenisKelamin] = React.useState();
     const [status_menikah, setStatusMenikah] = React.useState();
@@ -46,6 +50,10 @@ function EditProfil(props) {
             var _ktp = await AsyncStorage.getItem('ktp');
             var _nama = await AsyncStorage.getItem('nama');
             var _tempat_lahir = await AsyncStorage.getItem('tempat_lahir');
+            var _alamat = await AsyncStorage.getItem('alamat');
+            var _kecamatan = await AsyncStorage.getItem('kecamatan');
+            var _kelurahan = await AsyncStorage.getItem('kelurahan');
+            var _wilayah = await AsyncStorage.getItem('wilayah');
             var _tanggal_lahir = await AsyncStorage.getItem('tanggal_lahir');
             var _jenis_kelamin = await AsyncStorage.getItem('jenis_kelamin');
             var _status_menikah = await AsyncStorage.getItem('status_menikah');
@@ -55,6 +63,10 @@ function EditProfil(props) {
 
             console.info('_ktp', _ktp);
             console.info('_nama', _nama);
+            console.info('_alamat',_alamat);
+            console.info('_kecamatan',_kecamatan);
+            console.info('_kelurahan',_kelurahan);
+            console.info('_wilayah',_wilayah);
             console.info('_tempat_lahir', _tempat_lahir);
             console.info('_tanggal_lahir', _tanggal_lahir);
             console.info('_jenis_kelamin', _jenis_kelamin);
@@ -63,7 +75,7 @@ function EditProfil(props) {
             console.info('_pekerjaan', _pekerjaan);
 
             Axios.post(
-                `${url}/api/simaba/user`,
+                `${USER_MANAGEMENT}/simaba`,
                 {},
                 {
                     headers: {
@@ -78,6 +90,18 @@ function EditProfil(props) {
                         setNama(_nama, r.data?.data?.[0].nama);
                         setTempatLahir(
                             _tempat_lahir || r.data?.data?.[0].tempat_lahir,
+                        );
+                        setAlamat(
+                            _alamat || r.data?.data?.[0].alamat,
+                        );
+                        setKecamatan(
+                            _kecamatan || r.data?.data?.[0].kecamatan,
+                        );
+                        setKelurahan(
+                            _kelurahan || r.data?.data?.[0].kelurahan,
+                        );
+                        setWilayah(
+                            _wilayah || r.data?.data?.[0].wilayah,
                         );
                         setTanggalLahir(
                             _tanggal_lahir || r.data?.data?.[0].tanggal_lahir,
@@ -384,6 +408,10 @@ function EditProfil(props) {
                 ktp: value.ktp,
                 nama: value.nama,
                 tempat_lahir: value.tempat_lahir,
+                alamat: value.alamat,
+                kecamatan: value.kecamatan,
+                kelurahan: value.kelurahan,
+                wilayah: value.wilayah,
                 tanggal_lahir: value.tanggal_lahir,
                 jenis_kelamin: value.jeniskelamin,
                 status_menikah: value.status_menikah,
@@ -392,7 +420,7 @@ function EditProfil(props) {
                 gambar: filebase64,
             };
             console.log(body)
-                Axios.put(`${url}/api/simaba/user/update`, body, {
+                Axios.put(`${USER_MANAGEMENT}/simaba/update`, body, {
                     headers: {
                         Authorization: 'Bearer ' + token,
                         'Content-Type': 'application/json',
@@ -410,6 +438,22 @@ function EditProfil(props) {
                             AsyncStorage.setItem(
                                 'tempat_lahir',
                                 body.tempat_lahir.toString(),
+                            );
+                            AsyncStorage.setItem(
+                                'alamat',
+                                body.alamat.toString(),
+                            );
+                            AsyncStorage.setItem(
+                                'kecamatan',
+                                body.kecamatan.toString(),
+                            );
+                            AsyncStorage.setItem(
+                                'kelurahan',
+                                body.kelurahan.toString(),
+                            );
+                            AsyncStorage.setItem(
+                                'wilayah',
+                                body.wilayah.toString(),
                             );
                             AsyncStorage.setItem(
                                 'tanggal_lahir',
@@ -462,6 +506,11 @@ function EditProfil(props) {
             .required('Required !'),
         nama: Yup.string().required('Required !'),
         tempat_lahir: Yup.string().required('Required !'),
+        alamat: Yup.string().required('Required !'),
+        kecamatan: Yup.string().required('Required !'),
+        kelurahan: Yup.string().required('Required !'),
+        wilayah: Yup.string().required('Required !'),
+        
         tanggal_lahir: Yup.string().required('Required !'),
         // jeniskelamin : Yup.string()
         // .required('Required !'),
@@ -590,7 +639,7 @@ function EditProfil(props) {
             body.append('email', email);
             body.append('gambar', filePath);
             console.log(body);
-            Axios.put(`${url}/api/simaba/user/image-profile`, body, {
+            Axios.put(`${USER_MANAGEMENT}/simaba/image-profile`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'multipart/form-data',
@@ -778,6 +827,10 @@ function EditProfil(props) {
                                 nama: nama,
                                 tempat_lahir: tempat_lahir,
                                 tanggal_lahir: tanggal_lahir,
+                                alamat: alamat,
+                                kecamatan: kecamatan,
+                                kelurahan: kelurahan,
+                                wilayah: wilayah,
                                 jeniskelamin: jeniskelamin,
                                 status_menikah: status_menikah,
                                 pekerjaan: pekerjaanInitial,
@@ -967,6 +1020,182 @@ function EditProfil(props) {
                                                 textShadowRadius: 10,
                                             }}>
                                             {errors.tanggal_lahir}
+                                        </Text>
+                                    ) : null}
+                                    <Text
+                                        style={{
+                                            marginLeft: 30,
+                                            marginTop: 20,
+                                            fontSize: 15,
+                                            fontWeight: 'normal',
+                                            color: 'black',
+                                            textShadowColor: '#fff',
+                                            textShadowOffset: {
+                                                width: 1,
+                                                height: 1,
+                                            },
+                                            textShadowRadius: 10,
+                                        }}>
+                                        Alamat Lengkap
+                                    </Text>
+                                    <Item style={styles.item}>
+                                        <Input
+                                            style={styles.input}
+                                            onChangeText={handleChange(
+                                                'alamat',
+                                            )}
+                                            onBlur={handleBlur('alamat')}
+                                            value={values.alamat}
+                                        />
+                                    </Item>
+                                    {errors.alamat &&
+                                    touched.alamat ? (
+                                        <Text
+                                            style={{
+                                                marginLeft: 30,
+                                                fontSize: 15,
+                                                fontWeight: 'normal',
+                                                color: 'red',
+                                                textShadowColor: '#fff',
+                                                textShadowOffset: {
+                                                    width: 1,
+                                                    height: 1,
+                                                },
+                                                textShadowRadius: 10,
+                                            }}>
+                                            {errors.alamat}
+                                        </Text>
+                                    ) : null}
+                                    <Text
+                                        style={{
+                                            marginLeft: 30,
+                                            marginTop: 20,
+                                            fontSize: 15,
+                                            fontWeight: 'normal',
+                                            color: 'black',
+                                            textShadowColor: '#fff',
+                                            textShadowOffset: {
+                                                width: 1,
+                                                height: 1,
+                                            },
+                                            textShadowRadius: 10,
+                                        }}>
+                                        Kelurahan
+                                    </Text>
+                                    <Item style={styles.item}>
+                                        <Input
+                                            style={styles.input}
+                                            onChangeText={handleChange(
+                                                'kelurahan',
+                                            )}
+                                            onBlur={handleBlur('kelurahan')}
+                                            value={values.kelurahan}
+                                        />
+                                    </Item>
+                                    {errors.kelurahan &&
+                                    touched.kelurahan ? (
+                                        <Text
+                                            style={{
+                                                marginLeft: 30,
+                                                fontSize: 15,
+                                                fontWeight: 'normal',
+                                                color: 'red',
+                                                textShadowColor: '#fff',
+                                                textShadowOffset: {
+                                                    width: 1,
+                                                    height: 1,
+                                                },
+                                                textShadowRadius: 10,
+                                            }}>
+                                            {errors.kelurahan}
+                                        </Text>
+                                    ) : null}
+                                     <Text
+                                        style={{
+                                            marginLeft: 30,
+                                            marginTop: 20,
+                                            fontSize: 15,
+                                            fontWeight: 'normal',
+                                            color: 'black',
+                                            textShadowColor: '#fff',
+                                            textShadowOffset: {
+                                                width: 1,
+                                                height: 1,
+                                            },
+                                            textShadowRadius: 10,
+                                        }}>
+                                        Kecamatan
+                                    </Text>
+                                    <Item style={styles.item}>
+                                        <Input
+                                            style={styles.input}
+                                            onChangeText={handleChange(
+                                                'kecamatan',
+                                            )}
+                                            onBlur={handleBlur('kecamatan')}
+                                            value={values.kecamatan}
+                                        />
+                                    </Item>
+                                    {errors.kecamatan &&
+                                    touched.kecamatan ? (
+                                        <Text
+                                            style={{
+                                                marginLeft: 30,
+                                                fontSize: 15,
+                                                fontWeight: 'normal',
+                                                color: 'red',
+                                                textShadowColor: '#fff',
+                                                textShadowOffset: {
+                                                    width: 1,
+                                                    height: 1,
+                                                },
+                                                textShadowRadius: 10,
+                                            }}>
+                                            {errors.kecamatan}
+                                        </Text>
+                                    ) : null}
+                                    <Text
+                                        style={{
+                                            marginLeft: 30,
+                                            marginTop: 20,
+                                            fontSize: 15,
+                                            fontWeight: 'normal',
+                                            color: 'black',
+                                            textShadowColor: '#fff',
+                                            textShadowOffset: {
+                                                width: 1,
+                                                height: 1,
+                                            },
+                                            textShadowRadius: 10,
+                                        }}>
+                                        Kabupaten / Kota
+                                    </Text>
+                                    <Item style={styles.item}>
+                                        <Input
+                                            style={styles.input}
+                                            onChangeText={handleChange(
+                                                'wilayah',
+                                            )}
+                                            onBlur={handleBlur('wilayah')}
+                                            value={values.wilayah}
+                                        />
+                                    </Item>
+                                    {errors.wilayah &&
+                                    touched.wilayah ? (
+                                        <Text
+                                            style={{
+                                                marginLeft: 30,
+                                                fontSize: 15,
+                                                fontWeight: 'normal',
+                                                color: 'red',
+                                                textShadowColor: '#fff',
+                                                textShadowOffset: {
+                                                    width: 1,
+                                                    height: 1,
+                                                },
+                                                textShadowRadius: 10,
+                                            }}>
+                                            {errors.wilayah}
                                         </Text>
                                     ) : null}
                                     <Text

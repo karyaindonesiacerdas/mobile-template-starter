@@ -1,16 +1,24 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {
     Alert,
     ImageBackground,
     Image,
     Text,
     View,
+    TextInput,
     TouchableOpacity,
 } from 'react-native';
+import {CheckBox} from 'react-native-elements';
 import {Container, Card} from 'native-base';
+import {
+    ScrollView,
+    TouchableWithoutFeedback,
+} from 'react-native-gesture-handler';
 import styles from './styles';
 
-function index(props) {
+function lokasiSampel(props) {
+    const [check1, setCheck1] = useState(false);
+    const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -39,135 +47,85 @@ function index(props) {
                     right: 10,
                     top: 10,
                 }}></Image>
+            <ScrollView>
+                <Text
+                    style={{
+                        marginTop: 25,
+                        fontSize: 35,
+                        fontWeight: 'bold',
+                        color: '#000',
+                        textAlign: 'center',
+                    }}>
+                    PILIH LOKASI AMBIL {'\n'}CONTOH DARAH
+                </Text>
 
-            <Text
-                style={{
-                    marginLeft: 30,
-                    marginTop: 30,
-                    fontSize: 30,
-                    fontWeight: 'bold',
-                    color: 'black',
-                }}>
-                Persyaratan {'\n'}& Pendaftaran
-            </Text>
-
-            <Text
-                style={{
-                    marginLeft: 30,
-                    marginTop: 40,
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    color: 'black',
-                }}>
-                DONOR DARAH
-            </Text>
-
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                }}>
-                <Card style={styles.cardStyle}>
-                    <TouchableOpacity>
-                        <Text
-                            style={{
-                                margin: 10,
-                                fontSize: 15,
-                                textAlign: 'center',
-                                fontWeight: 'bold',
-                                color: 'white',
-                            }}>
-                            Biasa
-                        </Text>
-                    </TouchableOpacity>
-                </Card>
-                <Card style={styles.cardStyle}>
+                <Card
+                    style={{
+                        backgroundColor: '#70282b',
+                        marginTop: 80,
+                        marginBottom: 20,
+                        width: '86%',
+                        marginLeft: '7%',
+                    }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'Konvalesen02')}>
+                        onPress={goNextPage.bind(this, 'gedungUddKonvalesen')}>
                         <Text
                             style={{
                                 margin: 10,
-                                fontSize: 15,
-                                textAlign: 'center',
-                                fontWeight: 'bold',
-                                color: 'white',
-                            }}>
-                            Plasma{'\n'} Konvalesen
-                        </Text>
-                    </TouchableOpacity>
-                </Card>
-            </View>
-
-            <Text
-                style={{
-                    marginLeft: 30,
-                    marginTop: 20,
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    color: 'black',
-                }}>
-                PERMINTAAN DARAH
-            </Text>
-
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                }}>
-                <Card style={styles.cardStyle}>
-                    <TouchableOpacity>
-                        <Text
-                            style={{
-                                margin: 10,
-                                fontSize: 15,
-                                textAlign: 'center',
-                                fontWeight: 'bold',
-                                color: 'white',
-                            }}>
-                            Rumah{'\n'} Sakit
-                        </Text>
-                    </TouchableOpacity>
-                </Card>
-                <Card style={styles.cardStyle}>
-                    <TouchableOpacity>
-                        <Text
-                            style={{
-                                margin: 10,
-                                fontSize: 15,
+                                fontSize: 20,
                                 textAlign: 'center',
                                 color: 'white',
                                 fontWeight: 'bold',
                             }}>
-                            Mandiri
+                            Gedung UDD PMI Kota Semarang
                         </Text>
                     </TouchableOpacity>
                 </Card>
-            </View>
-
-            <Card
-                style={{
-                    backgroundColor: '#000',
-
-                    marginTop: 40,
-                    width: '86%',
-                    marginLeft: '7%',
-                }}>
-                <TouchableOpacity>
-                    <Text
-                        style={{
-                            margin: 10,
-                            fontSize: 15,
-                            textAlign: 'center',
-                            color: 'white',
-                            fontWeight: 'bold',
-                        }}>
-                        Mengadakan Kegiatan Donor Darah
-                    </Text>
-                </TouchableOpacity>
-            </Card>
-
+                <Card
+                    style={{
+                        backgroundColor: '#70282b',
+                        marginTop: 10,
+                        marginBottom: 20,
+                        width: '86%',
+                        marginLeft: '7%',
+                    }}>
+                    <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'Konvalesen17')}>
+                        <Text
+                            style={{
+                                margin: 10,
+                                fontSize: 20,
+                                textAlign: 'center',
+                                color: 'white',
+                                fontWeight: 'bold',
+                            }}>
+                            Mobil Unit Terdekat
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
+                <Card
+                    style={{
+                        backgroundColor: '#70282b',
+                        marginTop: 10,
+                        marginBottom: 20,
+                        width: '86%',
+                        marginLeft: '7%',
+                    }}>
+                    <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'Konvalesen22')}>
+                        <Text
+                            style={{
+                                margin: 10,
+                                fontSize: 20,
+                                textAlign: 'center',
+                                color: 'white',
+                                fontWeight: 'bold',
+                            }}>
+                            Tempatmu
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
+            </ScrollView>
             <View
                 style={{
                     alignContent: 'center',
@@ -176,8 +134,7 @@ function index(props) {
                     justifyContent: 'center',
                     alignContent: 'center',
                     marginTop: 30,
-                    bottom: 10,
-                    position: 'absolute',
+                    marginBottom: 10,
                 }}>
                 <Card
                     style={{
@@ -186,7 +143,7 @@ function index(props) {
                         marginRight: '2%',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'Dashboard')}>
+                        onPress={goNextPage.bind(this, 'admKonvalesenResult')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -203,7 +160,7 @@ function index(props) {
                 <View
                     style={{
                         width: '40%',
-                        marginLeft: '5%',
+                        marginLeft: '2%',
                     }}></View>
             </View>
 
@@ -213,11 +170,11 @@ function index(props) {
                 style={{
                     width: '100%',
 
-                    zIndex: -1,
                     backgroundColor: '#fff',
                     padding: 0,
                     paddingVertical: 90,
                     position: 'absolute',
+                    zIndex: -1,
                     bottom: 0,
                 }}
                 imageStyle={{
@@ -228,4 +185,4 @@ function index(props) {
     );
 }
 
-export default index;
+export default lokasiSampel;

@@ -1,17 +1,17 @@
 import Login from './auth/login';
 import Register from './auth/register';
-import Home from './home';
+import MenuDonor from './MenuDonor';
 import LoadingStart from './loading';
 import Account from './account';
-import KegiatanDonor from './kegiatan donor';
-import DonorBiasa from './donorbiasa';
-import Data from './Data';
-import Berhasil from './berhasil';
-import Pilih from './pilih';
-import Gedung from './gedung';
-import Barcode from './barcode/index,';
+import persyaratanBiasa from './persyaratanBiasa';
+import daftarDonorBiasa from './daftarDonorBiasa';
+import infoPendonorBiasa from './infoPendonorBiasa';
+import admBiasaResult from './admBiasaResult';
+import lokasiDonor from './lokasiDonor';
+import lokasiGedung from './lokasiGedung';
+import BarcodeDonor from './BarcodeDonor';
 import Status from './status';
-import table from './table';
+import lokasiMobilUnit from './lokasiMobilUnit';
 import Sukses from './suksestempat';
 import Barcode3 from './barcodetempat';
 import Kegiatan from './kegiatan';
@@ -19,17 +19,17 @@ import Barcode2 from './barcodemobilunit';
 import Kalender from './kalender';
 import {Dashboard, DashboardAdmin} from './dashboard';
 import Kuisioner from './kuisioner';
-import konvalesen02 from './konvalesen/konvalesen02';
-import Konvalesen03 from './konvalesen/konvalesen03';
-import Konvalesen04 from './konvalesen/konvalesen04';
-import Konvalesen05 from './konvalesen/konvalesen05';
-import Konvalesen06 from './konvalesen/konvalesen06';
-import Konvalesen07 from './konvalesen/konvalesen07';
-import Konvalesen09 from './konvalesen/konvalesen09';
-import Konvalesen10 from './konvalesen/konvalesen10';
-import Konvalesen11 from './konvalesen/konvalesen11';
-import Konvalesen12 from './konvalesen/konvalesen12';
-import Konvalesen13 from './konvalesen/konvalesen13';
+import persyaratanKonvalesen from './konvalesen/persyaratanKonvalesen';
+import daftarDonorkonv from './konvalesen/daftarDonorkonv';
+import infoPendonorKonv from './konvalesen/infoPendonorKonv';
+import infoCovidPendonor from './konvalesen/infoCovidPendonor';
+import kuisonerKonvalesen from './konvalesen/kuisonerKonvalesen';
+import agrementKonvalesen from './konvalesen/agrementKonvalesen';
+import admKonvalesenResult from './konvalesen/admKonvalesenResult';
+import lokasiSampel from './konvalesen/lokasiSampel';
+import gedungUddKonvalesen from './konvalesen/gedungUddKonvalesen';
+import agrementPlace from './konvalesen/agrementPlace';
+import barcodeSampel from './konvalesen/barcodeSampel';
 import Konvalesen14 from './konvalesen/konvalesen14';
 import Konvalesen15 from './konvalesen/konvalesen15';
 import Konvalesen16 from './konvalesen/konvalesen16';
@@ -50,22 +50,23 @@ import ListPendonor from './listpendonor';
 import PermintaanDarah1 from './permintaandarah/permintaan';
 import PermintaanSukses from './permintaandarah/sukses';
 import GantiPasword from './GantiPasword';
+import KartuDonor from './KartuDonor/KartuDonor';
 
 export {
 	Login,
 	Register,
-	Home,
+	MenuDonor,
 	LoadingStart,
 	Account,
-	KegiatanDonor,
-	DonorBiasa,
-	Data,
-	Pilih,
-	Gedung,
-	Barcode,
-	Berhasil,
+	persyaratanBiasa,
+	daftarDonorBiasa,
+	infoPendonorBiasa,
+	lokasiDonor,
+	lokasiGedung,
+	BarcodeDonor,
+	admBiasaResult,
 	Status,
-	table,
+	lokasiMobilUnit,
 	Sukses,
 	Barcode3,
 	Kegiatan,
@@ -73,17 +74,17 @@ export {
 	Kalender,
 	Dashboard,
 	Kuisioner,
-	konvalesen02,
-	Konvalesen03,
-	Konvalesen04,
-	Konvalesen05,
-	Konvalesen06,
-	Konvalesen07,
-	Konvalesen09,
-	Konvalesen10,
-	Konvalesen11,
-	Konvalesen12,
-	Konvalesen13,
+	persyaratanKonvalesen,
+	daftarDonorkonv,
+	infoPendonorKonv,
+	infoCovidPendonor,
+	kuisonerKonvalesen,
+	agrementKonvalesen,
+	admKonvalesenResult,
+	lokasiSampel,
+	gedungUddKonvalesen,
+	agrementPlace,
+	barcodeSampel,
 	Konvalesen14,
 	Konvalesen15,
 	Konvalesen16,
@@ -112,4 +113,5 @@ export {
 	PermintaanDarah1,
 	PermintaanSukses,
 	GantiPasword,
+	KartuDonor,
 };

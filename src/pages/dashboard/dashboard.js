@@ -39,7 +39,7 @@ function Dashboard(props) {
             const body = {
                 email: '',
             };
-            const res = await Axios.post(`${url}/api/simaba/user`, body, {
+            const res = await Axios.post(`${USER_MANAGEMENT}/simaba`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ function Dashboard(props) {
         const body = {
             email: '',
         };
-        Axios.post(`${url}/api/simaba/user`, body, {
+        Axios.post(`${USER_MANAGEMENT}/simaba`, body, {
             headers: {
                 Authorization: 'Bearer ' + token,
                 'Content-Type': 'application/json',
@@ -258,7 +258,7 @@ function Dashboard(props) {
 
                     <TouchableOpacity
                         style={styles.cardStyle}
-                        onPress={goNextPage.bind(this, 'Home')}>
+                        onPress={goNextPage.bind(this, 'MenuDonor')}>
                         <Image
                             source={require('../image/donor.png')}
                             style={{

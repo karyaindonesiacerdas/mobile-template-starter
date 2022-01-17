@@ -17,11 +17,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PENDONOR} from '../../config/api';
 import Axios from 'axios';
 
-function Gedung(props) {
+function lokasiGedung(props) {
     const [check1, setCheck1] = useState(false);
     const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
-        if (page == 'Barcode') {
+        if (page == 'BarcodeDonor') {
             submit();
         } else {
             props.navigation.navigate(page);
@@ -37,7 +37,7 @@ function Gedung(props) {
             lokasi: lokasi,
         };
         console.log(body);
-        Axios.put(`${url}/api/simaba/pendonor/update/lokasi`, body, {
+        Axios.put(`${PENDONOR}/simaba/update/lokasi`, body, {
             headers: {
                 Authorization: 'Bearer ' + token,
                 'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ function Gedung(props) {
                 console.info('res.data', res.data);
                 console.log(res.data);
                 if (res.data.code === 200) {
-                    props.navigation.navigate('Barcode');
+                    props.navigation.navigate('BarcodeDonor');
                 } else {
                     Alert.alert("Error", +res.data.code + '  ' + res.data.message,
                                 [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
@@ -234,7 +234,7 @@ function Gedung(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Pilih')}>
+                            onPress={goNextPage.bind(this, 'lokasiDonor')}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -256,7 +256,7 @@ function Gedung(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Barcode')}>
+                            onPress={goNextPage.bind(this, 'BarcodeDonor')}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -276,4 +276,4 @@ function Gedung(props) {
     );
 }
 
-export default Gedung;
+export default lokasiGedung;

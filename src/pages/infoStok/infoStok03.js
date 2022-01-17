@@ -52,7 +52,7 @@ function InfoStok03(props) {
             waktu: '',
         };
         Axios.post(
-            `${url}/api/simaba/stok-darah`,
+            `${STOK_DARAH}/simaba`,
             JSON.stringify(body),
             headers,
         )

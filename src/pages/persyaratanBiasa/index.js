@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 // import {authLogin} from '../../../config/api';
 import Bg from '../image/baground3.jpeg';
 
-function KegiatanDonor(props) {
+function persyaratanBiasa(props) {
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -104,7 +104,7 @@ function KegiatanDonor(props) {
                     }}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={goNextPage.bind(this, 'Home')}>
+                        onPress={goNextPage.bind(this, 'MenuDonor')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -121,7 +121,7 @@ function KegiatanDonor(props) {
                 <Card style={styles.cardStyle}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={goNextPage.bind(this, 'DonorBiasa')}>
+                        onPress={goNextPage.bind(this, 'daftarDonorBiasa')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -139,4 +139,4 @@ function KegiatanDonor(props) {
     );
 }
 
-export default KegiatanDonor;
+export default persyaratanBiasa;

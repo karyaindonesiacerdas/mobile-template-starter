@@ -249,7 +249,7 @@ function Riwayat(props) {
                 Authorization: 'Bearer ' + token,
             };
 
-            Axios.post(`${url}/api/simaba/riwayat-donor`, body, {
+            Axios.post(`${RIWAYAT}/simaba`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',

@@ -72,7 +72,7 @@ function InfoStok02(props) {
             'Content-Type': 'application/json',
         };
         const body = {};
-        Axios.post(`${url}/api/simaba/resipien`, JSON.stringify(body), headers)
+        Axios.post(`${RESIPIEN}/simaba`, JSON.stringify(body), headers)
             .then(r => {
                 if (r.data.code == 200) {
                     setRes(r.data);

@@ -30,7 +30,7 @@ import {
 } from 'react-native-gesture-handler';
 import styles from './styles';
 
-function Konvalesen13(props) {
+function barcodeSampel(props) {
     const [jadwal, setJadwal] = useState(null);
     const [lokasi, setLokasi] = useState(null);
     useEffect(() => {
@@ -167,4 +167,4 @@ function Konvalesen13(props) {
     );
 }
 
-export default Konvalesen13;
+export default barcodeSampel;

@@ -13,12 +13,12 @@ import {TouchableOpacity} from 'react-native';
 import styles from '../styles/styles';
 import Bg from '../../image/Baground2.jpg';
 
-function Pilih(props) {
+function lokasiDonor(props) {
     const [check1, setCheck1] = useState(false);
     const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
-        if (page != 'Berhasil') {
-            if (page == 'table'){
+        if (page != 'admBiasaResult') {
+            if (page == 'lokasiMobilUnit'){
                 Alert.alert("Info","Saat Ini Hanya Tersedia Donor Di Gedung UDD",
                 [{ text: "Ok", onPress: () => console.log("OK Pressed") }])
             }
@@ -85,7 +85,7 @@ function Pilih(props) {
                 }}>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={goNextPage.bind(this, 'Gedung')}>
+                    onPress={goNextPage.bind(this, 'lokasiGedung')}>
                     <Text
                         style={{
                             margin: 10,
@@ -108,7 +108,7 @@ function Pilih(props) {
                 }}>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={goNextPage.bind(this, 'table')}>
+                    onPress={goNextPage.bind(this, 'lokasiMobilUnit')}>
                     <Text
                         style={{
                             margin: 10,
@@ -130,7 +130,7 @@ function Pilih(props) {
                 }}>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={goNextPage.bind(this, 'Berhasil')}>
+                    onPress={goNextPage.bind(this, 'admBiasaResult')}>
                     <Text
                         style={{
                             margin: 10,
@@ -147,4 +147,4 @@ function Pilih(props) {
     );
 }
 
-export default Pilih;
+export default lokasiDonor;

@@ -1,9 +1,11 @@
-const USER_MANAGEMENT = 'http://sahabat-utd.id:6005';
-const STOK_DARAH = 'http://sahabat-utd.id:6100';
-const RESIPIEN = 'http://sahabat-utd.id:6007';
-const MOBIL_UNIT = 'http://sahabat-utd.id:6006';
-const PENDONOR = 'http://sahabat-utd.id:6003';
-const RIWAYAT = 'http://sahabat-utd.id:6008';
-const KUESIONER = 'http://sahabat-utd.id:6009';
+const USER_MANAGEMENT = 'https://sahabat-utd.id/api/user';
+const STOK_DARAH = 'https://sahabat-utd.id/api/stok-darah';
+const RESIPIEN = 'https://sahabat-utd.id/api/resipen';
+const MOBIL_UNIT = 'https://sahabat-utd.id/api/mobil-unit';
+const PENDONOR = 'https://sahabat-utd.id/api/pendonor';
+const JADWAL_DONOR = 'https://sahabat-utd.id/api/jadwal-donor';
+const RIWAYAT = 'https://sahabat-utd.id/api/riwayat-donor';
+const KUESIONER = 'https://sahabat-utd.id/api/kuesioner-ic';
+const KONSELING = 'https://sahabat-utd.id/api/konseling';
 
 export {USER_MANAGEMENT,STOK_DARAH,RESIPIEN,MOBIL_UNIT,PENDONOR, RIWAYAT,KUESIONER};

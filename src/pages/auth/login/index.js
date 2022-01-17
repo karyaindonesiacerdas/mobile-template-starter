@@ -21,10 +21,10 @@ import Bg from '../../image/Background.png';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {USER_MANAGEMENT} from '../../../config/api' ;
 
 function Login(props) {
     const handleSubmitLogin = value => {
-        const url = 'http://sahabat-utd.id:6005';
         const headers = {
             'Content-Type': 'application/json',
         };
@@ -34,19 +34,24 @@ function Login(props) {
         };
 
         Axios.post(
-            `${url}/api/simaba/user/login`,
+            `${USER_MANAGEMENT}/simaba/login`,
             JSON.stringify(body),
             headers,
         )
             .then(r => {
                 
                 if (r.data.code == 200) {
-                    console.log(r.data.data);
+                    console.log(r.data.data.KODEPENDONOR);
                     AsyncStorage.setItem('token', r.data.data.token);
                     AsyncStorage.setItem('role', r.data.data.role);
                     AsyncStorage.setItem('exp', r.data.data.exp);
                     AsyncStorage.setItem('ktp', r.data.data.ktp);
                     AsyncStorage.setItem('nama', r.data.data.nama);
+                    AsyncStorage.setItem('alamat', r.data.data.alamat);
+                    AsyncStorage.setItem('kecamatan', r.data.data.kecamatan);
+                    AsyncStorage.setItem('kelurahan', r.data.data.kelurahan);
+                    AsyncStorage.setItem('wilayah', r.data.data.wilayah);
+                    AsyncStorage.setItem('kartudonor', r.data.data.KODEPENDONOR);
                     AsyncStorage.setItem(
                         'tempat_lahir',
                         r.data.data.tempat_lahir,

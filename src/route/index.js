@@ -3,19 +3,19 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
 	Account,
-	Home,
+	MenuDonor,
 	LoadingStart,
 	Login,
 	Register,
-	KegiatanDonor,
-	DonorBiasa,
-	Data,
-	Berhasil,
-	Pilih,
-	Gedung,
-	Barcode,
+	persyaratanBiasa,
+	daftarDonorBiasa,
+	infoPendonorBiasa,
+	admBiasaResult,
+	lokasiDonor,
+	lokasiGedung,
+	BarcodeDonor,
 	Status,
-	table,
+	lokasiMobilUnit,
 	Sukses,
 	Barcode3,
 	Kegiatan,
@@ -23,17 +23,17 @@ import {
 	Kalender,
 	Dashboard,
 	Kuisioner,
-	konvalesen02,
-	Konvalesen03,
-	Konvalesen04,
-	Konvalesen05,
-	Konvalesen06,
-	Konvalesen07,
-	Konvalesen09,
-	Konvalesen10,
-	Konvalesen11,
-	Konvalesen12,
-	Konvalesen13,
+	persyaratanKonvalesen,
+	daftarDonorkonv,
+	infoPendonorKonv,
+	infoCovidPendonor,
+	kuisonerKonvalesen,
+	agrementKonvalesen,
+	admKonvalesenResult,
+	lokasiSampel,
+	gedungUddKonvalesen,
+	agrementPlace,
+	barcodeSampel,
 	Konvalesen14,
 	Konvalesen15,
 	Konvalesen16,
@@ -62,6 +62,7 @@ import {
 	PermintaanDarah1,
 	PermintaanSukses,
 	GantiPasword,
+	KartuDonor,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -75,16 +76,16 @@ function index() {
 				<Stack.Screen name="LoadingStart" component={LoadingStart} options={{ headerShown: false }} />
 				<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 				<Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
-				<Stack.Screen name="KegiatanDonor" component={KegiatanDonor} options={{ headerShown: false }} />
-				<Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-				<Stack.Screen name="DonorBiasa" component={DonorBiasa} options={{ headerShown: false }} />
-				<Stack.Screen name="Data" component={Data} options={{ headerShown: false }} />
-				<Stack.Screen name="Berhasil" component={Berhasil} options={{ headerShown: false }} />
-				<Stack.Screen name="Pilih" component={Pilih} options={{ headerShown: false }} />
-				<Stack.Screen name="Gedung" component={Gedung} options={{ headerShown: false }} />
-				<Stack.Screen name="Barcode" component={Barcode} options={{ headerShown: false }} />
+				<Stack.Screen name="persyaratanBiasa" component={persyaratanBiasa} options={{ headerShown: false }} />
+				<Stack.Screen name="MenuDonor" component={MenuDonor} options={{ headerShown: false }} />
+				<Stack.Screen name="daftarDonorBiasa" component={daftarDonorBiasa} options={{ headerShown: false }} />
+				<Stack.Screen name="infoPendonorBiasa" component={infoPendonorBiasa} options={{ headerShown: false }} />
+				<Stack.Screen name="admBiasaResult" component={admBiasaResult} options={{ headerShown: false }} />
+				<Stack.Screen name="lokasiDonor" component={lokasiDonor} options={{ headerShown: false }} />
+				<Stack.Screen name="lokasiGedung" component={lokasiGedung} options={{ headerShown: false }} />
+				<Stack.Screen name="BarcodeDonor" component={BarcodeDonor} options={{ headerShown: false }} />
 				<Stack.Screen name="Status" component={Status} options={{ headerShown: false }} />
-				<Stack.Screen name="table" component={table} options={{ headerShown: false }} />
+				<Stack.Screen name="lokasiMobilUnit" component={lokasiMobilUnit} options={{ headerShown: false }} />
 				<Stack.Screen name="Sukses" component={Sukses} options={{ headerShown: false }} />
 				<Stack.Screen name="Barcode3" component={Barcode3} options={{ headerShown: false }} />
 				<Stack.Screen name="Kegiatan" component={Kegiatan} options={{ headerShown: false }} />
@@ -92,17 +93,17 @@ function index() {
 				<Stack.Screen name="Kalender" component={Kalender} options={{ headerShown: false }} />
 				<Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
 				<Stack.Screen name="Kuisioner" component={Kuisioner} options={{ headerShown: false }} />
-				<Stack.Screen name="konvalesen02" component={konvalesen02} options={{ headerShown: false }} />
-				<Stack.Screen name="Konvalesen03" component={Konvalesen03} options={{ headerShown: false }} />
-				<Stack.Screen name="Konvalesen04" component={Konvalesen04} options={{ headerShown: false }} />
-				<Stack.Screen name="Konvalesen05" component={Konvalesen05} options={{ headerShown: false }} />
-				<Stack.Screen name="Konvalesen06" component={Konvalesen06} options={{ headerShown: false }} />
-				<Stack.Screen name="Konvalesen07" component={Konvalesen07} options={{ headerShown: false }} />
-				<Stack.Screen name="Konvalesen09" component={Konvalesen09} options={{ headerShown: false }} />
-				<Stack.Screen name="Konvalesen10" component={Konvalesen10} options={{ headerShown: false }} />
-				<Stack.Screen name="Konvalesen11" component={Konvalesen11} options={{ headerShown: false }} />
-				<Stack.Screen name="Konvalesen12" component={Konvalesen12} options={{ headerShown: false }} />
-				<Stack.Screen name="Konvalesen13" component={Konvalesen13} options={{ headerShown: false }} />
+				<Stack.Screen name="persyaratanKonvalesen" component={persyaratanKonvalesen} options={{ headerShown: false }} />
+				<Stack.Screen name="daftarDonorkonv" component={daftarDonorkonv} options={{ headerShown: false }} />
+				<Stack.Screen name="infoPendonorKonv" component={infoPendonorKonv} options={{ headerShown: false }} />
+				<Stack.Screen name="infoCovidPendonor" component={infoCovidPendonor} options={{ headerShown: false }} />
+				<Stack.Screen name="kuisonerKonvalesen" component={kuisonerKonvalesen} options={{ headerShown: false }} />
+				<Stack.Screen name="agrementKonvalesen" component={agrementKonvalesen} options={{ headerShown: false }} />
+				<Stack.Screen name="admKonvalesenResult" component={admKonvalesenResult} options={{ headerShown: false }} />
+				<Stack.Screen name="lokasiSampel" component={lokasiSampel} options={{ headerShown: false }} />
+				<Stack.Screen name="gedungUddKonvalesen" component={gedungUddKonvalesen} options={{ headerShown: false }} />
+				<Stack.Screen name="agrementPlace" component={agrementPlace} options={{ headerShown: false }} />
+				<Stack.Screen name="barcodeSampel" component={barcodeSampel} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen14" component={Konvalesen14} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen15" component={Konvalesen15} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen16" component={Konvalesen16} options={{ headerShown: false }} />
@@ -131,6 +132,8 @@ function index() {
 				<Stack.Screen name="PermintaanDarah1" component={PermintaanDarah1} options={{ headerShown: false }} />
 				<Stack.Screen name="PermintaanSukses" component={PermintaanSukses} options={{ headerShown: false }} />
 				<Stack.Screen name="GantiPasword" component={GantiPasword} options={{ headerShown: false }} />
+				<Stack.Screen name="KartuDonor" component={KartuDonor} options={{ headerShown: false }} />
+			
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

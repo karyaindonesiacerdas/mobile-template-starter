@@ -21,11 +21,11 @@ import Bg from '../../image/Baground2.jpg';
 import qs from 'qs';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
+import {USER_MANAGEMENT} from '../../../config/api' ;
 
 function Register(props) {
     const [check1, setCheck1] = useState(false);
     const handleSubmitRegister = value => {
-        const url = 'http://sahabat-utd.id:6005';
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
         };
@@ -37,7 +37,7 @@ function Register(props) {
         };
         console.log(body);
         Axios.post(
-            `${url}/api/simaba/user/register`,
+            `${USER_MANAGEMENT}/simaba/register`,
             qs.stringify(body),
             headers,
         )

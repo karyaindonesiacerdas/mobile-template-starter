@@ -24,7 +24,7 @@ import { PENDONOR } from '../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
 
-function Data(props) {
+function infoPendonorBiasa(props) {
   const [number, onChangeNumber] = React.useState(null);
   const [berat_badan, setBeratBadan] = React.useState('0');
   const [pekerjaan, setPekerjaan] = React.useState([
@@ -125,7 +125,7 @@ function Data(props) {
   }
 
   const goNextPage = page => {
-    if (page === 'DonorBiasa') {
+    if (page === 'daftarDonorBiasa') {
       props.navigation.goBack()
     }else if (page === 'Kuisioner'){
       setInputData(props.route.params)
@@ -427,7 +427,7 @@ function Data(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'DonorBiasa')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'daftarDonorBiasa')} >
               <Text
                 style={{
                   margin: 10,
@@ -467,4 +467,4 @@ function Data(props) {
   );
 }
 
-export default Data;
+export default infoPendonorBiasa;

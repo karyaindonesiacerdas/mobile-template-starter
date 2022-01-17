@@ -357,7 +357,7 @@ function Kuisioner(props) {
     const goNextPage = page => {
         var input = RefactorInput(kuesioner);
 
-        if (page === 'Berhasil') {
+        if (page === 'admBiasaResult') {
             console.info(input);
             if (input.count !== 43) {
                 alert(
@@ -367,7 +367,7 @@ function Kuisioner(props) {
                 submit(input);
             }
         } else {
-            props.navigation.navigate('Data')
+            props.navigation.navigate('infoPendonorBiasa')
         }
     };
     async function submit(input) {
@@ -379,7 +379,7 @@ function Kuisioner(props) {
         const ktp = await AsyncStorage.getItem('ktp');
         const url = KUESIONER;
         const url_pendonor = PENDONOR;
-        Axios.post(`${url_pendonor}/api/simaba/calon-pendonor/create`,qs.stringify(data_calon_donor),
+        Axios.post(`${PENDONOR}/simaba/calon-pendonor/create`,qs.stringify(data_calon_donor),
             {headers:{
             Authorization :'Bearer ' +token,
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -393,7 +393,7 @@ function Kuisioner(props) {
                     input.ktp = ktp;
                     input.nama = nama;
                     const body = input;
-                    Axios.post(`${url}/api/simaba/kuesioner/create`, body,
+                    Axios.post(`${KUESIONER}/simaba/create`, body,
                         {headers:{
                             Authorization :'Bearer ' +token,
                             'Content-Type': 'application/json',
@@ -402,7 +402,7 @@ function Kuisioner(props) {
                                 console.info('res.data', res.data);
                                 console.log(res.data);
                                 if (res.data.code === 200) {
-                                    props.navigation.navigate('Berhasil',{transaksi : res.data.transaksi});
+                                    props.navigation.navigate('admBiasaResult',{transaksi : res.data.transaksi});
                                 } else {
                                     console.log('Error', res.data.message);
                                 }
@@ -565,7 +565,7 @@ function Kuisioner(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Berhasil')}>
+                            onPress={goNextPage.bind(this, 'admBiasaResult')}>
                             <Text
                                 style={{
                                     margin: 10,

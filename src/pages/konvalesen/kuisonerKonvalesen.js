@@ -27,7 +27,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KUESIONER} from '../../config/api';
 import Axios from 'axios';
 
-function Konvalesen06(props) {
+function kuisonerKonvalesen(props) {
     const [kuesioner, setKuesioner] = useState([
         {
             number: 1,
@@ -356,7 +356,7 @@ function Konvalesen06(props) {
     const goNextPage = page => {
         var input = RefactorInput(kuesioner);
 
-        if (page === 'Konvalesen07') {
+        if (page === 'agrementKonvalesen') {
             console.info(input);
             if (input.count !== 43) {
                 alert(
@@ -372,35 +372,64 @@ function Konvalesen06(props) {
     async function submit(input) {
         const token = await AsyncStorage.getItem('token');
         const nama = await AsyncStorage.getItem('nama');
-        const kode_calon_pendonor = props.route.params.kode_pendonor;
+        const data_calon_donor = props.route.params.data_calon_donor
         const ktp = await AsyncStorage.getItem('ktp');
         const url = KUESIONER;
 
-        input.kode_calon_pendonor = kode_calon_pendonor;
-        input.ktp = ktp;
-        input.nama = nama;
-        const body = input;
-        console.log(body);
-        Axios.post(`${url}/api/simaba/kuesioner/create`, body, {
-            headers: {
-                Authorization: 'Bearer ' + token,
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(res => {
-                console.info('res.data', res.data);
-                console.log(res.data);
-                if (res.data.code === 200) {
-                    props.navigation.navigate('Konvalesen07', {
-                        kode_pendonor: kode_calon_pendonor,
+        Axios.post(`${PENDONOR}/simaba/calon-pendonor/create`, body,
+            {headers:{
+                Authorization :'Bearer ' +token,
+                'Content-Type': 'multipart/form-data; boundary=${body._boundary}',
+            }})
+        .then(res => {
+            console.info('res.data', res.data);
+            console.log(res.data);
+            if (res.data.code === 200) {
+                AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
+                input.kode_calon_pendonor = kode_calon_pendonor;
+                input.ktp = ktp;
+                input.nama = nama;
+                const body = input;
+                console.log(body);
+                Axios.post(`${KUESIONER}/simaba/create`, body, {
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(res => {
+                        console.info('res.data', res.data);
+                        console.log(res.data);
+                        if (res.data.code === 200) {
+                            props.navigation.navigate('agrementKonvalesen', {
+                                kode_pendonor: kode_calon_pendonor,
+                            });
+                        } else {
+                            Alert.alert("Error",res.data.message,
+                            [{ text: "OK", onPress: () => console.log(res.data.message) }]
+                            )
+                        }
+                    })
+                    .catch(err => {
+                        Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+                        [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                        )
                     });
-                } else {
-                    console.log('Error', res.data.message);
-                }
-            })
-            .catch(err => {
-                console.log('test : ', err.response);
-            });
+            } else if (res.data.code === 500){
+                Alert.alert("Gagal","Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ",
+                [{ text: "Cek Riwayat", onPress: () => props.navigation.replace('Riwayat') }]
+                )
+            } else {
+              Alert.alert("Error",res.data.message,
+              [{ text: "OK", onPress: () => console.log(res.data.message) }]
+              )
+            }
+        })
+        .catch(err => {
+            Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+            [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+            )
+        });
     }
     return (
         <Container>
@@ -539,7 +568,7 @@ function Konvalesen06(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Konvalesen07')}>
+                            onPress={goNextPage.bind(this, 'agrementKonvalesen')}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -559,7 +588,7 @@ function Konvalesen06(props) {
     );
 }
 
-export default Konvalesen06;
+export default kuisonerKonvalesen;
 
 function RefactorInput(val) {
     var count = 0;

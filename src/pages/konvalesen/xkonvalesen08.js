@@ -186,7 +186,7 @@ function index(props) {
                         marginRight: '2%',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'Konvalesen01')}>
+                        onPress={goNextPage.bind(this, 'MenuDonor')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -207,7 +207,7 @@ function index(props) {
                         marginLeft: '2%',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'Konvalesen10')}>
+                        onPress={goNextPage.bind(this, 'lokasiSampel')}>
                         <Text
                             style={{
                                 margin: 10,

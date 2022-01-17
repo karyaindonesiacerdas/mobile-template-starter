@@ -31,7 +31,7 @@ import {PENDONOR} from '../../config/api';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
-function Konvalesen09(props) {
+function admBiasaResult(props) {
     const [res, setRes] = useState({});
     const [komponent, setKomponen] = useState(null);
     const [buttons, setButton] = useState(null);
@@ -39,20 +39,17 @@ function Konvalesen09(props) {
         async function getData() {
             const token = await AsyncStorage.getItem('token');
             const url = PENDONOR;
-            AsyncStorage.setItem(
-                'kode_pendonor',
-                props.route.params.kode_pendonor,
-            );
+            const kode_pendonor = await AsyncStorage.getItem('kode_pendonor');
             const headers = {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + token,
             };
             const body = {
-                kode_calon_pendonor: props.route.params.kode_pendonor,
+                kode_calon_pendonor: kode_pendonor,
             };
             console.log(body);
             Axios.post(
-                `${url}/api/simaba/calon-pendonor`,
+                `${PENDONOR}/simaba/calon-pendonor`,
                 JSON.stringify(body),
                 headers,
             )
@@ -76,9 +73,8 @@ function Konvalesen09(props) {
                                             textAlign: 'center',
                                             color: 'white',
                                         }}>
-                                        ANDA LULUS DALAM TAHAP ADMINISTRASI DAN
-                                        {'\n'}MASUK KE TAHAP PENGAMBILAN{'\n'}
-                                        CONTOH DARAH
+                                        SELAMAT{'\n'}ANDA LOLOS SEBAGAI{'\n'}
+                                        CALON PENDONOR
                                     </Text>
                                 </View>,
                             );
@@ -94,7 +90,7 @@ function Konvalesen09(props) {
                                             style={styles.button}
                                             onPress={goNextPage.bind(
                                                 this,
-                                                'Konvalesen10',
+                                                'lokasiDonor',
                                             )}>
                                             <Text
                                                 style={{
@@ -161,7 +157,7 @@ function Konvalesen09(props) {
                                             </Text>
                                         </TouchableOpacity>
                                     </Card>
-                                </View>,
+                                </View>
                             );
                         }
                     } else {
@@ -227,7 +223,7 @@ function Konvalesen09(props) {
                         fontWeight: 'bold',
                         color: 'black',
                     }}>
-                    Donor Konvalesen
+                    Donor Darah Biasa
                 </Text>
                 <Card
                     style={{
@@ -254,4 +250,4 @@ function Konvalesen09(props) {
     );
 }
 
-export default Konvalesen09;
+export default admBiasaResult;

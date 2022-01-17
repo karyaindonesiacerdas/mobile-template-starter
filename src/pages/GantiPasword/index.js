@@ -39,7 +39,7 @@ function GantiPasword(props) {
       };
       console.log(body)
     
-      Axios.put(`${url}/api/simaba/user/change-password`, body,
+      Axios.put(`${USER_MANAGEMENT}/simaba/change-password`, body,
       {headers:{
         'Content-Type': 'application/json',
       }})

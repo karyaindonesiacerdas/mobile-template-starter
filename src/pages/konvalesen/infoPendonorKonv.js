@@ -20,7 +20,7 @@ import Bg from '../../image/baground3.jpeg'
 import { Button } from "react-native-elements/dist/buttons/Button";
 
 
-function Konvalesen04(props) {
+function infoPendonorKonv(props) {
   const [number, onChangeNumber] = React.useState(null);
   const [pekerjaan, setPekerjaan] = React.useState([
     { label: 'PNS', value: 'pns', checked: false },
@@ -123,7 +123,7 @@ function Konvalesen04(props) {
   
 
   const goNextPage = page => {
-    if (page == 'Konvalesen05') {
+    if (page == 'infoCovidPendonor') {
       input.alamat = props.route.params.payload.alamat
       input.jenis_donor = 'plasma konvalesen'
       input.ktp = props.route.params.payload.ktp
@@ -132,7 +132,7 @@ function Konvalesen04(props) {
       input.wilayah = props.route.params.payload.wilayah
       input.kecamatan = props.route.params.payload.kecamatan
       input.kelurahan = props.route.params.payload.kelurahan
-      props.navigation.navigate('Konvalesen05', {payload: input})
+      props.navigation.navigate('infoCovidPendonor', {payload: input})
 
     }
   }
@@ -292,7 +292,7 @@ function Konvalesen04(props) {
             style={{
               backgroundColor: "#000",width: "40%", marginRight:"2%" }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Konvalesen03')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'daftarDonorkonv')} >
               <Text
                 style={{
                   margin: 10,
@@ -311,7 +311,7 @@ function Konvalesen04(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Konvalesen05')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'infoCovidPendonor')} >
               <Text
                 style={{
                   margin: 10,
@@ -332,4 +332,4 @@ function Konvalesen04(props) {
   );
 }
 
-export default Konvalesen04;
+export default infoPendonorKonv;

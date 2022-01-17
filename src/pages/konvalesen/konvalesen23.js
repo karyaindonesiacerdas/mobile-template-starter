@@ -139,7 +139,7 @@ function Konvalesen23(props) {
                         marginLeft: '2%',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'Konvalesen13')}>
+                        onPress={goNextPage.bind(this, 'barcodeSampel')}>
                         <Text
                             style={{
                                 margin: 10,

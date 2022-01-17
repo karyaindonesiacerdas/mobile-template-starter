@@ -14,7 +14,7 @@ import {
 } from 'react-native-gesture-handler';
 import styles from './styles';
 
-function konvalesen02(props) {
+function persyaratanKonvalesen(props) {
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -123,7 +123,7 @@ function konvalesen02(props) {
                         marginLeft: '7%',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'Konvalesen03')}>
+                        onPress={goNextPage.bind(this, 'daftarDonorkonv')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -154,7 +154,7 @@ function konvalesen02(props) {
                         width: '40%',
                         marginRight: '2%',
                     }}>
-                    <TouchableOpacity onPress={goNextPage.bind(this, 'Home')}>
+                    <TouchableOpacity onPress={goNextPage.bind(this, 'MenuDonor')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -196,4 +196,4 @@ function konvalesen02(props) {
     );
 }
 
-export default konvalesen02;
+export default persyaratanKonvalesen;

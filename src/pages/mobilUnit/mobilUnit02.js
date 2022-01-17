@@ -60,7 +60,7 @@ function MobilUnit02(props) {
             hari: props.route.params.day,
         };
         Axios.post(
-            `${url}/api/simaba/mobil-unit`,
+            `${MOBIL_UNIT}/simaba`,
             JSON.stringify(body),
             headers,
         )

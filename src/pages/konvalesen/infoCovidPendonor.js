@@ -35,7 +35,7 @@ import { PENDONOR } from '../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
 
-function Konvalesen05(props) {
+function infoCovidPendonor(props) {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
   const [berat_badan, setBeratBadan] = React.useState('0');
@@ -79,9 +79,11 @@ function Konvalesen05(props) {
     const token = await AsyncStorage.getItem('token');
     const tanggal_lahir = await AsyncStorage.getItem('tanggal_lahir');
     const jenis_kelamin = await AsyncStorage.getItem('jenis_kelamin');
+    const tempat_lahir = await AsyncStorage.getItem('tempat_lahir');
     const url = PENDONOR;
     
     value.tanggal_lahir = tanggal_lahir
+    value.tempat_lahir = tempat_lahir
     value.jenis_kelamin = jenis_kelamin
     value.berat_badan = berat_badan
     value.positif_date = positif_date
@@ -95,30 +97,11 @@ function Konvalesen05(props) {
       body.append(key,value[key])
     }
     console.log(body)
-    Axios.post(`${url}/api/simaba/calon-pendonor/create`, body,
-    {headers:{
-      Authorization :'Bearer ' +token,
-      'Content-Type': 'multipart/form-data; boundary=${body._boundary}',
-    }})
-    .then(res => {
-        console.info('res.data', res.data);
-        console.log(res.data);
-        if (res.data.code === 200) {
-            alert('sukses menambahkan pendonor');
-            AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
-            props.navigation.navigate('Konvalesen06',{kode_pendonor : res.data.kode_pendonor});
-        } else {
-            console.log('Error', res.data.message);
-        }
-    })
-    .catch(err => {
-        console.log('test : ', err);
-    });
-
+    props.navigation.navigate('kuisonerKonvalesen',{data_calon_donor : body});
   }
 
   const goNextPage = (page) => {
-    if (page == 'Konvalesen06') {
+    if (page == 'kuisonerKonvalesen') {
       setInputData(props.route.params)
       submitData(input)
     }
@@ -360,9 +343,45 @@ function Konvalesen05(props) {
         >
           {''} ≥45 kg (Apabila kurang dari tidak lolos)
         </Text>
+
+        <Text
+          style={{
+            marginLeft: 30,
+            marginTop: 10,
+            fontSize: 15,
+            fontWeight: "bold",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Tanggal Positif
+        </Text>
+         <TextInput
+          style={{
+            height: 40,
+
+            marginRight: 30,
+            marginLeft: 30,
+            backgroundColor: "#bebebe",
+
+            marginTop: 0,
+          }}
+          onChangeText={date => setPositif_date(date)}
+          placeholder="(Contoh : 2021-01-01)"
+        />
+        
         <TouchableOpacity
           activeOpacity={0.5}
-          style={styles.buttonStyle}
+          style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+            backgroundColor: '#DDDDDD',
+            padding: 5,
+            marginTop :10,
+            marginLeft: 30,
+            marginRight: 30}}
           onPress={selectPositifFile}>
           {/*Single file selection button*/}
           <Text style={{
@@ -410,7 +429,7 @@ function Konvalesen05(props) {
             textShadowRadius: 10,
           }}
         >
-          Tanggal Positif
+          Tanggal Negatif / Sembuh:
         </Text>
          <TextInput
           style={{
@@ -422,15 +441,21 @@ function Konvalesen05(props) {
 
             marginTop: 0,
           }}
-          onChangeText={date => setPositif_date(date)}
+          onChangeText={date => setNegative_date(date)}
           placeholder="(Contoh : 2021-01-01)"
-    
-        
+  
+
         />
-        
-                 <TouchableOpacity
+        <TouchableOpacity
           activeOpacity={0.5}
-          style={styles.buttonStyle}
+          style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+            backgroundColor: '#DDDDDD',
+            padding: 5,
+            marginTop :10,
+            marginLeft: 30,
+            marginRight: 30}}
           onPress={selectNegativeFile}>
           {/*Single file selection button*/}
           <Text style={{
@@ -466,35 +491,7 @@ function Konvalesen05(props) {
           }}>
            {negative_file.name ? negative_file.name : ''}
         </Text>
-        <Text
-          style={{
-            marginLeft: 30,
-            marginTop: 10,
-            fontSize: 15,
-            fontWeight: "bold",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          Tanggal Negatif / Sembuh:
-        </Text>
-         <TextInput
-          style={{
-            height: 40,
-
-            marginRight: 30,
-            marginLeft: 30,
-            backgroundColor: "#bebebe",
-
-            marginTop: 0,
-          }}
-          onChangeText={date => setNegative_date(date)}
-          placeholder="(Contoh : 2021-01-01)"
-  
-
-        />
+        
         <Text
          style={{
            marginLeft: 30,
@@ -543,7 +540,7 @@ function Konvalesen05(props) {
               marginRight: "2%",
             }}
           >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen04")}>
+            <TouchableOpacity onPress={goNextPage.bind(this, "infoPendonorKonv")}>
               <Text
                 style={{
                   margin: 10,
@@ -565,7 +562,7 @@ function Konvalesen05(props) {
               marginLeft: "2%",
             }}
           >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen06")}>
+            <TouchableOpacity onPress={goNextPage.bind(this, "kuisonerKonvalesen")}>
               <Text
                 style={{
                   margin: 10,
@@ -605,5 +602,5 @@ function Konvalesen05(props) {
   );
 }
 
-export default Konvalesen05;
+export default infoCovidPendonor;
 

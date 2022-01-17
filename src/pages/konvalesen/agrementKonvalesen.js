@@ -30,14 +30,14 @@ import {
 } from "react-native-gesture-handler";
 import styles from "./styles";
 
-function Konvalesen07(props) {
+function agrementKonvalesen(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const goNextPage = (page) => {
     if (page) {
       const kode_calon_pendonor = props.route.params.kode_pendonor
       console.log(kode_calon_pendonor)
-      props.navigation.navigate('Konvalesen09',{kode_pendonor : kode_calon_pendonor});
+      props.navigation.navigate('agrementKonvalesen',{kode_pendonor : kode_calon_pendonor});
     }
   };
   return (
@@ -152,7 +152,7 @@ function Konvalesen07(props) {
               marginLeft: "2%",
             }}
           >
-            <TouchableOpacity onPress={goNextPage.bind(this, "Konvalesen09")}>
+            <TouchableOpacity onPress={goNextPage.bind(this, "admKonvalesenResult")}>
               <Text
                 style={{
                   margin: 10,
@@ -192,4 +192,4 @@ function Konvalesen07(props) {
   );
 }
 
-export default Konvalesen07;
+export default agrementKonvalesen;

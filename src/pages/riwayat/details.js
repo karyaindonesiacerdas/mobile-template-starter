@@ -52,7 +52,7 @@ function RiwayatDetail(props) {
                 Authorization: 'Bearer ' + token,
             };
 
-            Axios.post(`${url}/api/simaba/riwayat-donor/detail`, body, {
+            Axios.post(`${RIWAYAT}/simaba/detail`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ function RiwayatDetail(props) {
                                 setAction(
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
-                                            onPress={() => goNextPage('Pilih')}>
+                                            onPress={() => goNextPage('lokasiDonor')}>
                                             <Text style={styles.textInCard}>
                                                 Pilih Lokasi Donor
                                             </Text>
@@ -81,7 +81,7 @@ function RiwayatDetail(props) {
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                goNextPage('Barcode')
+                                                goNextPage('BarcodeDonor')
                                             }>
                                             <Text style={styles.textInCard}>
                                                 Tampilkan Barcode
@@ -94,7 +94,7 @@ function RiwayatDetail(props) {
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                goNextPage('Home')
+                                                goNextPage('MenuDonor')
                                             }>
                                             <Text style={styles.textInCard}>
                                                 Daftar Donor Baru
@@ -109,7 +109,7 @@ function RiwayatDetail(props) {
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                goNextPage('Konvalesen10')
+                                                goNextPage('lokasiSampel')
                                             }>
                                             <Text style={styles.textInCard}>
                                                 Pilih Lokasi Pengambilan Sampel
@@ -124,7 +124,7 @@ function RiwayatDetail(props) {
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                goNextPage('Konvalesen10')
+                                                goNextPage('lokasiSampel')
                                             }>
                                             <Text style={styles.textInCard}>
                                                 Tampilkan Barcode
@@ -154,7 +154,7 @@ function RiwayatDetail(props) {
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                goNextPage('Konvalesen10')
+                                                goNextPage('lokasiSampel')
                                             }>
                                             <Text style={styles.textInCard}>
                                                 Tampilkan Barcode
@@ -167,7 +167,7 @@ function RiwayatDetail(props) {
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                goNextPage.bind(this, 'Home')
+                                                goNextPage.bind(this, 'MenuDonor')
                                             }>
                                             <Text style={styles.textInCard}>
                                                 Daftar Donor Baru
@@ -249,7 +249,7 @@ function RiwayatDetail(props) {
                                     color: 'black',
                                 }}>
                                 <B>
-                                    Jadwal Donor :
+                                    Jadwal Donor / Sampel : {' '}
                                     {detail.TGL.substring(0,10)}
                                 </B>
                             </Text>
@@ -274,7 +274,7 @@ function RiwayatDetail(props) {
                                     fontSize: 15,
                                     color: 'black',
                                 }}>
-                                <B>Rhesus :{detail.rhesus.toUpperCase()}</B>
+                                <B>Rhesus :{' ' + detail.rhesus.toUpperCase()}</B>
                             </Text>
                             <Text
                                 style={{
@@ -286,7 +286,7 @@ function RiwayatDetail(props) {
                                 }}>
                                 <B>
                                     Berat Badan :
-                                    {detail.berat_badan.toUpperCase()}
+                                    {' ' + detail.berat_badan.toUpperCase()}
                                 </B>
                             </Text>
                         </TouchableOpacity>

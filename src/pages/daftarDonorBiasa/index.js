@@ -28,17 +28,26 @@ import {Button} from 'react-native-elements/dist/buttons/Button';
 import {Formik} from 'formik';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function DonorBiasa(props) {
+function daftarDonorBiasa(props) {
     const [input, setInput] = useState({ktp: '', nama: ''});
-    const [ktp, setKTP] = useState('');
-    const [nama_pendonor, setNama] = useState('');
-    const [telepon, setTelepon] = useState('');
+    const [ktp, setKTP] = useState();
+    const [nama_pendonor, setNama] = useState();
+    const [telepon, setTelepon] = useState();
+    const [alamat, setAlamat] = useState();
+    const [kelurahan, setKelurahan] = useState();
+    const [kecamatan, setKecamatan] = useState();
+    const [wilayah, setWilayah] = useState();
 
     const refactorInput = value => {
         value.ktp = ktp;
         value.nama = nama_pendonor;
         value.nomor_telepon = telepon;
-        props.navigation.navigate('Data', {payload: value});
+        value.alamat = alamat
+        value.kelurahan = kelurahan
+        value.kecamatan = kecamatan
+        value.wilayah = wilayah
+        
+        props.navigation.navigate('infoPendonorBiasa', {payload: value});
     };
     const goNextPage = page => {
         if (page) {
@@ -65,9 +74,18 @@ function DonorBiasa(props) {
         const valuektp = await AsyncStorage.getItem('ktp');
         const valuenama = await AsyncStorage.getItem('nama');
         const valuetelepon = await AsyncStorage.getItem('nomor_telepon');
+        const valuealamat = await AsyncStorage.getItem('alamat');
+        const valuekecamatan = await AsyncStorage.getItem('kecamatan');
+        const valuekelurahan = await AsyncStorage.getItem('kelurahan');
+        const valuewilayah = await AsyncStorage.getItem('wilayah');
         setKTP(valuektp);
         setNama(valuenama);
         setTelepon(valuetelepon);
+        setAlamat(valuealamat);
+        setKecamatan(valuekecamatan);
+        setKelurahan(valuekelurahan);
+        setWilayah(valuewilayah);
+        
     }
     return (
         <Container>
@@ -195,7 +213,8 @@ function DonorBiasa(props) {
                                     style={styles.input}
                                     onChangeText={handleChange('alamat')}
                                     onBlur={handleBlur('alamat')}
-                                    value={values.alamat}
+                                    value={alamat}
+                                    editable={false}
                                 />
                             </Item>
                             <Text
@@ -216,7 +235,8 @@ function DonorBiasa(props) {
                                     style={styles.input}
                                     onChangeText={handleChange('kelurahan')}
                                     onBlur={handleBlur('kelurahan')}
-                                    value={values.kelurahan}
+                                    value={kelurahan}
+                                    editable={false}
                                 />
                             </Item>
                             <Text
@@ -237,7 +257,8 @@ function DonorBiasa(props) {
                                     style={styles.input}
                                     onChangeText={handleChange('kecamatan')}
                                     onBlur={handleBlur('kecamatan')}
-                                    value={values.kecamatan}
+                                    value={kecamatan}
+                                    editable={false}
                                 />
                             </Item>
                             <Text
@@ -251,14 +272,15 @@ function DonorBiasa(props) {
                                     textShadowOffset: {width: 1, height: 1},
                                     textShadowRadius: 10,
                                 }}>
-                                Kab/Kota
+                                Kabupaten/Kota
                             </Text>
                             <Item style={styles.item}>
                                 <Input
                                     style={styles.input}
                                     onChangeText={handleChange('wilayah')}
                                     onBlur={handleBlur('wilayah')}
-                                    value={values.wilayah}
+                                    value={wilayah}
+                                    editable={false}
                                 />
                             </Item>
                             <Text
@@ -303,7 +325,7 @@ function DonorBiasa(props) {
                                         style={styles.button}
                                         onPress={goNextPage.bind(
                                             this,
-                                            'KegiatanDonor',
+                                            'persyaratanBiasa',
                                         )}>
                                         <Text
                                             style={{
@@ -346,4 +368,4 @@ function DonorBiasa(props) {
     );
 }
 
-export default DonorBiasa;
+export default daftarDonorBiasa;

@@ -315,7 +315,7 @@ function Kegiatan(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Home')}>
+                            onPress={goNextPage.bind(this, 'MenuDonor')}>
                             <Text
                                 style={{
                                     margin: 10,

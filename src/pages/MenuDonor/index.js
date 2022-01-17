@@ -6,13 +6,16 @@ import styles from '../styles/styles';
 import Bg from '../image/baground3.jpeg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function Home(props) {
+function MenuDonor(props) {
     useEffect(() => {
         async function checkData() {
             const ktp_ls = await AsyncStorage.getItem('ktp');
-            if (!ktp_ls) {
-                alert('mohon melengkapi data diri sebelum mendaftar donor');
-                props.navigation.navigate('EditProfil');
+            const alamat = await AsyncStorage.getItem('alamat');
+            
+            if (!ktp_ls || !alamat) {
+                Alert.alert("Warning","Lengkapi Data Profile !",
+                [{ text: "OK", onPress: () => props.navigation.navigate('EditProfil') }]
+                )    
             }
         }
         checkData();
@@ -72,7 +75,7 @@ function Home(props) {
                 <Card style={styles.cardStyle}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={goNextPage.bind(this, 'KegiatanDonor')}>
+                        onPress={goNextPage.bind(this, 'persyaratanBiasa')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -88,7 +91,7 @@ function Home(props) {
                 <Card style={styles.cardStyle}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={goNextPage.bind(this, 'konvalesen02')}>
+                        onPress={goNextPage.bind(this, 'persyaratanKonvalesen')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -180,4 +183,4 @@ function Home(props) {
     );
 }
 
-export default Home;
+export default MenuDonor;
