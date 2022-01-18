@@ -16,11 +16,11 @@ import {
   ScrollView,
 } from "react-native-gesture-handler";
 import {TouchableOpacity} from 'react-native'
-import styles from "../styles/styles";
-import Bg from '../../image/baground3.jpeg'
+import styles from "../../../styles/styles";
+import Bg from '../../../image/baground3.jpeg'
 import { Formik } from "formik";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PENDONOR } from '../../config/api';
+import { PENDONOR } from '../../../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
 
@@ -127,7 +127,7 @@ function infoPendonorBiasa(props) {
   const goNextPage = page => {
     if (page === 'daftarDonorBiasa') {
       props.navigation.goBack()
-    }else if (page === 'Kuisioner'){
+    }else if (page === 'kuisionerBiasa'){
       setInputData(props.route.params)
       submitData(input)
     }
@@ -161,14 +161,14 @@ function infoPendonorBiasa(props) {
     
     console.log(body)
     // AsyncStorage.setItem('data_calon_donor', body);
-    props.navigation.navigate('Kuisioner',{data_calon_donor : body});
+    props.navigation.navigate('kuisionerBiasa',{data_calon_donor : body});
 
   }
   return (
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
-        source={require("../image/logo.png")}
+        source={require("../../../image/logo.png")}
         style={{
           width: 54,
           height: 60,
@@ -179,7 +179,7 @@ function infoPendonorBiasa(props) {
         }}
       ></Image>
       <Image
-        source={require("../image/Logo2.png")}
+        source={require("../../../image/Logo2.png")}
         style={{
           position:'absolute',
           width: 54,
@@ -446,7 +446,7 @@ function infoPendonorBiasa(props) {
               backgroundColor: "#000",width: "40%",marginLeft:"2%"
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'Kuisioner')} >
+            <TouchableOpacity style={styles.button} onPress={goNextPage.bind(this, 'kuisionerBiasa')} >
               <Text
                 style={{
                   margin: 10,

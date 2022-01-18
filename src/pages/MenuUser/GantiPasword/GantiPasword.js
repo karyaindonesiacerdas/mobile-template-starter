@@ -22,10 +22,10 @@ import qs from 'qs';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
 import {ScrollView} from 'react-native-gesture-handler';
-import styles from '../styles/styles';
+import styles from '../../styles/styles';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {USER_MANAGEMENT} from '../../config/api';
+import {USER_MANAGEMENT} from '../../../config/api';
 
 function GantiPasword(props) {
   const submitData =(value) => {
@@ -79,7 +79,7 @@ function GantiPasword(props) {
     <Container>
       <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
-        source={require("../image/logo.png")}
+        source={require("../../image/logo.png")}
         style={{
           width: 54,
           height: 60,
@@ -90,7 +90,7 @@ function GantiPasword(props) {
         }}
       ></Image>
       <Image
-        source={require("../image/Logo2.png")}
+        source={require("../../image/Logo2.png")}
         style={{
           position:'absolute',
           width: 54,

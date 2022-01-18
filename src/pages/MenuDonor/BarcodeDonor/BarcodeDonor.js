@@ -1,83 +1,54 @@
-import React, {useState,useEffect} from 'react';
+import React, { useState,useEffect } from "react";
 import {
-    Container,
-    Card,
-    Item,
-    Input,
-    Spinner,
-    Toast,
-    ListItem,
-    CheckBox,
-    Body,
-    Button,
-    View,
-    Text,
-} from 'native-base';
-import {useMutation} from 'react-query';
-import {Formik} from 'formik';
-import {Alert, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import * as Yup from 'yup';
-import Bg from '../../image/Baground2.jpg';
-import qs from 'qs';
-import Axios from 'axios';
-import {StackActions} from '@react-navigation/native';
-import {ScrollView} from 'react-native-gesture-handler';
-import styles from '../styles/styles';
+  Alert,
+  ImageBackground,
+  Image,
+  Text,
+  View,
+  TextInput,
+} from "react-native";
+import { CheckBox } from "react-native-elements";
+import {
+  Container,
+  Card,
 
+} from "native-base";
+import {
+  ScrollView,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
+import {TouchableOpacity} from 'react-native'
+import styles from "../../styles/styles";
+import Bg from '../../image/baground3.jpeg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {USER_MANAGEMENT} from '../../config/api';
+import { PENDONOR } from '../../../config/api';
+import Axios from 'axios';
 import QRCode from "react-qr-code";
-
-function KartuDonor(props) {
+function BarcodeDonor(props) {
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
   const [qr , setQr] = useState(null)
-  const [kartudonor,setKartu] = useState()
-  const [nama,setNama] = useState()
-
+  const [info_pendonor,setInfo] = useState({kuesioner_id : '' , TGL : ''})
+      
   useEffect(() => {
+    const url = PENDONOR;
     async function getData() {
       const token = await AsyncStorage.getItem('token')
-      const kartudonor = await AsyncStorage.getItem('kartudonor')
-      const nama = await AsyncStorage.getItem('nama')
-      
-      console.log(kartudonor)
-      if (kartudonor){
-        setNama(nama)
-        setKartu(kartudonor)
-        setQr(
-          <View
-            style={{
-              alignContent: "center",
-
-              flexDirection: "row",
-              justifyContent: "center",
-                alignContent: "center",
-                marginTop:30,
-                marginBottom:15,
-              
-            }}
-          >
-          <QRCode
-          size = {200}
-          value= {kartudonor}
-        />
-        </View>
-        )    
-      }else{
-        const body = {
-          email: '',
-        };
-        Axios.post(`${USER_MANAGEMENT}/simaba`, body, {
-          headers: {
-              Authorization: 'Bearer ' + token,
-              'Content-Type': 'application/json',
-          },
-        })
+      const ktp = await AsyncStorage.getItem('ktp')
+      const kode_pendonor = await AsyncStorage.getItem('kode_pendonor');
+      const headers = {
+          'Content-Type': 'application/json',
+          'Authorization' : 'Bearer ' + token
+      };
+      const body = {
+        kode_calon_pendonor: kode_pendonor
+      };
+      Axios.post(`${PENDONOR}/simaba/calon-pendonor`, body,
+         headers)
           .then(res => {
-            const data_kartu = res.data.data[0]['KODEPENDONOR']
-            const data_nama = res.data.data[0]['nama']
-            setNama(data_nama)
-            setKartu(data_kartu)
-
+            setInfo(res.data.data[0]) 
+            const data = res.data.data[0].kuesioner_id
+            console.log(data)
               setQr(
                 <View
                   style={{
@@ -86,14 +57,14 @@ function KartuDonor(props) {
                     flexDirection: "row",
                     justifyContent: "center",
                       alignContent: "center",
-                      marginTop:10,
+                      marginTop:30,
                       marginBottom:15,
                     
                   }}
                 >
                 <QRCode
                 size = {200}
-                value= {data_kartu}
+                value= {data}
               />
               </View>
               )    
@@ -101,7 +72,7 @@ function KartuDonor(props) {
           .catch(err => {
               console.log('test : ', err.response);
           });
-    }}
+    }
     getData()
   }, []);
 
@@ -114,7 +85,7 @@ function KartuDonor(props) {
     <Container>
         <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
       <Image
-        source={require("../image/logo.png")}
+        source={require("../../image/logo.png")}
         style={{
           width: 55,
           height: 60,
@@ -125,7 +96,7 @@ function KartuDonor(props) {
         }}
       ></Image>
       <Image
-        source={require("../image/Logo2.png")}
+        source={require("../../image/Logo2.png")}
         style={{
           position: "absolute",
           width: 58,
@@ -141,20 +112,20 @@ function KartuDonor(props) {
 
         <Text
           style={{
+            marginLeft: 30,
             marginTop: 0,
-            textAlign: "center",
-            fontSize: 30,
+            fontSize: 35,
             fontWeight: "bold",
-            color: "black",
+            color: "red",
           }}
         >
-          Kartu Anggota
+          Gedung UDD
         </Text>
         <Text
           style={{
-            textAlign: "center",
+            marginLeft: 30,
             marginTop: 0,
-            marginBottom: 30,
+            marginBottom: 10,
             fontSize: 25,
             fontWeight: "bold",
             color: "black",
@@ -162,12 +133,12 @@ function KartuDonor(props) {
         >
           PMI Kota Semarang
         </Text>
-        <Text
+         <Text
           style={{
             marginLeft: 30,
             marginRight: 30,
-            marginTop: 5,
-            fontSize: 20,
+            marginTop: 20,
+            fontSize: 15,
             fontWeight: "bold",
 
             textAlign: "center",
@@ -177,8 +148,26 @@ function KartuDonor(props) {
             textShadowRadius: 10,
           }}
         >
-          {kartudonor}
+          ANDA TERDAFTAR SEBAGAI CALON DONOR{'\n'} DI UDD PMI KOTA SEMARANG{'\n'}SILAKAN KUNJUNGI UDD PMI KOTA SEMARANG
         </Text>
+         <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 20,
+            fontSize: 15,
+ 
+
+            textAlign: "center",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Scan barcode untuk cetak formulir donor
+        </Text>
+        
       {qr}
       <Text
           style={{
@@ -195,8 +184,24 @@ function KartuDonor(props) {
             textShadowRadius: 10,
           }}
         >
-          {nama}
+          {info_pendonor.kuesioner_id}
         </Text>
+        <Text
+                    style={{
+                        marginLeft: 30,
+                        marginRight: 30,
+                        fontWeight: "bold",
+                        fontSize: 20,
+                        marginTop: 20,
+
+                        textAlign: 'center',
+                        color: 'black',
+                        textShadowColor: '#fff',
+                        textShadowOffset: {width: 1, height: 1},
+                        textShadowRadius: 10,
+                    }}>
+                    Keterangan :{'\n'}Berlaku Hanya Pada Tanggal{'\n'}({info_pendonor.TGL.substring(0,10)})
+                </Text>
         <View
           style={{
             alignContent: "center",
@@ -233,4 +238,4 @@ function KartuDonor(props) {
   );
 }
 
-export default KartuDonor;
+export default BarcodeDonor;

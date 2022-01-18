@@ -5,44 +5,61 @@ import {
     Image,
     Text,
     View,
-    StyleSheet,
     TextInput,
 } from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Container, Card} from 'native-base';
-import {
-    ScrollView,
-    TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
-import styles from '../styles/styles';
-import {
-    Table,
-    TableWrapper,
-    Row,
-    Rows,
-    Col,
-} from 'react-native-table-component';
-import Bg from '../../image/baground3.jpeg';
+import styles from '../../../styles/styles';
+import Bg from '../../../image/baground3.jpeg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {PENDONOR} from '../../../../config/api';
+import Axios from 'axios';
 
-const CONTENT = {
-    tableHead: ['                   JADWAL KEGIATAN DONOR DARAH SENIN'],
-
-    tableData: [
-        ['               JAM', '             INSTASI', '       KETERANGAN'],
-        ['              08.00', '                PMI', '             Umum'],
-        ['                Dst', '', ''],
-    ],
-};
-function lokasiMobilUnit(props) {
+function lokasiGedung(props) {
     const [check1, setCheck1] = useState(false);
     const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
-        if (page) {
+        if (page == 'BarcodeDonor') {
+            submit();
+        } else {
             props.navigation.navigate(page);
         }
     };
-
+    async function submit() {
+        const token = await AsyncStorage.getItem('token');
+        const ktp = await AsyncStorage.getItem('ktp');
+        const lokasi = 'Gedung UDD';
+        const url = PENDONOR;
+        const body = {
+            ktp: ktp,
+            lokasi: lokasi,
+        };
+        console.log(body);
+        Axios.put(`${PENDONOR}/simaba/update/lokasi`, body, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(res => {
+                console.info('res.data', res.data);
+                console.log(res.data);
+                if (res.data.code === 200) {
+                    props.navigation.navigate('BarcodeDonor');
+                } else {
+                    Alert.alert("Error", +res.data.code + '  ' + res.data.message,
+                                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                                )
+                }
+            })
+            .catch(err => {
+                Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+                                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                                )
+            });
+    }
     return (
         <Container>
             <Image
@@ -50,7 +67,7 @@ function lokasiMobilUnit(props) {
                 style={{width: '100%', height: '100%', position: 'absolute'}}
             />
             <Image
-                source={require('../image/logo.png')}
+                source={require('../../../image/logo.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -60,7 +77,7 @@ function lokasiMobilUnit(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../image/Logo2.png')}
+                source={require('../../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 54,
@@ -74,60 +91,24 @@ function lokasiMobilUnit(props) {
                 <Text
                     style={{
                         marginLeft: 30,
-                        marginTop: 10,
+                        marginTop: 0,
                         fontSize: 35,
                         fontWeight: 'bold',
                         color: 'red',
                     }}>
-                    Mobil Unit
+                    Gedung UDD
                 </Text>
                 <Text
                     style={{
                         marginLeft: 30,
-                        marginTop: -10,
+                        marginTop: 0,
                         marginBottom: 10,
-                        fontSize: 35,
+                        fontSize: 25,
                         fontWeight: 'bold',
                         color: 'black',
                     }}>
-                    Terdekat
+                    PMI Kota Semarang
                 </Text>
-
-                <View
-                    style={{
-                        width: '90%',
-                        justifyContent: 'center',
-                        alignSelf: 'center',
-                    }}>
-                    <Table
-                        borderStyle={{
-                            borderWidth: 1,
-                            justifyContent: 'center',
-                            alignContent: 'center',
-                        }}>
-                        <Row
-                            data={CONTENT.tableHead}
-                            flexArr={[1, 2, 1, 1]}
-                            style={styles.head}
-                            textStyle={styles.text}
-                        />
-                        <TableWrapper style={styles.wrapper}>
-                            <Col
-                                data={CONTENT.tableTitle}
-                                style={styles.title}
-                                heightArr={[28, 28]}
-                                textStyle={styles.text}
-                            />
-                            <Rows
-                                data={CONTENT.tableData}
-                                flexArr={[1, 1, 1]}
-                                style={styles.row}
-                                textStyle={styles.text}
-                            />
-                        </TableWrapper>
-                    </Table>
-                </View>
-
                 <Image
                     source={{
                         uri: 'https://www.howtogeek.com/wp-content/uploads/2021/01/google-maps-satellite.png?height=200p&trim=2,2,2,2',
@@ -139,12 +120,13 @@ function lokasiMobilUnit(props) {
                         marginBottom: 20,
                         alignSelf: 'center',
                     }}></Image>
+
                 <Text
                     style={{
                         marginLeft: 30,
                         marginRight: 30,
-                        marginTop: 20,
-                        fontSize: 15,
+                        marginTop: 40,
+                        fontSize: 20,
                         fontWeight: 'bold',
 
                         textAlign: 'justify',
@@ -153,14 +135,30 @@ function lokasiMobilUnit(props) {
                         textShadowOffset: {width: 1, height: 1},
                         textShadowRadius: 10,
                     }}>
-                    NAMA LOKASI MOBILE UNIT
+                    UNIT DONOR DARAH PMI KOTA SEMARANG
                 </Text>
                 <Text
                     style={{
                         marginLeft: 30,
                         marginRight: 30,
 
-                        fontSize: 15,
+                        fontSize: 18,
+
+                        textAlign: 'justify',
+                        color: 'black',
+                        textShadowColor: '#fff',
+                        textShadowOffset: {width: 1, height: 1},
+                        textShadowRadius: 10,
+                    }}>
+                    JL. MGR Soegiyopranoto No. 31 Semarang {'\n'}Telp. 024 351
+                    5050
+                </Text>
+                <Text
+                    style={{
+                        marginLeft: 30,
+                        marginRight: 30,
+                        marginTop: 20,
+                        fontSize: 20,
                         fontWeight: 'bold',
 
                         textAlign: 'justify',
@@ -169,7 +167,54 @@ function lokasiMobilUnit(props) {
                         textShadowOffset: {width: 1, height: 1},
                         textShadowRadius: 10,
                     }}>
-                    ALAMAT LOKASI MOBILE UNIT
+                    Pelayanan Donor Setiap Hari
+                </Text>
+                <Text
+                    style={{
+                        marginLeft: 30,
+                        marginRight: 30,
+
+                        fontSize: 18,
+
+                        textAlign: 'justify',
+                        color: 'black',
+                        textShadowColor: '#fff',
+                        textShadowOffset: {width: 1, height: 1},
+                        textShadowRadius: 10,
+                    }}>
+                    Jam 07.39 s.d. 20.30 WIB
+                </Text>
+                <Text
+                    style={{
+                        marginLeft: 30,
+                        marginRight: 30,
+                        marginTop: 20,
+                        fontSize: 20,
+                        fontWeight: 'bold',
+
+                        textAlign: 'justify',
+                        color: 'black',
+                        textShadowColor: '#fff',
+                        textShadowOffset: {width: 1, height: 1},
+                        textShadowRadius: 10,
+                    }}>
+                    Pelayanan Permintaan Darah
+                </Text>
+                <Text
+                    style={{
+                        marginLeft: 30,
+                        marginRight: 30,
+
+                        fontSize: 18,
+
+                        textAlign: 'justify',
+                        color: 'black',
+                        textShadowColor: '#fff',
+                        textShadowOffset: {width: 1, height: 1},
+                        textShadowRadius: 10,
+                    }}>
+                    24 Jam{'\n'}
+                    Hari Minggu dan Libur Nasional tetap buka
                 </Text>
 
                 <View
@@ -179,7 +224,7 @@ function lokasiMobilUnit(props) {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignContent: 'center',
-                        marginTop: 320,
+                        marginTop: 210,
                     }}>
                     <Card
                         style={{
@@ -211,7 +256,7 @@ function lokasiMobilUnit(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Barcode2')}>
+                            onPress={goNextPage.bind(this, 'BarcodeDonor')}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -231,4 +276,4 @@ function lokasiMobilUnit(props) {
     );
 }
 
-export default lokasiMobilUnit;
+export default lokasiGedung;

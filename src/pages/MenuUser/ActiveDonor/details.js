@@ -10,7 +10,7 @@ import {Icon} from 'react-native-elements';
 import {Container, Card} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
 import styles from './styles';
-import {RIWAYAT} from '../../config/api';
+import {RIWAYAT} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -193,11 +193,11 @@ function RiwayatDetail(props) {
     return (
         <Container>
             <Image
-                source={require('../../asset/logoUDD.png')}
+                source={require('../../../asset/logoUDD.png')}
                 style={styles.logoUDD}
             />
             <Image
-                source={require('../../asset/logoSehat.png')}
+                source={require('../../../asset/logoSehat.png')}
                 style={styles.logoSehat}
             />
 
@@ -302,7 +302,7 @@ function RiwayatDetail(props) {
 
             <ImageBackground
                 // resizeMethod={'auto'}
-                source={require('../../asset/footer.png')}
+                source={require('../../../asset/footer.png')}
                 style={styles.imageBackgroundStyle}
                 imageStyle={{resizeMode: 'cover', alignSelf: 'flex-end'}}
             />

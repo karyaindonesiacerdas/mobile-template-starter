@@ -25,7 +25,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
-import {RIWAYAT} from '../../config/api';
+import {RIWAYAT} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -112,7 +112,7 @@ function Riwayat(props) {
         return (
             <View style={styles.headerFooterStyle}>
                 <Image
-                    source={require('../../asset/logoUDD.png')}
+                    source={require('../../image/logo.png')}
                     style={{
                         width: 54,
                         height: 60,
@@ -122,7 +122,7 @@ function Riwayat(props) {
                         left: 10,
                     }}></Image>
                 <Image
-                    source={require('../../asset/logoSehat.png')}
+                    source={require('../../image/Logo2.png')}
                     style={{
                         position: 'absolute',
                         width: 54,
@@ -288,7 +288,7 @@ function Riwayat(props) {
 
             <ImageBackground
                 // resizeMethod={'auto'}
-                source={require('../../asset/footer.png')}
+                source={require('../../../asset/footer.png')}
                 style={{
                     width: '100%',
 

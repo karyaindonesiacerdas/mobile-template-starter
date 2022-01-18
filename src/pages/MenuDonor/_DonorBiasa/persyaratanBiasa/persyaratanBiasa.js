@@ -4,10 +4,10 @@ import {Container, Card, button} from 'native-base';
 import {TouchableOpacity} from 'react-native';
 import {Formik} from 'formik';
 //from "react-native-gesture-handler";
-import styles from '../styles/styles';
+import styles from '../../../styles/styles';
 import * as Yup from 'yup';
 // import {authLogin} from '../../../config/api';
-import Bg from '../image/baground3.jpeg';
+import Bg from '../../../image/baground3.jpeg';
 
 function persyaratanBiasa(props) {
     const goNextPage = page => {
@@ -23,7 +23,7 @@ function persyaratanBiasa(props) {
             />
 
             <Image
-                source={require('../image/logo.png')}
+                source={require('../../../image/logo.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -33,7 +33,7 @@ function persyaratanBiasa(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../image/Logo2.png')}
+                source={require('../../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 60,

@@ -14,7 +14,8 @@ import {
     ScrollView,
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
-import styles from './styles';
+import styles from '../../styles/styles';
+import Bg from '../../image/Baground2.jpg';
 
 function lokasiSampel(props) {
     const [check1, setCheck1] = useState(false);
@@ -27,7 +28,7 @@ function lokasiSampel(props) {
     return (
         <Container>
             <Image
-                source={require('../../asset/logoUDD.png')}
+                source={require('../../image/logo.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -37,7 +38,7 @@ function lokasiSampel(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../../asset/logoSehat.png')}
+                source={require('../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 54,
@@ -166,7 +167,7 @@ function lokasiSampel(props) {
 
             <ImageBackground
                 // resizeMethod={'auto'}
-                source={require('../../asset/footer.png')}
+                source={require('../../../asset/footer.png')}
                 style={{
                     width: '100%',
 

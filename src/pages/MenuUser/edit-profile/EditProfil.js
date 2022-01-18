@@ -11,11 +11,11 @@ import {CheckBox} from 'react-native-elements';
 import {Container, Card, Item, Input, Content, Icon} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity, PermissionsAndroid} from 'react-native';
-import styles from '../styles/styles';
+import styles from '../../styles/styles';
 import Bg from '../../image/baground3.jpeg';
 import {Formik, Form} from 'formik';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PENDONOR, USER_MANAGEMENT} from '../../config/api';
+import {PENDONOR, USER_MANAGEMENT} from '../../../config/api';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Axios from 'axios';
 import * as Yup from 'yup';
@@ -683,7 +683,7 @@ function EditProfil(props) {
                         }}
                     />
                     <Image
-                        source={require('../image/logo.png')}
+                        source={require('../../image/logo.png')}
                         style={{
                             width: 54,
                             height: 60,
@@ -693,7 +693,7 @@ function EditProfil(props) {
                             left: 10,
                         }}></Image>
                     <Image
-                        source={require('../image/Logo2.png')}
+                        source={require('../../image/Logo2.png')}
                         style={{
                             position: 'absolute',
                             width: 54,

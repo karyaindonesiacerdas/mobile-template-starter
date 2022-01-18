@@ -15,7 +15,7 @@ import {
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
-import styles from '../styles/styles';
+import styles from '../../../styles/styles';
 import {
     Table,
     TableWrapper,
@@ -24,11 +24,11 @@ import {
     Col,
 } from 'react-native-table-component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { KUESIONER, PENDONOR } from '../../config/api';
+import { KUESIONER, PENDONOR } from '../../../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
 
-function Kuisioner(props) {
+function kuisionerBiasa(props) {
     const [kuesioner, setKuesioner] = useState([
         {
             number: 1,
@@ -431,7 +431,7 @@ function Kuisioner(props) {
     return (
         <Container>
             <Image
-                source={require('../image/logo.png')}
+                source={require('../../../image/logo.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -441,7 +441,7 @@ function Kuisioner(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../image/Logo2.png')}
+                source={require('../../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 54,
@@ -585,7 +585,7 @@ function Kuisioner(props) {
     );
 }
 
-export default Kuisioner;
+export default kuisionerBiasa;
 
 function RefactorInput(val) {
     var count = 0;

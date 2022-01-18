@@ -10,7 +10,7 @@ import {
 import {CheckBox} from 'react-native-elements';
 import {Container, Card} from 'native-base';
 import {TouchableOpacity} from 'react-native';
-import styles from '../styles/styles';
+import styles from '../../styles/styles';
 import Bg from '../../image/Baground2.jpg';
 
 function lokasiDonor(props) {
@@ -35,7 +35,7 @@ function lokasiDonor(props) {
                 style={{width: '100%', height: '100%', position: 'absolute'}}
             />
             <Image
-                source={require('../image/logo.png')}
+                source={require('../../image/logo.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -45,7 +45,7 @@ function lokasiDonor(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../image/Logo2.png')}
+                source={require('../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 54,

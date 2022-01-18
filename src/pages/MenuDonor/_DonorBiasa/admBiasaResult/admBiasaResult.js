@@ -25,9 +25,9 @@ import {
 } from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
-import styles from '../styles/styles';
-import Bg from '../../image/baground3.jpeg';
-import {PENDONOR} from '../../config/api';
+import styles from '../../../styles/styles';
+import Bg from '../../../image/baground3.jpeg';
+import {PENDONOR} from '../../../../config/api';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
@@ -184,7 +184,7 @@ function admBiasaResult(props) {
                 style={{width: '100%', height: '100%', position: 'absolute'}}
             />
             <Image
-                source={require('../image/logo.png')}
+                source={require('../../../image/logo.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -194,7 +194,7 @@ function admBiasaResult(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../image/Logo2.png')}
+                source={require('../../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 54,

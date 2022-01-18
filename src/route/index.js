@@ -22,7 +22,7 @@ import {
 	Barcode2,
 	Kalender,
 	Dashboard,
-	Kuisioner,
+	kuisionerBiasa,
 	persyaratanKonvalesen,
 	daftarDonorkonv,
 	infoPendonorKonv,
@@ -92,7 +92,7 @@ function index() {
 				<Stack.Screen name="Barcode2" component={Barcode2} options={{ headerShown: false }} />
 				<Stack.Screen name="Kalender" component={Kalender} options={{ headerShown: false }} />
 				<Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
-				<Stack.Screen name="Kuisioner" component={Kuisioner} options={{ headerShown: false }} />
+				<Stack.Screen name="kuisionerBiasa" component={kuisionerBiasa} options={{ headerShown: false }} />
 				<Stack.Screen name="persyaratanKonvalesen" component={persyaratanKonvalesen} options={{ headerShown: false }} />
 				<Stack.Screen name="daftarDonorkonv" component={daftarDonorkonv} options={{ headerShown: false }} />
 				<Stack.Screen name="infoPendonorKonv" component={infoPendonorKonv} options={{ headerShown: false }} />

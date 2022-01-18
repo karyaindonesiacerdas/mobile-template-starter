@@ -3,7 +3,7 @@ import {Alert, ImageBackground, Image, Text, View} from 'react-native';
 import {Container, Card} from 'native-base';
 import {TouchableOpacity} from 'react-native';
 import styles from '../styles/styles';
-import Bg from '../image/baground3.jpeg';
+import Bg from '../../image/baground3.jpeg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function MenuDonor(props) {
@@ -33,7 +33,7 @@ function MenuDonor(props) {
             />
 
             <Image
-                source={require('../image/logo.png')}
+                source={require('../../image/logo.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -43,7 +43,7 @@ function MenuDonor(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../image/Logo2.png')}
+                source={require('../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 54,
