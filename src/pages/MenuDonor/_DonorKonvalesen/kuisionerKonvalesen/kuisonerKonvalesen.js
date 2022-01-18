@@ -15,7 +15,7 @@ import {
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
-import styles from '../styles/styles';
+import styles from '../../../styles/styles';
 import {
     Table,
     TableWrapper,
@@ -24,7 +24,7 @@ import {
     Col,
 } from 'react-native-table-component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {KUESIONER} from '../../config/api';
+import {KUESIONER} from '../../../../config/api';
 import Axios from 'axios';
 
 function kuisonerKonvalesen(props) {
@@ -434,7 +434,7 @@ function kuisonerKonvalesen(props) {
     return (
         <Container>
             <Image
-                source={require('../image/logo.png')}
+                source={require('../../../image/logo.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -444,7 +444,7 @@ function kuisonerKonvalesen(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../image/Logo2.png')}
+                source={require('../../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 54,

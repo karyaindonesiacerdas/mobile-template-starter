@@ -28,7 +28,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
-import styles from "./styles";
+import styles from "../../../konvalesen/styles";
 
 function agrementKonvalesen(props) {
   const [check1, setCheck1] = useState(false);
@@ -43,7 +43,7 @@ function agrementKonvalesen(props) {
   return (
     <Container>
       <Image
-        source={require("../../asset/logoUDD.png")}
+        source={require("../../../../asset/logoUDD.png")}
         style={{
           width: 54,
           height: 60,
@@ -54,7 +54,7 @@ function agrementKonvalesen(props) {
         }}
       ></Image>
       <Image
-        source={require("../../asset/logoSehat.png")}
+        source={require("../../../../asset/logoSehat.png")}
         style={{
           position: "absolute",
           width: 54,
@@ -172,7 +172,7 @@ function agrementKonvalesen(props) {
 
       <ImageBackground
         // resizeMethod={'auto'}
-        source={require("../../asset/footer.png")}
+        source={require("../../../../asset/footer.png")}
         style={{
           width: "100%",
 

@@ -15,7 +15,7 @@ import {
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
-import styles from '../styles/styles';
+import styles from '../../../styles/styles';
 import {
     Table,
     TableWrapper,
@@ -23,11 +23,11 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
-import Bg from '../../image/baground3.jpeg';
+import Bg from '../../../image/baground3.jpeg';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PENDONOR} from '../../config/api';
+import {PENDONOR} from '../../../../config/api';
 import Axios from 'axios';
 function agrementPlace(props) {
     const [check1, setCheck1] = useState(false);
@@ -104,7 +104,7 @@ function agrementPlace(props) {
                 style={{width: '100%', height: '100%', position: 'absolute'}}
             />
             <Image
-                source={require('../image/logo.png')}
+                source={require('../../../image/logo.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -114,7 +114,7 @@ function agrementPlace(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../image/Logo2.png')}
+                source={require('../../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 54,

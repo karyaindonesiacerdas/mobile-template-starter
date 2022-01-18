@@ -12,7 +12,7 @@ import {
     ScrollView,
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
-import styles from './styles';
+import styles from '../../../konvalesen/styles';
 
 function persyaratanKonvalesen(props) {
     const goNextPage = page => {
@@ -23,7 +23,7 @@ function persyaratanKonvalesen(props) {
     return (
         <Container>
             <Image
-                source={require('../../asset/logoUDD.png')}
+                source={require('../../../../asset/logoUDD.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -33,7 +33,7 @@ function persyaratanKonvalesen(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../../asset/logoSehat.png')}
+                source={require('../../../../asset/logoSehat.png')}
                 style={{
                     position: 'absolute',
                     width: 54,
@@ -177,7 +177,7 @@ function persyaratanKonvalesen(props) {
 
             <ImageBackground
                 // resizeMethod={'auto'}
-                source={require('../../asset/footer.png')}
+                source={require('../../../../asset/footer.png')}
                 style={{
                     width: '100%',
 

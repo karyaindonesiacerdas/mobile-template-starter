@@ -18,7 +18,7 @@ import {
   TouchableWithoutFeedback,
   
 } from "react-native-gesture-handler";
-import styles from "./styles";
+import styles from "../../../konvalesen/styles";
 
 function gedungUddKonvalesen(props) {
   const [check1, setCheck1] = useState(false);
@@ -31,7 +31,7 @@ function gedungUddKonvalesen(props) {
   return (
     <Container>
       <Image
-        source={require("../../asset/logoUDD.png")}
+        source={require("../../../../asset/logoUDD.png")}
         style={{
           width: 54,
           height: 60,
@@ -42,7 +42,7 @@ function gedungUddKonvalesen(props) {
         }}
       ></Image>
       <Image
-        source={require("../../asset/logoSehat.png")}
+        source={require("../../../../asset/logoSehat.png")}
         style={{
           position: "absolute",
           width: 54,
@@ -80,7 +80,7 @@ function gedungUddKonvalesen(props) {
           PMI Kota Semarang
         </Text>
         <Image
-        source={require("../../asset/imagePeta.png")}
+        source={require("../../../../asset/imagePeta.png")}
         style={{
         
           width: 200,
@@ -258,7 +258,7 @@ function gedungUddKonvalesen(props) {
 
       <ImageBackground
         // resizeMethod={'auto'}
-        source={require("../../asset/footer.png")}
+        source={require("../../../../asset/footer.png")}
         style={{
           width: "100%",
 

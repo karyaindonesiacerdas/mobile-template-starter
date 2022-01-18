@@ -29,9 +29,9 @@ import {
 } from "react-native-gesture-handler";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import styles from "../styles/styles";
+import styles from "../../../styles/styles";
 import DocumentPicker from 'react-native-document-picker';
-import { PENDONOR } from '../../config/api';
+import { PENDONOR } from '../../../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
 
@@ -186,7 +186,7 @@ function infoCovidPendonor(props) {
   return (
     <Container>
       <Image
-        source={require("../../asset/logoUDD.png")}
+        source={require("../../../../asset/logoUDD.png")}
         style={{
           width: 54,
           height: 60,
@@ -197,7 +197,7 @@ function infoCovidPendonor(props) {
         }}
       ></Image>
       <Image
-        source={require("../../asset/logoSehat.png")}
+        source={require("../../../../asset/logoSehat.png")}
         style={{
           position: "absolute",
           width: 54,
@@ -582,7 +582,7 @@ function infoCovidPendonor(props) {
 
       <ImageBackground
         // resizeMethod={'auto'}
-        source={require("../../asset/footer.png")}
+        source={require("../../../../asset/footer.png")}
         style={{
           width: "100%",
 
