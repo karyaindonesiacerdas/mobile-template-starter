@@ -2,7 +2,6 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
-	Account,
 	MenuDonor,
 	LoadingStart,
 	Login,
@@ -46,15 +45,16 @@ import {
 	InfoStok03,
 	MobilUnit01,
 	MobilUnit02,
-    Riwayat,
-	RiwayatDetail,
+    ActiveDonor,
+	ActiveDonorDetail,
+	RiwayatDonor,
 	PermintaanDarah,
-	Alur01,
-	Alur02,
-	Alur03,
-	Alur04,
-	Alur05,
-	Alur06,
+	MenuAlur,
+	alurDonorBiasa,
+	alurDonorKonvalesen,
+	permintaanDarah,
+	pengadaanDonor,
+	konselingDonor,
 	EditProfil,
 	DashboardAdmin,
 	ListUser,
@@ -116,14 +116,15 @@ function index() {
 				<Stack.Screen name="InfoStok03" component={InfoStok03} options={{ headerShown: false }} />
 				<Stack.Screen name="MobilUnit01" component={MobilUnit01} options={{ headerShown: false }} />
 				<Stack.Screen name="MobilUnit02" component={MobilUnit02} options={{ headerShown: false }} />
-                <Stack.Screen name="Riwayat" component={Riwayat} options={{ headerShown: false }} />
-				<Stack.Screen name="RiwayatDetail" component={RiwayatDetail} options={{ headerShown: false }} />
-				<Stack.Screen name="Alur01" component={Alur01} options={{ headerShown: false }} />
-				<Stack.Screen name="Alur02" component={Alur02} options={{ headerShown: false }} />
-				<Stack.Screen name="Alur03" component={Alur03} options={{ headerShown: false }} />
-				<Stack.Screen name="Alur04" component={Alur04} options={{ headerShown: false }} />
-				<Stack.Screen name="Alur05" component={Alur05} options={{ headerShown: false }} />
-				<Stack.Screen name="Alur06" component={Alur06} options={{ headerShown: false }} />
+                <Stack.Screen name="ActiveDonor" component={ActiveDonor} options={{ headerShown: false }} />
+				<Stack.Screen name="ActiveDonorDetail" component={ActiveDonorDetail} options={{ headerShown: false }} />
+				<Stack.Screen name="RiwayatDonor" component={RiwayatDonor} options={{ headerShown: false }} />
+				<Stack.Screen name="MenuAlur" component={MenuAlur} options={{ headerShown: false }} />
+				<Stack.Screen name="alurDonorBiasa" component={alurDonorBiasa} options={{ headerShown: false }} />
+				<Stack.Screen name="alurDonorKonvalesen" component={alurDonorKonvalesen} options={{ headerShown: false }} />
+				<Stack.Screen name="permintaanDarah" component={permintaanDarah} options={{ headerShown: false }} />
+				<Stack.Screen name="pengadaanDonor" component={pengadaanDonor} options={{ headerShown: false }} />
+				<Stack.Screen name="konselingDonor" component={konselingDonor} options={{ headerShown: false }} />
 				<Stack.Screen name="PermintaanDarah" component={PermintaanDarah} options={{ headerShown: false }} />
 				<Stack.Screen name="EditProfil" component={EditProfil} options={{ headerShown: false }} />
 				<Stack.Screen name="DashboardAdmin" component={DashboardAdmin} options={{ headerShown: false }} />

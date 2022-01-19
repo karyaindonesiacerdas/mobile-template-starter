@@ -29,6 +29,10 @@ import {
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 import styles from "../../../konvalesen/styles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {KUESIONER , PENDONOR} from '../../../../config/api';
+import Axios from 'axios';
+
 
 function agrementKonvalesen(props) {
   const [check1, setCheck1] = useState(false);
@@ -40,6 +44,7 @@ function agrementKonvalesen(props) {
       props.navigation.navigate('agrementKonvalesen',{kode_pendonor : kode_calon_pendonor});
     }
   };
+
   return (
     <Container>
       <Image

@@ -2,7 +2,6 @@ import Login from './auth/login';
 import Register from './auth/register';
 import MenuDonor from './MenuDonor/MenuDonor';
 import LoadingStart from './loading';
-import Account from './account';
 import persyaratanBiasa from './MenuDonor/_DonorBiasa/persyaratanBiasa/persyaratanBiasa';
 import daftarDonorBiasa from './MenuDonor/_DonorBiasa/daftarDonorBiasa/daftarDonorBiasa';
 import infoPendonorBiasa from './MenuDonor/_DonorBiasa/infoPendonorBiasa/infoPendonorBiasa';
@@ -14,8 +13,9 @@ import BarcodeDonor from './MenuDonor/BarcodeDonor/BarcodeDonor';
 import EditProfil from './MenuUser/edit-profile/EditProfil';
 import GantiPasword from './MenuUser/GantiPasword/GantiPasword';
 import KartuDonor from './MenuUser/KartuDonor/KartuDonor';
-import Riwayat from './MenuUser/ActiveDonor/ActiveDonor';
-import RiwayatDetail from './MenuUser/ActiveDonor/details';
+import ActiveDonor from './MenuUser/ActiveDonor/ActiveDonor';
+import ActiveDonorDetail from './MenuUser/ActiveDonor/ActiveDonorDetail';
+import RiwayatDonor	from './MenuUser/RiwayatDonor/RiwayatDonor'
 import Status from './status';
 import Sukses from './suksestempat';
 import Barcode3 from './barcodetempat';
@@ -45,7 +45,12 @@ import Konvalesen23 from './konvalesen/konvalesen23';
 import { InfoStok01, InfoStok02, InfoStok03 } from './infoStok';
 import MobilUnit01 from './mobilUnit/mobilUnit01';
 import MobilUnit02 from './mobilUnit/mobilUnit02';
-import {Alur01,Alur02,Alur03,Alur04,Alur05,Alur06} from './alur';
+import MenuAlur from './MenuAlur/MenuAlur'
+import alurDonorBiasa from './MenuAlur/DonorBiasa/alurDonorBiasa';
+import alurDonorKonvalesen from './MenuAlur/DonorKonvalesen/alurDonorKonvalesen'
+import permintaanDarah from './MenuAlur/permintaanDarah/permintaanDarah'
+import pengadaanDonor from './MenuAlur/pengadaanDonor/pengadaanDonor'
+import konselingDonor from './MenuAlur/KonselingDonor/konselingDonor' 
 import PermintaanDarah from './permintaandarah';
 import ListUser from './user';
 import ListPendonor from './listpendonor';
@@ -57,7 +62,6 @@ export {
 	Register,
 	MenuDonor,
 	LoadingStart,
-	Account,
 	persyaratanBiasa,
 	daftarDonorBiasa,
 	infoPendonorBiasa,
@@ -98,14 +102,15 @@ export {
 	MobilUnit01,
 	MobilUnit02,
     DashboardAdmin,
-    Riwayat,
-	RiwayatDetail,
-	Alur01,
-	Alur02,
-	Alur03,
-	Alur04,
-	Alur05,
-	Alur06,
+    ActiveDonor,
+	ActiveDonorDetail,
+	RiwayatDonor,
+	MenuAlur,
+	alurDonorBiasa,
+	alurDonorKonvalesen,
+	permintaanDarah,
+	pengadaanDonor,
+	konselingDonor,
 	PermintaanDarah,
 	EditProfil,
 	ListUser,

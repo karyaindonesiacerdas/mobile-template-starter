@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import {Container, Card} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
-import styles from './styles';
+import styles from '../styles';
 
-function Alur04(props) {
+function permintaanDarah(props) {
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -22,11 +22,11 @@ function Alur04(props) {
     return (
         <Container>
             <Image
-                source={require('../../asset/logoUDD.png')}
+                source={require('../../../asset/logoUDD.png')}
                 style={styles.logoUDD}
             />
             <Image
-                source={require('../../asset/logoSehat.png')}
+                source={require('../../../asset/logoSehat.png')}
                 style={styles.logoSehat}
             />
 
@@ -37,7 +37,7 @@ function Alur04(props) {
                 <View style={styles.viewContainer}>
                     <Image
                         resizeMode={'cover'}
-                        source={require('../../asset/alur04.png')}
+                        source={require('../../../asset/permintaanDarah.png')}
                         style={{width: '100%', height: 510, marginBottom: 50}}
                     />
 
@@ -49,7 +49,7 @@ function Alur04(props) {
                                 marginRight: '2%',
                             }}>
                             <TouchableOpacity
-                                onPress={goNextPage.bind(this, 'Alur01')}>
+                                onPress={goNextPage.bind(this, 'MenuAlur')}>
                                 <Text style={styles.textInCard}>Kembali</Text>
                             </TouchableOpacity>
                         </Card>
@@ -60,7 +60,7 @@ function Alur04(props) {
 
             <ImageBackground
                 // resizeMethod={'auto'}
-                source={require('../../asset/footer.png')}
+                source={require('../../../asset/footer.png')}
                 style={styles.imageBackgroundStyle}
                 imageStyle={{resizeMode: 'cover', alignSelf: 'flex-end'}}
             />
@@ -68,4 +68,4 @@ function Alur04(props) {
     );
 }
 
-export default Alur04;
+export default permintaanDarah;

@@ -14,7 +14,7 @@ import {RIWAYAT} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function RiwayatDetail(props) {
+function ActiveDonorDetail(props) {
     const [kode_calon_pendonor, setKode] = useState()
     const [detail, SetDetail] = useState({
         kuesioner_id: '',
@@ -293,7 +293,7 @@ function RiwayatDetail(props) {
                     </Card>
                     {action}
                     <Card style={styles.flowCardMarroon}>
-                        <TouchableOpacity onPress={() => goNextPage('Riwayat')}>
+                        <TouchableOpacity onPress={() => goNextPage('ActiveDonor')}>
                             <Text style={styles.textInCard}>Riwayat Donor</Text>
                         </TouchableOpacity>
                     </Card>
@@ -310,4 +310,4 @@ function RiwayatDetail(props) {
     );
 }
 
-export default RiwayatDetail;
+export default ActiveDonorDetail;

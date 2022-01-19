@@ -24,7 +24,7 @@ import {
     Col,
 } from 'react-native-table-component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {KUESIONER} from '../../../../config/api';
+import {KUESIONER , PENDONOR} from '../../../../config/api';
 import Axios from 'axios';
 
 function kuisonerKonvalesen(props) {
@@ -376,7 +376,7 @@ function kuisonerKonvalesen(props) {
         const ktp = await AsyncStorage.getItem('ktp');
         const url = KUESIONER;
 
-        Axios.post(`${PENDONOR}/simaba/calon-pendonor/create`, body,
+        Axios.post(`${PENDONOR}/simaba/calon-pendonor/create`, data_calon_donor,
             {headers:{
                 Authorization :'Bearer ' +token,
                 'Content-Type': 'multipart/form-data; boundary=${body._boundary}',

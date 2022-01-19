@@ -9,9 +9,9 @@ import {
 import {Icon} from 'react-native-elements';
 import {Container, Card} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
-import styles from './styles';
+import styles from '../styles';
 
-function Alur05(props) {
+function pengadaanDonor(props) {
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -24,10 +24,10 @@ function Alur05(props) {
     return (
         <Container>
             <Image
-                source={require('../../asset/logoUDD.png')}
+                source={require('../../../asset/logoUDD.png')}
                 style={styles.logoUDD}></Image>
             <Image
-                source={require('../../asset/logoSehat.png')}
+                source={require('../../../asset/logoSehat.png')}
                 style={styles.logoSehat}></Image>
 
             <ScrollView>
@@ -95,7 +95,7 @@ function Alur05(props) {
                         width: '40%',
                         marginRight: '2%',
                     }}>
-                    <TouchableOpacity onPress={goNextPage.bind(this, 'Alur01')}>
+                    <TouchableOpacity onPress={goNextPage.bind(this, 'MenuAlur')}>
                         <Text style={styles.textInCard}>Kembali</Text>
                     </TouchableOpacity>
                 </Card>
@@ -104,7 +104,7 @@ function Alur05(props) {
 
             <ImageBackground
                 // resizeMethod={'auto'}
-                source={require('../../asset/footer.png')}
+                source={require('../../../asset/footer.png')}
                 style={styles.imageBackgroundStyle}
                 imageStyle={{
                     resizeMode: 'cover',
@@ -113,4 +113,4 @@ function Alur05(props) {
         </Container>
     );
 }
-export default Alur05;
+export default pengadaanDonor;

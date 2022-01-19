@@ -30,7 +30,7 @@ import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment'
 
-function ActiveDonor(props) {
+function RiwayatDonor(props) {
     const B = props => (
         <Text style={{fontWeight: 'bold'}}>{props.children}</Text>
     );
@@ -50,7 +50,7 @@ function ActiveDonor(props) {
                             textAlign : 'center'
                         }}
                     >
-                        <B>Tidak Ada Proses Donor Yang Sedang Berlangsung</B>
+                        <B>Anda Belum Pernah Melakukan Donor Silahkan Daftar Donor</B>
                     </Text>  
                 </TouchableOpacity>
             </Card>
@@ -95,7 +95,7 @@ function ActiveDonor(props) {
                             color: 'black'
                         }}
                     >
-                        <B>Status : {item.status.toUpperCase()}</B>
+                        <B>Status : Selesai</B>
                     </Text>
                     <Text
                         style={{
@@ -106,13 +106,8 @@ function ActiveDonor(props) {
                             color: 'black'
                         }}
                     >
-                        <B>Jadwal Donor :{item.TGL.substring(0,10)}</B>
+                        <B>Jadwal Donor :{item.jadwal_donor.substring(0,10)}</B>
                     </Text>
-                </TouchableOpacity>
-            </Card>
-            <Card style={styles.flowCardMarroon}>
-                <TouchableOpacity onPress={() => gotoDetails(item)}>
-                    <Text style={styles.textInCard}>Donor Details</Text>
                 </TouchableOpacity>
             </Card>
         </View>
@@ -164,7 +159,7 @@ function ActiveDonor(props) {
                         fontSize: 35,
                         fontWeight: 'bold',
                     }}>
-                    Inbox
+                    Riwayat
                 </Text>
                 <Text
                     style={{
@@ -249,11 +244,6 @@ function ActiveDonor(props) {
             props.navigation.navigate(page);
         }
     };
-    const gotoDetails = item => {
-        if (item) {
-            props.navigation.navigate('ActiveDonorDetail', {data: item});
-        }
-    };
     const [dataSource, setDataSource] = useState([]);
     const [res, setRes] = useState({
         data: [],
@@ -274,7 +264,7 @@ function ActiveDonor(props) {
                 Authorization: 'Bearer ' + token,
             };
 
-            Axios.post(`${RIWAYAT}/simaba`, body, {
+            Axios.post(`${RIWAYAT}/simaba/complete-donor`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',
@@ -282,11 +272,12 @@ function ActiveDonor(props) {
             })
                 .then(r => {
                     if (r.data.code == 200) {
+                        
                         const data = r.data.data
                         const filtered = []
                         if (data != null) {
                             const filtered = data.filter(function(value, index, arr){ 
-                                return data[index].TGL.substring(0,10) == date_today
+                                return data[index].jadwal_donor.substring(0,10) == date_today
                             });
                             setDataSource(filtered);
                         }else{
@@ -299,7 +290,7 @@ function ActiveDonor(props) {
                     }
                 })
                 .catch(err => {
-                    console.log(err)
+                    console.log(err);
                     Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
                     [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
                     )
@@ -365,4 +356,4 @@ const style = StyleSheet.create({
     },
 });
 
-export default ActiveDonor;
+export default RiwayatDonor;

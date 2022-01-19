@@ -10,7 +10,7 @@ import {Container, Card} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
 import styles from './styles';
 
-function Alur01(props) {
+function MenuAlur(props) {
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -36,14 +36,14 @@ function Alur01(props) {
                     }}>
                     <Card style={styles.cardStyle}>
                         <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'Alur02')}>
+                            onPress={goNextPage.bind(this, 'alurDonorBiasa')}>
                             <Text style={styles.textInCard}>Biasa</Text>
                         </TouchableOpacity>
                     </Card>
 
                     <Card style={styles.cardStyle}>
                         <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'Alur03')}>
+                            onPress={goNextPage.bind(this, 'alurDonorKonvalesen')}>
                             <Text style={styles.textInCard}>
                                 Plasma{'\n'} Konvalesen
                             </Text>
@@ -70,7 +70,7 @@ function Alur01(props) {
                     }}>
                     <Card style={styles.cardStyle}>
                         <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'Alur04')}>
+                            onPress={goNextPage.bind(this, 'permintaanDarah')}>
                             <Text style={styles.textInCard}>
                                 Rumah{'\n'} Sakit
                             </Text>
@@ -79,7 +79,7 @@ function Alur01(props) {
 
                     <Card style={styles.cardStyle}>
                         <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'Alur04')}>
+                            onPress={goNextPage.bind(this, 'permintaanDarah')}>
                             <Text style={styles.textInCard}>Mandiri</Text>
                         </TouchableOpacity>
                     </Card>
@@ -92,7 +92,7 @@ function Alur01(props) {
                         width: '86%',
                         marginLeft: '7%',
                     }}>
-                    <TouchableOpacity onPress={goNextPage.bind(this, 'Alur05')}>
+                    <TouchableOpacity onPress={goNextPage.bind(this, 'pengadaanDonor')}>
                         <Text style={styles.textInCard}>
                             Mengadakan Kegiatan Donor Darah
                         </Text>
@@ -106,7 +106,7 @@ function Alur01(props) {
                         width: '86%',
                         marginLeft: '7%',
                     }}>
-                    <TouchableOpacity onPress={goNextPage.bind(this, 'Alur06')}>
+                    <TouchableOpacity onPress={goNextPage.bind(this, 'konselingDonor')}>
                         <Text style={styles.textInCard}>
                             Konseling Donor Darah
                         </Text>
@@ -141,4 +141,4 @@ function Alur01(props) {
     );
 }
 
-export default Alur01;
+export default MenuAlur;

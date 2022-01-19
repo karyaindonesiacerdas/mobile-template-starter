@@ -495,7 +495,7 @@ function infoCovidPendonor(props) {
         <Text
          style={{
            marginLeft: 30,
-           marginTop: 0,
+           marginTop: 20,
            marginBottom : 0,
            fontSize: 15,
            color: "black",

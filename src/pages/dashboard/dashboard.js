@@ -16,6 +16,7 @@ import {USER_MANAGEMENT} from '../../config/api';
 import Axios from 'axios';
 import {useQuery, useQueryClient} from 'react-query';
 import {useNavigation} from '@react-navigation/native';
+import moment from 'moment'
 
 function Dashboard(props) {
     const queryClient = useQueryClient();
@@ -70,7 +71,7 @@ function Dashboard(props) {
     );
 
     useEffect(() => {
-        // checkSession();
+        checkSession();
         checkProfile();
     }, []);
 
@@ -85,7 +86,7 @@ function Dashboard(props) {
         }
     }
 
-    async function checkSession123() {
+    async function checkSession() {
         const token = await AsyncStorage.getItem('token');
         const url = USER_MANAGEMENT;
 
@@ -102,14 +103,14 @@ function Dashboard(props) {
                 console.info('then123----', r.data);
                 if (r.data.code == 401) {
                     console.info('then----');
-                    // AsyncStorage.clear();
-                    // props.navigation.navigate('Login');
+                    AsyncStorage.clear();
+                    props.navigation.navigate('Login');
                 }
             })
             .catch(err => {
                 console.info('catch---');
-                // AsyncStorage.clear();
-                // props.navigation.navigate('Login');
+                AsyncStorage.clear();
+                props.navigation.navigate('Login');
             });
     }
 
@@ -151,7 +152,7 @@ function Dashboard(props) {
                         </TouchableOpacity>
                 </Card>
                 <TouchableOpacity
-                    onPress={goNextPage.bind(this, 'Riwayat')}>
+                    onPress={goNextPage.bind(this, 'ActiveDonor')}>
                     <Image
                         source={require('../image/pesan.jpg')}
                         style={{
@@ -233,7 +234,7 @@ function Dashboard(props) {
 
                     <Card style={styles.cardTengah}>
                         <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'Riwayat')}>
+                            onPress={goNextPage.bind(this, 'RiwayatDonor')}>
                             <Text style={styles.textTengah}>Riwayat Donor</Text>
                         </TouchableOpacity>
                     </Card>
@@ -242,7 +243,7 @@ function Dashboard(props) {
                 <View style={styles.viewAtas}>
                     <TouchableOpacity
                         style={styles.cardStyle}
-                        onPress={goNextPage.bind(this, 'Alur01')}>
+                        onPress={goNextPage.bind(this, 'MenuAlur')}>
                         <Image
                             source={require('../image/alur.png')}
                             style={{

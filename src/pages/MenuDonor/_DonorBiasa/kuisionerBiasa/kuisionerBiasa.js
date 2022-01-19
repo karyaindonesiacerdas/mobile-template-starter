@@ -27,6 +27,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { KUESIONER, PENDONOR } from '../../../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
+import moment from 'moment'
 
 function kuisionerBiasa(props) {
     const [kuesioner, setKuesioner] = useState([
@@ -589,7 +590,9 @@ export default kuisionerBiasa;
 
 function RefactorInput(val) {
     var count = 0;
-    var t = new Date().toISOString().slice(0, 10);
+    var t = moment()
+        .utcOffset('+07:00')
+        .format('YYYY-MM-DD');
     for (let i = 0; i < val.length; i++) {
         if (val[i].value !== undefined && val[i].value !== '') {
             count++;
