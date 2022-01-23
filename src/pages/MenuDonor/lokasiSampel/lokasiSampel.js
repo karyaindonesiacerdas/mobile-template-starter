@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,} from 'react';
 import {
     Alert,
     ImageBackground,
@@ -144,7 +144,7 @@ function lokasiSampel(props) {
                         marginRight: '2%',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'admKonvalesenResult')}>
+                        onPress={goNextPage.bind(this, 'Dashboard')}>
                         <Text
                             style={{
                                 margin: 10,

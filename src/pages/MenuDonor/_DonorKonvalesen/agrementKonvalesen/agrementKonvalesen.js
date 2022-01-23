@@ -38,12 +38,81 @@ function agrementKonvalesen(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const goNextPage = (page) => {
-    if (page) {
-      const kode_calon_pendonor = props.route.params.kode_pendonor
-      console.log(kode_calon_pendonor)
-      props.navigation.navigate('agrementKonvalesen',{kode_pendonor : kode_calon_pendonor});
+    console.log(check1)
+    if (check1) {
+      submit_donor()
+      // props.navigation.navigate('agrementKonvalesen',{kode_pendonor : kode_calon_pendonor});
+    }
+    else {
+      Alert.alert("Warning","Centang Informed Consent Donor Konvalesen Terlebih Dahulu",
+              [{ text: "OK", onPress: () => console.log('Pressed') }]
+              )
     }
   };
+
+  async function submit_donor(input) {
+
+    const token = await AsyncStorage.getItem('token');
+    const nama = await AsyncStorage.getItem('nama');
+    const data_calon_donor = props.route.params.data_calon_donor
+    const kuisoner_calon_donor = props.route.params.kuisoner_calon_donor
+
+    const ktp = await AsyncStorage.getItem('ktp');
+    
+    Axios.post(`${PENDONOR}/simaba/calon-pendonor/create`, data_calon_donor,
+        {headers:{
+            Authorization :'Bearer ' +token,
+            'Content-Type': 'multipart/form-data; boundary=${body._boundary}',
+        }})
+    .then(res => {
+        console.info('res.data', res.data);
+        console.log(res.data);
+        if (res.data.code === 200) {
+            AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
+            kuisoner_calon_donor.kode_calon_pendonor = res.data.kode_pendonor;
+            kuisoner_calon_donor.ktp = ktp;
+            kuisoner_calon_donor.nama = nama;
+            const body = kuisoner_calon_donor;
+            console.log(body);
+            Axios.post(`${KUESIONER}/simaba/create`, body, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(res => {
+                    console.info('res.data', res.data);
+                    console.log(res.data);
+                    if (res.data.code === 200) {
+                        props.navigation.navigate('admKonvalesenResult', {});
+                    } else {
+                        Alert.alert("Error",res.data.message,
+                        [{ text: "OK", onPress: () => console.log(res.data.message) }]
+                        )
+                    }
+                })
+                .catch(err => {
+                    Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+                    [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                    )
+                });
+        } else if (res.data.code === 500){
+            Alert.alert("Gagal","Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ",
+            [{ text: "Cek Riwayat", onPress: () => props.navigation.replace('Riwayat') }]
+            )
+        } else {
+          Alert.alert("Error",res.data.message,
+          [{ text: "OK", onPress: () => console.log(res.data.message) }]
+          )
+        }
+    })
+    .catch(err => {
+        alert(err)  
+      // Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+        // [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+        // )
+    });
+}
 
   return (
     <Container>

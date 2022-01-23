@@ -25,13 +25,11 @@ import { PENDONOR } from '../../../config/api';
 import Axios from 'axios';
 import QRCode from "react-qr-code";
 function BarcodeDonor(props) {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
+  
   const [qr , setQr] = useState(null)
-  const [info_pendonor,setInfo] = useState({kuesioner_id : '' , TGL : ''})
-      
+  const [tgl_donor,setTanggal] = useState(null)     
+  const [kuisoner_id, setKuesioner] = useState(null) 
   useEffect(() => {
-    const url = PENDONOR;
     async function getData() {
       const token = await AsyncStorage.getItem('token')
       const ktp = await AsyncStorage.getItem('ktp')
@@ -47,7 +45,15 @@ function BarcodeDonor(props) {
          headers)
           .then(res => {
             setInfo(res.data.data[0]) 
-            const data = res.data.data[0].kuesioner_id
+            if (res.data.data[0].jenis_donor == 'biasa'){
+              const data = res.data.data[0].kuesioner_id
+              setKuesioner(res.data.data[0].kuesioner_id)
+              setTanggal(res.data.data[0].TGL)
+            }else{
+              setTanggal(res.data.data[0].tanggal_darah)
+              setKuesioner(res.data.data[0].kuesioner_id_darah)
+              const data = res.data.data[0].kuesioner_id_darah
+            }
             console.log(data)
               setQr(
                 <View
@@ -184,7 +190,7 @@ function BarcodeDonor(props) {
             textShadowRadius: 10,
           }}
         >
-          {info_pendonor.kuesioner_id}
+          {kuisoner_id}
         </Text>
         <Text
                     style={{
@@ -200,7 +206,7 @@ function BarcodeDonor(props) {
                         textShadowOffset: {width: 1, height: 1},
                         textShadowRadius: 10,
                     }}>
-                    Keterangan :{'\n'}Berlaku Hanya Pada Tanggal{'\n'}({info_pendonor.TGL.substring(0,10)})
+                    Keterangan :{'\n'}Berlaku Hanya Pada Tanggal{'\n'}({tgl_donor.substring(0,10)})
                 </Text>
         <View
           style={{

@@ -286,7 +286,7 @@ function ActiveDonor(props) {
                         const filtered = []
                         if (data != null) {
                             const filtered = data.filter(function(value, index, arr){ 
-                                return data[index].TGL.substring(0,10) == date_today
+                                return data[index].TGL.substring(0,10) == date_today || data[index].jenis_donor == 'plasma konvalesen'
                             });
                             setDataSource(filtered);
                         }else{

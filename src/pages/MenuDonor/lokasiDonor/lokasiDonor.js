@@ -130,7 +130,7 @@ function lokasiDonor(props) {
                 }}>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={goNextPage.bind(this, 'admBiasaResult')}>
+                    onPress={goNextPage.bind(this, 'Dashboard')}>
                     <Text
                         style={{
                             margin: 10,

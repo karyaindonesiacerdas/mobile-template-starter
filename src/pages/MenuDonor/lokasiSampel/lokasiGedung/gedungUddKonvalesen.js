@@ -19,15 +19,52 @@ import {
   
 } from "react-native-gesture-handler";
 import styles from "../../../konvalesen/styles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {PENDONOR} from '../../../../config/api';
+import Axios from 'axios';
 
 function gedungUddKonvalesen(props) {
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
   const goNextPage = (page) => {
-    if (page) {
-      props.navigation.navigate(page, {location: 'Gedung UDD'})
+    if (page == 'barcodeSampel') {
+      submit();
+    } else {
+        props.navigation.navigate(page);
     }
   };
+
+  async function submit() {
+    const token = await AsyncStorage.getItem('token');
+    const ktp = await AsyncStorage.getItem('ktp');
+    const lokasi = 'Gedung UDD';
+    const url = PENDONOR;
+    const body = {
+        ktp: ktp,
+        lokasi: lokasi,
+    };
+    console.log(body);
+    Axios.put(`${PENDONOR}/simaba/update/lokasisample`, body, {
+        headers: {
+            Authorization: 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(res => {
+            console.info('res.data', res.data);
+            console.log(res.data);
+            if (res.data.code === 200) {
+                props.navigation.navigate('barcodeSampel');
+            } else {
+                Alert.alert("Error", +res.data.code + '  ' + res.data.message,
+                            [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                            )
+            }
+        })
+        .catch(err => {
+            Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+                            [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                            )
+        });
+}
   return (
     <Container>
       <Image
@@ -239,7 +276,7 @@ function gedungUddKonvalesen(props) {
               marginLeft: "2%",
             }}
           >
-            <TouchableOpacity onPress={goNextPage.bind(this, "agrementPlace")}>
+            <TouchableOpacity onPress={goNextPage.bind(this, "barcodeSampel")}>
               <Text
                 style={{
                   margin: 10,

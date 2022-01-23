@@ -29,14 +29,59 @@ import {
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
 import styles from '../../konvalesen/styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { PENDONOR } from '../../../config/api';
+import Axios from 'axios';
+import QRCode from "react-qr-code";
 
 function barcodeSampel(props) {
-    const [jadwal, setJadwal] = useState(null);
-    const [lokasi, setLokasi] = useState(null);
+    const [qr , setQr] = useState(null)
+    const [info_pendonor,setInfo] = useState({kuesioner_id : '' , TGL : ''})
+   
     useEffect(() => {
-        setJadwal(props.route.params.jadwal);
-        setLokasi(props.route.params.lokasi);
-    }, []);
+        async function getData() {
+          const token = await AsyncStorage.getItem('token')
+          const ktp = await AsyncStorage.getItem('ktp')
+          const kode_pendonor = await AsyncStorage.getItem('kode_pendonor');
+          const headers = {
+              'Content-Type': 'application/json',
+              'Authorization' : 'Bearer ' + token
+          };
+          const body = {
+            kode_calon_pendonor: kode_pendonor
+          };
+          Axios.post(`${PENDONOR}/simaba/calon-pendonor`, body,
+             headers)
+              .then(res => {
+                setInfo(res.data.data[0]) 
+                const data = res.data.data[0].kuesioner_id
+                console.log(data)
+                  setQr(
+                    <View
+                      style={{
+                        alignContent: "center",
+    
+                        flexDirection: "row",
+                        justifyContent: "center",
+                          alignContent: "center",
+                          marginTop:30,
+                          marginBottom:15,
+                        
+                      }}
+                    >
+                    <QRCode
+                    size = {200}
+                    value= {data}
+                  />
+                  </View>
+                  )    
+              })
+              .catch(err => {
+                  console.log('test : ', err.response);
+              });
+        }
+        getData()
+      }, []);
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -72,16 +117,6 @@ function barcodeSampel(props) {
                 <Text
                     style={{
                         marginLeft: 30,
-                        marginTop: 25,
-                        fontSize: 35,
-                        fontWeight: 'bold',
-                        color: 'red',
-                    }}>
-                    Gedung
-                </Text>
-                <Text
-                    style={{
-                        marginLeft: 30,
                         marginTop: -5,
                         fontSize: 25,
                         fontWeight: 'bold',
@@ -90,27 +125,73 @@ function barcodeSampel(props) {
                     PMI Kota Semarang
                 </Text>
                 <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 20,
+            fontSize: 15,
+            fontWeight: "bold",
+
+            textAlign: "center",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          ANDA TERDAFTAR SEBAGAI CALON DONOR KONVALESEN{'\n'} DI UDD PMI KOTA SEMARANG{'\n'}SILAKAN KUNJUNGI UDD PMI KOTA SEMARANG
+        </Text>
+         <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 20,
+            fontSize: 15,
+ 
+
+            textAlign: "center",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          Scan barcode untuk cetak formulir pengambilan Sampel
+        </Text>
+        
+      {qr}
+      <Text
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 5,
+            fontSize: 20,
+            fontWeight: "bold",
+
+            textAlign: "center",
+            color: "black",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}
+        >
+          {info_pendonor.kuesioner_id}
+        </Text>
+        <Text
                     style={{
                         marginLeft: 30,
                         marginRight: 30,
-
-                        marginTop: 50,
-                        marginBottom: 20,
-                        fontSize: 24,
-                        fontWeight: 'bold',
+                        fontWeight: "bold",
+                        fontSize: 20,
+                        marginTop: 20,
 
                         textAlign: 'center',
                         color: 'black',
+                        textShadowColor: '#fff',
+                        textShadowOffset: {width: 1, height: 1},
+                        textShadowRadius: 10,
                     }}>
-                    Terima Kasih Anda Sudah Mendaftarkan Diri Sebagai Calon
-                    Donor Plasma Konvalesen.{'\n'}
-                    {'\n'}
-                    Jadwal Pengambilan Sampel Darah di {lokasi} pada tanggal
-                    {'\n'}
-                    {'\n'}
-                    {jadwal}
-                    {'\n'}
-                    Silahkan Datang Pada Jadwal Yang Sudah di Tentukan
+                    Keterangan :{'\n'}Berlaku Hanya Pada Tanggal{'\n'}({info_pendonor.TGL.substring(0,10)})
                 </Text>
             </ScrollView>
             <View
@@ -130,7 +211,7 @@ function barcodeSampel(props) {
                         marginLeft: '2%',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'Konvalesen14')}>
+                        onPress={goNextPage.bind(this, 'Dashboard')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -140,7 +221,7 @@ function barcodeSampel(props) {
                                 color: 'white',
                                 fontWeight: 'bold',
                             }}>
-                            Selanjutnya
+                            Kembali
                         </Text>
                     </TouchableOpacity>
                 </Card>

@@ -133,7 +133,7 @@ function agrementPlace(props) {
                         fontWeight: 'bold',
                         color: 'red',
                     }}>
-                    Gdeung UDD
+                    Gdeung UDD 
                 </Text>
                 <Text
                     style={{

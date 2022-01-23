@@ -26,7 +26,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KUESIONER , PENDONOR} from '../../../../config/api';
 import Axios from 'axios';
-
+ 
 function kuisonerKonvalesen(props) {
     const [kuesioner, setKuesioner] = useState([
         {
@@ -363,7 +363,8 @@ function kuisonerKonvalesen(props) {
                     `semua kuesioner harus diisi, sisa : ${43 - input.count}`,
                 );
             } else {
-                submit(input);
+                const data_calon_donor = props.route.params.data_calon_donor
+                props.navigation.navigate('agrementKonvalesen',{data_calon_donor : data_calon_donor,kuisoner_calon_donor : input});
             }
         } else {
             props.navigation.navigate(page);

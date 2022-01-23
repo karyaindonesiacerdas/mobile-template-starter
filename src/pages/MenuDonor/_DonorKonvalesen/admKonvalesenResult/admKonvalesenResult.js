@@ -38,17 +38,13 @@ function admKonvalesenResult(props) {
     useEffect(() => {
         async function getData() {
             const token = await AsyncStorage.getItem('token');
-            const url = PENDONOR;
-            AsyncStorage.setItem(
-                'kode_pendonor',
-                props.route.params.kode_pendonor,
-            );
+            const kode_calon_pendonor = await AsyncStorage.getItem('kode_pendonor');
             const headers = {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + token,
             };
             const body = {
-                kode_calon_pendonor: props.route.params.kode_pendonor,
+                kode_calon_pendonor: kode_calon_pendonor,
             };
             console.log(body);
             Axios.post(

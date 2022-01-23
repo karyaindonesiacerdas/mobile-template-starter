@@ -124,7 +124,7 @@ function ActiveDonorDetail(props) {
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                goNextPage('lokasiSampel')
+                                                goNextPage('barcodeSampel')
                                             }>
                                             <Text style={styles.textInCard}>
                                                 Tampilkan Barcode
@@ -133,13 +133,13 @@ function ActiveDonorDetail(props) {
                                     </Card>,
                                 );
                             } else if (
-                                r.data.data[0].status === 'lolos sample'
+                                r.data.data[0].status === 'pengambilan_darah'
                             ) {
                                 setAction(
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                goNextPage('Konvalesen16')
+                                                goNextPage('lokasiDonor')
                                             }>
                                             <Text style={styles.textInCard}>
                                                 Pilih Lokasi Donor
