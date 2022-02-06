@@ -380,6 +380,7 @@ function kuisionerBiasa(props) {
         const ktp = await AsyncStorage.getItem('ktp');
         const url = KUESIONER;
         const url_pendonor = PENDONOR;
+        console.info('Submit')
         Axios.post(`${PENDONOR}/simaba/calon-pendonor/create`,qs.stringify(data_calon_donor),
             {headers:{
             Authorization :'Bearer ' +token,

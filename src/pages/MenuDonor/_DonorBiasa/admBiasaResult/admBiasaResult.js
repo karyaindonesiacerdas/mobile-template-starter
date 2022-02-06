@@ -170,7 +170,7 @@ function admBiasaResult(props) {
         }
         setTimeout(() => {
             getData();
-        }, 3000);
+        }, 1000);
     }, []);
     const goNextPage = page => {
         if (page) {

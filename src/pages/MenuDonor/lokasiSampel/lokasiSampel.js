@@ -22,7 +22,15 @@ function lokasiSampel(props) {
     const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
         if (page) {
-            props.navigation.navigate(page);
+            if (page !== 'gedungUddKonvalesen' && page !=='Dashboard' ){
+                Alert.alert("Warning","Menu Ini Belum Bisa Digunakan",
+                [{ text: "OK", onPress: () => null }]
+                )
+            }
+            else{
+                props.navigation.navigate(page);
+            }
+           
         }
     };
     return (

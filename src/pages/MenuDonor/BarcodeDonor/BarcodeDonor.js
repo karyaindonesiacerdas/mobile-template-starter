@@ -41,20 +41,18 @@ function BarcodeDonor(props) {
       const body = {
         kode_calon_pendonor: kode_pendonor
       };
+      console.log('get barcode')
       Axios.post(`${PENDONOR}/simaba/calon-pendonor`, body,
          headers)
           .then(res => {
-            setInfo(res.data.data[0]) 
-            if (res.data.data[0].jenis_donor == 'biasa'){
-              const data = res.data.data[0].kuesioner_id
+            console.log(res.data.data[0])
+              
+            if (res.data.data[0].jenis_donor === 'biasa'){
+              console.log(res.data.data[0])
               setKuesioner(res.data.data[0].kuesioner_id)
-              setTanggal(res.data.data[0].TGL)
-            }else{
-              setTanggal(res.data.data[0].tanggal_darah)
-              setKuesioner(res.data.data[0].kuesioner_id_darah)
-              const data = res.data.data[0].kuesioner_id_darah
-            }
-            console.log(data)
+              if (res.data.data[0].TGL){
+                setTanggal(res.data.data[0].TGL.substring(0,10))
+              }
               setQr(
                 <View
                   style={{
@@ -70,13 +68,39 @@ function BarcodeDonor(props) {
                 >
                 <QRCode
                 size = {200}
-                value= {data}
+                value= {res.data.data[0].kuesioner_id}
               />
               </View>
-              )    
+              ) 
+            }else{
+              if(res.data.data[0].tanggal_darah){
+                setTanggal(res.data.data[0].tanggal_darah.substring(0,10))
+              }
+              setKuesioner(res.data.data[0].kuesioner_id_darah)
+              setQr(
+                <View
+                  style={{
+                    alignContent: "center",
+
+                    flexDirection: "row",
+                    justifyContent: "center",
+                      alignContent: "center",
+                      marginTop:30,
+                      marginBottom:15,
+                    
+                  }}
+                >
+                <QRCode
+                size = {200}
+                value= {res.data.data[0].kuesioner_id_darah}
+              />
+              </View>
+              ) 
+            }
+                 
           })
           .catch(err => {
-              console.log('test : ', err.response);
+              console.log('test 1 : ', err.response);
           });
     }
     getData()
@@ -206,7 +230,7 @@ function BarcodeDonor(props) {
                         textShadowOffset: {width: 1, height: 1},
                         textShadowRadius: 10,
                     }}>
-                    Keterangan :{'\n'}Berlaku Hanya Pada Tanggal{'\n'}({tgl_donor.substring(0,10)})
+                    Keterangan :{'\n'}Berlaku Hanya Pada Tanggal{'\n'}{tgl_donor}
                 </Text>
         <View
           style={{
