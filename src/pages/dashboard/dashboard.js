@@ -171,9 +171,7 @@ function Dashboard(props) {
                             height: 120,
                         }}>
                         <Image
-                            source={{
-                                uri: 'https://www.pmi-kabtegal.or.id/asset/foto_statis/pmi_jadul.jpg',
-                            }}
+                            source={require('../image/sejarah.jpeg')}
                             style={styles.ImageAtas}
                         />
                         <Text style={styles.textAtas}>
@@ -188,9 +186,7 @@ function Dashboard(props) {
                             height: 120,
                         }}>
                         <Image
-                            source={{
-                                uri: 'https://pmikotasemarang.or.id/wp-content/uploads/2021/08/WhatsApp-Image-2021-08-14-at-17.14.08-1024x576.jpeg',
-                            }}
+                            source={require('../image/donordarah.jpeg')}
                             style={styles.ImageAtas}
                         />
                         <Text style={styles.textAtas}>
@@ -205,9 +201,7 @@ function Dashboard(props) {
                             height: 120,
                         }}>
                         <Image
-                            source={{
-                                uri: 'https://pmi.or.id/wp-content/uploads/2021/07/WhatsApp-Image-2021-07-18-at-00.21.46.jpeg',
-                            }}
+                            source={require('../image/konvalesen.jpeg')}
                             style={styles.ImageAtas}
                         />
                         <Text style={styles.textAtas}>
