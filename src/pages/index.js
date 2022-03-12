@@ -56,6 +56,10 @@ import ListUser from './user';
 import ListPendonor from './listpendonor';
 import PermintaanDarah1 from './permintaandarah/permintaan';
 import PermintaanSukses from './permintaandarah/sukses';
+import Contact from './InfoPMI/Contact/contact';
+import InfoKegiatan from './InfoPMI/InfoKegiatan/infoKegiatan';
+import InfoKonvalesen from './InfoPMI/InfoKonvalesen/infoKonvalesen';
+import Sejarah from './InfoPMI/Sejarah/sejarah';
 
 export {
 	Login,
@@ -119,4 +123,8 @@ export {
 	PermintaanSukses,
 	GantiPasword,
 	KartuDonor,
+	Contact,
+	InfoKegiatan,
+	InfoKonvalesen,
+	Sejarah,
 };

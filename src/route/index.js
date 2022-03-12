@@ -63,6 +63,10 @@ import {
 	PermintaanSukses,
 	GantiPasword,
 	KartuDonor,
+	Contact,
+	InfoKegiatan,
+	InfoKonvalesen,
+	Sejarah,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -134,6 +138,10 @@ function index() {
 				<Stack.Screen name="PermintaanSukses" component={PermintaanSukses} options={{ headerShown: false }} />
 				<Stack.Screen name="GantiPasword" component={GantiPasword} options={{ headerShown: false }} />
 				<Stack.Screen name="KartuDonor" component={KartuDonor} options={{ headerShown: false }} />
+				<Stack.Screen name="InfoKegiatan" component={InfoKegiatan} options={{ headerShown: false }} />
+				<Stack.Screen name="InfoKonvalesen" component={InfoKonvalesen} options={{ headerShown: false }} />
+				<Stack.Screen name="Sejarah" component={Sejarah} options={{ headerShown: false }} />
+				<Stack.Screen name="Contact" component={Contact} options={{ headerShown: false }} />
 			
 			</Stack.Navigator>
 		</NavigationContainer>

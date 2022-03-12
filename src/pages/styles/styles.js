@@ -118,6 +118,34 @@ const styles = StyleSheet.create({
     width: 20,
     resizeMode: 'stretch',
   },
+  
+	viewContainer: {
+		alignContent: 'center',
+		marginRight: '5%',
+		marginLeft: '5%',
+		justifyContent: 'center',
+		alignContent: 'center',
+		marginTop: '5%'
+	},
+  textInCard: {
+		margin: 10,
+		fontSize: 15,
+		textAlign: 'center',
+		fontWeight: 'bold',
+		color: 'white'
+	},
+
+  textInCard5: {
+		margin: 10,
+    fontSize: 15,
+		textAlign: 'center',
+		color: 'black',
+    fontWeight: 'bold',
+	},
+
+  flowCardRed: { backgroundColor: '#da251c', borderRadius: 10 },
+	flowCardMarroon: { backgroundColor: '#b36c69', borderRadius: 10, zIndex: 1 },
+	flowCardPeach: { backgroundColor: '#fadbd9', borderRadius: 10, marginTop: -20 }
 });
 
 export default styles;

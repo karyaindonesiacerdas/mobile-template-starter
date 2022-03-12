@@ -165,6 +165,8 @@ function Dashboard(props) {
                 </View>
                 <View style={styles.viewAtas}>
                     <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'Sejarah')}
+                        
                         style={{
                             backgroundColor: '#fff',
                             width: 120,
@@ -180,6 +182,7 @@ function Dashboard(props) {
                     </TouchableOpacity>
 
                     <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'InfoKegiatan')}
                         style={{
                             backgroundColor: '#fff',
                             width: 120,
@@ -195,6 +198,7 @@ function Dashboard(props) {
                     </TouchableOpacity>
 
                     <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'InfoKonvalesen')}
                         style={{
                             backgroundColor: '#fff',
                             width: 120,
@@ -207,6 +211,7 @@ function Dashboard(props) {
                         <Text style={styles.textAtas}>
                             Info Plasma {'\n'}Konvalesen
                         </Text>
+                    
                     </TouchableOpacity>
                 </View>
 
@@ -317,7 +322,9 @@ function Dashboard(props) {
 
                         <Text style={styles.textBawah}>Konseling Donor</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardStyle}>
+                    <TouchableOpacity style={styles.cardStyle}
+                    onPress={goNextPage.bind(this, 'Contact')}
+                    >
                         <Image
                             source={require('../image/download.png')}
                             style={{
