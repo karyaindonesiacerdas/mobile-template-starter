@@ -40,9 +40,9 @@ import {
 	Konvalesen19,
 	Konvalesen22,
 	Konvalesen23,
-	InfoStok01,
-	InfoStok02,
-	InfoStok03,
+	MenuStock,
+	KebutuhanDarah,
+	StockDarah,
 	MobilUnit01,
 	MobilUnit02,
     ActiveDonor,
@@ -59,14 +59,22 @@ import {
 	DashboardAdmin,
 	ListUser,
 	ListPendonor,
-	PermintaanDarah1,
-	PermintaanSukses,
+	DetailPermintaan,
+	ResultPermintaan,
 	GantiPasword,
 	KartuDonor,
 	Contact,
 	InfoKegiatan,
 	InfoKonvalesen,
 	Sejarah,
+	MenuKonseling,
+	FAQ,
+	TentangKonseling,
+	DaftarKonseling,
+	JadwalKonseling,
+	RateKonseling,
+	HistoryKonseling,
+	RiwayatPermintaan,
 } from '../pages';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -115,9 +123,9 @@ function index() {
 				<Stack.Screen name="Konvalesen19" component={Konvalesen19} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen22" component={Konvalesen22} options={{ headerShown: false }} />
 				<Stack.Screen name="Konvalesen23" component={Konvalesen23} options={{ headerShown: false }} />
-				<Stack.Screen name="InfoStok01" component={InfoStok01} options={{ headerShown: false }} />
-				<Stack.Screen name="InfoStok02" component={InfoStok02} options={{ headerShown: false }} />
-				<Stack.Screen name="InfoStok03" component={InfoStok03} options={{ headerShown: false }} />
+				<Stack.Screen name="MenuStock" component={MenuStock} options={{ headerShown: false }} />
+				<Stack.Screen name="KebutuhanDarah" component={KebutuhanDarah} options={{ headerShown: false }} />
+				<Stack.Screen name="StockDarah" component={StockDarah} options={{ headerShown: false }} />
 				<Stack.Screen name="MobilUnit01" component={MobilUnit01} options={{ headerShown: false }} />
 				<Stack.Screen name="MobilUnit02" component={MobilUnit02} options={{ headerShown: false }} />
                 <Stack.Screen name="ActiveDonor" component={ActiveDonor} options={{ headerShown: false }} />
@@ -134,14 +142,21 @@ function index() {
 				<Stack.Screen name="DashboardAdmin" component={DashboardAdmin} options={{ headerShown: false }} />
 				<Stack.Screen name="ListUser" component={ListUser} options={{ headerShown: false }} />
 				<Stack.Screen name="ListPendonor" component={ListPendonor} options={{ headerShown: false }} />
-				<Stack.Screen name="PermintaanDarah1" component={PermintaanDarah1} options={{ headerShown: false }} />
-				<Stack.Screen name="PermintaanSukses" component={PermintaanSukses} options={{ headerShown: false }} />
+				<Stack.Screen name="DetailPermintaan" component={DetailPermintaan} options={{ headerShown: false }} />
+				<Stack.Screen name="ResultPermintaan" component={ResultPermintaan} options={{ headerShown: false }} />
 				<Stack.Screen name="GantiPasword" component={GantiPasword} options={{ headerShown: false }} />
 				<Stack.Screen name="KartuDonor" component={KartuDonor} options={{ headerShown: false }} />
 				<Stack.Screen name="InfoKegiatan" component={InfoKegiatan} options={{ headerShown: false }} />
 				<Stack.Screen name="InfoKonvalesen" component={InfoKonvalesen} options={{ headerShown: false }} />
 				<Stack.Screen name="Sejarah" component={Sejarah} options={{ headerShown: false }} />
 				<Stack.Screen name="Contact" component={Contact} options={{ headerShown: false }} />
+				<Stack.Screen name="MenuKonseling" component={MenuKonseling} options={{ headerShown: false }} />
+				<Stack.Screen name="FAQ" component={FAQ} options={{ headerShown: false }} />
+				<Stack.Screen name="DaftarKonseling" component={DaftarKonseling} options={{ headerShown: false }} />
+				<Stack.Screen name="JadwalKonseling" component={JadwalKonseling} options={{ headerShown: false }} />
+				<Stack.Screen name="RateKonseling" component={RateKonseling} options={{ headerShown: false }} />
+				<Stack.Screen name="HistoryKonseling" component={HistoryKonseling} options={{ headerShown: false }} />
+				<Stack.Screen name="RiwayatPermintaan" component={RiwayatPermintaan} options={{ headerShown: false }} />
 			
 			</Stack.Navigator>
 		</NavigationContainer>

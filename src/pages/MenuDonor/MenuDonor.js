@@ -115,7 +115,7 @@ function MenuDonor(props) {
                 <Card style={styles.cardStyle}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={goNextPage.bind(this, 'PermintaanDarah')}>
+                        onPress={goNextPage.bind(this, 'RiwayatPermintaan')}>
                         <Text
                             style={{
                                 margin: 10,

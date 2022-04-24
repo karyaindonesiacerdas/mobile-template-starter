@@ -26,7 +26,7 @@ import {
 import Axios from 'axios';
 import {RESIPIEN} from '../../config/api';
 
-function InfoStok02(props) {
+function KebutuhanDarah(props) {
     const [res, setRes] = useState({
         data: [
             {
@@ -265,4 +265,4 @@ function InfoStok02(props) {
     );
 }
 
-export default InfoStok02;
+export default KebutuhanDarah;

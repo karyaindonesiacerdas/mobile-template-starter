@@ -185,10 +185,11 @@ function Contact(props) {
                       <Text>{'  '}</Text>
                       <Icon.Button name="youtube-play" size={25} color="#900" backgroundColor='#fadbd9' onPress={()=>{ Linking.openURL('https://www.youtube.com/channel/UCxTx1Tho2WraxpwWJQ3Eddw')}}/>
                       <Text>{'  '}</Text>
+                      <Icon.Button name="internet-explorer" size={25} color="#900" backgroundColor='#fadbd9' onPress={()=>{ Linking.openURL('https://pmikotasemarang.or.id/')}} />
+                      <Text>{'  '}</Text>
                       <Icon.Button name="twitter-square" size={25} color="#900" backgroundColor='#fadbd9' onPress={()=>{ Linking.openURL('https://twitter.com/pmikotasemarang?lang=id')}}/>
                       <Text>{'  '}</Text>
                       <Icon.Button name="whatsapp" size={25} color="#900" backgroundColor='#fadbd9' onPress={()=>{ Linking.openURL('https://web.whatsapp.com/send?phone=6282136700876&text=Halo%20PMI%20Kota%20Semarang')}} />
-                     
                        </View>
                       
                     

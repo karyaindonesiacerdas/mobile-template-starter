@@ -13,98 +13,13 @@ import {
     View,
     Text,
 } from 'native-base';
-import {useMutation} from 'react-query';
-import {Formik} from 'formik';
-import {Alert, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import * as Yup from 'yup';
+import {Alert, Image, StyleSheet, TouchableOpacity,Linking} from 'react-native';
 import Bg from '../../image/Baground2.jpg';
-import qs from 'qs';
-import Axios from 'axios';
-import {StackActions} from '@react-navigation/native';
 import {ScrollView} from 'react-native-gesture-handler';
 import styles from '../../styles/styles';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {USER_MANAGEMENT} from '../../../config/api';
-import QRCode from "react-qr-code";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 function InfoKegiatan(props) {
-  const [qr , setQr] = useState(null)
-  const [kartudonor,setKartu] = useState()
-  const [nama,setNama] = useState()
-
-  useEffect(() => {
-    async function getData() {
-      const token = await AsyncStorage.getItem('token')
-      const kartudonor = await AsyncStorage.getItem('kartudonor')
-      const nama = await AsyncStorage.getItem('nama')
-      
-      console.log(kartudonor)
-      if (kartudonor){
-        setNama(nama)
-        setKartu(kartudonor)
-        setQr(
-          <View
-            style={{
-              alignContent: "center",
-
-              flexDirection: "row",
-              justifyContent: "center",
-                alignContent: "center",
-                marginTop:30,
-                marginBottom:15,
-              
-            }}
-          >
-          <QRCode
-          size = {200}
-          value= {kartudonor}
-        />
-        </View>
-        )    
-      }else{
-        const body = {
-          email: '',
-        };
-        Axios.post(`${USER_MANAGEMENT}/simaba`, body, {
-          headers: {
-              Authorization: 'Bearer ' + token,
-              'Content-Type': 'application/json',
-          },
-        })
-          .then(res => {
-            const data_kartu = res.data.data[0]['KODEPENDONOR']
-            const data_nama = res.data.data[0]['nama']
-            setNama(data_nama)
-            setKartu(data_kartu)
-
-              setQr(
-                <View
-                  style={{
-                    alignContent: "center",
-
-                    flexDirection: "row",
-                    justifyContent: "center",
-                      alignContent: "center",
-                      marginTop:10,
-                      marginBottom:15,
-                    
-                  }}
-                >
-                <QRCode
-                size = {200}
-                value= {data_kartu}
-              />
-              </View>
-              )    
-          })
-          .catch(err => {
-              console.log('test : ', err.response);
-          });
-    }}
-    getData()
-  }, []);
-
   const goNextPage = page => {
     if (page) {
       props.navigation.replace(page)
@@ -137,66 +52,93 @@ function InfoKegiatan(props) {
         }}
       ></Image>
       <ScrollView>
-        
-
-        <Text
-          style={{
-            marginTop: 0,
-            textAlign: "center",
-            fontSize: 30,
-            fontWeight: "bold",
-            color: "black",
-          }}
-        >
-          Kartu Anggota
-        </Text>
+        <View style={styles.viewContainer}>
+                
         <Text
           style={{
             textAlign: "center",
             marginTop: 0,
-            marginBottom: 30,
+            marginBottom: 50,
             fontSize: 25,
             fontWeight: "bold",
             color: "black",
           }}
         >
-          PMI Kota Semarang
+         Info Kegiatan
         </Text>
-        <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 5,
-            fontSize: 20,
-            fontWeight: "bold",
+            <Card style={styles.flowCardPeach}>
+                <TouchableOpacity>
+                    <View
+                        style={{
+                            marginTop: 10,
+                            flexDirection: 'row',
+                            alignSelf: 'center'
+                        }}>
+                     <Image
+                            source={require('../../image/kegiatan.png')}
+                            style={{
+                              marginTop: 10,
+                              marginBottom: 20,
+                              width: 200,
+                              height: 200,
+                              alignSelf: 'center'
+                            }}
+                        />
+                      </View>  
+                        
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignSelf: 'center',
+                          
+                        }}>
+                        <Text style={{
+                          textAlign: "justify",
+                          fontSize: 14,
+                          color: "black",
+                        }}>
+                        {'      '}SEMARANG – Palang Merah Indonesia (PMI) Kota Semarang menggelar apel kesiapsiagaan bencana di halaman markas PMI Kota Semarang, Jalan Sogeijopranoto, 35 Kota Semarang, Jawa Tengah, Sabtu (4/12/2021) pagi.
 
-            textAlign: "center",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          {kartudonor}
-        </Text>
-      {qr}
-      <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 5,
-            fontSize: 20,
-            fontWeight: "bold",
+                        {'\n      '} Saat melakukan pengecekan sarana dan prasarana, Ketua PMI Kota Semarang Awal Prasetyo mengatakan aktivitas relawan sudah tidak bisa dianggap sebagai sebuah kegiatan sampingan. Sebab, menurutnya relawan harus memiliki standar kompetensi keterampilan yang dapat dipertanggungjawabkan.
+                        {'\n      '} “Relawan tidak bisa menjadi sampingan, relawan harus profesional,” kata Awal Prasetyo.
 
-            textAlign: "center",
-            color: "black",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}
-        >
-          {nama}
-        </Text>
+                        {'\n      '} Awal lantas menerangkan prefesional yang dia maksud, yakni memiliki keterampilan yang dapat dipertanggung jawabkan ketika menolong korban. Selain itu juga memiliki peralatan yang sesuai standar profesional, utamanya dengan pelayanan ambulans, “Profesional disini bukan secara ekonomi, tapi secara pelayanan, sesuai dengan misi PMI, prefesional dan lebih dicintai masyarakat,” lanjutnya.
+
+                        {'\n      '} Lebih lanjut dia menerangkan, relawan PMI Kota Semarang harus diupayakan bisa tersertifikasi di lembaga sertifikasi profesi (LSP) PMI Jateng. Oleh karena itu dia berharap peran relawan dari fakultas/akademi gizi atau kesehatan dalam memberikan pelayanan makanan bagi korban bencana sesuai standar makan yang sehat.
+
+                        {'\n      '} Sementara, salah satu relawan senior PMI Kota Semarang, Roy Syaifuddin menerangkan peralatan yang telah siap untuk menghadapi bahaya musim hujan tahun ini. Dia sebut dari ambulans, perahu karet, alat perlindungan diri (APD) sampai alat bantu evakuasi ketinggian, “Ini juga sudah kita siapkan untuk posko siaga harian,” ungkap relawan yang ikut dalam bencana Tsunami Aceh.
+
+                        {'\n      '} Kepala Markas PMI Kota Semarang, Mugiyanto menambahkan, apel kesiapsiagaan bencana juga dimaksudkan untuk menyambut peringatan hari relawan internasional 5 Desember, “Apel kesiapsiagaan ini Juga memperingati hari relawan internasional pada 5 Desember. Jadi kita ajukan pada pagi hari ini,” ungkapnya.
+
+                        {'\n      '} Untuk itu, lanjutnya, PMI Kota Semarang melibatkan melibatkan perwakilan dari semua potensi kebencanaan di Kota Semarang seperti Basarnas, BPBD, Damkar, Baznas dan sebagainya.
+                        {'\n      '} “Kita libatkan semua potensi yang ada, kita melakukan pengecekan sumber daya manusia dan sarana dan prasarana yang ada,” jelasnya.
+
+                        
+                        </Text>
+                    </View>
+                      <View
+                        style={{
+                            marginTop : 25,
+                            marginBottom:20,
+                            flexDirection: 'row',
+                            alignSelf: 'center'
+                        }}>
+                      <Icon.Button name="facebook-square" size={25} color="#900" backgroundColor='#fadbd9' onPress={()=>{ Linking.openURL('https://www.facebook.com/pmi.semarang')}}/>
+                      <Text>{'  '}</Text>
+                      <Icon.Button name="instagram" size={25} color="#900" backgroundColor='#fadbd9' onPress={()=>{ Linking.openURL('https://www.instagram.com/pmikotasemarang/')}}/>
+                      <Text>{'  '}</Text>
+                      <Icon.Button name="youtube-play" size={25} color="#900" backgroundColor='#fadbd9' onPress={()=>{ Linking.openURL('https://www.youtube.com/channel/UCxTx1Tho2WraxpwWJQ3Eddw')}}/>
+                      <Text>{'  '}</Text>
+                      <Icon.Button name="twitter-square" size={25} color="#900" backgroundColor='#fadbd9' onPress={()=>{ Linking.openURL('https://twitter.com/pmikotasemarang?lang=id')}}/>
+                      <Text>{'  '}</Text>
+                      <Icon.Button name="whatsapp" size={25} color="#900" backgroundColor='#fadbd9' onPress={()=>{ Linking.openURL('https://web.whatsapp.com/send?phone=6282136700876&text=Halo%20PMI%20Kota%20Semarang')}} />
+                     
+                       </View>
+                      
+                    
+                </TouchableOpacity>
+            </Card>
+        </View>
         <View
           style={{
             alignContent: "center",

@@ -16,7 +16,7 @@ import {
 } from 'react-native-gesture-handler';
 import styles from './styles';
 
-function InfoStok01(props) {
+function MenuStock(props) {
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -207,4 +207,4 @@ function InfoStok01(props) {
     );
 }
 
-export default InfoStok01;
+export default MenuStock;

@@ -27,21 +27,21 @@ import {
 import Axios from 'axios';
 import {STOK_DARAH} from '../../config/api';
 
-function InfoStok03(props) {
+function StockDarah(props) {
     const [CONTENT, setCONTENT] = useState({
         tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
         tableTitle2: ['Produk'],
-        tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB']],
+        tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB', 'TOTAL']],
     });
     const [tableData, setTableData] = useState([
-        ['WB', '0', '0', '0', '0', '0'],
-        ['PRC', '0', '0', '0', '0', '0'],
-        ['TC', '0', '0', '0', '0', '0'],
-        ['FFP', '0', '0', '0', '0', '0'],
-        ['AHF', '0', '0', '0', '0', '0'],
-        ['LD', '0', '0', '0', '0', '0'],
-        ['LR', '0', '0', '0', '0', '0'],
-        ['PK', '0', '0', '0', '0', '0'],
+        ['WB ', '0', '0', '0', '0', '0'],
+        ['PRC ', '0', '0', '0', '0', '0'],
+        ['TC ', '0', '0', '0', '0', '0'],
+        ['FFP ', '0', '0', '0', '0', '0'],
+        ['AHF ', '0', '0', '0', '0', '0'],
+        ['LD ', '0', '0', '0', '0', '0'],
+        ['LR ', '0', '0', '0', '0', '0'],
+        ['PK ', '0', '0', '0', '0', '0'],
     ]);
     useEffect(() => {
         const url = STOK_DARAH;
@@ -329,4 +329,4 @@ function InfoStok03(props) {
     );
 }
 
-export default InfoStok03;
+export default StockDarah;

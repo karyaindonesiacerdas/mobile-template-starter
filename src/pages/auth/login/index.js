@@ -4,12 +4,12 @@ import {
     Content,
     Item,
     Input,
-    Spinner,
     Toast,
     Button,
     View,
     Text,
 } from 'native-base';
+import AwesomeLoading from 'react-native-awesome-loading';
 import {useMutation} from 'react-query';
 import {Formik} from 'formik';
 import {Image, StyleSheet, TouchableOpacity,ImageBackground,Alert } from 'react-native';
@@ -22,9 +22,14 @@ import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {USER_MANAGEMENT} from '../../../config/api' ;
+import Spinner from 'react-native-loading-spinner-overlay';
 
 function Login(props) {
+    const [loading, setLoading] = useState(false);
+
     const handleSubmitLogin = value => {
+        console.log('here')
+        setLoading(true)
         const headers = {
             'Content-Type': 'application/json',
         };
@@ -41,6 +46,7 @@ function Login(props) {
             .then(r => {
                 
                 if (r.data.code == 200) {
+                    setLoading(false)
                     console.log(r.data.data.KODEPENDONOR);
                     AsyncStorage.setItem('token', r.data.data.token);
                     AsyncStorage.setItem('role', r.data.data.role);
@@ -85,12 +91,14 @@ function Login(props) {
                             break;
                     }
                 } else {
+                    setLoading(false)
                     Alert.alert("Gagal","Email Atau Password Tidak Cocok",
                     [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
                    )
                 }
             })
             .catch(err => {
+                setLoading(false)
                 console.log('error : ', err);
             });
     };
@@ -107,6 +115,8 @@ function Login(props) {
                 source={Bg}
                 resizeMode="cover"
                 style={styles.image}>
+                <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading" />
+        
                 <Content contentContainerStyle={styles.container}>
                     <View style={styles.logo}>
                         <Image
@@ -261,5 +271,7 @@ const styles = StyleSheet.create({
         marginTop: -10,
         fontSize: 12,
         paddingLeft: 10,
+    },spinnerTextStyle: {
+        color: '#FFF',
     },
 });

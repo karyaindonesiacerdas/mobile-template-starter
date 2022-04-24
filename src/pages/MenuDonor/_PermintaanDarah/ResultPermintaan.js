@@ -16,7 +16,7 @@ import {
 import {TouchableOpacity} from 'react-native';
 //import styles from "./styles";
 
-function PermintaanSukses(props) {
+function ResultPermintaan(props) {
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -27,7 +27,7 @@ function PermintaanSukses(props) {
     return (
         <Container>
             <Image
-                source={require('../../asset/logoUDD.png')}
+                source={require('../../../asset/logoUDD.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -37,7 +37,7 @@ function PermintaanSukses(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../../asset/logoSehat.png')}
+                source={require('../../../asset/logoSehat.png')}
                 style={{
                     position: 'absolute',
                     width: 54,
@@ -121,7 +121,7 @@ function PermintaanSukses(props) {
 
             <ImageBackground
                 // resizeMethod={'auto'}
-                source={require('../../asset/footer.png')}
+                source={require('../../../asset/footer.png')}
                 style={{
                     width: '100%',
 
@@ -140,4 +140,4 @@ function PermintaanSukses(props) {
     );
 }
 
-export default PermintaanSukses;
+export default ResultPermintaan;

@@ -4,7 +4,7 @@ import {CheckBox} from 'react-native-elements';
 import {Container, Card, Picker, Item} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
-import styles from '../styles/styles';
+import styles from '../../styles/styles';
 import Bg from '../../image/baground3.jpeg';
 
 function PermintaanDarah(props) {
@@ -101,7 +101,7 @@ function PermintaanDarah(props) {
                 style={{width: '100%', height: '100%', position: 'absolute'}}
             />
             <Image
-                source={require('../image/logo.png')}
+                source={require('../../image/logo.png')}
                 style={{
                     width: 54,
                     height: 60,
@@ -111,7 +111,7 @@ function PermintaanDarah(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../image/Logo2.png')}
+                source={require('../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 54,
@@ -441,7 +441,7 @@ function PermintaanDarah(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'PermintaanDarah1')}>
+                            onPress={goNextPage.bind(this, 'DetailPermintaan')}>
                             <Text
                                 style={{
                                     margin: 10,

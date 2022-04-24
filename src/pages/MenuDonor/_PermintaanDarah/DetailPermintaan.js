@@ -12,11 +12,17 @@ import {CheckBox} from 'react-native-elements';
 import {Container, Item, Input, Card, Content, Icon} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
-import styles from '../styles/styles';
+import styles from './styles';
 import {Formik} from 'formik';
 
-function PermintaanDarah1(props) {
+function DetailPermintaan(props) {
     const [pekerjaan, setPekerjaan] = React.useState([
+        {
+            label: 'Whole Blood (WB) Biasa',
+            value: 'Whole Blood (WB) Biasa',
+            checked: false,
+            num: 0,
+        },
         {
             label: 'Whole Blood (WB) Biasa',
             value: 'Whole Blood (WB) Biasa',
@@ -156,7 +162,7 @@ function PermintaanDarah1(props) {
     return (
         <Container>
             <Image
-                source={require('../image/logo.png')}
+                source={require('../../image/logo.png')}
                 style={{
                     width: 60,
                     height: 65,
@@ -166,7 +172,7 @@ function PermintaanDarah1(props) {
                     left: 10,
                 }}></Image>
             <Image
-                source={require('../image/Logo2.png')}
+                source={require('../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
                     width: 60,
@@ -254,7 +260,7 @@ function PermintaanDarah1(props) {
                                 borderWidth: 2,
                                 padding: 5,
                             }}>
-                            <Text style={{marginLeft: 10}}>{item.value}</Text>
+                            <Text style={{marginLeft: 10,fontSize:10}}>{item.value}</Text>
                             <View
                                 style={{
                                     flexDirection: 'row',
@@ -273,7 +279,7 @@ function PermintaanDarah1(props) {
                                         marginRight: 5,
                                         marginLeft: 5,
                                         marginTop: 0,
-                                        fontSize: 20,
+                                        fontSize: 10,
                                         fontWeight: 'normal',
 
                                         textAlign: 'center',
@@ -373,4 +379,4 @@ function PermintaanDarah1(props) {
     );
 }
 
-export default PermintaanDarah1;
+export default DetailPermintaan;

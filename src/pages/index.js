@@ -42,7 +42,7 @@ import Konvalesen17 from './konvalesen/konvalesen17';
 import Konvalesen19 from './konvalesen/konvalesen19';
 import Konvalesen22 from './konvalesen/konvalesen22';
 import Konvalesen23 from './konvalesen/konvalesen23';
-import { InfoStok01, InfoStok02, InfoStok03 } from './infoStok';
+import { MenuStock, KebutuhanDarah, StockDarah } from './infoStok';
 import MobilUnit01 from './mobilUnit/mobilUnit01';
 import MobilUnit02 from './mobilUnit/mobilUnit02';
 import MenuAlur from './MenuAlur/MenuAlur'
@@ -51,16 +51,23 @@ import alurDonorKonvalesen from './MenuAlur/DonorKonvalesen/alurDonorKonvalesen'
 import permintaanDarah from './MenuAlur/permintaanDarah/permintaanDarah'
 import pengadaanDonor from './MenuAlur/pengadaanDonor/pengadaanDonor'
 import konselingDonor from './MenuAlur/KonselingDonor/konselingDonor' 
-import PermintaanDarah from './permintaandarah';
+import PermintaanDarah from './MenuDonor/_PermintaanDarah/PermintaanDarah';
 import ListUser from './user';
 import ListPendonor from './listpendonor';
-import PermintaanDarah1 from './permintaandarah/permintaan';
-import PermintaanSukses from './permintaandarah/sukses';
+import DetailPermintaan from './MenuDonor/_PermintaanDarah/DetailPermintaan';
+import ResultPermintaan from './MenuDonor/_PermintaanDarah/ResultPermintaan';
 import Contact from './InfoPMI/Contact/contact';
 import InfoKegiatan from './InfoPMI/InfoKegiatan/infoKegiatan';
 import InfoKonvalesen from './InfoPMI/InfoKonvalesen/infoKonvalesen';
 import Sejarah from './InfoPMI/Sejarah/sejarah';
-
+import MenuKonseling from './MenuKonseling/MenuKonseling';
+import FAQ from './MenuKonseling/FAQ/faq';
+import TentangKonseling from './MenuKonseling/TentangKonseling/tentangKonseling';
+import DaftarKonseling from './MenuKonseling/Konseling/daftarKonseling';
+import JadwalKonseling from './MenuKonseling/Konseling/jadwalKonsing';
+import RateKonseling from './MenuKonseling/Konseling/rateKonseling';
+import HistoryKonseling from './MenuKonseling/HistoryKonseling/historyKonseling';
+import RiwayatPermintaan from './MenuDonor/_PermintaanDarah/RiwayatPermintaan';
 export {
 	Login,
 	Register,
@@ -100,9 +107,9 @@ export {
 	Konvalesen19,
 	Konvalesen22,
 	Konvalesen23,
-	InfoStok01,
-	InfoStok02,
-	InfoStok03,
+	MenuStock,
+	KebutuhanDarah,
+	StockDarah,
 	MobilUnit01,
 	MobilUnit02,
     DashboardAdmin,
@@ -119,12 +126,20 @@ export {
 	EditProfil,
 	ListUser,
 	ListPendonor,
-	PermintaanDarah1,
-	PermintaanSukses,
+	DetailPermintaan,
+	ResultPermintaan,
 	GantiPasword,
 	KartuDonor,
 	Contact,
 	InfoKegiatan,
 	InfoKonvalesen,
 	Sejarah,
+	MenuKonseling,
+	FAQ,
+	TentangKonseling,
+	DaftarKonseling,
+	JadwalKonseling,
+	RateKonseling,
+	HistoryKonseling,
+	RiwayatPermintaan,
 };
