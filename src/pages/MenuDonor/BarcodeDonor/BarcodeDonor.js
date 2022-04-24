@@ -21,7 +21,7 @@ import {TouchableOpacity} from 'react-native'
 import styles from "../../styles/styles";
 import Bg from '../../image/baground3.jpeg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PENDONOR } from '../../../config/api';
+import { API } from '../../../config/api';
 import Axios from 'axios';
 import QRCode from "react-qr-code";
 function BarcodeDonor(props) {
@@ -42,7 +42,7 @@ function BarcodeDonor(props) {
         kode_calon_pendonor: kode_pendonor
       };
       console.log('get barcode')
-      Axios.post(`${PENDONOR}/simaba/calon-pendonor`, body,
+      Axios.post(`${API}/pendonor/calon-pendonor`, body,
          headers)
           .then(res => {
             console.log(res.data.data[0])

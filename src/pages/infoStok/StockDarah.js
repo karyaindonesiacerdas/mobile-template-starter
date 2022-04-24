@@ -25,7 +25,7 @@ import {
 } from 'react-native-table-component';
 
 import Axios from 'axios';
-import {STOK_DARAH} from '../../config/api';
+import {API} from '../../config/api';
 
 function StockDarah(props) {
     const [CONTENT, setCONTENT] = useState({
@@ -44,7 +44,6 @@ function StockDarah(props) {
         ['PK ', '0', '0', '0', '0', '0'],
     ]);
     useEffect(() => {
-        const url = STOK_DARAH;
         const headers = {
             'Content-Type': 'application/json',
         };
@@ -52,7 +51,7 @@ function StockDarah(props) {
             waktu: '',
         };
         Axios.post(
-            `${STOK_DARAH}/simaba`,
+            `${API}/stok-darah`,
             JSON.stringify(body),
             headers,
         )

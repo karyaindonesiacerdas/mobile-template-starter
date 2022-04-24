@@ -24,7 +24,7 @@ import {
     Col,
 } from 'react-native-table-component';
 import Axios from 'axios';
-import {RESIPIEN} from '../../config/api';
+import {API} from '../../config/api';
 
 function KebutuhanDarah(props) {
     const [res, setRes] = useState({
@@ -67,12 +67,11 @@ function KebutuhanDarah(props) {
     };
 
     useEffect(() => {
-        const url = RESIPIEN;
         const headers = {
             'Content-Type': 'application/json',
         };
         const body = {};
-        Axios.post(`${RESIPIEN}/simaba`, JSON.stringify(body), headers)
+        Axios.post(`${API}/resipien`, JSON.stringify(body), headers)
             .then(r => {
                 if (r.data.code == 200) {
                     setRes(r.data);

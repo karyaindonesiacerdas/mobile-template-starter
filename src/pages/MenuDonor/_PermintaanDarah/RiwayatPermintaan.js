@@ -25,7 +25,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
-import {RIWAYAT} from '../../../config/api';
+import {API} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment'
@@ -256,8 +256,7 @@ function RiwayatPermintaan(props) {
             const token = await AsyncStorage.getItem('token');
             const date_today = moment().utcOffset('+07:00').format('YYYY-MM-DD');
             const ktp = await AsyncStorage.getItem('ktp');
-            const url = RIWAYAT;
-
+            
             const body = {
                 ktp: ktp,
             };
@@ -267,7 +266,7 @@ function RiwayatPermintaan(props) {
                 Authorization: 'Bearer ' + token,
             };
 
-            Axios.post(`${RIWAYAT}/simaba/complete-donor`, body, {
+            Axios.post(`${API}/riwayat/complete-donor`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',

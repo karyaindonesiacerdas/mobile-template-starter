@@ -15,7 +15,7 @@ import styles from '../../styles/styles';
 import Bg from '../../image/baground3.jpeg';
 import {Formik, Form} from 'formik';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PENDONOR, USER_MANAGEMENT} from '../../../config/api';
+import { API} from '../../../config/api';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Axios from 'axios';
 import * as Yup from 'yup';
@@ -44,8 +44,7 @@ function EditProfil(props) {
     useEffect(() => {
         async function getUser() {
             const token = await AsyncStorage.getItem('token');
-            const url = USER_MANAGEMENT;
-
+            
             // TOKEN
             var _ktp = await AsyncStorage.getItem('ktp');
             var _nama = await AsyncStorage.getItem('nama');
@@ -75,7 +74,7 @@ function EditProfil(props) {
             console.info('_pekerjaan', _pekerjaan);
 
             Axios.post(
-                `${USER_MANAGEMENT}/simaba`,
+                `${API}/user`,
                 {},
                 {
                     headers: {
@@ -403,7 +402,6 @@ function EditProfil(props) {
         async function submit() {
             // setIsLoading(true)
             const token = await AsyncStorage.getItem('token');
-            const url = USER_MANAGEMENT;
             const body = {
                 ktp: value.ktp,
                 nama: value.nama,
@@ -420,7 +418,7 @@ function EditProfil(props) {
                 gambar: filebase64,
             };
             console.log(body)
-                Axios.put(`${USER_MANAGEMENT}/simaba/update`, body, {
+                Axios.put(`${API}/user/update`, body, {
                     headers: {
                         Authorization: 'Bearer ' + token,
                         'Content-Type': 'application/json',
@@ -634,12 +632,11 @@ function EditProfil(props) {
         async function submit_photo() {
             const token = await AsyncStorage.getItem('token');
             const email = await AsyncStorage.getItem('email');
-            const url = USER_MANAGEMENT;
             const body = new FormData();
             body.append('email', email);
             body.append('gambar', filePath);
             console.log(body);
-            Axios.put(`${USER_MANAGEMENT}/simaba/image-profile`, body, {
+            Axios.put(`${API}/user/image-profile`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'multipart/form-data',

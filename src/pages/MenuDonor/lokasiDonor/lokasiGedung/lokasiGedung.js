@@ -14,7 +14,7 @@ import {TouchableOpacity} from 'react-native';
 import styles from '../../../styles/styles';
 import Bg from '../../../image/baground3.jpeg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PENDONOR} from '../../../../config/api';
+import {API} from '../../../../config/api';
 import Axios from 'axios';
 
 function lokasiGedung(props) {
@@ -31,13 +31,12 @@ function lokasiGedung(props) {
         const token = await AsyncStorage.getItem('token');
         const ktp = await AsyncStorage.getItem('ktp');
         const lokasi = 'Gedung UDD';
-        const url = PENDONOR;
         const body = {
             ktp: ktp,
             lokasi: lokasi,
         };
         console.log(body);
-        Axios.put(`${PENDONOR}/simaba/update/lokasi`, body, {
+        Axios.put(`${API}/pendonor/update/lokasi`, body, {
             headers: {
                 Authorization: 'Bearer ' + token,
                 'Content-Type': 'application/json',

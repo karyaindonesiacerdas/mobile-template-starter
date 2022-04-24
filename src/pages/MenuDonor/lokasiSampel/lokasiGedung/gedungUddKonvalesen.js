@@ -20,7 +20,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "../../../konvalesen/styles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PENDONOR} from '../../../../config/api';
+import {API} from '../../../../config/api';
 import Axios from 'axios';
 
 function gedungUddKonvalesen(props) {
@@ -36,13 +36,12 @@ function gedungUddKonvalesen(props) {
     const token = await AsyncStorage.getItem('token');
     const ktp = await AsyncStorage.getItem('ktp');
     const lokasi = 'Gedung UDD';
-    const url = PENDONOR;
     const body = {
         ktp: ktp,
         lokasi: lokasi,
     };
     console.log(body);
-    Axios.put(`${PENDONOR}/simaba/update/lokasisample`, body, {
+    Axios.put(`${API}/pendonor/update/lokasisample`, body, {
         headers: {
             Authorization: 'Bearer ' + token,
             'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ import {
 } from "react-native-gesture-handler";
 import styles from "../../../konvalesen/styles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {KUESIONER , PENDONOR} from '../../../../config/api';
+import {API} from '../../../../config/api';
 import Axios from 'axios';
 
 
@@ -59,7 +59,7 @@ function agrementKonvalesen(props) {
 
     const ktp = await AsyncStorage.getItem('ktp');
     
-    Axios.post(`${PENDONOR}/simaba/calon-pendonor/create`, data_calon_donor,
+    Axios.post(`${API}/pendonor/calon-pendonor/create`, data_calon_donor,
         {headers:{
             Authorization :'Bearer ' +token,
             'Content-Type': 'multipart/form-data; boundary=${body._boundary}',

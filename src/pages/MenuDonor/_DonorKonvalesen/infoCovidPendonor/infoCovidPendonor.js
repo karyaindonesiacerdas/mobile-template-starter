@@ -31,7 +31,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from "../../../styles/styles";
 import DocumentPicker from 'react-native-document-picker';
-import { PENDONOR } from '../../../../config/api';
+import { API } from '../../../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
 
@@ -80,7 +80,6 @@ function infoCovidPendonor(props) {
     const tanggal_lahir = await AsyncStorage.getItem('tanggal_lahir');
     const jenis_kelamin = await AsyncStorage.getItem('jenis_kelamin');
     const tempat_lahir = await AsyncStorage.getItem('tempat_lahir');
-    const url = PENDONOR;
     
     value.tanggal_lahir = tanggal_lahir
     value.tempat_lahir = tempat_lahir

@@ -27,7 +27,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
 import styles from '../../../styles/styles';
 import Bg from '../../../image/baground3.jpeg';
-import {PENDONOR} from '../../../../config/api';
+import {API} from '../../../../config/api';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
@@ -38,7 +38,6 @@ function admBiasaResult(props) {
     useEffect(() => {
         async function getData() {
             const token = await AsyncStorage.getItem('token');
-            const url = PENDONOR;
             const kode_pendonor = await AsyncStorage.getItem('kode_pendonor');
             const headers = {
                 'Content-Type': 'application/json',
@@ -49,7 +48,7 @@ function admBiasaResult(props) {
             };
             console.log(body);
             Axios.post(
-                `${PENDONOR}/simaba/calon-pendonor`,
+                `${API}/pendonor/calon-pendonor`,
                 JSON.stringify(body),
                 headers,
             )

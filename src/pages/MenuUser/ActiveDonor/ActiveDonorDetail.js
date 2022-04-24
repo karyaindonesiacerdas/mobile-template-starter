@@ -10,7 +10,7 @@ import {Icon} from 'react-native-elements';
 import {Container, Card} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
 import styles from './styles';
-import {RIWAYAT} from '../../../config/api';
+import {API} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -40,8 +40,7 @@ function ActiveDonorDetail(props) {
             const token = await AsyncStorage.getItem('token');
             var t = new Date().toISOString().slice(0, 10);
             const ktp = await AsyncStorage.getItem('ktp');
-            const url = RIWAYAT;
-
+            
             const body = {
                 ktp: ktp,
                 kuesioner_id: props.route.params.data.kuesioner_id,
@@ -52,7 +51,7 @@ function ActiveDonorDetail(props) {
                 Authorization: 'Bearer ' + token,
             };
 
-            Axios.post(`${RIWAYAT}/simaba/detail`, body, {
+            Axios.post(`${API}/riwayat/detail`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',

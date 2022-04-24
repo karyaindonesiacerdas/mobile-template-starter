@@ -27,7 +27,7 @@ import Bg from '../../../image/baground3.jpeg';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PENDONOR} from '../../../../config/api';
+import {API} from '../../../../config/api';
 import Axios from 'axios';
 function agrementPlace(props) {
     const [check1, setCheck1] = useState(false);
@@ -67,14 +67,13 @@ function agrementPlace(props) {
         const token = await AsyncStorage.getItem('token');
         const ktp = await AsyncStorage.getItem('ktp');
         const lokasi = props.route.params.location;
-        const url = PENDONOR;
         const body = {
             ktp: ktp,
             lokasi: lokasi,
             jadwal: jadwal,
         };
         console.log(body);
-        Axios.put(`${PENDONOR}/simaba/update/lokasisample`, body, {
+        Axios.put(`${API}/pendonor/update/lokasisample`, body, {
             headers: {
                 Authorization: 'Bearer ' + token,
                 'Content-Type': 'application/json',

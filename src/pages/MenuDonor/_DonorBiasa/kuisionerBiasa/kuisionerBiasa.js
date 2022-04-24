@@ -24,7 +24,7 @@ import {
     Col,
 } from 'react-native-table-component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { KUESIONER, PENDONOR } from '../../../../config/api';
+import { API } from '../../../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
 import moment from 'moment'
@@ -378,10 +378,8 @@ function kuisionerBiasa(props) {
         const data_calon_donor = props.route.params.data_calon_donor
         console.log(data_calon_donor)
         const ktp = await AsyncStorage.getItem('ktp');
-        const url = KUESIONER;
-        const url_pendonor = PENDONOR;
         console.info('Submit')
-        Axios.post(`${PENDONOR}/simaba/calon-pendonor/create`,qs.stringify(data_calon_donor),
+        Axios.post(`${API}/pendonor/calon-pendonor/create`,qs.stringify(data_calon_donor),
             {headers:{
             Authorization :'Bearer ' +token,
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -395,7 +393,7 @@ function kuisionerBiasa(props) {
                     input.ktp = ktp;
                     input.nama = nama;
                     const body = input;
-                    Axios.post(`${KUESIONER}/simaba/create`, body,
+                    Axios.post(`${API}/kuesioner/create`, body,
                         {headers:{
                             Authorization :'Bearer ' +token,
                             'Content-Type': 'application/json',

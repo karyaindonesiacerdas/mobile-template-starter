@@ -21,7 +21,7 @@ import Bg from '../../image/Background.png';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {USER_MANAGEMENT} from '../../../config/api' ;
+import {API} from '../../../config/api' ;
 import Spinner from 'react-native-loading-spinner-overlay';
 
 function Login(props) {
@@ -39,7 +39,7 @@ function Login(props) {
         };
 
         Axios.post(
-            `${USER_MANAGEMENT}/simaba/login`,
+            `${API}/user/login`,
             JSON.stringify(body),
             headers,
         )
@@ -99,6 +99,9 @@ function Login(props) {
             })
             .catch(err => {
                 setLoading(false)
+                Alert.alert("Error","Silahkan Coba Lagi",
+                    [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
+                   )
                 console.log('error : ', err);
             });
     };

@@ -21,7 +21,7 @@ import Bg from '../../image/Baground2.jpg';
 import qs from 'qs';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
-import {USER_MANAGEMENT} from '../../../config/api' ;
+import {API} from '../../../config/api' ;
 
 function Register(props) {
     const [check1, setCheck1] = useState(false);
@@ -37,7 +37,7 @@ function Register(props) {
         };
         console.log(body);
         Axios.post(
-            `${USER_MANAGEMENT}/simaba/register`,
+            `${API}/user/register`,
             qs.stringify(body),
             headers,
         )
@@ -173,7 +173,6 @@ function Register(props) {
                             )}
                             <ListItem>
                                 <CheckBox
-                                    checked={false}
                                     color=""
                                     checked={check1}
                                     onPress={() => setCheck1(!check1)}

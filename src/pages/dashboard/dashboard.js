@@ -12,7 +12,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import styles from './styles';
 import Bg from '../../image/baground3.jpeg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {USER_MANAGEMENT} from '../../config/api';
+import {API} from '../../config/api';
 import Axios from 'axios';
 import {useQuery, useQueryClient} from 'react-query';
 import {useNavigation} from '@react-navigation/native';
@@ -35,12 +35,12 @@ function Dashboard(props) {
             // Expired token :
             // const token =
             //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InphaHJpLnJ1c2xpQGdtYWlsLmNvbSIsImRvbm9yX2lkIjoiIiwibmFtYSI6IlphaHJpIFJ1c2xpIiwiZ29sb25nYW5fZGFyYWgiOiIiLCJyb2xlIjoicGVuZG9ub3IiLCJnYW1iYXIiOiIiLCJleHAiOjE2Mzk1MzM2NTQsImlhdCI6MTYzOTUzMDA1NCwiaXNzIjoiU0FIQUJBVC1VVEQifQ.OSR5Va_GTj21vQnzHHOBc3WfyKyYeqU1cVrN_xS1DkY';
-            const url = USER_MANAGEMENT;
+            const url = API;
 
             const body = {
                 email: '',
             };
-            const res = await Axios.post(`${USER_MANAGEMENT}/simaba`, body, {
+            const res = await Axios.post(`${API}/user`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',
@@ -88,12 +88,12 @@ function Dashboard(props) {
 
     async function checkSession() {
         const token = await AsyncStorage.getItem('token');
-        const url = USER_MANAGEMENT;
+        const url = API;
 
         const body = {
             email: '',
         };
-        Axios.post(`${USER_MANAGEMENT}/simaba`, body, {
+        Axios.post(`${API}/user`, body, {
             headers: {
                 Authorization: 'Bearer ' + token,
                 'Content-Type': 'application/json',

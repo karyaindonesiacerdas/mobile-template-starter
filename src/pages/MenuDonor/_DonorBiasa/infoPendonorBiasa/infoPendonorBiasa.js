@@ -20,7 +20,7 @@ import styles from "../../../styles/styles";
 import Bg from '../../../image/baground3.jpeg'
 import { Formik } from "formik";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PENDONOR } from '../../../../config/api';
+import { API } from '../../../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
 
@@ -150,7 +150,6 @@ function infoPendonorBiasa(props) {
     const tempat_lahir = await AsyncStorage.getItem('tempat_lahir');
     const status_menikah = await AsyncStorage.getItem('status_menikah');
     const jenis_kelamin = await AsyncStorage.getItem('jenis_kelamin');
-    const url_pendonor = PENDONOR;
     value.tanggal_lahir = tanggal_lahir
     value.jenis_kelamin = jenis_kelamin
     value.berat_badan = berat_badan

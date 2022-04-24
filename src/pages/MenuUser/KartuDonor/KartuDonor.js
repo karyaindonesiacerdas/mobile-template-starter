@@ -25,7 +25,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import styles from '../../styles/styles';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {USER_MANAGEMENT} from '../../../config/api';
+import {API} from '../../../config/api';
 import QRCode from "react-qr-code";
 
 function KartuDonor(props) {
@@ -66,7 +66,7 @@ function KartuDonor(props) {
         const body = {
           email: '',
         };
-        Axios.post(`${USER_MANAGEMENT}/simaba`, body, {
+        Axios.post(`${API}/user`, body, {
           headers: {
               Authorization: 'Bearer ' + token,
               'Content-Type': 'application/json',

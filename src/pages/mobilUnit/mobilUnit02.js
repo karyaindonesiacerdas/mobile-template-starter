@@ -23,7 +23,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
-import {MOBIL_UNIT} from '../../config/api';
+import {API} from '../../config/api';
 import Axios from 'axios';
 
 function MobilUnit02(props) {
@@ -50,7 +50,6 @@ function MobilUnit02(props) {
 
     useEffect(() => {
         var t = new Date().toISOString().slice(0, 10);
-        const url = MOBIL_UNIT;
         const headers = {
             'Content-Type': 'application/json',
         };
@@ -60,7 +59,7 @@ function MobilUnit02(props) {
             hari: props.route.params.day,
         };
         Axios.post(
-            `${MOBIL_UNIT}/simaba`,
+            `${API}/mobil-unit`,
             JSON.stringify(body),
             headers,
         )

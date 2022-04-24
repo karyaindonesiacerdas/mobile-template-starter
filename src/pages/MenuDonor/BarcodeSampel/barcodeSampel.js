@@ -30,7 +30,7 @@ import {
 } from 'react-native-gesture-handler';
 import styles from '../../konvalesen/styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PENDONOR } from '../../../config/api';
+import { API } from '../../../config/api';
 import Axios from 'axios';
 import QRCode from "react-qr-code";
 
@@ -50,7 +50,7 @@ function barcodeSampel(props) {
           const body = {
             kode_calon_pendonor: kode_pendonor
           };
-          Axios.post(`${PENDONOR}/simaba/calon-pendonor`, body,
+          Axios.post(`${API}/pendonor/calon-pendonor`, body,
              headers)
               .then(res => {
                 setInfo(res.data.data[0]) 

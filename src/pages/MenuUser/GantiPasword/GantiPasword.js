@@ -25,13 +25,12 @@ import {ScrollView} from 'react-native-gesture-handler';
 import styles from '../../styles/styles';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {USER_MANAGEMENT} from '../../../config/api';
+import {API} from '../../../config/api';
 
 function GantiPasword(props) {
   const submitData =(value) => {
     async function submit(){
       const token = await AsyncStorage.getItem('token')
-      const url = USER_MANAGEMENT;
       const body = {
         email: value.email,
         new_password: value.new_password,
@@ -39,7 +38,7 @@ function GantiPasword(props) {
       };
       console.log(body)
     
-      Axios.put(`${USER_MANAGEMENT}/simaba/change-password`, body,
+      Axios.put(`${API}/user/change-password`, body,
       {headers:{
         'Content-Type': 'application/json',
       }})

@@ -23,7 +23,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
-import {PENDONOR} from '../../config/api';
+import {API} from '../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -36,7 +36,6 @@ function ListPendonor(props) {
         async function getToken() {
             const token = await AsyncStorage.getItem('token');
             var t = new Date().toISOString().slice(0, 10);
-            const url = PENDONOR;
             const headers = {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + token,
@@ -46,7 +45,7 @@ function ListPendonor(props) {
                 donor_id: '',
             };
             Axios.post(
-                `${PENDONOR}/simaba/pendonor`,
+                `${API}/pendonor/statistik`,
                 JSON.stringify(body),
                 headers,
             )
