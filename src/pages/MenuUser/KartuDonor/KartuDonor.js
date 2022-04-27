@@ -27,11 +27,14 @@ import styles from '../../styles/styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {API} from '../../../config/api';
 import QRCode from "react-qr-code";
+import AwesomeLoading from 'react-native-awesome-loading';
+
 
 function KartuDonor(props) {
   const [qr , setQr] = useState(null)
   const [kartudonor,setKartu] = useState()
   const [nama,setNama] = useState()
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getData() {
@@ -63,6 +66,7 @@ function KartuDonor(props) {
         </View>
         )    
       }else{
+        setLoading(true)
         const body = {
           email: '',
         };
@@ -73,6 +77,7 @@ function KartuDonor(props) {
           },
         })
           .then(res => {
+            setLoading(false)
             const data_kartu = res.data.data[0]['KODEPENDONOR']
             const data_nama = res.data.data[0]['nama']
             setNama(data_nama)
@@ -113,6 +118,7 @@ function KartuDonor(props) {
   return (
     <Container>
         <Image source={Bg} style={{width: '100%', height: '100%', position: 'absolute'}} />
+        <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
       <Image
         source={require("../../image/logo.png")}
         style={{

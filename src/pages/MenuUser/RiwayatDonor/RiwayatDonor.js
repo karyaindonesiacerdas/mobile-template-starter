@@ -29,8 +29,11 @@ import {API} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment'
+import AwesomeLoading from 'react-native-awesome-loading';
 
 function RiwayatDonor(props) {
+    const [loading, setLoading] = useState(false);
+
     const B = props => (
         <Text style={{fontWeight: 'bold'}}>{props.children}</Text>
     );
@@ -250,6 +253,7 @@ function RiwayatDonor(props) {
     });
     useEffect(() => {
         async function getRiwayat() {
+            setLoading(true)
             const token = await AsyncStorage.getItem('token');
             const date_today = moment().utcOffset('+07:00').format('YYYY-MM-DD');
             const ktp = await AsyncStorage.getItem('ktp');
@@ -263,13 +267,14 @@ function RiwayatDonor(props) {
                 Authorization: 'Bearer ' + token,
             };
 
-            Axios.post(`${API}/riwayat/complete-donor`, body, {
+            Axios.post(`${API}/riwayat-donor`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',
                 },
             })
                 .then(r => {
+                    setLoading(false)
                     if (r.data.code == 200) {
                         
                         const data = r.data.data
@@ -289,8 +294,9 @@ function RiwayatDonor(props) {
                     }
                 })
                 .catch(err => {
+                    setLoading(false)
                     console.log(err);
-                    Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+                    Alert.alert("Error","Menu Masih Dalam Pengembangan",
                     [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
                     )
                 });
@@ -301,6 +307,8 @@ function RiwayatDonor(props) {
     return (
         <Container>
             <SafeAreaView style={{flex: 1}}>
+            <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
+
                 <FlatList
                     data={dataSource}
                     keyExtractor={(item, index) => index.toString()}

@@ -6,6 +6,7 @@ import {
     Text,
     View,
     TextInput,
+    Button,
 } from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Container, Card, Item, Input, Content, Icon} from 'native-base';
@@ -16,12 +17,18 @@ import Bg from '../../image/baground3.jpeg';
 import {Formik, Form} from 'formik';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API} from '../../../config/api';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Axios from 'axios';
 import * as Yup from 'yup';
 import base64 from 'react-native-base64';
+import AwesomeLoading from 'react-native-awesome-loading';
+import DatePicker from 'react-native-date-picker'
+import moment from 'moment'
+import 'moment/locale/id'
+import ImagePicker from 'react-native-image-crop-picker';
+
 
 function EditProfil(props) {
+    const [loading, setLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [ktp, setKtp] = useState(null);
     const [nama, setNama] = useState(null);
@@ -35,14 +42,17 @@ function EditProfil(props) {
     const [status_menikah, setStatusMenikah] = React.useState();
     const [pekerjaan, setPekerjaan] = React.useState([]);
     const [pekerjaanInitial, setPekerjaanInitial] = React.useState(null);
-    const [golonganDarah, setGolonganDarah] = React.useState([]);
+    const [golongan_darah, setGolonganDarah] = React.useState([]);
     const [golonganDarahInitial, setGolonganDarahInitial] =
         React.useState(null);
     const [filebase64, setBase64] = React.useState(null);
     const [gambar, setGambar] = React.useState('');
+    const [date, setDate] = useState(new Date())
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         async function getUser() {
+            setLoading(true)
             const token = await AsyncStorage.getItem('token');
             
             // TOKEN
@@ -84,6 +94,7 @@ function EditProfil(props) {
                 },
             )
                 .then(r => {
+                    setLoading(false)
                     if (r.data.code == 200) {
                         setKtp(_ktp || r.data?.data?.[0].ktp);
                         setNama(_nama, r.data?.data?.[0].nama);
@@ -286,41 +297,42 @@ function EditProfil(props) {
                                         : false,
                             },
                         ]);
-                        setBase64(_gambar || null);
+                        setGambar(_gambar || r.data?.data?.[0].gambar);
                     } else {
+                        setLoading(false)
                         console.error('Error', r.data);
                     }
                 })
                 .catch(err => {
+                    setLoading(false)
                     console.error('error : ', err);
                 });
         }
-        // async function get_profile_image() {
-        //     const token = await AsyncStorage.getItem('token');
-        //     const gambar_str = await AsyncStorage.getItem('gambar');
-        //     if (gambar_str) {
-        //         setGambar(gambar_str.substring(15));
-        //         console.log(gambar_str);
-        //     }
-        //     const url = USER_MANAGEMENT;
-        //     const get_url = `${url}/api/simaba/image-profile/${gambar}`;
-        //     console.log(get_url);
-        //     Axios.get(get_url, {
-        //         headers: {
-        //             Authorization: 'Bearer ' + token,
-        //         },
-        //     })
-        //         .then(r => {
-        //             console.log(r);
-        //         })
-        //         .catch(err => {
-        //             console.log(err);
-        //         });
-        // }
+        async function get_profile_image() {
+            const token = await AsyncStorage.getItem('token');
+            const gambar_str = await AsyncStorage.getItem('gambar');
+            if (gambar_str) {
+                setGambar(gambar_str);
+                console.log(gambar_str);
+            }
+            const get_url = `${API}/user/image-profile/${gambar.toString()}`;
+            console.log(get_url);
+            Axios.get(get_url, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+            })
+                .then(r => {
+                    console.log(r);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
 
         getUser();
         setIsLoading(false);
-        // get_profile_image();
+        get_profile_image();
     }, []);
 
     const [input] = useState({
@@ -330,68 +342,6 @@ function EditProfil(props) {
         status_menikah: '',
     });
 
-    const pekerjaanHandler = index => {
-        const newValue = pekerjaan.map((checkbox, i) => {
-            if (i !== index)
-                return {
-                    ...checkbox,
-                    checked: false,
-                };
-            if (i === index) {
-                const item = {
-                    ...checkbox,
-                    checked: !checkbox.checked,
-                };
-                input.pekerjaan = checkbox.value;
-                return item;
-            }
-            return checkbox;
-        });
-        console.info('setPekerjaan', newValue);
-        setPekerjaan(newValue);
-    };
-
-    const golonganDarahHandler = index => {
-        const newValue = golonganDarah.map((checkbox, i) => {
-            if (i !== index)
-                return {
-                    ...checkbox,
-                    checked: false,
-                };
-            if (i === index) {
-                const item = {
-                    ...checkbox,
-                    checked: !checkbox.checked,
-                };
-                input.gologan_darah = checkbox.value;
-                return item;
-            }
-            return checkbox;
-        });
-        setGolonganDarah(newValue);
-    };
-    const jeniskelaminHandler = val => {
-        const newValue = jeniskelamin.map((checkbox, i) => {
-            if (i !== index)
-                return {
-                    ...checkbox,
-                    checked: false,
-                };
-            if (i === index) {
-                const item = {
-                    ...checkbox,
-                    checked: !checkbox.checked,
-                };
-                input.jenis_kelamin = checkbox.value;
-                return item;
-            }
-            return checkbox;
-        });
-        setJenisKelamin(newValue);
-    };
-    const statusmenikahHandler = val => {
-        setStatusMenikah(val);
-    };
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -401,7 +351,9 @@ function EditProfil(props) {
     const submitData = value => {
         async function submit() {
             // setIsLoading(true)
+            setLoading(true)
             const token = await AsyncStorage.getItem('token');
+            
             const body = {
                 ktp: value.ktp,
                 nama: value.nama,
@@ -413,11 +365,14 @@ function EditProfil(props) {
                 tanggal_lahir: value.tanggal_lahir,
                 jenis_kelamin: value.jeniskelamin,
                 status_menikah: value.status_menikah,
-                golongan_darah: value.gologan_darah,
+                golongan_darah: value.golongan_darah.toString(),
                 pekerjaan: value.pekerjaan,
                 gambar: filebase64,
             };
-            console.log(body)
+            console.log(
+                '11BODY---',
+                body.golongan_darah.toString(),
+            );
                 Axios.put(`${API}/user/update`, body, {
                     headers: {
                         Authorization: 'Bearer ' + token,
@@ -425,11 +380,8 @@ function EditProfil(props) {
                     },
                 })
                     .then(r => {
+                        setLoading(false)
                         if (r.data.code == 200) {
-                            console.log(
-                                '11BODY---',
-                                value.golongan_darah.toString(),
-                            );
 
                             AsyncStorage.setItem('ktp', body.ktp.toString());
                             AsyncStorage.setItem('nama', body.nama.toString());
@@ -467,7 +419,7 @@ function EditProfil(props) {
                             );
                             AsyncStorage.setItem(
                                 'golongan_darah',
-                                value.golongan_darah.toString(),
+                                body.golongan_darah.toString(),
                             );
                             AsyncStorage.setItem(
                                 'pekerjaan',
@@ -489,9 +441,10 @@ function EditProfil(props) {
                         }
                     })
                     .catch(err => {
+
                         console.log('error : ', err.message);
                     });
-
+            setLoading(false)
             setIsLoading(false);
         }
         submit();
@@ -517,117 +470,6 @@ function EditProfil(props) {
     });
     const [filePath, setFilePath] = useState({});
 
-    const requestCameraPermission = async () => {
-        if (Platform.OS === 'android') {
-            try {
-                const granted = await PermissionsAndroid.request(
-                    PermissionsAndroid.PERMISSIONS.CAMERA,
-                    {
-                        title: 'Camera Permission',
-                        message: 'App needs camera permission',
-                    },
-                );
-                // If CAMERA Permission is granted
-                return granted === PermissionsAndroid.RESULTS.GRANTED;
-            } catch (err) {
-                console.warn(err);
-                return false;
-            }
-        } else return true;
-    };
-
-    const requestExternalWritePermission = async () => {
-        if (Platform.OS === 'android') {
-            try {
-                const granted = await PermissionsAndroid.request(
-                    PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-                    {
-                        title: 'External Storage Write Permission',
-                        message: 'App needs write permission',
-                    },
-                );
-                // If WRITE_EXTERNAL_STORAGE Permission is granted
-                return granted === PermissionsAndroid.RESULTS.GRANTED;
-            } catch (err) {
-                console.warn(err);
-                alert('Write permission err', err);
-            }
-            return false;
-        } else return true;
-    };
-
-    const captureImage = async type => {
-        let options = {
-            mediaType: type,
-            maxWidth: 300,
-            maxHeight: 550,
-            quality: 1,
-            videoQuality: 'low',
-            durationLimit: 30, //Video max duration in seconds
-            saveToPhotos: true,
-            includeBase64: true,
-        };
-        let isCameraPermitted = await requestCameraPermission();
-        let isStoragePermitted = await requestExternalWritePermission();
-        if (isCameraPermitted && isStoragePermitted) {
-            launchCamera(options, response => {
-                if (response.didCancel) {
-                    alert('User cancelled camera picker');
-                    return;
-                } else if (response.errorCode == 'camera_unavailable') {
-                    alert('Camera not available on device');
-                    return;
-                } else if (response.errorCode == 'permission') {
-                    alert('Permission not satisfied');
-                    return;
-                } else if (response.errorCode == 'others') {
-                    alert(response.errorMessage);
-                    return;
-                }
-
-                const img = {
-                    uri: response.assets[0].uri,
-                    type: response.assets[0].type,
-                    name: response.assets[0].fileName,
-                };
-                setFilePath(img);
-                setBase64(response.assets[0].base64);
-            });
-        }
-    };
-
-    const chooseFile = type => {
-        let options = {
-            mediaType: type,
-            maxWidth: 300,
-            maxHeight: 550,
-            quality: 1,
-            includeBase64: true,
-        };
-        launchImageLibrary(options, response => {
-            if (response.didCancel) {
-                alert('User cancelled camera picker');
-                return;
-            } else if (response.errorCode == 'camera_unavailable') {
-                alert('Camera not available on device');
-                return;
-            } else if (response.errorCode == 'permission') {
-                alert('Permission not satisfied');
-                return;
-            } else if (response.errorCode == 'others') {
-                alert(response.errorMessage);
-                return;
-            }
-            console.log(response);
-            const img = {
-                uri: response.assets[0].uri,
-                type: response.assets[0].type,
-                name: response.assets[0].fileName,
-            };
-            setFilePath(img);
-            setBase64(response.assets[0].base64);
-        });
-    };
     const savePhoto = () => {
         async function submit_photo() {
             const token = await AsyncStorage.getItem('token');
@@ -667,6 +509,9 @@ function EditProfil(props) {
 
     return (
         <Container>
+            
+            <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
+
             {isLoading ? (
                 <Text>Loading....</Text>
             ) : (
@@ -756,6 +601,7 @@ function EditProfil(props) {
                                         width: '60%',
                                         marginRight: '30%',
                                     }}>
+                                        
                                     <TouchableOpacity
                                         style={styles.button}
                                         onPress={() => captureImage('photo')}>
@@ -974,7 +820,7 @@ function EditProfil(props) {
                                             {errors.tempat_lahir}
                                         </Text>
                                     ) : null}
-                                    <Text
+                                <Text
                                         style={{
                                             marginLeft: 30,
                                             marginTop: 20,
@@ -990,15 +836,33 @@ function EditProfil(props) {
                                         }}>
                                         Tanggal Lahir
                                     </Text>
+                                    
+                                    <DatePicker
+                                            modal
+                                            mode='date'
+                                            open={open}
+                                            date={date}
+                                            onConfirm={(date) => {
+                                            setOpen(false)
+                                            
+                                            console.log()
+                                            setTanggalLahir(moment(date).format('YYYY-MM-DD').toString())
+                                            }}
+                                            onCancel={() => {
+                                            setOpen(false)
+                                            }}
+                                        />
                                     <Item style={styles.item}>
-                                        <Input
+                                        <TextInput
                                             style={styles.input}
                                             onChangeText={handleChange(
                                                 'tanggal_lahir',
                                             )}
+                                            onPressIn = {() => setOpen(true)}
                                             onBlur={handleBlur('tanggal_lahir')}
                                             value={values.tanggal_lahir}
                                             placeholder={'Contoh: 1982-12-28'}
+                                            // editable= {false}
                                         />
                                     </Item>
                                     {errors.tanggal_lahir &&
@@ -1019,6 +883,7 @@ function EditProfil(props) {
                                             {errors.tanggal_lahir}
                                         </Text>
                                     ) : null}
+                                   
                                     <Text
                                         style={{
                                             marginLeft: 30,
@@ -1451,6 +1316,7 @@ function EditProfil(props) {
                                                                     'pekerjaan',
                                                                     checkbox.value,
                                                                 );
+                                                                
                                                             }}
                                                             key={i}
                                                         />
@@ -1462,6 +1328,7 @@ function EditProfil(props) {
                                             {pekerjaan.map((checkbox, i) => {
                                                 if (i >= pekerjaan.length / 2) {
                                                     return (
+                                                        
                                                         <CheckBox
                                                             style={{
                                                                 width: '70%',
@@ -1514,12 +1381,12 @@ function EditProfil(props) {
                                             justifyContent: 'space-between',
                                         }}>
                                         <View>
-                                            {golonganDarah.map(
+                                            {golongan_darah.map(
                                                 (checkbox, i) => {
                                                     // console.info("__DATA__",golonganDarah)
                                                     if (
                                                         i <
-                                                        golonganDarah.length / 2
+                                                        golongan_darah.length / 2
                                                     ) {
                                                         return (
                                                             <CheckBox
@@ -1540,7 +1407,6 @@ function EditProfil(props) {
                                                                         'golongan_darah',
                                                                         checkbox.value,
                                                                     );
-                                                                    console.log(checkbox.value)
                                                                 }}
                                                                 key={i}
                                                             />
@@ -1550,11 +1416,11 @@ function EditProfil(props) {
                                             )}
                                         </View>
                                         <View>
-                                            {golonganDarah.map(
+                                            {golongan_darah.map(
                                                 (checkbox, i) => {
                                                     if (
                                                         i >=
-                                                        golonganDarah.length / 2
+                                                        golongan_darah.length / 2
                                                     ) {
                                                         return (
                                                             <CheckBox

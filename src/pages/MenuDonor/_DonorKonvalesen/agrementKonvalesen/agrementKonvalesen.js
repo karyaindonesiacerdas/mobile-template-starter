@@ -74,7 +74,7 @@ function agrementKonvalesen(props) {
             kuisoner_calon_donor.nama = nama;
             const body = kuisoner_calon_donor;
             console.log(body);
-            Axios.post(`${KUESIONER}/simaba/create`, body, {
+            Axios.post(`${API}/kuesioner/create`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',

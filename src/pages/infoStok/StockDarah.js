@@ -286,7 +286,7 @@ function StockDarah(props) {
                         marginRight: '2%',
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'InfoStok01')}>
+                        onPress={goNextPage.bind(this, 'MenuStock')}>
                         <Text
                             style={{
                                 margin: 10,

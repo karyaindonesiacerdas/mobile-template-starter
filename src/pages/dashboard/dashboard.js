@@ -276,7 +276,7 @@ function Dashboard(props) {
 
                     <TouchableOpacity
                         style={styles.cardStyle}
-                        onPress={goNextPage.bind(this, 'InfoStok01')}>
+                        onPress={goNextPage.bind(this, 'MenuStock')}>
                         <Image
                             source={require('../image/infostok.jpeg')}
                             style={{

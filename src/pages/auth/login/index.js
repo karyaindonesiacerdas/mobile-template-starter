@@ -142,11 +142,11 @@ function Login(props) {
                             password: '',
                         }}
                         validationSchema={Yup.object({
-                            email: Yup.string().email('Invalid email address'),
+                            email: Yup.string().email('Invalid email address').required('Required'),
                             password: Yup.string().max(
                                 20,
                                 'Must be 5 characters or less',
-                            ),
+                            ).required('Required'),
                         })}
                         onSubmit={value => {
                             handleSubmitLogin(value);
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     errMsg: {
-        color: 'red',
+        color: 'black',
         marginBottom: 10,
         marginTop: -10,
         fontSize: 12,

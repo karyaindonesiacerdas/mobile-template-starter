@@ -13,8 +13,10 @@ import styles from './styles';
 import {API} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AwesomeLoading from 'react-native-awesome-loading';
 
 function ActiveDonorDetail(props) {
+    const [loading, setLoading] = useState(false);
     const [kode_calon_pendonor, setKode] = useState()
     const [detail, SetDetail] = useState({
         kuesioner_id: '',
@@ -40,6 +42,7 @@ function ActiveDonorDetail(props) {
             const token = await AsyncStorage.getItem('token');
             var t = new Date().toISOString().slice(0, 10);
             const ktp = await AsyncStorage.getItem('ktp');
+            setLoading(true)
             
             const body = {
                 ktp: ktp,
@@ -51,13 +54,14 @@ function ActiveDonorDetail(props) {
                 Authorization: 'Bearer ' + token,
             };
 
-            Axios.post(`${API}/riwayat/detail`, body, {
+            Axios.post(`${API}/riwayat-donor/detail`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',
                 },
             })
                 .then(r => {
+                    setLoading(false)
                     if (r.data.code == 200) {
                         AsyncStorage.setItem('kode_pendonor',r.data.data[0].kode_calon_pendonor);
                         SetDetail(r.data.data[0]);
@@ -181,6 +185,7 @@ function ActiveDonorDetail(props) {
                     }
                 })
                 .catch(err => {
+                    setLoading(false)
                     Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
                     [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
                     )
@@ -293,7 +298,7 @@ function ActiveDonorDetail(props) {
                     {action}
                     <Card style={styles.flowCardMarroon}>
                         <TouchableOpacity onPress={() => goNextPage('ActiveDonor')}>
-                            <Text style={styles.textInCard}>Riwayat Donor</Text>
+                            <Text style={styles.textInCard}>Active Donor</Text>
                         </TouchableOpacity>
                     </Card>
                 </View>

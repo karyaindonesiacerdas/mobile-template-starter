@@ -414,7 +414,7 @@ function kuisionerBiasa(props) {
                             });
                 } else if (res.data.code === 500){
                     Alert.alert("Gagal","Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ",
-                    [{ text: "Cek Riwayat", onPress: () => props.navigation.replace('Riwayat') }]
+                    [{ text: "Cek Inbox", onPress: () => props.navigation.replace('ActiveDonor') }]
                    )
                 } else{
                     Alert.alert("Error","Silahkan Coba Kembali",

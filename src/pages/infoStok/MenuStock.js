@@ -84,7 +84,7 @@ function MenuStock(props) {
                             marginRight: '5%',
                         }}>
                         <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'InfoStok02')}>
+                            onPress={goNextPage.bind(this, 'KebutuhanDarah')}>
                             <Icon
                                 name="plus"
                                 type="font-awesome"
@@ -120,7 +120,7 @@ function MenuStock(props) {
                             marginLeft: '5%',
                         }}>
                         <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'InfoStok03')}>
+                            onPress={goNextPage.bind(this, 'StockDarah')}>
                             <Icon
                                 name="tint"
                                 type="font-awesome"
