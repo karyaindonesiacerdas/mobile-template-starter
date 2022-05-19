@@ -22,7 +22,14 @@ function MenuDonor(props) {
     }, []);
     const goNextPage = page => {
         if (page) {
-            props.navigation.navigate(page);
+            if (page==='RiwayatPermintaan'){
+                Alert.alert("Warning","Feature Sedang Dalam Pengembangan",
+                [{ text: "OK", onPress: () => console.log('Ok') }]
+                ) 
+            }else{
+                props.navigation.navigate(page);
+            }
+            
         }
     };
     return (

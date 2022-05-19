@@ -6,6 +6,7 @@ import {
     View,
     TouchableOpacity,
     ActivityIndicator,
+    Alert,
 } from 'react-native';
 import {Container, Card} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -118,8 +119,13 @@ function Dashboard(props) {
         if (page === 'Login') {
             AsyncStorage.clear();
             props.navigation.navigate(page);
-        } else {
+        } else if (page ==='MenuKonseling'){
+            Alert.alert("Warning","Feature Sedang Dalam Pengembangan",
+            [{ text: "OK", onPress: () => console.log('Ok') }]
+            ) 
+        }else {
             props.navigation.navigate(page);
+            
         }
     };
 

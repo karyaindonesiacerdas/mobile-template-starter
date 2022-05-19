@@ -28,8 +28,10 @@ import { API } from '../../../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
 import moment from 'moment'
+import AwesomeLoading from 'react-native-awesome-loading';
 
 function kuisionerBiasa(props) {
+    const [loading, setLoading] = useState(false);
     const [kuesioner, setKuesioner] = useState([
         {
             number: 1,
@@ -372,6 +374,8 @@ function kuisionerBiasa(props) {
         }
     };
     async function submit(input) {
+        setLoading(true)
+        console.log('loading ' + loading)
         const token = await AsyncStorage.getItem('token');
         const nama = await AsyncStorage.getItem('nama');
         
@@ -393,12 +397,13 @@ function kuisionerBiasa(props) {
                     input.ktp = ktp;
                     input.nama = nama;
                     const body = input;
-                    Axios.post(`${API}/kuesioner/create`, body,
+                    Axios.post(`${API}/kuesioner-ic/create`, body,
                         {headers:{
                             Authorization :'Bearer ' +token,
                             'Content-Type': 'application/json',
                         }})
                             .then(res => {
+                                setLoading(false)
                                 console.info('res.data', res.data);
                                 console.log(res.data);
                                 if (res.data.code === 200) {
@@ -421,15 +426,18 @@ function kuisionerBiasa(props) {
                     [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
                     )
                 }
+                setLoading(false)
             })
             .catch(err => {
                 Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
                 [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
                 )
             });
+            setLoading(false)
     }
     return (
         <Container>
+            <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
             <Image
                 source={require('../../../image/logo.png')}
                 style={{
@@ -452,6 +460,7 @@ function kuisionerBiasa(props) {
                     top: 10,
                 }}></Image>
             <ScrollView>
+            
                 <Text
                     style={{
                         marginLeft: 10,
@@ -473,6 +482,7 @@ function kuisionerBiasa(props) {
                     }}>
                     Donor Darah Biasa
                 </Text>
+                
                 <View
                     style={{
                         width: '90%',

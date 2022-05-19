@@ -276,7 +276,7 @@ function ActiveDonor(props) {
                 Authorization: 'Bearer ' + token,
             };
 
-            Axios.post(`${API}/riwayat-donor`, body, {
+            Axios.post(`${API}/riwayat-donor/active`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',
