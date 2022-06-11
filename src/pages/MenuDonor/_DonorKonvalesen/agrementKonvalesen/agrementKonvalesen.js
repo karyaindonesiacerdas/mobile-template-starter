@@ -32,11 +32,14 @@ import styles from "../../../konvalesen/styles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {API} from '../../../../config/api';
 import Axios from 'axios';
+import AwesomeLoading from 'react-native-awesome-loading';
 
 
 function agrementKonvalesen(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const goNextPage = (page) => {
     console.log(check1)
     if (check1) {
@@ -51,7 +54,7 @@ function agrementKonvalesen(props) {
   };
 
   async function submit_donor(input) {
-
+    setLoading(true)
     const token = await AsyncStorage.getItem('token');
     const nama = await AsyncStorage.getItem('nama');
     const data_calon_donor = props.route.params.data_calon_donor
@@ -81,6 +84,7 @@ function agrementKonvalesen(props) {
                 },
             })
                 .then(res => {
+                  setLoading(false)
                     console.info('res.data', res.data);
                     console.log(res.data);
                     if (res.data.code === 200) {
@@ -92,30 +96,37 @@ function agrementKonvalesen(props) {
                     }
                 })
                 .catch(err => {
+                    setLoading(false)
                     Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
                     [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
                     )
                 });
         } else if (res.data.code === 500){
+            setLoading(false)
             Alert.alert("Gagal","Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ",
             [{ text: "Cek Riwayat", onPress: () => props.navigation.replace('Riwayat') }]
             )
         } else {
+          setLoading(false)
           Alert.alert("Error",res.data.message,
           [{ text: "OK", onPress: () => console.log(res.data.message) }]
           )
         }
     })
     .catch(err => {
+      setLoading(false)
         alert(err)  
       // Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
         // [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
         // )
     });
+    setLoading(false)
 }
 
   return (
     <Container>
+          <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
+
       <Image
         source={require("../../../../asset/logoUDD.png")}
         style={{

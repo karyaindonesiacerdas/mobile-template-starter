@@ -370,27 +370,31 @@ function kuisionerBiasa(props) {
                 submit(input);
             }
         } else {
-            props.navigation.navigate('infoPendonorBiasa')
+            props.navigation.navigate('daftarDonorBiasa')
         }
     };
-    async function submit(input) {
+    
+    const submit = input => {
+        console.log('loading at 378 ' + loading)
         setLoading(true)
-        console.log('loading ' + loading)
-        const token = await AsyncStorage.getItem('token');
-        const nama = await AsyncStorage.getItem('nama');
-        
         const data_calon_donor = props.route.params.data_calon_donor
-        console.log(data_calon_donor)
-        const ktp = await AsyncStorage.getItem('ktp');
-        console.info('Submit')
-        Axios.post(`${API}/pendonor/calon-pendonor/create`,qs.stringify(data_calon_donor),
+        const token = data_calon_donor['token']
+        const ktp = data_calon_donor['ktp']
+        const nama = data_calon_donor['nama']
+        
+        var body = new FormData();
+
+        for ( var key in data_calon_donor ) {
+            body.append(key, data_calon_donor[key]);
+        }
+        
+        console.log('loading ' + loading)
+        Axios.post(`${API}/pendonor/calon-pendonor/create`,body,
             {headers:{
             Authorization :'Bearer ' +token,
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'multipart/form-data; boundary=${body._boundary}',
             }})
             .then(res => {
-                console.info('res.data', res.data);
-                console.log(res.data);
                 if (res.data.code === 200) {
                     AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
                     input.kode_calon_pendonor = res.data.kode_pendonor;
@@ -413,15 +417,24 @@ function kuisionerBiasa(props) {
                                 }
                             })
                             .catch(err => {
+                                setLoading(false)
                                 Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-                                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                                [{ text: "OK", onPress: () => props.navigation.navigate('Login') }]
                                 )
                             });
                 } else if (res.data.code === 500){
+                    setLoading(false)
                     Alert.alert("Gagal","Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ",
                     [{ text: "Cek Inbox", onPress: () => props.navigation.replace('ActiveDonor') }]
+                    // [{ text: "Cek Inbox", onPress: () => console.log('loading') }]
+                    )
+                } else if (res.data.code === 400){
+                    setLoading(false)
+                    Alert.alert("Gagal","Silahkan Lengkapi Halaman Profile Anda  ",
+                    [{ text: "Cek Inbox", onPress: () => props.navigation.replace('EditProfil') }]
                    )
                 } else{
+                    setLoading(false)
                     Alert.alert("Error","Silahkan Coba Kembali",
                     [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
                     )
@@ -429,11 +442,12 @@ function kuisionerBiasa(props) {
                 setLoading(false)
             })
             .catch(err => {
+                setLoading(false)
                 Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                [{ text: "OK", onPress: () => props.navigation.navigate('Login') }]
                 )
             });
-            setLoading(false)
+            // setLoading(false)
     }
     return (
         <Container>
@@ -460,6 +474,7 @@ function kuisionerBiasa(props) {
                     top: 10,
                 }}></Image>
             <ScrollView>
+            <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
             
                 <Text
                     style={{

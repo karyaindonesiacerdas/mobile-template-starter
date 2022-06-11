@@ -264,7 +264,7 @@ function ActiveDonor(props) {
         async function getRiwayat() {
             setLoading(true)
             const token = await AsyncStorage.getItem('token');
-            const date_today = moment().utcOffset('+07:00').format('YYYY-MM-DD');
+            const date_today = moment().add(-7, 'days').utcOffset('+07:00').format('YYYY-MM-DD');
             const ktp = await AsyncStorage.getItem('ktp');
             
             const body = {
@@ -285,11 +285,12 @@ function ActiveDonor(props) {
                 .then(r => {
                     setLoading(false)
                     if (r.data.code == 200) {
+                        console.log(r.data.data[0].status)
                         const data = r.data.data
                         const filtered = []
                         if (data != null) {
                             const filtered = data.filter(function(value, index, arr){ 
-                                return data[index].TGL.substring(0,10) == date_today || data[index].jenis_donor == 'plasma konvalesen'
+                                return data[index].TGL.substring(0,10) >= date_today || data[index].jenis_donor == 'plasma konvalesen'
                             });
                             setDataSource(filtered);
                         }else{

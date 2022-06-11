@@ -82,7 +82,6 @@ function EditProfil(props) {
             console.info('_status_menikah', _status_menikah);
             console.info('_golongan_darah', _golongan_darah);
             console.info('_pekerjaan', _pekerjaan);
-
             Axios.post(
                 `${API}/user`,
                 {},
@@ -332,7 +331,7 @@ function EditProfil(props) {
 
         getUser();
         setIsLoading(false);
-        get_profile_image();
+        // get_profile_image();
     }, []);
 
     const [input] = useState({
@@ -349,6 +348,17 @@ function EditProfil(props) {
     };
 
     const submitData = value => {
+        var flag_error = 0
+        for (const key in value){
+            console.log(`${key}: ${value[key]}`);
+            if (!value[key] && flag_error == 0){
+                flag_error +=1
+                var text = "Kolom " + key.toUpperCase() + " Tidak Boleh Kosong"
+                Alert.alert("Gagal",text,
+                [{ text: "Coba Lagi", onPress: () => console.log('Ok')}]
+                )
+            }
+        }
         async function submit() {
             // setIsLoading(true)
             setLoading(true)
@@ -431,8 +441,8 @@ function EditProfil(props) {
                                 body.gambar.toString(),
                             );}
 
-                            Alert.alert("Berhasil","Profile Berhasil Di Perbarui",
-                                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                            Alert.alert("Berhasil","Profile Berhasil Di Perbarui, Silahkan Login Kembali",
+                                [{ text: "OK", onPress: () => props.navigation.navigate('Login') }]
                                 )
                         } else {
                             Alert.alert("Gagal",r.data.message,
@@ -447,27 +457,11 @@ function EditProfil(props) {
             setLoading(false)
             setIsLoading(false);
         }
-        submit();
+        if (flag_error == 0){
+            submit();
+        }      
     };
 
-    const formSchema = Yup.object().shape({
-        ktp: Yup.string()
-            .min(10, 'Invalid KTP Number !')
-            .max(16, 'Invalid KTP Number !')
-            .required('Required !'),
-        nama: Yup.string().required('Required !'),
-        tempat_lahir: Yup.string().required('Required !'),
-        alamat: Yup.string().required('Required !'),
-        kecamatan: Yup.string().required('Required !'),
-        kelurahan: Yup.string().required('Required !'),
-        wilayah: Yup.string().required('Required !'),
-        
-        tanggal_lahir: Yup.string().required('Required !'),
-        // jeniskelamin : Yup.string()
-        // .required('Required !'),
-        // statusmenikah : Yup.string()
-        // .required('Required !')
-    });
     const [filePath, setFilePath] = useState({});
     const requestCameraPermission = async () => {
         if (Platform.OS === 'android') {
@@ -696,11 +690,7 @@ function EditProfil(props) {
                                     marginRight: '5%',
                                 }}>
                                 <Image
-                                    source={{
-                                        uri:
-                                            'data:image/jpeg;base64,' +
-                                            filebase64,
-                                    }}
+                                    source={require('../../image/logo_profile.png')}
                                     style={{
                                         marginTop: 15,
                                         width: 150,
@@ -797,7 +787,6 @@ function EditProfil(props) {
                                 golongan_darah: golonganDarahInitial,
                             }}
                             enableReinitialize
-                            validationSchema={formSchema}
                             onSubmit={value => {
                                 submitData(value);
                             }}>
@@ -807,51 +796,9 @@ function EditProfil(props) {
                                 setFieldValue,
                                 handleSubmit,
                                 values,
-                                errors,
                                 touched,
                             }) => (
                                 <View>
-                                    <Text
-                                        style={{
-                                            marginLeft: 30,
-                                            marginTop: 20,
-                                            fontSize: 15,
-                                            fontWeight: 'normal',
-                                            color: 'black',
-                                            textShadowColor: '#fff',
-                                            textShadowOffset: {
-                                                width: 1,
-                                                height: 1,
-                                            },
-                                            textShadowRadius: 10,
-                                        }}>
-                                        No.KTP
-                                    </Text>
-                                    <Item style={styles.item}>
-                                        <Input
-                                            style={styles.input}
-                                            onChangeText={handleChange('ktp')}
-                                            onBlur={handleBlur('ktp')}
-                                            value={values.ktp}
-                                        />
-                                    </Item>
-                                    {errors.ktp && touched.ktp ? (
-                                        <Text
-                                            style={{
-                                                marginLeft: 30,
-                                                fontSize: 15,
-                                                fontWeight: 'normal',
-                                                color: 'red',
-                                                textShadowColor: '#fff',
-                                                textShadowOffset: {
-                                                    width: 1,
-                                                    height: 1,
-                                                },
-                                                textShadowRadius: 10,
-                                            }}>
-                                            {errors.ktp}
-                                        </Text>
-                                    ) : null}
                                     <Text
                                         style={{
                                             marginLeft: 30,
@@ -876,23 +823,50 @@ function EditProfil(props) {
                                             value={values.nama}
                                         />
                                     </Item>
-                                    {errors.nama && touched.nama ? (
-                                        <Text
-                                            style={{
-                                                marginLeft: 30,
-                                                fontSize: 15,
-                                                fontWeight: 'normal',
-                                                color: 'red',
-                                                textShadowColor: '#fff',
-                                                textShadowOffset: {
-                                                    width: 1,
-                                                    height: 1,
-                                                },
-                                                textShadowRadius: 10,
-                                            }}>
-                                            {errors.nama}
-                                        </Text>
-                                    ) : null}
+                                    <Text
+                                        style={{
+                                            marginLeft: 30,
+                                            marginTop: 20,
+                                            fontSize: 15,
+                                            fontWeight: 'normal',
+                                            color: 'black',
+                                            textShadowColor: '#fff',
+                                            textShadowOffset: {
+                                                width: 1,
+                                                height: 1,
+                                            },
+                                            textShadowRadius: 10,
+                                        }}>
+                                        Tanggal Lahir
+                                    </Text>
+                                    
+                                    <DatePicker
+                                            modal
+                                            mode='date'
+                                            open={open}
+                                            date={date}
+                                            onConfirm={(date) => {
+                                            setOpen(false)
+                                            
+                                        setTanggalLahir(moment(date).format('YYYY-MM-DD').toString())
+                                            }}
+                                            onCancel={() => {
+                                            setOpen(false)
+                                            }}
+                                        />
+                                    <Item style={styles.item}>
+                                        <TextInput
+                                            style={styles.input}
+                                            onChangeText={handleChange(
+                                                'tanggal_lahir',
+                                            )}
+                                            onPressIn = {() => setOpen(true)}
+                                            onBlur={handleBlur('tanggal_lahir')}
+                                            value={values.tanggal_lahir}
+                                            placeholder={'Contoh: 1982-12-28'}
+                                            // editable= {false}
+                                        />
+                                    </Item>
                                     <Text
                                         style={{
                                             marginLeft: 30,
@@ -919,25 +893,7 @@ function EditProfil(props) {
                                             value={values.tempat_lahir}
                                         />
                                     </Item>
-                                    {errors.tempat_lahir &&
-                                    touched.tempat_lahir ? (
-                                        <Text
-                                            style={{
-                                                marginLeft: 30,
-                                                fontSize: 15,
-                                                fontWeight: 'normal',
-                                                color: 'red',
-                                                textShadowColor: '#fff',
-                                                textShadowOffset: {
-                                                    width: 1,
-                                                    height: 1,
-                                                },
-                                                textShadowRadius: 10,
-                                            }}>
-                                            {errors.tempat_lahir}
-                                        </Text>
-                                    ) : null}
-                                <Text
+                                    <Text
                                         style={{
                                             marginLeft: 30,
                                             marginTop: 20,
@@ -951,56 +907,17 @@ function EditProfil(props) {
                                             },
                                             textShadowRadius: 10,
                                         }}>
-                                        Tanggal Lahir
+                                        No.KTP
                                     </Text>
-                                    
-                                    <DatePicker
-                                            modal
-                                            mode='date'
-                                            open={open}
-                                            date={date}
-                                            onConfirm={(date) => {
-                                            setOpen(false)
-                                            
-                                            console.log()
-                                            setTanggalLahir(moment(date).format('YYYY-MM-DD').toString())
-                                            }}
-                                            onCancel={() => {
-                                            setOpen(false)
-                                            }}
-                                        />
                                     <Item style={styles.item}>
-                                        <TextInput
+                                        <Input
                                             style={styles.input}
-                                            onChangeText={handleChange(
-                                                'tanggal_lahir',
-                                            )}
-                                            onPressIn = {() => setOpen(true)}
-                                            onBlur={handleBlur('tanggal_lahir')}
-                                            value={values.tanggal_lahir}
-                                            placeholder={'Contoh: 1982-12-28'}
-                                            // editable= {false}
+                                            onChangeText={handleChange('ktp')}
+                                            onBlur={handleBlur('ktp')}
+                                            value={values.ktp}
+                                            keyboardType='numeric'
                                         />
                                     </Item>
-                                    {errors.tanggal_lahir &&
-                                    touched.tanggal_lahir ? (
-                                        <Text
-                                            style={{
-                                                marginLeft: 30,
-                                                fontSize: 15,
-                                                fontWeight: 'normal',
-                                                color: 'red',
-                                                textShadowColor: '#fff',
-                                                textShadowOffset: {
-                                                    width: 1,
-                                                    height: 1,
-                                                },
-                                                textShadowRadius: 10,
-                                            }}>
-                                            {errors.tanggal_lahir}
-                                        </Text>
-                                    ) : null}
-                                   
                                     <Text
                                         style={{
                                             marginLeft: 30,
@@ -1027,24 +944,6 @@ function EditProfil(props) {
                                             value={values.alamat}
                                         />
                                     </Item>
-                                    {errors.alamat &&
-                                    touched.alamat ? (
-                                        <Text
-                                            style={{
-                                                marginLeft: 30,
-                                                fontSize: 15,
-                                                fontWeight: 'normal',
-                                                color: 'red',
-                                                textShadowColor: '#fff',
-                                                textShadowOffset: {
-                                                    width: 1,
-                                                    height: 1,
-                                                },
-                                                textShadowRadius: 10,
-                                            }}>
-                                            {errors.alamat}
-                                        </Text>
-                                    ) : null}
                                     <Text
                                         style={{
                                             marginLeft: 30,
@@ -1071,24 +970,7 @@ function EditProfil(props) {
                                             value={values.kelurahan}
                                         />
                                     </Item>
-                                    {errors.kelurahan &&
-                                    touched.kelurahan ? (
-                                        <Text
-                                            style={{
-                                                marginLeft: 30,
-                                                fontSize: 15,
-                                                fontWeight: 'normal',
-                                                color: 'red',
-                                                textShadowColor: '#fff',
-                                                textShadowOffset: {
-                                                    width: 1,
-                                                    height: 1,
-                                                },
-                                                textShadowRadius: 10,
-                                            }}>
-                                            {errors.kelurahan}
-                                        </Text>
-                                    ) : null}
+                                    
                                      <Text
                                         style={{
                                             marginLeft: 30,
@@ -1115,24 +997,7 @@ function EditProfil(props) {
                                             value={values.kecamatan}
                                         />
                                     </Item>
-                                    {errors.kecamatan &&
-                                    touched.kecamatan ? (
-                                        <Text
-                                            style={{
-                                                marginLeft: 30,
-                                                fontSize: 15,
-                                                fontWeight: 'normal',
-                                                color: 'red',
-                                                textShadowColor: '#fff',
-                                                textShadowOffset: {
-                                                    width: 1,
-                                                    height: 1,
-                                                },
-                                                textShadowRadius: 10,
-                                            }}>
-                                            {errors.kecamatan}
-                                        </Text>
-                                    ) : null}
+                                   
                                     <Text
                                         style={{
                                             marginLeft: 30,
@@ -1159,24 +1024,8 @@ function EditProfil(props) {
                                             value={values.wilayah}
                                         />
                                     </Item>
-                                    {errors.wilayah &&
-                                    touched.wilayah ? (
-                                        <Text
-                                            style={{
-                                                marginLeft: 30,
-                                                fontSize: 15,
-                                                fontWeight: 'normal',
-                                                color: 'red',
-                                                textShadowColor: '#fff',
-                                                textShadowOffset: {
-                                                    width: 1,
-                                                    height: 1,
-                                                },
-                                                textShadowRadius: 10,
-                                            }}>
-                                            {errors.wilayah}
-                                        </Text>
-                                    ) : null}
+                                   
+
                                     <Text
                                         style={{
                                             marginLeft: 30,
@@ -1645,6 +1494,7 @@ function EditProfil(props) {
                                             <TouchableOpacity
                                                 style={styles.button}
                                                 onPress={handleSubmit}>
+                                                
                                                 <Text
                                                     style={{
                                                         margin: 10,

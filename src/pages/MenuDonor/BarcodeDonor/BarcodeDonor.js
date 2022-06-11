@@ -24,8 +24,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API } from '../../../config/api';
 import Axios from 'axios';
 import QRCode from "react-qr-code";
+import AwesomeLoading from 'react-native-awesome-loading';
+
+
 function BarcodeDonor(props) {
-  
+  const [loading, setLoading] = useState(false);
   const [qr , setQr] = useState(null)
   const [tgl_donor,setTanggal] = useState(null)     
   const [kuisoner_id, setKuesioner] = useState(null) 
@@ -42,16 +45,17 @@ function BarcodeDonor(props) {
         kode_calon_pendonor: kode_pendonor
       };
       console.log('get barcode')
+      setLoading(true)
       Axios.post(`${API}/pendonor/calon-pendonor`, body,
          headers)
           .then(res => {
             console.log(res.data.data[0])
-              
+            setLoading(false)
             if (res.data.data[0].jenis_donor === 'biasa'){
               console.log(res.data.data[0])
               setKuesioner(res.data.data[0].kuesioner_id)
-              if (res.data.data[0].TGL){
-                setTanggal(res.data.data[0].TGL.substring(0,10))
+              if (res.data.data[0].created_at){
+                setTanggal(res.data.data[0].created_at.substring(0,10))
               }
               setQr(
                 <View
@@ -100,6 +104,7 @@ function BarcodeDonor(props) {
                  
           })
           .catch(err => {
+            setLoading(false)
               console.log('test 1 : ', err.response);
           });
     }
@@ -138,7 +143,8 @@ function BarcodeDonor(props) {
         }}
       ></Image>
       <ScrollView>
-        
+      <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
+
 
         <Text
           style={{

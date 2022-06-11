@@ -14,7 +14,7 @@ import {API} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AwesomeLoading from 'react-native-awesome-loading';
-
+import moment from 'moment'
 function ActiveDonorDetail(props) {
     const [loading, setLoading] = useState(false);
     const [kode_calon_pendonor, setKode] = useState()
@@ -39,6 +39,7 @@ function ActiveDonorDetail(props) {
     );
     useEffect(() => {
         async function getRiwayat() {
+            const date_today = moment().utcOffset('+07:00').format('YYYY-MM-DD');
             const token = await AsyncStorage.getItem('token');
             var t = new Date().toISOString().slice(0, 10);
             const ktp = await AsyncStorage.getItem('ktp');
@@ -66,32 +67,47 @@ function ActiveDonorDetail(props) {
                         AsyncStorage.setItem('kode_pendonor',r.data.data[0].kode_calon_pendonor);
                         SetDetail(r.data.data[0]);
                         if (r.data.data[0].jenis_donor === 'biasa') {
-                            if (r.data.data[0].status === 'lolos admin') {
-                                setAction(
-                                    <Card style={styles.flowCardMarroon}>
-                                        <TouchableOpacity
-                                            onPress={() => goNextPage('lokasiDonor')}>
-                                            <Text style={styles.textInCard}>
-                                                Pilih Lokasi Donor
-                                            </Text>
-                                        </TouchableOpacity>
-                                    </Card>,
-                                );
-                            } else if (
-                                r.data.data[0].status === 'location_set'
-                            ) {
-                                setAction(
-                                    <Card style={styles.flowCardMarroon}>
-                                        <TouchableOpacity
-                                            onPress={() =>
-                                                goNextPage('BarcodeDonor')
-                                            }>
-                                            <Text style={styles.textInCard}>
-                                                Tampilkan Barcode
-                                            </Text>
-                                        </TouchableOpacity>
-                                    </Card>,
-                                );
+                            if(date_today === r.data.data[0].TGL.substring(0,10)){
+                                if (r.data.data[0].status === 'lolos admin') {
+                                    setAction(
+                                        <Card style={styles.flowCardMarroon}>
+                                            <TouchableOpacity
+                                                onPress={() => goNextPage('lokasiDonor')}>
+                                                <Text style={styles.textInCard}>
+                                                    Pilih Lokasi Donor
+                                                </Text>
+                                            </TouchableOpacity>
+                                        </Card>,
+                                    );
+                                } else if (
+                                    r.data.data[0].status === 'location_set'
+                                ) {
+                                    setAction(
+                                        <Card style={styles.flowCardMarroon}>
+                                            <TouchableOpacity
+                                                onPress={() =>
+                                                    goNextPage('BarcodeDonor')
+                                                }>
+                                                <Text style={styles.textInCard}>
+                                                    Tampilkan Barcode
+                                                </Text>
+                                            </TouchableOpacity>
+                                        </Card>,
+                                    );
+                                } else {
+                                    setAction(
+                                        <Card style={styles.flowCardMarroon}>
+                                            <TouchableOpacity
+                                                onPress={() =>
+                                                    goNextPage('MenuDonor')
+                                                }>
+                                                <Text style={styles.textInCard}>
+                                                    Daftar Donor Baru
+                                                </Text>
+                                            </TouchableOpacity>
+                                        </Card>,
+                                    );
+                                }
                             } else {
                                 setAction(
                                     <Card style={styles.flowCardMarroon}>
@@ -253,7 +269,7 @@ function ActiveDonorDetail(props) {
                                     color: 'black',
                                 }}>
                                 <B>
-                                    Jadwal Donor / Sampel : {' '}
+                                    Jadwal Donor / Sampel : {'  '}
                                     {detail.TGL.substring(0,10)}
                                 </B>
                             </Text>

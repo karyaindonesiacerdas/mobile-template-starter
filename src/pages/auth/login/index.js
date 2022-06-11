@@ -37,6 +37,7 @@ function Login(props) {
             email: value.email,
             password: value.password,
         };
+        console.log(body)
 
         Axios.post(
             `${API}/user/login`,

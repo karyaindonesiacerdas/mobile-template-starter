@@ -34,6 +34,7 @@ function lokasiGedung(props) {
         const body = {
             ktp: ktp,
             lokasi: lokasi,
+            status: 'location_set'
         };
         console.log(body);
         Axios.put(`${API}/pendonor/update/lokasi`, body, {
