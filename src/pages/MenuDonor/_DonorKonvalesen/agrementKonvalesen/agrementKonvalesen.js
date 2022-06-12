@@ -68,8 +68,7 @@ function agrementKonvalesen(props) {
             'Content-Type': 'multipart/form-data; boundary=${body._boundary}',
         }})
     .then(res => {
-        console.info('res.data', res.data);
-        console.log(res.data);
+        // stop
         if (res.data.code === 200) {
             AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
             kuisoner_calon_donor.kode_calon_pendonor = res.data.kode_pendonor;
@@ -77,7 +76,7 @@ function agrementKonvalesen(props) {
             kuisoner_calon_donor.nama = nama;
             const body = kuisoner_calon_donor;
             console.log(body);
-            Axios.post(`${API}/kuesioner/create`, body, {
+            Axios.post(`${API}/kuesioner-ic/create`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                     'Content-Type': 'application/json',
@@ -85,10 +84,11 @@ function agrementKonvalesen(props) {
             })
                 .then(res => {
                   setLoading(false)
-                    console.info('res.data', res.data);
-                    console.log(res.data);
+                    console.info('res.data kuisoner', res.data);
+                    console.log(res.data.code);
                     if (res.data.code === 200) {
-                        props.navigation.navigate('admKonvalesenResult', {});
+                      setLoading(false)
+                        props.navigation.navigate('admKonvalesenResult', {transaksi : res.data.transaksi});
                     } else {
                         Alert.alert("Error",res.data.message,
                         [{ text: "OK", onPress: () => console.log(res.data.message) }]
@@ -106,21 +106,26 @@ function agrementKonvalesen(props) {
             Alert.alert("Gagal","Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ",
             [{ text: "Cek Riwayat", onPress: () => props.navigation.replace('Riwayat') }]
             )
+        } else if (res.data.code === 400){
+            setLoading(false)
+            Alert.alert("Gagal","Silahkan Lengkapi Halaman Profile Anda  ",
+            [{ text: "Cek Inbox", onPress: () => props.navigation.replace('EditProfil') }]
+           )
         } else {
           setLoading(false)
-          Alert.alert("Error",res.data.message,
-          [{ text: "OK", onPress: () => console.log(res.data.message) }]
+          Alert.alert("Error","Silahkan Coba Kembali",
+          [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
           )
         }
     })
     .catch(err => {
       setLoading(false)
         alert(err)  
-      // Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-        // [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
-        // )
+      Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
+        [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+        )
     });
-    setLoading(false)
+    // setLoading(false)
 }
 
   return (

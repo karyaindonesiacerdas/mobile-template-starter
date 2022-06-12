@@ -82,7 +82,7 @@ function Login(props) {
                     AsyncStorage.setItem('email', r.data.data.email);
                     AsyncStorage.setItem('gambar', r.data.data.gambar);
 
-                    // AsyncStorage.setItem('golongan_darah',r.data.data.golongan_darah);
+                    AsyncStorage.setItem('golongan_darah',r.data.data.golongan_darah);
                     switch (r.data.data.role) {
                         case 'pendonor':
                             props.navigation.replace('Dashboard');

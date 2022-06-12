@@ -407,11 +407,11 @@ function kuisionerBiasa(props) {
                             'Content-Type': 'application/json',
                         }})
                             .then(res => {
-                                setLoading(false)
                                 console.info('res.data', res.data);
                                 console.log(res.data);
                                 if (res.data.code === 200) {
                                     props.navigation.navigate('admBiasaResult',{transaksi : res.data.transaksi});
+                                    setLoading(false)
                                 } else {
                                     console.log('Error', res.data.message);
                                 }

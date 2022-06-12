@@ -116,6 +116,7 @@ function Dashboard(props) {
     }
 
     const goNextPage = page => {
+        checkSession()
         if (page === 'Login') {
             AsyncStorage.clear();
             props.navigation.navigate(page);
