@@ -41,7 +41,6 @@ function agrementKonvalesen(props) {
   const [loading, setLoading] = useState(false);
 
   const goNextPage = (page) => {
-    console.log(check1)
     if (check1) {
       submit_donor()
       // props.navigation.navigate('agrementKonvalesen',{kode_pendonor : kode_calon_pendonor});

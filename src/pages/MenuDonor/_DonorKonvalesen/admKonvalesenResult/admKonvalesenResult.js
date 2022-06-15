@@ -55,7 +55,6 @@ function admKonvalesenResult(props) {
                 .then(r => {
                     if (r.data.code == 200) {
                         setRes(r.data);
-                        console.log('res', r.data.data[0]);
                         if (r.data.data[0].status === 'lolos admin') {
                             setKomponen(
                                 <View>

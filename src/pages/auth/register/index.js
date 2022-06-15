@@ -41,7 +41,6 @@ function Register(props) {
                 email: value.email,
                 nomor_telepon: value.nomorTelepon,
             };
-            console.log(body);
             Axios.post(
                 `${API}/user/register`,
                 qs.stringify(body),
@@ -50,7 +49,6 @@ function Register(props) {
                 .then(res => {
                     setLoading(false)
                     if (res.data.code === 200) {
-                        console.log()
                         Alert.alert("Berhasil","Anda Telah Terdaftar, Silakan Cek Email Untuk Mendapatkan Credential",
                         [{ text: "OK", onPress: () => console.log("OK Pressed") }]
                         )

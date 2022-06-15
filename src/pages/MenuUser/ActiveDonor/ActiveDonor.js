@@ -285,7 +285,6 @@ function ActiveDonor(props) {
                 .then(r => {
                     setLoading(false)
                     if (r.data.code == 200) {
-                        console.log(r.data.data[0].status)
                         const data = r.data.data
                         const filtered = []
                         if (data != null) {

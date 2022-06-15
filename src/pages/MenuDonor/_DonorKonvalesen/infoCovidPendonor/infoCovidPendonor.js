@@ -99,12 +99,7 @@ function infoCovidPendonor(props) {
         // DocumentPicker.types.pdf
       });
       //Printing the log realted to the file
-      console.log('res : ' + JSON.stringify(res));
-      console.log('URI : ' + res[0].uri);
-      console.log('Type : ' + res[0].type);
-      console.log('File Name : ' + res[0].name);
-      console.log('File Size : ' + res[0].size);
-
+      
       //Setting the state to show single file attributes
       const img = {
         uri: res[0].uri,
@@ -137,11 +132,6 @@ function infoCovidPendonor(props) {
         // DocumentPicker.types.pdf
       });
       //Printing the log realted to the file
-      console.log('res : ' + JSON.stringify(res));
-      console.log('URI : ' + res[0].uri);
-      console.log('Type : ' + res[0].type);
-      console.log('File Name : ' + res[0].name);
-      console.log('File Size : ' + res[0].size);
       //Setting the state to show single file attributes
       const img2 = {
         uri: res[0].uri,

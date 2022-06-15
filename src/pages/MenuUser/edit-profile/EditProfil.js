@@ -390,7 +390,6 @@ function EditProfil(props) {
                     },
                 })
                     .then(r => {
-                        setLoading(false)
                         if (r.data.code == 200) {
 
                             AsyncStorage.setItem('ktp', body.ktp.toString());
@@ -440,28 +439,105 @@ function EditProfil(props) {
                                 'gambar',
                                 body.gambar.toString(),
                             );}
-
-                            Alert.alert("Berhasil","Profile Berhasil Di Perbarui, Silahkan Login Kembali",
-                                [{ text: "OK", onPress: () => props.navigation.navigate('Login') }]
-                                )
+                            renew_token('Dashboard')
                         } else {
+                            setLoading(false)
                             Alert.alert("Gagal",r.data.message,
                                 [{ text: "Coba Lagi", onPress: () => console.log('Ok')}]
                                 )
                         }
                     })
                     .catch(err => {
-
+                        setLoading(false)
                         console.log('error : ', err.message);
                     });
-            setLoading(false)
+            
             setIsLoading(false);
         }
         if (flag_error == 0){
             submit();
         }      
     };
+    const renew_token = page => {
+        async function relogin(){
+            const email = await AsyncStorage.getItem('email');
+            const password = await AsyncStorage.getItem('pass');
 
+            const body = {
+                email: email,
+                password: password,
+            };
+            const headers = {
+                'Content-Type': 'application/json',
+            };
+    
+            Axios.post(
+                `${API}/user/login`,
+                JSON.stringify(body),
+                headers,
+            )
+                .then(r => {
+                    if (r.data.code == 200) {
+                        AsyncStorage.clear();
+                        AsyncStorage.setItem('email', body.email);
+                        AsyncStorage.setItem('pass', body.password);
+                        AsyncStorage.setItem('token', r.data.data.token);
+                        AsyncStorage.setItem('role', r.data.data.role);
+                        AsyncStorage.setItem('exp', r.data.data.exp);
+                        AsyncStorage.setItem('ktp', r.data.data.ktp);
+                        AsyncStorage.setItem('nama', r.data.data.nama);
+                        AsyncStorage.setItem('alamat', r.data.data.alamat);
+                        AsyncStorage.setItem('kecamatan', r.data.data.kecamatan);
+                        AsyncStorage.setItem('kelurahan', r.data.data.kelurahan);
+                        AsyncStorage.setItem('wilayah', r.data.data.wilayah);
+                        AsyncStorage.setItem('kartudonor', r.data.data.KODEPENDONOR);
+                        AsyncStorage.setItem(
+                            'tempat_lahir',
+                            r.data.data.tempat_lahir,
+                        );
+                        AsyncStorage.setItem(
+                            'tanggal_lahir',
+                            r.data.data.tanggal_lahir,
+                        );
+                        AsyncStorage.setItem(
+                            'status_menikah',
+                            r.data.data.status_menikah,
+                        );
+                        AsyncStorage.setItem(
+                            'jenis_kelamin',
+                            r.data.data.jenis_kelamin,
+                        );
+                        AsyncStorage.setItem(
+                            'nomor_telepon',
+                            r.data.data.nomor_telepon,
+                        );
+                        AsyncStorage.setItem('email', r.data.data.email);
+                        AsyncStorage.setItem('pekerjaan', r.data.data.pekerjaan);
+                        AsyncStorage.setItem('gambar', r.data.data.gambar);
+    
+                        AsyncStorage.setItem('golongan_darah',r.data.data.golongan_darah);
+                        setLoading(false)
+                        Alert.alert("Berhasil","Profile Berhasil Di Perbarui. ",
+                        [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                        )
+                        
+                    } else {
+                        setLoading(false)
+                        Alert.alert("Gagal","Email Atau Password Tidak Cocok",
+                        [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
+                       )
+                    }
+                })
+                .catch(err => {
+                    setLoading(false)
+                    Alert.alert("Error","Silahkan Coba Lagi",
+                        [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
+                       )
+                    console.log('error : ', err);
+                });
+        }
+        relogin()
+    };
     const [filePath, setFilePath] = useState({});
     const requestCameraPermission = async () => {
         if (Platform.OS === 'android') {

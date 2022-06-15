@@ -28,7 +28,6 @@ function Login(props) {
     const [loading, setLoading] = useState(false);
 
     const handleSubmitLogin = value => {
-        console.log('here')
         setLoading(true)
         const headers = {
             'Content-Type': 'application/json',
@@ -37,18 +36,17 @@ function Login(props) {
             email: value.email,
             password: value.password,
         };
-        console.log(body)
-
+    
         Axios.post(
             `${API}/user/login`,
             JSON.stringify(body),
             headers,
         )
             .then(r => {
-                
                 if (r.data.code == 200) {
                     setLoading(false)
-                    console.log(r.data.data.KODEPENDONOR);
+                    AsyncStorage.setItem('email', body.email);
+                    AsyncStorage.setItem('pass', body.password);
                     AsyncStorage.setItem('token', r.data.data.token);
                     AsyncStorage.setItem('role', r.data.data.role);
                     AsyncStorage.setItem('exp', r.data.data.exp);

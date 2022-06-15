@@ -375,7 +375,6 @@ function kuisionerBiasa(props) {
     };
     
     const submit = input => {
-        console.log('loading at 378 ' + loading)
         setLoading(true)
         const data_calon_donor = props.route.params.data_calon_donor
         const token = data_calon_donor['token']
@@ -383,12 +382,19 @@ function kuisionerBiasa(props) {
         const nama = data_calon_donor['nama']
         
         var body = new FormData();
-
+        var flag = 0
         for ( var key in data_calon_donor ) {
-            body.append(key, data_calon_donor[key]);
+            if (key != "token"){
+                if (data_calon_donor[key] == null){
+                    flag+=1
+                    Alert.alert("Error",key.toUpperCase() + " tidak boleh null, lengkapi profile",
+                    [{ text: "OK", onPress: () => props.navigation.navigate('EditProfil') }]
+                    )     
+                }
+                body.append(key, data_calon_donor[key]);
+            }
         }
-        
-        console.log('loading ' + loading)
+    async function submit(){
         Axios.post(`${API}/pendonor/calon-pendonor/create`,body,
             {headers:{
             Authorization :'Bearer ' +token,
@@ -407,8 +413,6 @@ function kuisionerBiasa(props) {
                             'Content-Type': 'application/json',
                         }})
                             .then(res => {
-                                console.info('res.data', res.data);
-                                console.log(res.data);
                                 if (res.data.code === 200) {
                                     props.navigation.navigate('admBiasaResult',{transaksi : res.data.transaksi});
                                     setLoading(false)
@@ -431,7 +435,7 @@ function kuisionerBiasa(props) {
                 } else if (res.data.code === 400){
                     setLoading(false)
                     Alert.alert("Gagal","Silahkan Lengkapi Halaman Profile Anda  ",
-                    [{ text: "Cek Inbox", onPress: () => props.navigation.replace('EditProfil') }]
+                    [{ text: "Update Profile", onPress: () => console.log("ok") }]
                    )
                 } else{
                     setLoading(false)
@@ -447,6 +451,10 @@ function kuisionerBiasa(props) {
                 [{ text: "OK", onPress: () => props.navigation.navigate('Login') }]
                 )
             });
+        }
+        if (flag==0){
+            submit()
+        }
             // setLoading(false)
     }
     return (
