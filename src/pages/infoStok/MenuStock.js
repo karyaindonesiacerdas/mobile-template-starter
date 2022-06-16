@@ -20,9 +20,7 @@ function MenuStock(props) {
     const goNextPage = page => {
         if (page) {
             if (page=="KebutuhanDarah"){
-                Alert.alert("Warning","Feature Sedang Dalam Pengembangan",
-                [{ text: "OK", onPress: () => console.log('Ok') }]
-                )
+                props.navigation.navigate(page);
             }
             else{
                 props.navigation.navigate(page);

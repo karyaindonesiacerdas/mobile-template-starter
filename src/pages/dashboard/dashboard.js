@@ -60,7 +60,7 @@ function Dashboard(props) {
                     alert("Unauthorized");
                     // expired kembali ke login dan clear session
                     queryClient.invalidateQueries();
-                    AsyncStorage.clear();
+                    // AsyncStorage.clear();
                     props.navigation.reset({
                         index: 0,
                         routes: [{name: 'Login'}],
@@ -104,13 +104,13 @@ function Dashboard(props) {
                 console.info('then123----', r.data);
                 if (r.data.code == 401) {
                     console.info('then----');
-                    AsyncStorage.clear();
+                    // AsyncStorage.clear();
                     props.navigation.navigate('Login');
                 }
             })
             .catch(err => {
                 console.info('catch---');
-                AsyncStorage.clear();
+                // AsyncStorage.clear();
                 props.navigation.navigate('Login');
             });
     }
@@ -118,7 +118,7 @@ function Dashboard(props) {
     const goNextPage = page => {
         checkSession()
         if (page === 'Login') {
-            AsyncStorage.clear();
+            // AsyncStorage.clear();
             props.navigation.navigate(page);
         } else if (page ==='MenuKonseling'){
             Alert.alert("Warning","Feature Sedang Dalam Pengembangan",

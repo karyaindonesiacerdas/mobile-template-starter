@@ -36,7 +36,7 @@ import QRCode from "react-qr-code";
 
 function barcodeSampel(props) {
     const [qr , setQr] = useState(null)
-    const [info_pendonor,setInfo] = useState({kuesioner_id : '' , TGL : ''})
+    const [info_pendonor,setInfo] = useState({kuesioner_id : '' , created_at : ''})
    
     useEffect(() => {
         async function getData() {
@@ -53,6 +53,7 @@ function barcodeSampel(props) {
           Axios.post(`${API}/pendonor/calon-pendonor`, body,
              headers)
               .then(res => {
+                console.log(res.data.data)
                 setInfo(res.data.data[0]) 
                 const data = res.data.data[0].kuesioner_id
                 console.log(data)
@@ -191,7 +192,7 @@ function barcodeSampel(props) {
                         textShadowOffset: {width: 1, height: 1},
                         textShadowRadius: 10,
                     }}>
-                    Keterangan :{'\n'}Berlaku Hanya Pada Tanggal{'\n'}({info_pendonor.TGL.substring(0,10)})
+                    Keterangan :{'\n'}Berlaku Hanya Pada Tanggal{'\n'}({info_pendonor.created_at.substring(0,10)})
                 </Text>
             </ScrollView>
             <View

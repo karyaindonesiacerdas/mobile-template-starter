@@ -478,7 +478,6 @@ function EditProfil(props) {
             )
                 .then(r => {
                     if (r.data.code == 200) {
-                        AsyncStorage.clear();
                         AsyncStorage.setItem('email', body.email);
                         AsyncStorage.setItem('pass', body.password);
                         AsyncStorage.setItem('token', r.data.data.token);

@@ -67,21 +67,24 @@ function KebutuhanDarah(props) {
     };
 
     useEffect(() => {
-        const headers = {
-            'Content-Type': 'application/json',
-        };
-        const body = {};
-        Axios.post(`${API}/resipien`, JSON.stringify(body), headers)
-            .then(r => {
-                if (r.data.code == 200) {
-                    setRes(r.data);
-                } else {
-                    console.log('Error', r.data.message);
-                }
+        async function get_kebutuhan_darah() {
+            const token = await AsyncStorage.getItem('token');
+            
+            const get_url = `${API}/kebutuhandarah/list/kebutuhandarah'`;
+            // const body
+            Axios.get(get_url, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
             })
-            .catch(err => {
-                console.log('tes : ', err);
-            });
+                .then(r => {
+                    console.log(r);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+
     }, []);
 
     const goNextPage = page => {

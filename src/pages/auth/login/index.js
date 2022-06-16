@@ -8,6 +8,9 @@ import {
     Button,
     View,
     Text,
+    ListItem,
+    CheckBox,
+    Body,
 } from 'native-base';
 import AwesomeLoading from 'react-native-awesome-loading';
 import {useMutation} from 'react-query';
@@ -26,17 +29,26 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 function Login(props) {
     const [loading, setLoading] = useState(false);
+    const [check1, setCheck1] = useState(false);
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
 
     const handleSubmitLogin = value => {
         setLoading(true)
         const headers = {
             'Content-Type': 'application/json',
         };
+        if (check1){
+            var remind_me = 'Y'
+        }
+        else{
+            var remind_me = 'N'
+        }
         const body = {
             email: value.email,
             password: value.password,
         };
-    
         Axios.post(
             `${API}/user/login`,
             JSON.stringify(body),
@@ -44,13 +56,15 @@ function Login(props) {
         )
             .then(r => {
                 if (r.data.code == 200) {
-                    setLoading(false)
+                   console.log(r.data.data)
                     AsyncStorage.setItem('email', body.email);
                     AsyncStorage.setItem('pass', body.password);
+                    AsyncStorage.setItem('remind_me', remind_me)
                     AsyncStorage.setItem('token', r.data.data.token);
                     AsyncStorage.setItem('role', r.data.data.role);
                     AsyncStorage.setItem('exp', r.data.data.exp);
                     AsyncStorage.setItem('ktp', r.data.data.ktp);
+                    AsyncStorage.setItem('pekerjaan', r.data.data.pekerjaan);
                     AsyncStorage.setItem('nama', r.data.data.nama);
                     AsyncStorage.setItem('alamat', r.data.data.alamat);
                     AsyncStorage.setItem('kecamatan', r.data.data.kecamatan);
@@ -111,6 +125,23 @@ function Login(props) {
         }
     };
 
+    useEffect(() => {
+        async function getUser() {
+            var _password = await AsyncStorage.getItem('pass');
+            var _email = await AsyncStorage.getItem('email');
+            var _remind_me = await AsyncStorage.getItem('remind_me');
+            if (_remind_me == 'Y'){
+                setPassword(_password)
+                setEmail(_email)
+                setCheck1(true)
+            }
+            AsyncStorage.clear();
+        }
+        getUser()
+       
+    }, []);
+
+
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -137,9 +168,10 @@ function Login(props) {
                     </View>
                     <Formik
                         initialValues={{
-                            email: '',
-                            password: '',
+                            email: email,
+                            password: password,
                         }}
+                        enableReinitialize
                         validationSchema={Yup.object({
                             email: Yup.string().email('Invalid email address').required('Required'),
                             password: Yup.string().max(
@@ -193,6 +225,18 @@ function Login(props) {
                                         </Text>
                                     </View>
                                 )}
+                            <ListItem>
+                                <CheckBox
+                                    color=""
+                                    checked={check1}
+                                    onPress={() => setCheck1(!check1)}
+                                />
+                                <Body>
+                                    <Text>
+                                       Remind Me
+                                    </Text>
+                                </Body>
+                            </ListItem>
                                 <Button
                                     onPress={handleSubmit}
                                     full
@@ -253,7 +297,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 25,
         height: 50,
-        marginBottom: 20,
+        marginBottom: 10,
         justifyContent: 'center',
         padding: 20,
     },
