@@ -45,6 +45,9 @@ function EditProfil(props) {
     const [golongan_darah, setGolonganDarah] = React.useState([]);
     const [golonganDarahInitial, setGolonganDarahInitial] =
         React.useState(null);
+    const [rhesusInitial, setRhesusInitial] =
+        React.useState(null);
+    const[rhesus, setRhesus] = React.useState([]);
     const [filebase64, setBase64] = React.useState(null);
     const [gambar, setGambar] = React.useState('');
     const [date, setDate] = useState(new Date())
@@ -69,6 +72,7 @@ function EditProfil(props) {
             var _golongan_darah = await AsyncStorage.getItem('golongan_darah');
             var _pekerjaan = await AsyncStorage.getItem('pekerjaan');
             var _gambar = await AsyncStorage.getItem('gambar');
+            var _rhesus = await AsyncStorage.getItem('rhesus');
 
             console.info('_ktp', _ktp);
             console.info('_nama', _nama);
@@ -82,6 +86,8 @@ function EditProfil(props) {
             console.info('_status_menikah', _status_menikah);
             console.info('_golongan_darah', _golongan_darah);
             console.info('_pekerjaan', _pekerjaan);
+            console.info('_rhesus', _rhesus);
+
             Axios.post(
                 `${API}/user`,
                 {},
@@ -127,6 +133,10 @@ function EditProfil(props) {
                         setGolonganDarahInitial(
                             _golongan_darah || r.data?.data?.[0].golongan_darah,
                         );
+
+                        setRhesusInitial(
+                            _rhesus || r.data?.data?.[0].rhesus,
+                        )
 
                         console.info(
                             _pekerjaan || r.data?.data?.[0].pekerjaan,
@@ -296,6 +306,47 @@ function EditProfil(props) {
                                         : false,
                             },
                         ]);
+
+                        setRhesus([
+                            {
+                                label: '(+) Positive',
+                                value: '+',
+                                checked:
+                                    _rhesus == '+'
+                                        ? true
+                                        : false ||
+                                          r.data?.data?.[0].rhesus ==
+                                              '+'
+                                        ? true
+                                        : false,
+                            },
+                            {
+                                label: '(-) Negative',
+                                value: '-',
+                                checked:
+                                    _rhesus == '-'
+                                        ? true
+                                        : false ||
+                                          r.data?.data?.[0].rhesus ==
+                                              '-'
+                                        ? true
+                                        : false,
+                            },
+                            {
+                                label: '(X)Tidak Tahu',
+                                value: 'X',
+                                checked:
+                                    _rhesus == 'X'
+                                        ? true
+                                        : false ||
+                                          r.data?.data?.[0].rhesus ==
+                                              'X'
+                                        ? true
+                                        : false,
+                            },
+                           
+                        ]);
+
                         setGambar(_gambar || r.data?.data?.[0].gambar);
                     } else {
                         setLoading(false)
@@ -339,6 +390,7 @@ function EditProfil(props) {
         gologan_darah: '',
         jenis_kelamin: '',
         status_menikah: '',
+        rhesus : '',
     });
 
     const goNextPage = page => {
@@ -377,6 +429,7 @@ function EditProfil(props) {
                 status_menikah: value.status_menikah,
                 golongan_darah: value.golongan_darah.toString(),
                 pekerjaan: value.pekerjaan,
+                rhesus: value.rhesus,
                 gambar: filebase64,
             };
             console.log(
@@ -391,54 +444,6 @@ function EditProfil(props) {
                 })
                     .then(r => {
                         if (r.data.code == 200) {
-
-                            AsyncStorage.setItem('ktp', body.ktp.toString());
-                            AsyncStorage.setItem('nama', body.nama.toString());
-                            AsyncStorage.setItem(
-                                'tempat_lahir',
-                                body.tempat_lahir.toString(),
-                            );
-                            AsyncStorage.setItem(
-                                'alamat',
-                                body.alamat.toString(),
-                            );
-                            AsyncStorage.setItem(
-                                'kecamatan',
-                                body.kecamatan.toString(),
-                            );
-                            AsyncStorage.setItem(
-                                'kelurahan',
-                                body.kelurahan.toString(),
-                            );
-                            AsyncStorage.setItem(
-                                'wilayah',
-                                body.wilayah.toString(),
-                            );
-                            AsyncStorage.setItem(
-                                'tanggal_lahir',
-                                body.tanggal_lahir.toString(),
-                            );
-                            AsyncStorage.setItem(
-                                'jenis_kelamin',
-                                body.jenis_kelamin.toString(),
-                            );
-                            AsyncStorage.setItem(
-                                'status_menikah',
-                                body.status_menikah.toString(),
-                            );
-                            AsyncStorage.setItem(
-                                'golongan_darah',
-                                body.golongan_darah.toString(),
-                            );
-                            AsyncStorage.setItem(
-                                'pekerjaan',
-                                body.pekerjaan.toString(),
-                            );
-                            if (body.gambar){
-                            AsyncStorage.setItem(
-                                'gambar',
-                                body.gambar.toString(),
-                            );}
                             renew_token('Dashboard')
                         } else {
                             setLoading(false)
@@ -515,6 +520,7 @@ function EditProfil(props) {
                         AsyncStorage.setItem('gambar', r.data.data.gambar);
     
                         AsyncStorage.setItem('golongan_darah',r.data.data.golongan_darah);
+                        AsyncStorage.setItem('rhesus',r.data.data.rhesus);
                         setLoading(false)
                         Alert.alert("Berhasil","Profile Berhasil Di Perbarui. ",
                         [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
@@ -860,6 +866,7 @@ function EditProfil(props) {
                                 status_menikah: status_menikah,
                                 pekerjaan: pekerjaanInitial,
                                 golongan_darah: golonganDarahInitial,
+                                rhesus: rhesusInitial
                             }}
                             enableReinitialize
                             onSubmit={value => {
@@ -1480,6 +1487,100 @@ function EditProfil(props) {
                                                                 onPress={() => {
                                                                     setFieldValue(
                                                                         'golongan_darah',
+                                                                        checkbox.value,
+                                                                    );
+                                                                }}
+                                                                key={i}
+                                                            />
+                                                        );
+                                                    }
+                                                },
+                                            )}
+                                        </View>
+                                    </View>
+                                    <Text
+                                        style={{
+                                            marginLeft: 30,
+                                            marginTop: 20,
+                                            fontSize: 15,
+                                            fontWeight: 'bold',
+                                            color: 'black',
+                                            textShadowColor: '#fff',
+                                            textShadowOffset: {
+                                                width: 1,
+                                                height: 1,
+                                            },
+                                            textShadowRadius: 10,
+                                        }}>
+                                        Rhesus
+                                    </Text>
+                                    <View
+                                        style={{
+                                            marginTop: 10,
+                                            marginLeft: 30,
+                                            marginRight: 40,
+                                            flexDirection: 'row',
+                                            justifyContent: 'space-between',
+                                        }}>
+                                        <View>
+                                            {rhesus.map(
+                                                (checkbox, i) => {
+                                                    // console.info("__DATA__",golonganDarah)
+                                                    if (
+                                                        i <
+                                                        rhesus.length / 2
+                                                    ) {
+                                                        return (
+                                                            <CheckBox
+                                                                style={{
+                                                                    width: '70%',
+                                                                }}
+                                                                title={
+                                                                    checkbox.label
+                                                                }
+                                                                checked={
+                                                                    checkbox.value ==
+                                                                    values.rhesus
+                                                                        ? true
+                                                                        : false
+                                                                }
+                                                                onPress={() => {
+                                                                    setFieldValue(
+                                                                        'rhesus',
+                                                                        checkbox.value,
+                                                                    );
+                                                                }}
+                                                                key={i}
+                                                            />
+                                                        );
+                                                    }
+                                                },
+                                            )}
+                                        </View>
+                                        <View>
+                                            {rhesus.map(
+                                                (checkbox, i) => {
+                                                    if (
+                                                        i >=
+                                                        rhesus.length / 2
+                                                    ) {
+                                                        return (
+                                                            <CheckBox
+                                                                style={{
+                                                                    width: '70%',
+                                                                }}
+                                                                title={
+                                                                    checkbox.label
+                                                                }
+                                                                checked={
+                                                                    checkbox.value ==
+                                                                    values.rhesus
+                                                                        ? true
+                                                                        : false
+                                                                }
+                                                                onPress={() => {
+                                                                    setFieldValue(
+                                                                        'rhesus',
                                                                         checkbox.value,
                                                                     );
                                                                 }}

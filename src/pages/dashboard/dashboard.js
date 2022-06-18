@@ -52,7 +52,7 @@ function Dashboard(props) {
         {
             cacheTime: 0,
             onSettled: (data, error) => {
-                console.log('DATA----', data);
+                // console.log('DATA----', data);
                 if (data?.code == 200) {
                     // token masih aktif
                 }
@@ -101,7 +101,7 @@ function Dashboard(props) {
             },
         })
             .then(r => {
-                console.info('then123----', r.data);
+                // console.info('then123----', r.data);
                 if (r.data.code == 401) {
                     console.info('then----');
                     // AsyncStorage.clear();
@@ -120,7 +120,7 @@ function Dashboard(props) {
         if (page === 'Login') {
             // AsyncStorage.clear();
             props.navigation.navigate(page);
-        } else if (page ==='MenuKonseling'){
+        } else if (page ===''){
             Alert.alert("Warning","Feature Sedang Dalam Pengembangan",
             [{ text: "OK", onPress: () => console.log('Ok') }]
             ) 

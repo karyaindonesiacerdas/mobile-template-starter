@@ -56,7 +56,6 @@ function Login(props) {
         )
             .then(r => {
                 if (r.data.code == 200) {
-                   console.log(r.data.data)
                     AsyncStorage.setItem('email', body.email);
                     AsyncStorage.setItem('pass', body.password);
                     AsyncStorage.setItem('remind_me', remind_me)
@@ -95,6 +94,7 @@ function Login(props) {
                     AsyncStorage.setItem('gambar', r.data.data.gambar);
 
                     AsyncStorage.setItem('golongan_darah',r.data.data.golongan_darah);
+                    AsyncStorage.setItem('rhesus',r.data.data.rhesus);
                     switch (r.data.data.role) {
                         case 'pendonor':
                             props.navigation.replace('Dashboard');

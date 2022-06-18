@@ -271,10 +271,6 @@ function ActiveDonor(props) {
                 ktp: ktp,
             };
             console.log(body);
-            const headers = {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + token,
-            };
 
             Axios.post(`${API}/riwayat-donor/active`, body, {
                 headers: {

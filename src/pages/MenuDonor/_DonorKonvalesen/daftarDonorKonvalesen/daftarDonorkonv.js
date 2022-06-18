@@ -80,7 +80,7 @@ function daftarDonorkonv(props) {
                 value.jenis_kelamin = jenis_kelamin
                 value.pekerjaan = pekerjaan
                 value.golongan_darah = golongan_darah
-                value.rhesus = 'X'
+                value.rhesus = rhesus
                 value.berat_badan = berat_badan
                 props.navigation.navigate('infoCovidPendonor', { data_calon_donor: value });
             }

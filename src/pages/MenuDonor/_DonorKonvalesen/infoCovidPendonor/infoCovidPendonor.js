@@ -63,20 +63,46 @@ function infoCovidPendonor(props) {
   // }
 
   async function submitData (value) {
-    
-    value.positif_date = positif_date
-    value.tanggal_sembuh = negative_date
-    value.hasil_positif_lab = positif_file
-    value.hasil_negatif_lab = negative_file
-    console.log("+" + positif_file)
-    console.log("-" + negative_file)
-    
-    const body = new FormData();
-    for (var key in value){
-      body.append(key,value[key])
+    var alert_input = ""
+
+    if (!positif_date){
+      alert_input += "Positive Date, "
     }
-    console.log(body)
-    props.navigation.navigate('kuisonerKonvalesen',{data_calon_donor : body});
+    if (!negative_date){
+      alert_input += "Negative Date, "
+    }
+    if (!positif_file){
+      alert_input += "Positive File, "
+    }
+    if (!negative_file){
+      alert_input += "Negative File "
+    }
+
+    if (alert_input!=""){
+      Alert.alert("Error",alert_input + " tidak boleh null",
+        [{ text: "OK", onPress: () => console.log('ok') }]
+        )    
+    }else{
+      console.log('here')
+      value.positif_date = positif_date
+      value.tanggal_sembuh = negative_date
+      value.hasil_positif_lab = positif_file
+      value.hasil_negatif_lab = negative_file
+      var flag = 0
+      const body = new FormData();
+      for (var key in value){
+        if (value[key] == null){
+          flag+=1
+          Alert.alert("Error",key.toUpperCase() + " tidak boleh null, lengkapi profile",
+          [{ text: "OK", onPress: () => props.navigation.navigate('EditProfil') }]
+          )     
+        }
+        body.append(key,value[key])
+      }
+      if (flag == 0){
+        props.navigation.navigate('kuisonerKonvalesen',{data_calon_donor : body});
+      }
+    }
   }
 
   const goNextPage = (page) => {
