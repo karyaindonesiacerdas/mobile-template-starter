@@ -24,10 +24,10 @@ import {
     Col,
 } from 'react-native-table-component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { API } from '../../../../config/api';
+import {API} from '../../../../config/api';
 import Axios from 'axios';
 import qs from 'qs';
-import moment from 'moment'
+import moment from 'moment';
 import AwesomeLoading from 'react-native-awesome-loading';
 
 function kuisionerBiasa(props) {
@@ -370,96 +370,156 @@ function kuisionerBiasa(props) {
                 submit(input);
             }
         } else {
-            props.navigation.navigate('daftarDonorBiasa')
+            props.navigation.navigate('daftarDonorBiasa');
         }
     };
-    
+
     const submit = input => {
-        setLoading(true)
-        const data_calon_donor = props.route.params.data_calon_donor
-        const token = data_calon_donor['token']
-        const ktp = data_calon_donor['ktp']
-        const nama = data_calon_donor['nama']
-        
+        setLoading(true);
+        const data_calon_donor = props.route.params.data_calon_donor;
+        const token = data_calon_donor['token'];
+        const ktp = data_calon_donor['ktp'];
+        const nama = data_calon_donor['nama'];
+
         var body = new FormData();
-        var flag = 0
-        for ( var key in data_calon_donor ) {
-            if (key != "token"){
-                if (data_calon_donor[key] == null){
-                    flag+=1
-                    Alert.alert("Error",key.toUpperCase() + " tidak boleh null, lengkapi profile",
-                    [{ text: "OK", onPress: () => props.navigation.navigate('EditProfil') }]
-                    )     
+        var flag = 0;
+        for (var key in data_calon_donor) {
+            if (key != 'token') {
+                if (data_calon_donor[key] == null) {
+                    flag += 1;
+                    Alert.alert(
+                        'Error',
+                        key.toUpperCase() +
+                            ' tidak boleh null, lengkapi profile',
+                        [
+                            {
+                                text: 'OK',
+                                onPress: () =>
+                                    props.navigation.navigate('EditProfil'),
+                            },
+                        ],
+                    );
                 }
                 body.append(key, data_calon_donor[key]);
             }
         }
-    async function submit(){
-        Axios.post(`${API}/pendonor/calon-pendonor/create`,body,
-            {headers:{
-            Authorization :'Bearer ' +token,
-            'Content-Type': 'multipart/form-data; boundary=${body._boundary}',
-            }})
-            .then(res => {
-                if (res.data.code === 200) {
-                    AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
-                    input.kode_calon_pendonor = res.data.kode_pendonor;
-                    input.ktp = ktp;
-                    input.nama = nama;
-                    const body = input;
-                    Axios.post(`${API}/kuesioner-ic/create`, body,
-                        {headers:{
-                            Authorization :'Bearer ' +token,
-                            'Content-Type': 'application/json',
-                        }})
+        async function submit() {
+            Axios.post(`${API}/pendonor/calon-pendonor/create`, body, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                    'Content-Type':
+                        'multipart/form-data; boundary=${body._boundary}',
+                },
+            })
+                .then(res => {
+                    if (res.data.code === 200) {
+                        AsyncStorage.setItem(
+                            'kode_pendonor',
+                            res.data.kode_pendonor,
+                        );
+                        input.kode_calon_pendonor = res.data.kode_pendonor;
+                        input.ktp = ktp;
+                        input.nama = nama;
+                        const body = input;
+                        Axios.post(`${API}/kuesioner-ic/create`, body, {
+                            headers: {
+                                Authorization: 'Bearer ' + token,
+                                'Content-Type': 'application/json',
+                            },
+                        })
                             .then(res => {
                                 if (res.data.code === 200) {
-                                    props.navigation.navigate('admBiasaResult',{transaksi : res.data.transaksi});
-                                    setLoading(false)
+                                    props.navigation.navigate(
+                                        'admBiasaResult',
+                                        {transaksi: res.data.transaksi},
+                                    );
+                                    setLoading(false);
                                 } else {
                                     console.log('Error', res.data.message);
                                 }
                             })
                             .catch(err => {
-                                setLoading(false)
-                                Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-                                [{ text: "OK", onPress: () => props.navigation.navigate('Login') }]
-                                )
+                                setLoading(false);
+                                Alert.alert(
+                                    'Error',
+                                    'Session Berakhir Silahkan Login Kembali',
+                                    [
+                                        {
+                                            text: 'OK',
+                                            onPress: () =>
+                                                props.navigation.navigate(
+                                                    'Login',
+                                                ),
+                                        },
+                                    ],
+                                );
                             });
-                } else if (res.data.code === 500){
-                    setLoading(false)
-                    Alert.alert("Gagal","Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ",
-                    [{ text: "Cek Inbox", onPress: () => props.navigation.replace('ActiveDonor') }]
-                    // [{ text: "Cek Inbox", onPress: () => console.log('loading') }]
-                    )
-                } else if (res.data.code === 400){
-                    setLoading(false)
-                    Alert.alert("Gagal","Silahkan Lengkapi Halaman Profile Anda  ",
-                    [{ text: "Update Profile", onPress: () => console.log("ok") }]
-                   )
-                } else{
-                    setLoading(false)
-                    Alert.alert("Error","Silahkan Coba Kembali",
-                    [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
-                    )
-                }
-                setLoading(false)
-            })
-            .catch(err => {
-                setLoading(false)
-                Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-                [{ text: "OK", onPress: () => props.navigation.navigate('Login') }]
-                )
-            });
+                    } else if (res.data.code === 500) {
+                        setLoading(false);
+                        Alert.alert(
+                            'Gagal',
+                            'Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ',
+                            [
+                                {
+                                    text: 'Cek Inbox',
+                                    onPress: () =>
+                                        props.navigation.replace('ActiveDonor'),
+                                },
+                            ],
+                            // [{ text: "Cek Inbox", onPress: () => console.log('loading') }]
+                        );
+                    } else if (res.data.code === 400) {
+                        setLoading(false);
+                        Alert.alert(
+                            'Gagal',
+                            'Silahkan Lengkapi Halaman Profile Anda  ',
+                            [
+                                {
+                                    text: 'Update Profile',
+                                    onPress: () => console.log('ok'),
+                                },
+                            ],
+                        );
+                    } else {
+                        setLoading(false);
+                        Alert.alert('Error', 'Silahkan Coba Kembali', [
+                            {
+                                text: 'OK',
+                                onPress: () =>
+                                    props.navigation.navigate('Dashboard'),
+                            },
+                        ]);
+                    }
+                    setLoading(false);
+                })
+                .catch(err => {
+                    setLoading(false);
+                    Alert.alert(
+                        'Error',
+                        'Session Berakhir Silahkan Login Kembali',
+                        [
+                            {
+                                text: 'OK',
+                                onPress: () =>
+                                    props.navigation.navigate('Login'),
+                            },
+                        ],
+                    );
+                });
         }
-        if (flag==0){
-            submit()
+        if (flag == 0) {
+            submit();
         }
-            // setLoading(false)
-    }
+        // setLoading(false)
+    };
     return (
         <Container>
-            <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
+            <AwesomeLoading
+                indicatorId={18}
+                size={50}
+                isActive={loading}
+                text="loading.."
+            />
             <Image
                 source={require('../../../image/logo.png')}
                 style={{
@@ -482,8 +542,13 @@ function kuisionerBiasa(props) {
                     top: 10,
                 }}></Image>
             <ScrollView>
-            <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
-            
+                <AwesomeLoading
+                    indicatorId={18}
+                    size={50}
+                    isActive={loading}
+                    text="loading.."
+                />
+
                 <Text
                     style={{
                         marginLeft: 10,
@@ -505,7 +570,7 @@ function kuisionerBiasa(props) {
                     }}>
                     Donor Darah Biasa
                 </Text>
-                
+
                 <View
                     style={{
                         width: '90%',
@@ -622,9 +687,7 @@ export default kuisionerBiasa;
 
 function RefactorInput(val) {
     var count = 0;
-    var t = moment()
-        .utcOffset('+07:00')
-        .format('YYYY-MM-DD');
+    var t = moment().utcOffset('+07:00').format('YYYY-MM-DD');
     for (let i = 0; i < val.length; i++) {
         if (val[i].value !== undefined && val[i].value !== '') {
             count++;
@@ -682,3 +745,4 @@ function RefactorInput(val) {
     };
     return input;
 }
+

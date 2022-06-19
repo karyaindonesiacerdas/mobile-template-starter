@@ -34,7 +34,7 @@ function lokasiGedung(props) {
         const body = {
             ktp: ktp,
             lokasi: lokasi,
-            status: 'location_set'
+            status: 'location_set',
         };
         console.log(body);
         Axios.put(`${API}/pendonor/update/lokasi`, body, {
@@ -49,15 +49,31 @@ function lokasiGedung(props) {
                 if (res.data.code === 200) {
                     props.navigation.navigate('BarcodeDonor');
                 } else {
-                    Alert.alert("Error", +res.data.code + '  ' + res.data.message,
-                                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
-                                )
+                    Alert.alert(
+                        'Error',
+                        +res.data.code + '  ' + res.data.message,
+                        [
+                            {
+                                text: 'OK',
+                                onPress: () =>
+                                    props.navigation.navigate('Dashboard'),
+                            },
+                        ],
+                    );
                 }
             })
             .catch(err => {
-                Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-                                [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
-                                )
+                Alert.alert(
+                    'Error',
+                    'Session Berakhir Silahkan Login Kembali',
+                    [
+                        {
+                            text: 'OK',
+                            onPress: () =>
+                                props.navigation.navigate('Dashboard'),
+                        },
+                    ],
+                );
             });
     }
     return (
@@ -277,3 +293,4 @@ function lokasiGedung(props) {
 }
 
 export default lokasiGedung;
+

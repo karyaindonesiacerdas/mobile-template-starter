@@ -292,3 +292,4 @@ function alurDonorBiasa(props) {
 }
 
 export default alurDonorBiasa;
+

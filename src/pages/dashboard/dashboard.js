@@ -17,7 +17,7 @@ import {API} from '../../config/api';
 import Axios from 'axios';
 import {useQuery, useQueryClient} from 'react-query';
 import {useNavigation} from '@react-navigation/native';
-import moment from 'moment'
+import moment from 'moment';
 
 function Dashboard(props) {
     const queryClient = useQueryClient();
@@ -28,7 +28,7 @@ function Dashboard(props) {
         'check-token',
         async () => {
             const token = await AsyncStorage.getItem('token');
-            
+
             // Aktif token :
             // const token =
             //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RpbmdAZ21haWwuY29tIiwiZG9ub3JfaWQiOiIiLCJuYW1hIjoiWmFocmkgUnVzbGkiLCJnb2xvbmdhbl9kYXJhaCI6IiIsInJvbGUiOiJwZW5kb25vciIsImdhbWJhciI6IiIsImV4cCI6MTYzOTU0MzA3NCwiaWF0IjoxNjM5NTM5NDc0LCJpc3MiOiJTQUhBQkFULVVURCJ9.3cMhcr3mXv-uBUNxeIg8U66W_qAbSl6md1P2nH_bxpg';
@@ -57,7 +57,7 @@ function Dashboard(props) {
                     // token masih aktif
                 }
                 if (error || data?.code != 200) {
-                    alert("Unauthorized");
+                    alert('Unauthorized');
                     // expired kembali ke login dan clear session
                     queryClient.invalidateQueries();
                     // AsyncStorage.clear();
@@ -116,17 +116,16 @@ function Dashboard(props) {
     }
 
     const goNextPage = page => {
-        checkSession()
+        checkSession();
         if (page === 'Login') {
             // AsyncStorage.clear();
             props.navigation.navigate(page);
-        } else if (page ===''){
-            Alert.alert("Warning","Feature Sedang Dalam Pengembangan",
-            [{ text: "OK", onPress: () => console.log('Ok') }]
-            ) 
-        }else {
+        } else if (page === '') {
+            Alert.alert('Warning', 'Feature Sedang Dalam Pengembangan', [
+                {text: 'OK', onPress: () => console.log('Ok')},
+            ]);
+        } else {
             props.navigation.navigate(page);
-            
         }
     };
 
@@ -146,34 +145,35 @@ function Dashboard(props) {
             />
             <ScrollView>
                 <View>
-                <Card style={{
-                    		backgroundColor: '#e60013',
+                    <Card
+                        style={{
+                            backgroundColor: '#e60013',
                             width: 120,
                             borderRadius: 10,
                             marginRight: 15,
-                            alignSelf : 'flex-end'
-                }}>
+                            alignSelf: 'flex-end',
+                        }}>
                         <TouchableOpacity
                             onPress={goNextPage.bind(this, 'Login')}>
                             <Text style={styles.textTengah}>Logout</Text>
                         </TouchableOpacity>
-                </Card>
-                <TouchableOpacity
-                    onPress={goNextPage.bind(this, 'ActiveDonor')}>
-                    <Image
-                        source={require('../image/pesan.jpg')}
-                        style={{
-                            width: 60,
-                            height: 60,  
-                            margin: 10,
-                            alignSelf: 'flex-start'}}
-                    />
-                </TouchableOpacity>
+                    </Card>
+                    <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'ActiveDonor')}>
+                        <Image
+                            source={require('../image/pesan.jpg')}
+                            style={{
+                                width: 60,
+                                height: 60,
+                                margin: 10,
+                                alignSelf: 'flex-start',
+                            }}
+                        />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.viewAtas}>
                     <TouchableOpacity
                         onPress={goNextPage.bind(this, 'Sejarah')}
-                        
                         style={{
                             backgroundColor: '#fff',
                             width: 120,
@@ -218,12 +218,10 @@ function Dashboard(props) {
                         <Text style={styles.textAtas}>
                             Info Plasma {'\n'}Konvalesen
                         </Text>
-                    
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.viewAtas}>
-                    
                     <Card style={styles.cardTengah}>
                         <TouchableOpacity
                             onPress={goNextPage.bind(this, 'KartuDonor')}>
@@ -316,9 +314,9 @@ function Dashboard(props) {
                         </Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.cardStyle}
-                    onPress={goNextPage.bind(this, 'MenuKonseling')}
-                    >
+                    <TouchableOpacity
+                        style={styles.cardStyle}
+                        onPress={goNextPage.bind(this, 'MenuKonseling')}>
                         <Image
                             source={require('../image/konseling2.jpeg')}
                             style={{
@@ -331,9 +329,9 @@ function Dashboard(props) {
 
                         <Text style={styles.textBawah}>Konseling Donor</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardStyle}
-                    onPress={goNextPage.bind(this, 'Contact')}
-                    >
+                    <TouchableOpacity
+                        style={styles.cardStyle}
+                        onPress={goNextPage.bind(this, 'Contact')}>
                         <Image
                             source={require('../image/download.png')}
                             style={{
@@ -352,3 +350,4 @@ function Dashboard(props) {
 }
 
 export default Dashboard;
+

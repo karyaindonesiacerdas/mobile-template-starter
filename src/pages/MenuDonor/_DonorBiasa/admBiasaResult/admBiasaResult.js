@@ -154,7 +154,7 @@ function admBiasaResult(props) {
                                             </Text>
                                         </TouchableOpacity>
                                     </Card>
-                                </View>
+                                </View>,
                             );
                         }
                     } else {
@@ -248,3 +248,4 @@ function admBiasaResult(props) {
 }
 
 export default admBiasaResult;
+

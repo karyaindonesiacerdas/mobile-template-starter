@@ -38,7 +38,9 @@ function admKonvalesenResult(props) {
     useEffect(() => {
         async function getData() {
             const token = await AsyncStorage.getItem('token');
-            const kode_calon_pendonor = await AsyncStorage.getItem('kode_pendonor');
+            const kode_calon_pendonor = await AsyncStorage.getItem(
+                'kode_pendonor',
+            );
             const headers = {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + token,
@@ -250,3 +252,4 @@ function admKonvalesenResult(props) {
 }
 
 export default admKonvalesenResult;
+

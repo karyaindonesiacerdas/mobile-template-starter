@@ -8,7 +8,7 @@ import {
     TextInput,
     BackHandler,
 } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import {CheckBox} from 'react-native-elements';
 import {
     Container,
     Header,
@@ -21,12 +21,12 @@ import {
     Item,
     nama,
 } from 'native-base';
-import { ScrollView } from 'react-native-gesture-handler';
-import { TouchableOpacity } from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native';
 import styles from '../../../styles/styles';
 import Bg from '../../../image/baground3.jpeg';
-import { Button } from 'react-native-elements/dist/buttons/Button';
-import { Formik } from 'formik';
+import {Button} from 'react-native-elements/dist/buttons/Button';
+import {Formik} from 'formik';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AwesomeLoading from 'react-native-awesome-loading';
 
@@ -48,44 +48,46 @@ function daftarDonorkonv(props) {
     const [pekerjaan, setPekerjaan] = useState();
     const [berat_badan, setBeratBadan] = React.useState('0');
     const [loading, setLoading] = useState(false);
-    
+
     const refactorInput = value => {
-        async function submit(){
-            setLoading(true)
+        async function submit() {
+            setLoading(true);
             setTimeout(() => {
-                setLoading(false)
+                setLoading(false);
             }, 1000);
-            console.log(loading)
-            if (berat_badan <= 45){
-                Alert.alert('Warning !', 'Berat Badan Harus Lebih Dari 45', [{
-                    text: 'Cancel',
-                    onPress: () => null,
-                    style: 'cancel',
-                },
-            ]);
-            }
-            else{
+            console.log(loading);
+            if (berat_badan <= 45) {
+                Alert.alert('Warning !', 'Berat Badan Harus Lebih Dari 45', [
+                    {
+                        text: 'Cancel',
+                        onPress: () => null,
+                        style: 'cancel',
+                    },
+                ]);
+            } else {
                 value.ktp = ktp;
-                value.jenis_donor = 'plasma konvalesen'
+                value.jenis_donor = 'plasma konvalesen';
                 value.nama = nama_pendonor;
                 value.nomor_telepon = telepon;
-                value.alamat = alamat
-                value.kelurahan = kelurahan
-                value.kecamatan = kecamatan
-                value.wilayah = wilayah
-                value.token = token
-                value.tanggal_lahir = tanggal_lahir
-                value.tempat_lahir = tempat_lahir
-                value.status_menikah = status_menikah
-                value.jenis_kelamin = jenis_kelamin
-                value.pekerjaan = pekerjaan
-                value.golongan_darah = golongan_darah
-                value.rhesus = rhesus
-                value.berat_badan = berat_badan
-                props.navigation.navigate('infoCovidPendonor', { data_calon_donor: value });
+                value.alamat = alamat;
+                value.kelurahan = kelurahan;
+                value.kecamatan = kecamatan;
+                value.wilayah = wilayah;
+                value.token = token;
+                value.tanggal_lahir = tanggal_lahir;
+                value.tempat_lahir = tempat_lahir;
+                value.status_menikah = status_menikah;
+                value.jenis_kelamin = jenis_kelamin;
+                value.pekerjaan = pekerjaan;
+                value.golongan_darah = golongan_darah;
+                value.rhesus = rhesus;
+                value.berat_badan = berat_badan;
+                props.navigation.navigate('infoCovidPendonor', {
+                    data_calon_donor: value,
+                });
             }
         }
-        submit()
+        submit();
     };
     const goNextPage = page => {
         if (page) {
@@ -93,23 +95,23 @@ function daftarDonorkonv(props) {
         }
     };
     const backAction = () => {
-        Alert.alert('Hold on!', 'Are you sure you want to go back?', [{
+        Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+            {
                 text: 'Cancel',
                 onPress: () => null,
                 style: 'cancel',
             },
-            { text: 'YES', onPress: () => BackHandler.goBack() },
+            {text: 'YES', onPress: () => BackHandler.goBack()},
         ]);
         return true;
     };
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
         setTimeout(() => {
-            setLoading(false)
+            setLoading(false);
         }, 1000);
         update_field_data();
-       
     }, []);
 
     async function update_field_data() {
@@ -128,7 +130,7 @@ function daftarDonorkonv(props) {
         const golongan_darah = await AsyncStorage.getItem('golongan_darah');
         const pekerjaan = await AsyncStorage.getItem('pekerjaan');
         const rhesus = await AsyncStorage.getItem('rhesus');
-        
+
         setKTP(valuektp);
         setNama(valuenama);
         setTelepon(valuetelepon);
@@ -136,14 +138,14 @@ function daftarDonorkonv(props) {
         setKecamatan(valuekecamatan);
         setKelurahan(valuekelurahan);
         setWilayah(valuewilayah);
-        setToken(token)
-        setTanggalLahir(tanggal_lahir)
-        setTempatLahir(tempat_lahir)
-        setStatusMenikah(status_menikah)
-        setJniesKelamin(jenis_kelamin)
-        setGolonganDarah(golongan_darah)
-        setRhesus(rhesus)
-        setPekerjaan(pekerjaan)
+        setToken(token);
+        setTanggalLahir(tanggal_lahir);
+        setTempatLahir(tempat_lahir);
+        setStatusMenikah(status_menikah);
+        setJniesKelamin(jenis_kelamin);
+        setGolonganDarah(golongan_darah);
+        setRhesus(rhesus);
+        setPekerjaan(pekerjaan);
     }
     return (
         <Container>
@@ -172,7 +174,12 @@ function daftarDonorkonv(props) {
                     top: 10,
                 }}></Image>
             <ScrollView>
-            <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
+                <AwesomeLoading
+                    indicatorId={18}
+                    size={50}
+                    isActive={loading}
+                    text="loading.."
+                />
 
                 <Text
                     style={{
@@ -371,13 +378,12 @@ function daftarDonorkonv(props) {
                                     marginLeft: 30,
                                     marginTop: 20,
                                     fontSize: 15,
-                                    fontWeight: "bold",
-                                    color: "black",
-                                    textShadowColor: "#fff",
-                                    textShadowOffset: { width: 1, height: 1 },
+                                    fontWeight: 'bold',
+                                    color: 'black',
+                                    textShadowColor: '#fff',
+                                    textShadowOffset: {width: 1, height: 1},
                                     textShadowRadius: 10,
-                                }}
-                                >
+                                }}>
                                 Berat badan (Pilih)
                             </Text>
                             <Item style={styles.item}>
@@ -385,7 +391,7 @@ function daftarDonorkonv(props) {
                                     style={styles.input}
                                     selectedValue={berat_badan}
                                     onValueChange={(itemValue, itemIndex) =>
-                                    setBeratBadan(itemValue)
+                                        setBeratBadan(itemValue)
                                     }>
                                     <Picker.Item label="0" value="0" />
                                     <Picker.Item label="25" value="25" />
@@ -463,18 +469,17 @@ function daftarDonorkonv(props) {
                                 </Picker>
                             </Item>
                             <Text
-                            style={{
-                                marginLeft: 30,
-                                marginTop: 0,
-                                fontSize: 15,
-                                color: "black",
-                                fontWeight: "bold",
-                                textShadowColor: "#fff",
-                                textShadowOffset: { width: 1, height: 1 },
-                                textShadowRadius: 10,
-                            }}
-                            >
-                            {''} ≥45 kg (Apabila kurang dari tidak lolos)
+                                style={{
+                                    marginLeft: 30,
+                                    marginTop: 0,
+                                    fontSize: 15,
+                                    color: 'black',
+                                    fontWeight: 'bold',
+                                    textShadowColor: '#fff',
+                                    textShadowOffset: {width: 1, height: 1},
+                                    textShadowRadius: 10,
+                                }}>
+                                {''} ≥45 kg (Apabila kurang dari tidak lolos)
                             </Text>
                             <View
                                 style={{
@@ -539,3 +544,4 @@ function daftarDonorkonv(props) {
 }
 
 export default daftarDonorkonv;
+

@@ -43,7 +43,10 @@ function MenuAlur(props) {
 
                     <Card style={styles.cardStyle}>
                         <TouchableOpacity
-                            onPress={goNextPage.bind(this, 'alurDonorKonvalesen')}>
+                            onPress={goNextPage.bind(
+                                this,
+                                'alurDonorKonvalesen',
+                            )}>
                             <Text style={styles.textInCard}>
                                 Plasma{'\n'} Konvalesen
                             </Text>
@@ -92,7 +95,8 @@ function MenuAlur(props) {
                         width: '86%',
                         marginLeft: '7%',
                     }}>
-                    <TouchableOpacity onPress={goNextPage.bind(this, 'pengadaanDonor')}>
+                    <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'pengadaanDonor')}>
                         <Text style={styles.textInCard}>
                             Mengadakan Kegiatan Donor Darah
                         </Text>
@@ -106,7 +110,8 @@ function MenuAlur(props) {
                         width: '86%',
                         marginLeft: '7%',
                     }}>
-                    <TouchableOpacity onPress={goNextPage.bind(this, 'konselingDonor')}>
+                    <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'konselingDonor')}>
                         <Text style={styles.textInCard}>
                             Konseling Donor Darah
                         </Text>
@@ -142,3 +147,4 @@ function MenuAlur(props) {
 }
 
 export default MenuAlur;
+

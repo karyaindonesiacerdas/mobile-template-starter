@@ -30,29 +30,20 @@ import {API} from '../../config/api';
 function StockDarah(props) {
     const [CONTENT, setCONTENT] = useState({
         tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
-        product: [
-            "WB",
-        "PRC",
-        "TC",
-        "FFP",
-        "AHF",
-        "LD",
-        "LR",
-        "PK",
-        ],
+        product: ['WB', 'PRC', 'TC', 'FFP', 'AHF', 'LD', 'LR', 'PK'],
         tableTitle2: ['Produk'],
         tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB', 'TOTAL']],
     });
-    const [product , setProduct] = useState([
-        "WB",
-        "PRC",
-        "TC",
-        "FFP",
-        "AHF",
-        "LD",
-        "LR",
-        "PK",
-    ])
+    const [product, setProduct] = useState([
+        'WB',
+        'PRC',
+        'TC',
+        'FFP',
+        'AHF',
+        'LD',
+        'LR',
+        'PK',
+    ]);
     const [tableData, setTableData] = useState([
         ['0', '0', '0', '0', '0'],
         ['0', '0', '0', '0', '0'],
@@ -70,11 +61,7 @@ function StockDarah(props) {
         const body = {
             waktu: '',
         };
-        Axios.post(
-            `${API}/stok-darah`,
-            JSON.stringify(body),
-            headers,
-        )
+        Axios.post(`${API}/stok-darah`, JSON.stringify(body), headers)
             .then(res => {
                 if (res.data.code == 200) {
                     CONTENT.tableHead = [
@@ -214,7 +201,7 @@ function StockDarah(props) {
                             borderWidth: 1,
                             justifyContent: 'center',
                             alignContent: 'center',
-                            marginBottom:30
+                            marginBottom: 30,
                         }}>
                         <TableWrapper style={styles.wrapper}>
                             <Col
@@ -245,16 +232,22 @@ function StockDarah(props) {
                             />
                         </TableWrapper>
                     </Table>
-                    <Text style={{marginLeft:20}}></Text>
-                    <Text style={{marginLeft:10}}>Keterangan :</Text>
-                    <Text style={{marginLeft:10}}>*WB = Whole Blood</Text>
-                    <Text style={{marginLeft:10}}>*PRC = Packed Red Cell</Text>
-                    <Text style={{marginLeft:10}}>*TC = Thrombocyte Concentrate</Text>
-                    <Text style={{marginLeft:10}}>*FFP = Fresh Frozen Plasma</Text>
-                    <Text style={{marginLeft:10}}>*AHF = AHF</Text>
-                    <Text style={{marginLeft:10}}>*LD = Leucodepleted</Text>
-                    <Text style={{marginLeft:10}}>*LR = Leucoreduce</Text>
-                    <Text style={{marginLeft:10}}>*PK = Plasma Konvalesen</Text>
+                    <Text style={{marginLeft: 20}}></Text>
+                    <Text style={{marginLeft: 10}}>Keterangan :</Text>
+                    <Text style={{marginLeft: 10}}>*WB = Whole Blood</Text>
+                    <Text style={{marginLeft: 10}}>*PRC = Packed Red Cell</Text>
+                    <Text style={{marginLeft: 10}}>
+                        *TC = Thrombocyte Concentrate
+                    </Text>
+                    <Text style={{marginLeft: 10}}>
+                        *FFP = Fresh Frozen Plasma
+                    </Text>
+                    <Text style={{marginLeft: 10}}>*AHF = AHF</Text>
+                    <Text style={{marginLeft: 10}}>*LD = Leucodepleted</Text>
+                    <Text style={{marginLeft: 10}}>*LR = Leucoreduce</Text>
+                    <Text style={{marginLeft: 10}}>
+                        *PK = Plasma Konvalesen
+                    </Text>
                 </View>
             </ScrollView>
             <View
@@ -317,3 +310,4 @@ function StockDarah(props) {
 }
 
 export default StockDarah;
+

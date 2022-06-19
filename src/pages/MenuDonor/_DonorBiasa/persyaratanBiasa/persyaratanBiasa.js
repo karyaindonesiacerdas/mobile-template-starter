@@ -140,3 +140,4 @@ function persyaratanBiasa(props) {
 }
 
 export default persyaratanBiasa;
+

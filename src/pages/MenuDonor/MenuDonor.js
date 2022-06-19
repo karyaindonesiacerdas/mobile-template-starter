@@ -11,25 +11,27 @@ function MenuDonor(props) {
         async function checkData() {
             const ktp_ls = await AsyncStorage.getItem('ktp');
             const alamat = await AsyncStorage.getItem('alamat');
-            
+
             if (!ktp_ls || !alamat) {
-                Alert.alert("Warning","Lengkapi Data Profile !",
-                [{ text: "OK", onPress: () => props.navigation.navigate('EditProfil') }]
-                )    
+                Alert.alert('Warning', 'Lengkapi Data Profile !', [
+                    {
+                        text: 'OK',
+                        onPress: () => props.navigation.navigate('EditProfil'),
+                    },
+                ]);
             }
         }
         checkData();
     }, []);
     const goNextPage = page => {
         if (page) {
-            if (page==='Kegiatan'){
-                Alert.alert("Warning","Feature Sedang Dalam Pengembangan",
-                [{ text: "OK", onPress: () => console.log('Ok') }]
-                ) 
-            }else{
+            if (page === 'Kegiatan') {
+                Alert.alert('Warning', 'Feature Sedang Dalam Pengembangan', [
+                    {text: 'OK', onPress: () => console.log('Ok')},
+                ]);
+            } else {
                 props.navigation.navigate(page);
             }
-            
         }
     };
     return (
@@ -98,7 +100,10 @@ function MenuDonor(props) {
                 <Card style={styles.cardStyle}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={goNextPage.bind(this, 'persyaratanKonvalesen')}>
+                        onPress={goNextPage.bind(
+                            this,
+                            'persyaratanKonvalesen',
+                        )}>
                         <Text
                             style={{
                                 margin: 10,
@@ -161,33 +166,31 @@ function MenuDonor(props) {
                 </TouchableOpacity>
             </Card>
             <View
-                                    style={{
-                                        flexDirection: 'row',
-                                        justifyContent: 'center',
-                                        alignContent: 'center',
-                                    }}>
-                                    <Card style={styles.cardStyle}>
-                                        <TouchableOpacity
-                                            style={styles.button}
-                                            onPress={goNextPage.bind(
-                                                this,
-                                                'Dashboard',
-                                            )}>
-                                            <Text
-                                                style={{
-                                                    margin: 10,
-                                                    fontSize: 15,
-                                                    textAlign: 'center',
-                                                    fontWeight: 'bold',
-                                                    color: 'white',
-                                                }}>
-                                                Kembali
-                                            </Text>
-                                        </TouchableOpacity>
-                                    </Card>
-                                </View>
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                }}>
+                <Card style={styles.cardStyle}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={goNextPage.bind(this, 'Dashboard')}>
+                        <Text
+                            style={{
+                                margin: 10,
+                                fontSize: 15,
+                                textAlign: 'center',
+                                fontWeight: 'bold',
+                                color: 'white',
+                            }}>
+                            Kembali
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
+            </View>
         </Container>
     );
 }
 
 export default MenuDonor;
+

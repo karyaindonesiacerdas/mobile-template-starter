@@ -15,7 +15,13 @@ import {
 import AwesomeLoading from 'react-native-awesome-loading';
 import {useMutation} from 'react-query';
 import {Formik} from 'formik';
-import {Image, StyleSheet, TouchableOpacity,ImageBackground,Alert } from 'react-native';
+import {
+    Image,
+    StyleSheet,
+    TouchableOpacity,
+    ImageBackground,
+    Alert,
+} from 'react-native';
 //from "react-native-gesture-handler";
 //import styles from "../styles/styles";
 import * as Yup from 'yup';
@@ -24,7 +30,7 @@ import Bg from '../../image/Background.png';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {API} from '../../../config/api' ;
+import {API} from '../../../config/api';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 function Login(props) {
@@ -33,32 +39,26 @@ function Login(props) {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
-
     const handleSubmitLogin = value => {
-        setLoading(true)
+        setLoading(true);
         const headers = {
             'Content-Type': 'application/json',
         };
-        if (check1){
-            var remind_me = 'Y'
-        }
-        else{
-            var remind_me = 'N'
+        if (check1) {
+            var remind_me = 'Y';
+        } else {
+            var remind_me = 'N';
         }
         const body = {
             email: value.email,
             password: value.password,
         };
-        Axios.post(
-            `${API}/user/login`,
-            JSON.stringify(body),
-            headers,
-        )
+        Axios.post(`${API}/user/login`, JSON.stringify(body), headers)
             .then(r => {
                 if (r.data.code == 200) {
                     AsyncStorage.setItem('email', body.email);
                     AsyncStorage.setItem('pass', body.password);
-                    AsyncStorage.setItem('remind_me', remind_me)
+                    AsyncStorage.setItem('remind_me', remind_me);
                     AsyncStorage.setItem('token', r.data.data.token);
                     AsyncStorage.setItem('role', r.data.data.role);
                     AsyncStorage.setItem('exp', r.data.data.exp);
@@ -69,7 +69,10 @@ function Login(props) {
                     AsyncStorage.setItem('kecamatan', r.data.data.kecamatan);
                     AsyncStorage.setItem('kelurahan', r.data.data.kelurahan);
                     AsyncStorage.setItem('wilayah', r.data.data.wilayah);
-                    AsyncStorage.setItem('kartudonor', r.data.data.KODEPENDONOR);
+                    AsyncStorage.setItem(
+                        'kartudonor',
+                        r.data.data.KODEPENDONOR,
+                    );
                     AsyncStorage.setItem(
                         'tempat_lahir',
                         r.data.data.tempat_lahir,
@@ -93,8 +96,11 @@ function Login(props) {
                     AsyncStorage.setItem('email', r.data.data.email);
                     AsyncStorage.setItem('gambar', r.data.data.gambar);
 
-                    AsyncStorage.setItem('golongan_darah',r.data.data.golongan_darah);
-                    AsyncStorage.setItem('rhesus',r.data.data.rhesus);
+                    AsyncStorage.setItem(
+                        'golongan_darah',
+                        r.data.data.golongan_darah,
+                    );
+                    AsyncStorage.setItem('rhesus', r.data.data.rhesus);
                     switch (r.data.data.role) {
                         case 'pendonor':
                             props.navigation.replace('Dashboard');
@@ -104,17 +110,23 @@ function Login(props) {
                             break;
                     }
                 } else {
-                    setLoading(false)
-                    Alert.alert("Gagal","Email Atau Password Tidak Cocok",
-                    [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
-                   )
+                    setLoading(false);
+                    Alert.alert('Gagal', 'Email Atau Password Tidak Cocok', [
+                        {
+                            text: 'Coba Lagi',
+                            onPress: () => console.log('OK Pressed'),
+                        },
+                    ]);
                 }
             })
             .catch(err => {
-                setLoading(false)
-                Alert.alert("Error","Silahkan Coba Lagi",
-                    [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
-                   )
+                setLoading(false);
+                Alert.alert('Error', 'Silahkan Coba Lagi', [
+                    {
+                        text: 'Coba Lagi',
+                        onPress: () => console.log('OK Pressed'),
+                    },
+                ]);
                 console.log('error : ', err);
             });
     };
@@ -130,17 +142,15 @@ function Login(props) {
             var _password = await AsyncStorage.getItem('pass');
             var _email = await AsyncStorage.getItem('email');
             var _remind_me = await AsyncStorage.getItem('remind_me');
-            if (_remind_me == 'Y'){
-                setPassword(_password)
-                setEmail(_email)
-                setCheck1(true)
+            if (_remind_me == 'Y') {
+                setPassword(_password);
+                setEmail(_email);
+                setCheck1(true);
             }
             AsyncStorage.clear();
         }
-        getUser()
-       
+        getUser();
     }, []);
-
 
     return (
         <View style={styles.container}>
@@ -148,8 +158,13 @@ function Login(props) {
                 source={Bg}
                 resizeMode="cover"
                 style={styles.image}>
-                <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading" />
-        
+                <AwesomeLoading
+                    indicatorId={18}
+                    size={50}
+                    isActive={loading}
+                    text="loading"
+                />
+
                 <Content contentContainerStyle={styles.container}>
                     <View style={styles.logo}>
                         <Image
@@ -173,11 +188,12 @@ function Login(props) {
                         }}
                         enableReinitialize
                         validationSchema={Yup.object({
-                            email: Yup.string().email('Invalid email address').required('Required'),
-                            password: Yup.string().max(
-                                20,
-                                'Must be 5 characters or less',
-                            ).required('Required'),
+                            email: Yup.string()
+                                .email('Invalid email address')
+                                .required('Required'),
+                            password: Yup.string()
+                                .max(20, 'Must be 5 characters or less')
+                                .required('Required'),
                         })}
                         onSubmit={value => {
                             handleSubmitLogin(value);
@@ -225,18 +241,16 @@ function Login(props) {
                                         </Text>
                                     </View>
                                 )}
-                            <ListItem>
-                                <CheckBox
-                                    color=""
-                                    checked={check1}
-                                    onPress={() => setCheck1(!check1)}
-                                />
-                                <Body>
-                                    <Text>
-                                       Remind Me
-                                    </Text>
-                                </Body>
-                            </ListItem>
+                                <ListItem>
+                                    <CheckBox
+                                        color=""
+                                        checked={check1}
+                                        onPress={() => setCheck1(!check1)}
+                                    />
+                                    <Body>
+                                        <Text>Remind Me</Text>
+                                    </Body>
+                                </ListItem>
                                 <Button
                                     onPress={handleSubmit}
                                     full
@@ -317,7 +331,9 @@ const styles = StyleSheet.create({
         marginTop: -10,
         fontSize: 12,
         paddingLeft: 10,
-    },spinnerTextStyle: {
+    },
+    spinnerTextStyle: {
         color: '#FFF',
     },
 });
+

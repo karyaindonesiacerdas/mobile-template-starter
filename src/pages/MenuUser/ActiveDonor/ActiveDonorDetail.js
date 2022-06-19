@@ -14,10 +14,10 @@ import {API} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AwesomeLoading from 'react-native-awesome-loading';
-import moment from 'moment'
+import moment from 'moment';
 function ActiveDonorDetail(props) {
     const [loading, setLoading] = useState(false);
-    const [kode_calon_pendonor, setKode] = useState()
+    const [kode_calon_pendonor, setKode] = useState();
     const [detail, SetDetail] = useState({
         kuesioner_id: '',
         jadwal_donor: '',
@@ -26,7 +26,7 @@ function ActiveDonorDetail(props) {
         golongan_darah: '',
         rhesus: '',
         berat_badan: '',
-        TGL : '',
+        TGL: '',
     });
     const [action, setAction] = useState();
     const goNextPage = page => {
@@ -39,12 +39,14 @@ function ActiveDonorDetail(props) {
     );
     useEffect(() => {
         async function getRiwayat() {
-            const date_today = moment().utcOffset('+07:00').format('YYYY-MM-DD');
+            const date_today = moment()
+                .utcOffset('+07:00')
+                .format('YYYY-MM-DD');
             const token = await AsyncStorage.getItem('token');
             var t = new Date().toISOString().slice(0, 10);
             const ktp = await AsyncStorage.getItem('ktp');
-            setLoading(true)
-            
+            setLoading(true);
+
             const body = {
                 ktp: ktp,
                 kuesioner_id: props.route.params.data.kuesioner_id,
@@ -62,17 +64,25 @@ function ActiveDonorDetail(props) {
                 },
             })
                 .then(r => {
-                    setLoading(false)
+                    setLoading(false);
                     if (r.data.code == 200) {
-                        AsyncStorage.setItem('kode_pendonor',r.data.data[0].kode_calon_pendonor);
+                        AsyncStorage.setItem(
+                            'kode_pendonor',
+                            r.data.data[0].kode_calon_pendonor,
+                        );
                         SetDetail(r.data.data[0]);
                         if (r.data.data[0].jenis_donor === 'biasa') {
-                            if(date_today === r.data.data[0].TGL.substring(0,10)){
+                            if (
+                                date_today ===
+                                r.data.data[0].TGL.substring(0, 10)
+                            ) {
                                 if (r.data.data[0].status === 'lolos admin') {
                                     setAction(
                                         <Card style={styles.flowCardMarroon}>
                                             <TouchableOpacity
-                                                onPress={() => goNextPage('lokasiDonor')}>
+                                                onPress={() =>
+                                                    goNextPage('lokasiDonor')
+                                                }>
                                                 <Text style={styles.textInCard}>
                                                     Pilih Lokasi Donor
                                                 </Text>
@@ -186,7 +196,10 @@ function ActiveDonorDetail(props) {
                                     <Card style={styles.flowCardMarroon}>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                goNextPage.bind(this, 'MenuDonor')
+                                                goNextPage.bind(
+                                                    this,
+                                                    'MenuDonor',
+                                                )
                                             }>
                                             <Text style={styles.textInCard}>
                                                 Daftar Donor Baru
@@ -201,10 +214,18 @@ function ActiveDonorDetail(props) {
                     }
                 })
                 .catch(err => {
-                    setLoading(false)
-                    Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-                    [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
-                    )
+                    setLoading(false);
+                    Alert.alert(
+                        'Error',
+                        'Session Berakhir Silahkan Login Kembali',
+                        [
+                            {
+                                text: 'OK',
+                                onPress: () =>
+                                    props.navigation.navigate('Dashboard'),
+                            },
+                        ],
+                    );
                 });
         }
         getRiwayat();
@@ -270,7 +291,7 @@ function ActiveDonorDetail(props) {
                                 }}>
                                 <B>
                                     Jadwal Donor / Sampel : {'  '}
-                                    {detail.TGL.substring(0,10)}
+                                    {detail.TGL.substring(0, 10)}
                                 </B>
                             </Text>
                             <Text
@@ -294,7 +315,9 @@ function ActiveDonorDetail(props) {
                                     fontSize: 15,
                                     color: 'black',
                                 }}>
-                                <B>Rhesus :{' ' + detail.rhesus.toUpperCase()}</B>
+                                <B>
+                                    Rhesus :{' ' + detail.rhesus.toUpperCase()}
+                                </B>
                             </Text>
                             <Text
                                 style={{
@@ -313,7 +336,8 @@ function ActiveDonorDetail(props) {
                     </Card>
                     {action}
                     <Card style={styles.flowCardMarroon}>
-                        <TouchableOpacity onPress={() => goNextPage('ActiveDonor')}>
+                        <TouchableOpacity
+                            onPress={() => goNextPage('ActiveDonor')}>
                             <Text style={styles.textInCard}>Active Donor</Text>
                         </TouchableOpacity>
                     </Card>
@@ -331,3 +355,4 @@ function ActiveDonorDetail(props) {
 }
 
 export default ActiveDonorDetail;
+

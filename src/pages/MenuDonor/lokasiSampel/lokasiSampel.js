@@ -1,4 +1,4 @@
-import React, {useState,} from 'react';
+import React, {useState} from 'react';
 import {
     Alert,
     ImageBackground,
@@ -22,15 +22,13 @@ function lokasiSampel(props) {
     const [check2, setCheck2] = useState(false);
     const goNextPage = page => {
         if (page) {
-            if (page !== 'gedungUddKonvalesen' && page !=='Dashboard' ){
-                Alert.alert("Warning","Menu Ini Belum Bisa Digunakan",
-                [{ text: "OK", onPress: () => null }]
-                )
-            }
-            else{
+            if (page !== 'gedungUddKonvalesen' && page !== 'Dashboard') {
+                Alert.alert('Warning', 'Menu Ini Belum Bisa Digunakan', [
+                    {text: 'OK', onPress: () => null},
+                ]);
+            } else {
                 props.navigation.navigate(page);
             }
-           
         }
     };
     return (
@@ -195,3 +193,4 @@ function lokasiSampel(props) {
 }
 
 export default lokasiSampel;
+

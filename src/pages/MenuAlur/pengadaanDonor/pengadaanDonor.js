@@ -95,7 +95,8 @@ function pengadaanDonor(props) {
                         width: '40%',
                         marginRight: '2%',
                     }}>
-                    <TouchableOpacity onPress={goNextPage.bind(this, 'MenuAlur')}>
+                    <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'MenuAlur')}>
                         <Text style={styles.textInCard}>Kembali</Text>
                     </TouchableOpacity>
                 </Card>
@@ -114,3 +115,4 @@ function pengadaanDonor(props) {
     );
 }
 export default pengadaanDonor;
+

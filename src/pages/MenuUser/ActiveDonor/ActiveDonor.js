@@ -28,7 +28,7 @@ import {
 import {API} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import moment from 'moment'
+import moment from 'moment';
 import AwesomeLoading from 'react-native-awesome-loading';
 
 function ActiveDonor(props) {
@@ -39,85 +39,83 @@ function ActiveDonor(props) {
     const EmptyListMessage = ({}) => {
         return (
             <View style={styles.viewContainer}>
-            <Card style={styles.flowCardPeach}>
-                <TouchableOpacity>
-                    <Text
-                        style={{
-                            marginTop: 20,
-                            marginBottom: 10,
-                            marginLeft: 20,
-                            marginRight: 20,
-                            fontSize: 15,
-                            color: 'black',
-                            textAlign : 'center'
-                        }}
-                    >
-                        <B>Tidak Ada Proses Donor Yang Sedang Berlangsung</B>
-                    </Text>  
-                </TouchableOpacity>
-            </Card>
-            
-        </View>
+                <Card style={styles.flowCardPeach}>
+                    <TouchableOpacity>
+                        <Text
+                            style={{
+                                marginTop: 20,
+                                marginBottom: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                fontSize: 15,
+                                color: 'black',
+                                textAlign: 'center',
+                            }}>
+                            <B>
+                                Tidak Ada Proses Donor Yang Sedang Berlangsung
+                            </B>
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
+            </View>
         );
-    }
+    };
     const ItemView = ({item}) => {
         return (
-          <View style={styles.viewContainer}>
-            <Card style={styles.flowCardPeach}>
-                <TouchableOpacity>
-                    <Text
-                        style={{
-                            marginTop: 20,
-                            marginBottom: 10,
-                            marginLeft: 20,
-                            marginRight: 20,
-                            fontSize: 15,
-                            color: 'black'
-                        }}
-                    >
-                        <B>Transaksi ID : {item.kuesioner_id}</B>
-                    </Text>
-                    <Text
-                        style={{
-                            marginBottom: 10,
-                            marginLeft: 20,
-                            marginRight: 20,
-                            fontSize: 15,
-                            color: 'black'
-                        }}
-                    >
-                        <B>Jenis Donor : {item.jenis_donor.toUpperCase()}</B>
-                    </Text>
-                    <Text
-                        style={{
-                            marginBottom: 10,
-                            marginLeft: 20,
-                            marginRight: 20,
-                            fontSize: 15,
-                            color: 'black'
-                        }}
-                    >
-                        <B>Status : {item.status.toUpperCase()}</B>
-                    </Text>
-                    <Text
-                        style={{
-                            marginBottom: 10,
-                            marginLeft: 20,
-                            marginRight: 20,
-                            fontSize: 15,
-                            color: 'black'
-                        }}
-                    >
-                        <B>Jadwal Donor :{item.TGL.substring(0,10)}</B>
-                    </Text>
-                </TouchableOpacity>
-            </Card>
-            <Card style={styles.flowCardMarroon}>
-                <TouchableOpacity onPress={() => gotoDetails(item)}>
-                    <Text style={styles.textInCard}>Donor Details</Text>
-                </TouchableOpacity>
-            </Card>
-        </View>
+            <View style={styles.viewContainer}>
+                <Card style={styles.flowCardPeach}>
+                    <TouchableOpacity>
+                        <Text
+                            style={{
+                                marginTop: 20,
+                                marginBottom: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                fontSize: 15,
+                                color: 'black',
+                            }}>
+                            <B>Transaksi ID : {item.kuesioner_id}</B>
+                        </Text>
+                        <Text
+                            style={{
+                                marginBottom: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                fontSize: 15,
+                                color: 'black',
+                            }}>
+                            <B>
+                                Jenis Donor : {item.jenis_donor.toUpperCase()}
+                            </B>
+                        </Text>
+                        <Text
+                            style={{
+                                marginBottom: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                fontSize: 15,
+                                color: 'black',
+                            }}>
+                            <B>Status : {item.status.toUpperCase()}</B>
+                        </Text>
+                        <Text
+                            style={{
+                                marginBottom: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                fontSize: 15,
+                                color: 'black',
+                            }}>
+                            <B>Jadwal Donor :{item.TGL.substring(0, 10)}</B>
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
+                <Card style={styles.flowCardMarroon}>
+                    <TouchableOpacity onPress={() => gotoDetails(item)}>
+                        <Text style={styles.textInCard}>Donor Details</Text>
+                    </TouchableOpacity>
+                </Card>
+            </View>
         );
     };
 
@@ -262,11 +260,14 @@ function ActiveDonor(props) {
     });
     useEffect(() => {
         async function getRiwayat() {
-            setLoading(true)
+            setLoading(true);
             const token = await AsyncStorage.getItem('token');
-            const date_today = moment().add(-7, 'days').utcOffset('+07:00').format('YYYY-MM-DD');
+            const date_today = moment()
+                .add(-7, 'days')
+                .utcOffset('+07:00')
+                .format('YYYY-MM-DD');
             const ktp = await AsyncStorage.getItem('ktp');
-            
+
             const body = {
                 ktp: ktp,
             };
@@ -279,16 +280,25 @@ function ActiveDonor(props) {
                 },
             })
                 .then(r => {
-                    setLoading(false)
+                    setLoading(false);
                     if (r.data.code == 200) {
-                        const data = r.data.data
-                        const filtered = []
+                        const data = r.data.data;
+                        const filtered = [];
                         if (data != null) {
-                            const filtered = data.filter(function(value, index, arr){ 
-                                return data[index].TGL.substring(0,10) >= date_today || data[index].jenis_donor == 'plasma konvalesen'
+                            const filtered = data.filter(function (
+                                value,
+                                index,
+                                arr,
+                            ) {
+                                return (
+                                    data[index].TGL.substring(0, 10) >=
+                                        date_today ||
+                                    data[index].jenis_donor ==
+                                        'plasma konvalesen'
+                                );
                             });
                             setDataSource(filtered);
-                        }else{
+                        } else {
                             setDataSource(data);
                         }
                         setRes(r.data);
@@ -298,11 +308,19 @@ function ActiveDonor(props) {
                     }
                 })
                 .catch(err => {
-                    setLoading(false)
-                    console.log(err)
-                    Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-                    [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
-                    )
+                    setLoading(false);
+                    console.log(err);
+                    Alert.alert(
+                        'Error',
+                        'Session Berakhir Silahkan Login Kembali',
+                        [
+                            {
+                                text: 'OK',
+                                onPress: () =>
+                                    props.navigation.navigate('Dashboard'),
+                            },
+                        ],
+                    );
                 });
         }
         getRiwayat();
@@ -311,7 +329,12 @@ function ActiveDonor(props) {
     return (
         <Container>
             <SafeAreaView style={{flex: 1}}>
-            <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
+                <AwesomeLoading
+                    indicatorId={18}
+                    size={50}
+                    isActive={loading}
+                    text="loading.."
+                />
 
                 <FlatList
                     data={dataSource}
@@ -368,3 +391,4 @@ const style = StyleSheet.create({
 });
 
 export default ActiveDonor;
+

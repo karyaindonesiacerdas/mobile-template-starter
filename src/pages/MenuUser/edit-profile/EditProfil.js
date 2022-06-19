@@ -16,14 +16,14 @@ import styles from '../../styles/styles';
 import Bg from '../../image/baground3.jpeg';
 import {Formik, Form} from 'formik';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { API} from '../../../config/api';
+import {API} from '../../../config/api';
 import Axios from 'axios';
 import * as Yup from 'yup';
 import base64 from 'react-native-base64';
 import AwesomeLoading from 'react-native-awesome-loading';
-import DatePicker from 'react-native-date-picker'
-import moment from 'moment'
-import 'moment/locale/id'
+import DatePicker from 'react-native-date-picker';
+import moment from 'moment';
+import 'moment/locale/id';
 import ImagePicker from 'react-native-image-crop-picker';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
@@ -45,19 +45,18 @@ function EditProfil(props) {
     const [golongan_darah, setGolonganDarah] = React.useState([]);
     const [golonganDarahInitial, setGolonganDarahInitial] =
         React.useState(null);
-    const [rhesusInitial, setRhesusInitial] =
-        React.useState(null);
-    const[rhesus, setRhesus] = React.useState([]);
+    const [rhesusInitial, setRhesusInitial] = React.useState(null);
+    const [rhesus, setRhesus] = React.useState([]);
     const [filebase64, setBase64] = React.useState(null);
     const [gambar, setGambar] = React.useState('');
-    const [date, setDate] = useState(new Date())
-    const [open, setOpen] = useState(false)
+    const [date, setDate] = useState(new Date());
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         async function getUser() {
-            setLoading(true)
+            setLoading(true);
             const token = await AsyncStorage.getItem('token');
-            
+
             // TOKEN
             var _ktp = await AsyncStorage.getItem('ktp');
             var _nama = await AsyncStorage.getItem('nama');
@@ -76,10 +75,10 @@ function EditProfil(props) {
 
             console.info('_ktp', _ktp);
             console.info('_nama', _nama);
-            console.info('_alamat',_alamat);
-            console.info('_kecamatan',_kecamatan);
-            console.info('_kelurahan',_kelurahan);
-            console.info('_wilayah',_wilayah);
+            console.info('_alamat', _alamat);
+            console.info('_kecamatan', _kecamatan);
+            console.info('_kelurahan', _kelurahan);
+            console.info('_wilayah', _wilayah);
             console.info('_tempat_lahir', _tempat_lahir);
             console.info('_tanggal_lahir', _tanggal_lahir);
             console.info('_jenis_kelamin', _jenis_kelamin);
@@ -99,25 +98,17 @@ function EditProfil(props) {
                 },
             )
                 .then(r => {
-                    setLoading(false)
+                    setLoading(false);
                     if (r.data.code == 200) {
                         setKtp(_ktp || r.data?.data?.[0].ktp);
                         setNama(_nama, r.data?.data?.[0].nama);
                         setTempatLahir(
                             _tempat_lahir || r.data?.data?.[0].tempat_lahir,
                         );
-                        setAlamat(
-                            _alamat || r.data?.data?.[0].alamat,
-                        );
-                        setKecamatan(
-                            _kecamatan || r.data?.data?.[0].kecamatan,
-                        );
-                        setKelurahan(
-                            _kelurahan || r.data?.data?.[0].kelurahan,
-                        );
-                        setWilayah(
-                            _wilayah || r.data?.data?.[0].wilayah,
-                        );
+                        setAlamat(_alamat || r.data?.data?.[0].alamat);
+                        setKecamatan(_kecamatan || r.data?.data?.[0].kecamatan);
+                        setKelurahan(_kelurahan || r.data?.data?.[0].kelurahan);
+                        setWilayah(_wilayah || r.data?.data?.[0].wilayah);
                         setTanggalLahir(
                             _tanggal_lahir || r.data?.data?.[0].tanggal_lahir,
                         );
@@ -134,9 +125,7 @@ function EditProfil(props) {
                             _golongan_darah || r.data?.data?.[0].golongan_darah,
                         );
 
-                        setRhesusInitial(
-                            _rhesus || r.data?.data?.[0].rhesus,
-                        )
+                        setRhesusInitial(_rhesus || r.data?.data?.[0].rhesus);
 
                         console.info(
                             _pekerjaan || r.data?.data?.[0].pekerjaan,
@@ -315,8 +304,7 @@ function EditProfil(props) {
                                     _rhesus == '+'
                                         ? true
                                         : false ||
-                                          r.data?.data?.[0].rhesus ==
-                                              '+'
+                                          r.data?.data?.[0].rhesus == '+'
                                         ? true
                                         : false,
                             },
@@ -327,8 +315,7 @@ function EditProfil(props) {
                                     _rhesus == '-'
                                         ? true
                                         : false ||
-                                          r.data?.data?.[0].rhesus ==
-                                              '-'
+                                          r.data?.data?.[0].rhesus == '-'
                                         ? true
                                         : false,
                             },
@@ -339,22 +326,20 @@ function EditProfil(props) {
                                     _rhesus == 'X'
                                         ? true
                                         : false ||
-                                          r.data?.data?.[0].rhesus ==
-                                              'X'
+                                          r.data?.data?.[0].rhesus == 'X'
                                         ? true
                                         : false,
                             },
-                           
                         ]);
 
                         setGambar(_gambar || r.data?.data?.[0].gambar);
                     } else {
-                        setLoading(false)
+                        setLoading(false);
                         console.error('Error', r.data);
                     }
                 })
                 .catch(err => {
-                    setLoading(false)
+                    setLoading(false);
                     console.error('error : ', err);
                 });
         }
@@ -390,7 +375,7 @@ function EditProfil(props) {
         gologan_darah: '',
         jenis_kelamin: '',
         status_menikah: '',
-        rhesus : '',
+        rhesus: '',
     });
 
     const goNextPage = page => {
@@ -400,22 +385,22 @@ function EditProfil(props) {
     };
 
     const submitData = value => {
-        var flag_error = 0
-        for (const key in value){
+        var flag_error = 0;
+        for (const key in value) {
             console.log(`${key}: ${value[key]}`);
-            if (!value[key] && flag_error == 0){
-                flag_error +=1
-                var text = "Kolom " + key.toUpperCase() + " Tidak Boleh Kosong"
-                Alert.alert("Gagal",text,
-                [{ text: "Coba Lagi", onPress: () => console.log('Ok')}]
-                )
+            if (!value[key] && flag_error == 0) {
+                flag_error += 1;
+                var text = 'Kolom ' + key.toUpperCase() + ' Tidak Boleh Kosong';
+                Alert.alert('Gagal', text, [
+                    {text: 'Coba Lagi', onPress: () => console.log('Ok')},
+                ]);
             }
         }
         async function submit() {
             // setIsLoading(true)
-            setLoading(true)
+            setLoading(true);
             const token = await AsyncStorage.getItem('token');
-            
+
             const body = {
                 ktp: value.ktp,
                 nama: value.nama,
@@ -432,39 +417,39 @@ function EditProfil(props) {
                 rhesus: value.rhesus,
                 gambar: filebase64,
             };
-            console.log(
-                '11BODY---',
-                body.golongan_darah.toString(),
-            );
-                Axios.put(`${API}/user/update`, body, {
-                    headers: {
-                        Authorization: 'Bearer ' + token,
-                        'Content-Type': 'application/json',
-                    },
+            console.log('11BODY---', body.golongan_darah.toString());
+            Axios.put(`${API}/user/update`, body, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(r => {
+                    if (r.data.code == 200) {
+                        renew_token('Dashboard');
+                    } else {
+                        setLoading(false);
+                        Alert.alert('Gagal', r.data.message, [
+                            {
+                                text: 'Coba Lagi',
+                                onPress: () => console.log('Ok'),
+                            },
+                        ]);
+                    }
                 })
-                    .then(r => {
-                        if (r.data.code == 200) {
-                            renew_token('Dashboard')
-                        } else {
-                            setLoading(false)
-                            Alert.alert("Gagal",r.data.message,
-                                [{ text: "Coba Lagi", onPress: () => console.log('Ok')}]
-                                )
-                        }
-                    })
-                    .catch(err => {
-                        setLoading(false)
-                        console.log('error : ', err.message);
-                    });
-            
+                .catch(err => {
+                    setLoading(false);
+                    console.log('error : ', err.message);
+                });
+
             setIsLoading(false);
         }
-        if (flag_error == 0){
+        if (flag_error == 0) {
             submit();
-        }      
+        }
     };
     const renew_token = page => {
-        async function relogin(){
+        async function relogin() {
             const email = await AsyncStorage.getItem('email');
             const password = await AsyncStorage.getItem('pass');
 
@@ -475,12 +460,8 @@ function EditProfil(props) {
             const headers = {
                 'Content-Type': 'application/json',
             };
-    
-            Axios.post(
-                `${API}/user/login`,
-                JSON.stringify(body),
-                headers,
-            )
+
+            Axios.post(`${API}/user/login`, JSON.stringify(body), headers)
                 .then(r => {
                     if (r.data.code == 200) {
                         AsyncStorage.setItem('email', body.email);
@@ -491,10 +472,19 @@ function EditProfil(props) {
                         AsyncStorage.setItem('ktp', r.data.data.ktp);
                         AsyncStorage.setItem('nama', r.data.data.nama);
                         AsyncStorage.setItem('alamat', r.data.data.alamat);
-                        AsyncStorage.setItem('kecamatan', r.data.data.kecamatan);
-                        AsyncStorage.setItem('kelurahan', r.data.data.kelurahan);
+                        AsyncStorage.setItem(
+                            'kecamatan',
+                            r.data.data.kecamatan,
+                        );
+                        AsyncStorage.setItem(
+                            'kelurahan',
+                            r.data.data.kelurahan,
+                        );
                         AsyncStorage.setItem('wilayah', r.data.data.wilayah);
-                        AsyncStorage.setItem('kartudonor', r.data.data.KODEPENDONOR);
+                        AsyncStorage.setItem(
+                            'kartudonor',
+                            r.data.data.KODEPENDONOR,
+                        );
                         AsyncStorage.setItem(
                             'tempat_lahir',
                             r.data.data.tempat_lahir,
@@ -516,32 +506,55 @@ function EditProfil(props) {
                             r.data.data.nomor_telepon,
                         );
                         AsyncStorage.setItem('email', r.data.data.email);
-                        AsyncStorage.setItem('pekerjaan', r.data.data.pekerjaan);
+                        AsyncStorage.setItem(
+                            'pekerjaan',
+                            r.data.data.pekerjaan,
+                        );
                         AsyncStorage.setItem('gambar', r.data.data.gambar);
-    
-                        AsyncStorage.setItem('golongan_darah',r.data.data.golongan_darah);
-                        AsyncStorage.setItem('rhesus',r.data.data.rhesus);
-                        setLoading(false)
-                        Alert.alert("Berhasil","Profile Berhasil Di Perbarui. ",
-                        [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
-                        )
-                        
+
+                        AsyncStorage.setItem(
+                            'golongan_darah',
+                            r.data.data.golongan_darah,
+                        );
+                        AsyncStorage.setItem('rhesus', r.data.data.rhesus);
+                        setLoading(false);
+                        Alert.alert(
+                            'Berhasil',
+                            'Profile Berhasil Di Perbarui. ',
+                            [
+                                {
+                                    text: 'OK',
+                                    onPress: () =>
+                                        props.navigation.navigate('Dashboard'),
+                                },
+                            ],
+                        );
                     } else {
-                        setLoading(false)
-                        Alert.alert("Gagal","Email Atau Password Tidak Cocok",
-                        [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
-                       )
+                        setLoading(false);
+                        Alert.alert(
+                            'Gagal',
+                            'Email Atau Password Tidak Cocok',
+                            [
+                                {
+                                    text: 'Coba Lagi',
+                                    onPress: () => console.log('OK Pressed'),
+                                },
+                            ],
+                        );
                     }
                 })
                 .catch(err => {
-                    setLoading(false)
-                    Alert.alert("Error","Silahkan Coba Lagi",
-                        [{ text: "Coba Lagi", onPress: () => console.log("OK Pressed") }]
-                       )
+                    setLoading(false);
+                    Alert.alert('Error', 'Silahkan Coba Lagi', [
+                        {
+                            text: 'Coba Lagi',
+                            onPress: () => console.log('OK Pressed'),
+                        },
+                    ]);
                     console.log('error : ', err);
                 });
         }
-        relogin()
+        relogin();
     };
     const [filePath, setFilePath] = useState({});
     const requestCameraPermission = async () => {
@@ -621,15 +634,15 @@ function EditProfil(props) {
         //         setBase64(response.assets[0].base64);
         //     });
         // }
-        Alert.alert("Warning","Feature Sedang Dalam Pengembangan",
-        [{ text: "OK", onPress: () => console.log('Ok') }]
-        )
+        Alert.alert('Warning', 'Feature Sedang Dalam Pengembangan', [
+            {text: 'OK', onPress: () => console.log('Ok')},
+        ]);
     };
 
     const chooseFile = type => {
-        Alert.alert("Warning","Feature Sedang Dalam Pengembangan",
-        [{ text: "OK", onPress: () => console.log('Ok') }]
-        )
+        Alert.alert('Warning', 'Feature Sedang Dalam Pengembangan', [
+            {text: 'OK', onPress: () => console.log('Ok')},
+        ]);
         // let options = {
         //     mediaType: type,
         //     maxWidth: 300,
@@ -685,9 +698,11 @@ function EditProfil(props) {
                         // AsyncStorage.setItem('tanggal_lahir',r.data.data.tanggal_lahir);
                         // AsyncStorage.setItem('status_menikah',r.data.data.status_menikah);
                         // AsyncStorage.setItem('jenis_kelamin',r.data.data.jenis_kelamin);
-                        Alert.alert("Berhasil","Photo Profile Berhasil Di Perbarui",
-                                [{ text: "OK", onPress: () => console.log('Ok') }]
-                                )
+                        Alert.alert(
+                            'Berhasil',
+                            'Photo Profile Berhasil Di Perbarui',
+                            [{text: 'OK', onPress: () => console.log('Ok')}],
+                        );
                     } else {
                         console.log('Error', r.data);
                     }
@@ -701,8 +716,12 @@ function EditProfil(props) {
 
     return (
         <Container>
-            
-            <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
+            <AwesomeLoading
+                indicatorId={18}
+                size={50}
+                isActive={loading}
+                text="loading.."
+            />
 
             {isLoading ? (
                 <Text>Loading....</Text>
@@ -789,7 +808,6 @@ function EditProfil(props) {
                                         width: '60%',
                                         marginRight: '30%',
                                     }}>
-                                        
                                     <TouchableOpacity
                                         style={styles.button}
                                         onPress={() => captureImage('photo')}>
@@ -866,7 +884,7 @@ function EditProfil(props) {
                                 status_menikah: status_menikah,
                                 pekerjaan: pekerjaanInitial,
                                 golongan_darah: golonganDarahInitial,
-                                rhesus: rhesusInitial
+                                rhesus: rhesusInitial,
                             }}
                             enableReinitialize
                             onSubmit={value => {
@@ -921,28 +939,32 @@ function EditProfil(props) {
                                         }}>
                                         Tanggal Lahir
                                     </Text>
-                                    
+
                                     <DatePicker
-                                            modal
-                                            mode='date'
-                                            open={open}
-                                            date={date}
-                                            onConfirm={(date) => {
-                                            setOpen(false)
-                                            
-                                        setTanggalLahir(moment(date).format('YYYY-MM-DD').toString())
-                                            }}
-                                            onCancel={() => {
-                                            setOpen(false)
-                                            }}
-                                        />
+                                        modal
+                                        mode="date"
+                                        open={open}
+                                        date={date}
+                                        onConfirm={date => {
+                                            setOpen(false);
+
+                                            setTanggalLahir(
+                                                moment(date)
+                                                    .format('YYYY-MM-DD')
+                                                    .toString(),
+                                            );
+                                        }}
+                                        onCancel={() => {
+                                            setOpen(false);
+                                        }}
+                                    />
                                     <Item style={styles.item}>
                                         <TextInput
                                             style={styles.input}
                                             onChangeText={handleChange(
                                                 'tanggal_lahir',
                                             )}
-                                            onPressIn = {() => setOpen(true)}
+                                            onPressIn={() => setOpen(true)}
                                             onBlur={handleBlur('tanggal_lahir')}
                                             value={values.tanggal_lahir}
                                             placeholder={'Contoh: 1982-12-28'}
@@ -997,7 +1019,7 @@ function EditProfil(props) {
                                             onChangeText={handleChange('ktp')}
                                             onBlur={handleBlur('ktp')}
                                             value={values.ktp}
-                                            keyboardType='numeric'
+                                            keyboardType="numeric"
                                         />
                                     </Item>
                                     <Text
@@ -1052,8 +1074,8 @@ function EditProfil(props) {
                                             value={values.kelurahan}
                                         />
                                     </Item>
-                                    
-                                     <Text
+
+                                    <Text
                                         style={{
                                             marginLeft: 30,
                                             marginTop: 20,
@@ -1079,7 +1101,7 @@ function EditProfil(props) {
                                             value={values.kecamatan}
                                         />
                                     </Item>
-                                   
+
                                     <Text
                                         style={{
                                             marginLeft: 30,
@@ -1106,7 +1128,6 @@ function EditProfil(props) {
                                             value={values.wilayah}
                                         />
                                     </Item>
-                                   
 
                                     <Text
                                         style={{
@@ -1210,12 +1231,11 @@ function EditProfil(props) {
                                             style={{width: '70%'}}
                                             title={'Belum Menikah'}
                                             checked={
-                                                values.status_menikah == "0"
+                                                values.status_menikah == '0'
                                                     ? true
                                                     : false
                                             }
                                             onPress={() =>
-                                                
                                                 setFieldValue(
                                                     'status_menikah',
                                                     '0',
@@ -1364,7 +1384,6 @@ function EditProfil(props) {
                                                                     'pekerjaan',
                                                                     checkbox.value,
                                                                 );
-                                                                
                                                             }}
                                                             key={i}
                                                         />
@@ -1376,7 +1395,6 @@ function EditProfil(props) {
                                             {pekerjaan.map((checkbox, i) => {
                                                 if (i >= pekerjaan.length / 2) {
                                                     return (
-                                                        
                                                         <CheckBox
                                                             style={{
                                                                 width: '70%',
@@ -1395,7 +1413,9 @@ function EditProfil(props) {
                                                                     'pekerjaan',
                                                                     checkbox.value,
                                                                 );
-                                                                console.log(checkbox.value)
+                                                                console.log(
+                                                                    checkbox.value,
+                                                                );
                                                             }}
                                                             key={i}
                                                         />
@@ -1434,7 +1454,8 @@ function EditProfil(props) {
                                                     // console.info("__DATA__",golonganDarah)
                                                     if (
                                                         i <
-                                                        golongan_darah.length / 2
+                                                        golongan_darah.length /
+                                                            2
                                                     ) {
                                                         return (
                                                             <CheckBox
@@ -1468,7 +1489,8 @@ function EditProfil(props) {
                                                 (checkbox, i) => {
                                                     if (
                                                         i >=
-                                                        golongan_darah.length / 2
+                                                        golongan_darah.length /
+                                                            2
                                                     ) {
                                                         return (
                                                             <CheckBox
@@ -1523,73 +1545,63 @@ function EditProfil(props) {
                                             justifyContent: 'space-between',
                                         }}>
                                         <View>
-                                            {rhesus.map(
-                                                (checkbox, i) => {
-                                                    // console.info("__DATA__",golonganDarah)
-                                                    if (
-                                                        i <
-                                                        rhesus.length / 2
-                                                    ) {
-                                                        return (
-                                                            <CheckBox
-                                                                style={{
-                                                                    width: '70%',
-                                                                }}
-                                                                title={
-                                                                    checkbox.label
-                                                                }
-                                                                checked={
-                                                                    checkbox.value ==
-                                                                    values.rhesus
-                                                                        ? true
-                                                                        : false
-                                                                }
-                                                                onPress={() => {
-                                                                    setFieldValue(
-                                                                        'rhesus',
-                                                                        checkbox.value,
-                                                                    );
-                                                                }}
-                                                                key={i}
-                                                            />
-                                                        );
-                                                    }
-                                                },
-                                            )}
+                                            {rhesus.map((checkbox, i) => {
+                                                // console.info("__DATA__",golonganDarah)
+                                                if (i < rhesus.length / 2) {
+                                                    return (
+                                                        <CheckBox
+                                                            style={{
+                                                                width: '70%',
+                                                            }}
+                                                            title={
+                                                                checkbox.label
+                                                            }
+                                                            checked={
+                                                                checkbox.value ==
+                                                                values.rhesus
+                                                                    ? true
+                                                                    : false
+                                                            }
+                                                            onPress={() => {
+                                                                setFieldValue(
+                                                                    'rhesus',
+                                                                    checkbox.value,
+                                                                );
+                                                            }}
+                                                            key={i}
+                                                        />
+                                                    );
+                                                }
+                                            })}
                                         </View>
                                         <View>
-                                            {rhesus.map(
-                                                (checkbox, i) => {
-                                                    if (
-                                                        i >=
-                                                        rhesus.length / 2
-                                                    ) {
-                                                        return (
-                                                            <CheckBox
-                                                                style={{
-                                                                    width: '70%',
-                                                                }}
-                                                                title={
-                                                                    checkbox.label
-                                                                }
-                                                                checked={
-                                                                    checkbox.value ==
-                                                                    values.rhesus
-                                                                        ? true
-                                                                        : false
-                                                                }
-                                                                onPress={() => {
-                                                                    setFieldValue(
-                                                                        'rhesus',
-                                                                        checkbox.value,
-                                                                    );
-                                                                }}
-                                                                key={i}
-                                                            />
-                                                        );
-                                                    }
-                                                },
-                                            )}
+                                            {rhesus.map((checkbox, i) => {
+                                                if (i >= rhesus.length / 2) {
+                                                    return (
+                                                        <CheckBox
+                                                            style={{
+                                                                width: '70%',
+                                                            }}
+                                                            title={
+                                                                checkbox.label
+                                                            }
+                                                            checked={
+                                                                checkbox.value ==
+                                                                values.rhesus
+                                                                    ? true
+                                                                    : false
+                                                            }
+                                                            onPress={() => {
+                                                                setFieldValue(
+                                                                    'rhesus',
+                                                                    checkbox.value,
+                                                                );
+                                                            }}
+                                                            key={i}
+                                                        />
+                                                    );
+                                                }
+                                            })}
                                         </View>
                                     </View>
                                     <View
@@ -1670,7 +1682,6 @@ function EditProfil(props) {
                                             <TouchableOpacity
                                                 style={styles.button}
                                                 onPress={handleSubmit}>
-                                                
                                                 <Text
                                                     style={{
                                                         margin: 10,
@@ -1696,3 +1707,4 @@ function EditProfil(props) {
 }
 
 export default EditProfil;
+

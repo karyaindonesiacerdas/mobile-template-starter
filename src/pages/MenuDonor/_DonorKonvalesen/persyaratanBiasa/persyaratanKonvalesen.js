@@ -154,7 +154,8 @@ function persyaratanKonvalesen(props) {
                         width: '40%',
                         marginRight: '2%',
                     }}>
-                    <TouchableOpacity onPress={goNextPage.bind(this, 'MenuDonor')}>
+                    <TouchableOpacity
+                        onPress={goNextPage.bind(this, 'MenuDonor')}>
                         <Text
                             style={{
                                 margin: 10,
@@ -197,3 +198,4 @@ function persyaratanKonvalesen(props) {
 }
 
 export default persyaratanKonvalesen;
+

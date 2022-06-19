@@ -19,10 +19,9 @@ import styles from './styles';
 function MenuStock(props) {
     const goNextPage = page => {
         if (page) {
-            if (page=="KebutuhanDarah"){
+            if (page == 'KebutuhanDarah') {
                 props.navigation.navigate(page);
-            }
-            else{
+            } else {
                 props.navigation.navigate(page);
             }
         }
@@ -46,7 +45,6 @@ function MenuStock(props) {
                     width: 54,
                     height: 60,
                     margin: 20,
-
                     right: 10,
                     top: 10,
                 }}></Image>
@@ -213,3 +211,4 @@ function MenuStock(props) {
 }
 
 export default MenuStock;
+

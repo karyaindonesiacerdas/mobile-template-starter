@@ -26,7 +26,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {API} from '../../../../config/api';
 import Axios from 'axios';
- 
+
 function kuisonerKonvalesen(props) {
     const [kuesioner, setKuesioner] = useState([
         {
@@ -363,8 +363,11 @@ function kuisonerKonvalesen(props) {
                     `semua kuesioner harus diisi, sisa : ${43 - input.count}`,
                 );
             } else {
-                const data_calon_donor = props.route.params.data_calon_donor
-                props.navigation.navigate('agrementKonvalesen',{data_calon_donor : data_calon_donor,kuisoner_calon_donor : input});
+                const data_calon_donor = props.route.params.data_calon_donor;
+                props.navigation.navigate('agrementKonvalesen', {
+                    data_calon_donor: data_calon_donor,
+                    kuisoner_calon_donor: input,
+                });
             }
         } else {
             props.navigation.navigate(page);
@@ -373,63 +376,104 @@ function kuisonerKonvalesen(props) {
     async function submit(input) {
         const token = await AsyncStorage.getItem('token');
         const nama = await AsyncStorage.getItem('nama');
-        const data_calon_donor = props.route.params.data_calon_donor
+        const data_calon_donor = props.route.params.data_calon_donor;
         const ktp = await AsyncStorage.getItem('ktp');
-        
-        Axios.post(`${API}/pendonor/calon-pendonor/create`, data_calon_donor,
-            {headers:{
-                Authorization :'Bearer ' +token,
-                'Content-Type': 'multipart/form-data; boundary=${body._boundary}',
-            }})
-        .then(res => {
-            console.info('res.data', res.data);
-            console.log(res.data);
-            if (res.data.code === 200) {
-                AsyncStorage.setItem('kode_pendonor',res.data.kode_pendonor);
-                input.kode_calon_pendonor = kode_calon_pendonor;
-                input.ktp = ktp;
-                input.nama = nama;
-                const body = input;
-                console.log(body);
-                Axios.post(`${API}/kuesioner/create`, body, {
-                    headers: {
-                        Authorization: 'Bearer ' + token,
-                        'Content-Type': 'application/json',
-                    },
-                })
-                    .then(res => {
-                        console.info('res.data', res.data);
-                        console.log(res.data);
-                        if (res.data.code === 200) {
-                            props.navigation.navigate('agrementKonvalesen', {
-                                kode_pendonor: kode_calon_pendonor,
-                            });
-                        } else {
-                            Alert.alert("Error",res.data.message,
-                            [{ text: "OK", onPress: () => console.log(res.data.message) }]
-                            )
-                        }
-                    })
-                    .catch(err => {
-                        Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-                        [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
-                        )
-                    });
-            } else if (res.data.code === 500){
-                Alert.alert("Gagal","Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ",
-                [{ text: "Cek Riwayat", onPress: () => props.navigation.replace('Riwayat') }]
-                )
-            } else {
-              Alert.alert("Error",res.data.message,
-              [{ text: "OK", onPress: () => console.log(res.data.message) }]
-              )
-            }
+
+        Axios.post(`${API}/pendonor/calon-pendonor/create`, data_calon_donor, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type':
+                    'multipart/form-data; boundary=${body._boundary}',
+            },
         })
-        .catch(err => {
-            Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-            [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
-            )
-        });
+            .then(res => {
+                console.info('res.data', res.data);
+                console.log(res.data);
+                if (res.data.code === 200) {
+                    AsyncStorage.setItem(
+                        'kode_pendonor',
+                        res.data.kode_pendonor,
+                    );
+                    input.kode_calon_pendonor = kode_calon_pendonor;
+                    input.ktp = ktp;
+                    input.nama = nama;
+                    const body = input;
+                    console.log(body);
+                    Axios.post(`${API}/kuesioner/create`, body, {
+                        headers: {
+                            Authorization: 'Bearer ' + token,
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                        .then(res => {
+                            console.info('res.data', res.data);
+                            console.log(res.data);
+                            if (res.data.code === 200) {
+                                props.navigation.navigate(
+                                    'agrementKonvalesen',
+                                    {
+                                        kode_pendonor: kode_calon_pendonor,
+                                    },
+                                );
+                            } else {
+                                Alert.alert('Error', res.data.message, [
+                                    {
+                                        text: 'OK',
+                                        onPress: () =>
+                                            console.log(res.data.message),
+                                    },
+                                ]);
+                            }
+                        })
+                        .catch(err => {
+                            Alert.alert(
+                                'Error',
+                                'Session Berakhir Silahkan Login Kembali',
+                                [
+                                    {
+                                        text: 'OK',
+                                        onPress: () =>
+                                            props.navigation.navigate(
+                                                'Dashboard',
+                                            ),
+                                    },
+                                ],
+                            );
+                        });
+                } else if (res.data.code === 500) {
+                    Alert.alert(
+                        'Gagal',
+                        'Anda Sudah Mendaftar Donor Hari Ini, Cek Halaman Riwayat  ',
+                        [
+                            {
+                                text: 'Cek Riwayat',
+                                onPress: () =>
+                                    props.navigation.replace('Riwayat'),
+                            },
+                        ],
+                    );
+                } else {
+                    Alert.alert('Error', res.data.message, [
+                        {
+                            text: 'OK',
+                            onPress: () => console.log(res.data.message),
+                        },
+                    ]);
+                }
+            })
+            .catch(err => {
+                Alert.alert(
+                    'Error',
+                    'Session Berakhir Silahkan Login Kembali',
+                    [
+                        {
+                            text: 'OK',
+                            onPress: () =>
+                                props.navigation.navigate('Dashboard'),
+                        },
+                    ],
+                );
+            });
     }
     return (
         <Container>
@@ -568,7 +612,10 @@ function kuisonerKonvalesen(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'agrementKonvalesen')}>
+                            onPress={goNextPage.bind(
+                                this,
+                                'agrementKonvalesen',
+                            )}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -650,3 +697,4 @@ function RefactorInput(val) {
     };
     return input;
 }
+

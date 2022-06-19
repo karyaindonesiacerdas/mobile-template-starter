@@ -28,7 +28,7 @@ import {
 import {API} from '../../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import moment from 'moment'
+import moment from 'moment';
 import AwesomeLoading from 'react-native-awesome-loading';
 
 function RiwayatDonor(props) {
@@ -40,80 +40,82 @@ function RiwayatDonor(props) {
     const EmptyListMessage = ({}) => {
         return (
             <View style={styles.viewContainer}>
-            <Card style={styles.flowCardPeach}>
-                <TouchableOpacity>
-                    <Text
-                        style={{
-                            marginTop: 20,
-                            marginBottom: 10,
-                            marginLeft: 20,
-                            marginRight: 20,
-                            fontSize: 15,
-                            color: 'black',
-                            textAlign : 'center'
-                        }}
-                    >
-                        <B>Anda Belum Pernah Melakukan Donor Silahkan Daftar Donor</B>
-                    </Text>  
-                </TouchableOpacity>
-            </Card>
-            
-        </View>
+                <Card style={styles.flowCardPeach}>
+                    <TouchableOpacity>
+                        <Text
+                            style={{
+                                marginTop: 20,
+                                marginBottom: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                fontSize: 15,
+                                color: 'black',
+                                textAlign: 'center',
+                            }}>
+                            <B>
+                                Anda Belum Pernah Melakukan Donor Silahkan
+                                Daftar Donor
+                            </B>
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
+            </View>
         );
-    }
+    };
     const ItemView = ({item}) => {
         return (
-          <View style={styles.viewContainer}>
-            <Card style={styles.flowCardPeach}>
-                <TouchableOpacity>
-                    <Text
-                        style={{
-                            marginTop: 20,
-                            marginBottom: 10,
-                            marginLeft: 20,
-                            marginRight: 20,
-                            fontSize: 15,
-                            color: 'black'
-                        }}
-                    >
-                        <B>Transaksi ID : {item.kuesioner_id}</B>
-                    </Text>
-                    <Text
-                        style={{
-                            marginBottom: 10,
-                            marginLeft: 20,
-                            marginRight: 20,
-                            fontSize: 15,
-                            color: 'black'
-                        }}
-                    >
-                        <B>Jenis Donor : {item.jenis_donor.toUpperCase()}</B>
-                    </Text>
-                    <Text
-                        style={{
-                            marginBottom: 10,
-                            marginLeft: 20,
-                            marginRight: 20,
-                            fontSize: 15,
-                            color: 'black'
-                        }}
-                    >
-                        <B>Status : Selesai</B>
-                    </Text>
-                    <Text
-                        style={{
-                            marginBottom: 10,
-                            marginLeft: 20,
-                            marginRight: 20,
-                            fontSize: 15,
-                            color: 'black'
-                        }}
-                    >
-                        <B>Jadwal Donor :{item.jadwal_donor.substring(0,10)}</B>
-                    </Text>
-                </TouchableOpacity>
-            </Card>
-        </View>
+            <View style={styles.viewContainer}>
+                <Card style={styles.flowCardPeach}>
+                    <TouchableOpacity>
+                        <Text
+                            style={{
+                                marginTop: 20,
+                                marginBottom: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                fontSize: 15,
+                                color: 'black',
+                            }}>
+                            <B>Transaksi ID : {item.kuesioner_id}</B>
+                        </Text>
+                        <Text
+                            style={{
+                                marginBottom: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                fontSize: 15,
+                                color: 'black',
+                            }}>
+                            <B>
+                                Jenis Donor : {item.jenis_donor.toUpperCase()}
+                            </B>
+                        </Text>
+                        <Text
+                            style={{
+                                marginBottom: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                fontSize: 15,
+                                color: 'black',
+                            }}>
+                            <B>Status : Selesai</B>
+                        </Text>
+                        <Text
+                            style={{
+                                marginBottom: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                fontSize: 15,
+                                color: 'black',
+                            }}>
+                            <B>
+                                Jadwal Donor :
+                                {item.jadwal_donor.substring(0, 10)}
+                            </B>
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
+            </View>
         );
     };
 
@@ -253,11 +255,13 @@ function RiwayatDonor(props) {
     });
     useEffect(() => {
         async function getRiwayat() {
-            setLoading(true)
+            setLoading(true);
             const token = await AsyncStorage.getItem('token');
-            const date_today = moment().utcOffset('+07:00').format('YYYY-MM-DD');
+            const date_today = moment()
+                .utcOffset('+07:00')
+                .format('YYYY-MM-DD');
             const ktp = await AsyncStorage.getItem('ktp');
-            
+
             const body = {
                 ktp: ktp,
             };
@@ -274,17 +278,23 @@ function RiwayatDonor(props) {
                 },
             })
                 .then(r => {
-                    setLoading(false)
+                    setLoading(false);
                     if (r.data.code == 200) {
-                        
-                        const data = r.data.data
-                        const filtered = []
+                        const data = r.data.data;
+                        const filtered = [];
                         if (data != null) {
-                            const filtered = data.filter(function(value, index, arr){ 
-                                return data[index].jadwal_donor.substring(0,10) == date_today
+                            const filtered = data.filter(function (
+                                value,
+                                index,
+                                arr,
+                            ) {
+                                return (
+                                    data[index].jadwal_donor.substring(0, 10) ==
+                                    date_today
+                                );
                             });
                             setDataSource(filtered);
-                        }else{
+                        } else {
                             setDataSource(data);
                         }
                         setRes(r.data);
@@ -294,11 +304,15 @@ function RiwayatDonor(props) {
                     }
                 })
                 .catch(err => {
-                    setLoading(false)
+                    setLoading(false);
                     console.log(err);
-                    Alert.alert("Error","Menu Masih Dalam Pengembangan",
-                    [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
-                    )
+                    Alert.alert('Error', 'Menu Masih Dalam Pengembangan', [
+                        {
+                            text: 'OK',
+                            onPress: () =>
+                                props.navigation.navigate('Dashboard'),
+                        },
+                    ]);
                 });
         }
         getRiwayat();
@@ -307,7 +321,12 @@ function RiwayatDonor(props) {
     return (
         <Container>
             <SafeAreaView style={{flex: 1}}>
-            <AwesomeLoading indicatorId={18} size={50} isActive={loading} text="loading.." />
+                <AwesomeLoading
+                    indicatorId={18}
+                    size={50}
+                    isActive={loading}
+                    text="loading.."
+                />
 
                 <FlatList
                     data={dataSource}
@@ -364,3 +383,4 @@ const style = StyleSheet.create({
 });
 
 export default RiwayatDonor;
+

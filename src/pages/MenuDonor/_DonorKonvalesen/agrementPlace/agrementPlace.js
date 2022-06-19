@@ -132,7 +132,7 @@ function agrementPlace(props) {
                         fontWeight: 'bold',
                         color: 'red',
                     }}>
-                    Gdeung UDD 
+                    Gdeung UDD
                 </Text>
                 <Text
                     style={{
@@ -160,7 +160,6 @@ function agrementPlace(props) {
                         style={{width: '70%'}}
                         checked={check1}
                         onPress={() => setCheck1(!check1)}
-                        style={{width: '70%'}}
                     />
                 </View>
                 <View
@@ -180,7 +179,10 @@ function agrementPlace(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'gedungUddKonvalesen')}>
+                            onPress={goNextPage.bind(
+                                this,
+                                'gedungUddKonvalesen',
+                            )}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -223,3 +225,4 @@ function agrementPlace(props) {
 }
 
 export default agrementPlace;
+

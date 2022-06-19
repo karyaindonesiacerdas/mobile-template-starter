@@ -8,7 +8,7 @@ import {
     StyleSheet,
     TextInput,
     TouchableOpacity,
-    Switch
+    Switch,
 } from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Container, Card} from 'native-base';
@@ -27,9 +27,9 @@ import {
 import Axios from 'axios';
 import {API} from '../../config/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Dropdown } from 'react-native-element-dropdown';
+import {Dropdown} from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import DataTable, { COL_TYPES } from 'react-native-datatable-component';
+import DataTable, {COL_TYPES} from 'react-native-datatable-component';
 
 function KebutuhanDarah(props) {
     const [res, setRes] = useState({
@@ -78,65 +78,65 @@ function KebutuhanDarah(props) {
             ],
         ],
     };
-    const [list_darah,setListDarah] = useState([])
-    const [list_rs,setRs] = useState([])
-    const [list_product,setProduct] = useState([])
+    const [list_darah, setListDarah] = useState([]);
+    const [list_rs, setRs] = useState([]);
+    const [list_product, setProduct] = useState([]);
 
     useEffect(() => {
-        get_kebutuhan_darah()
-      }, [rs, product, golda]); // <-- dependency array
+        get_kebutuhan_darah();
+    }, [rs, product, golda]); // <-- dependency array
     const labelDarah = () => {
         if (list_darah || isFocus2) {
-          return (
-            <Text style={[styles.label, isFocus2 && { color: 'blue' }]}>
-              Golongan Darah
-            </Text>
-          );
+            return (
+                <Text style={[styles.label, isFocus2 && {color: 'blue'}]}>
+                    Golongan Darah
+                </Text>
+            );
         }
         return null;
-      };
+    };
 
-      const labelRs = () => {
+    const labelRs = () => {
         if (list_rs || isFocus1) {
-          return (
-            <Text style={[styles.label, isFocus1 && { color: 'blue' }]}>
-              Rumah Sakit
-            </Text>
-          );
+            return (
+                <Text style={[styles.label, isFocus1 && {color: 'blue'}]}>
+                    Rumah Sakit
+                </Text>
+            );
         }
         return null;
-      };
+    };
 
-      const labelProduct = () => {
+    const labelProduct = () => {
         if (list_product || isFocus3) {
-          return (
-            <Text style={[styles.label, isFocus3 && { color: 'blue' }]}>
-              Product
-            </Text>
-          );
+            return (
+                <Text style={[styles.label, isFocus3 && {color: 'blue'}]}>
+                    Product
+                </Text>
+            );
         }
         return null;
-      };
+    };
 
-      const labelForm = () => {
+    const labelForm = () => {
         if (list_product || isFocus3) {
-          return (
-            <Text style={[styles.label, isFocus3 && { color: 'blue' }]}>
-              No Form
-            </Text>
-          );
+            return (
+                <Text style={[styles.label, isFocus3 && {color: 'blue'}]}>
+                    No Form
+                </Text>
+            );
         }
         return null;
-      };
+    };
 
-      async function get_kebutuhan_darah() {
+    async function get_kebutuhan_darah() {
         const token = await AsyncStorage.getItem('token');
         const body = {
             rumah_sakit: rs,
             produk: product,
-            golda: golda
-        }
-        console.log(body)
+            golda: golda,
+        };
+        console.log(body);
         // Axios.get(`${API}/kebutuhandarah/list/produk`, {
         Axios.post(`${API}/kebutuhandarah/list/kebutuhandarah`, body, {
             headers: {
@@ -144,98 +144,98 @@ function KebutuhanDarah(props) {
                 'Content-Type': 'application/json',
             },
         })
-           .then(r => {
-                var KebutuhanDarahList = r.data.data.KebutuhanDarahList
-                var list_darah = []
-                console.log(KebutuhanDarahList[0])
-                console.log(KebutuhanDarahList[1])
+            .then(r => {
+                var KebutuhanDarahList = r.data.data.KebutuhanDarahList;
+                var list_darah = [];
+                console.log(KebutuhanDarahList[0]);
+                console.log(KebutuhanDarahList[1]);
                 // console.log(KebutuhanDarahList);
             })
             .catch(err => {
                 console.log(err);
             });
-        }
-        async function get_info (){
-            const token = await AsyncStorage.getItem('token');
-            Axios.get(`${API}/kebutuhandarah/list/produk`, {
-                headers: {
-                    Authorization: 'Bearer ' + token,
-                    'Content-Type': 'application/json',
-                },
-            })
+    }
+    async function get_info() {
+        const token = await AsyncStorage.getItem('token');
+        Axios.get(`${API}/kebutuhandarah/list/produk`, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+        })
             .then(r => {
-                var products =r.data.data.products
-                var product_list = [{ label: 'All', value: '' }]
-                for(var i in products){
-                    var d = {}
-                    d['label']=products[i]
-                    d['value']=products[i]
-                    product_list.push(d)
+                var products = r.data.data.products;
+                var product_list = [{label: 'All', value: ''}];
+                for (var i in products) {
+                    var d = {};
+                    d['label'] = products[i];
+                    d['value'] = products[i];
+                    product_list.push(d);
                 }
-                setProduct(product_list)
+                setProduct(product_list);
             })
             .catch(err => {
                 console.log(err);
             });
 
-            Axios.get(`${API}/kebutuhandarah/list/golda`, {
-                headers: {
-                    Authorization: 'Bearer ' + token,
-                    'Content-Type': 'application/json',
-                },
-            })
+        Axios.get(`${API}/kebutuhandarah/list/golda`, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+        })
             .then(r => {
-                var golda = r.data.data.bloodtypes
-                var golda_list = [{ label: 'All', value: '' }]
-                for (var i in golda){
-                    var d = {}
-                    d['label']=golda[i]
-                    d['value']=golda[i]
-                    golda_list.push(d)
+                var golda = r.data.data.bloodtypes;
+                var golda_list = [{label: 'All', value: ''}];
+                for (var i in golda) {
+                    var d = {};
+                    d['label'] = golda[i];
+                    d['value'] = golda[i];
+                    golda_list.push(d);
                 }
-                setListDarah(golda_list)
+                setListDarah(golda_list);
             })
             .catch(err => {
                 console.log(err);
             });
 
-            Axios.get(`${API}/kebutuhandarah/list/rumahsakit`, {
-                headers: {
-                    Authorization: 'Bearer ' + token,
-                    'Content-Type': 'application/json',
-                },
-            })
+        Axios.get(`${API}/kebutuhandarah/list/rumahsakit`, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+        })
             .then(r => {
-                var rs = r.data.data.hospitals
-                var rs_list = [{ label: 'All', value: '' }]
-                for (var i in rs){
-                    var d = {}
-                    d['label']=rs[i]
-                    d['value']=rs[i]
-                    rs_list.push(d)
+                var rs = r.data.data.hospitals;
+                var rs_list = [{label: 'All', value: ''}];
+                for (var i in rs) {
+                    var d = {};
+                    d['label'] = rs[i];
+                    d['value'] = rs[i];
+                    rs_list.push(d);
                 }
-                setRs(rs_list)
+                setRs(rs_list);
             })
             .catch(err => {
                 console.log(err);
             });
-        }
+    }
 
-    useEffect(() => { 
-        get_kebutuhan_darah()
-        get_info()
+    useEffect(() => {
+        get_kebutuhan_darah();
+        get_info();
     }, []);
 
-    const [no_form, setNoFormValue] = useState('')
+    const [no_form, setNoFormValue] = useState('');
 
     const searchbyNoForm = () => {
-        console.log('asda')
+        console.log('asda');
         async function get_kebutuhan_darah_by_form() {
             const token = await AsyncStorage.getItem('token');
             const body = {
                 noform: no_form,
-            }
-            console.log(body)
+            };
+            console.log(body);
             // Axios.get(`${API}/kebutuhandarah/list/produk`, {
             Axios.post(`${API}/kebutuhandarah/list/kebutuhandarah`, body, {
                 headers: {
@@ -243,19 +243,19 @@ function KebutuhanDarah(props) {
                     'Content-Type': 'application/json',
                 },
             })
-               .then(r => {
-                    var KebutuhanDarahList = r.data.data.KebutuhanDarahList
-                    var list_darah = []
-                    console.log(KebutuhanDarahList[0])
-                    console.log(KebutuhanDarahList[1])
+                .then(r => {
+                    var KebutuhanDarahList = r.data.data.KebutuhanDarahList;
+                    var list_darah = [];
+                    console.log(KebutuhanDarahList[0]);
+                    console.log(KebutuhanDarahList[1]);
                     // console.log(KebutuhanDarahList);
                 })
                 .catch(err => {
                     console.log(err);
                 });
-            }
-            get_kebutuhan_darah_by_form()
-    }
+        }
+        get_kebutuhan_darah_by_form();
+    };
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -320,53 +320,54 @@ function KebutuhanDarah(props) {
                         </Text>
                     </TouchableOpacity>
                 </Card>
-                <View style={{
+                <View
+                    style={{
                         width: '90%',
                         justifyContent: 'center',
                         alignItems: 'center',
                         marginBottom: 10,
                         flex: 2,
                     }}>
-                <Text>Show Filter</Text>
-                <Switch
-                    trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={isEnabled ? "#0c77ab" : "#669ab3"}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
-                />
+                    <Text>Show Filter</Text>
+                    <Switch
+                        trackColor={{false: '#767577', true: '#81b0ff'}}
+                        thumbColor={isEnabled ? '#0c77ab' : '#669ab3'}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={toggleSwitch}
+                        value={isEnabled}
+                    />
                 </View>
                 {!isEnabled ? (
-                    <View style={{
-                        width: '90%',
-                        justifyContent: 'center',
-                        alignSelf: 'center',
-                        marginBottom: 10,                
-                    }}>
-                    {labelForm()}
-                    <TextInput style = {styles.input}
-                        placeholder = "UTD-000000-000"
-                        placeholderTextColor = "#808080"
-                        autoCapitalize = "characters"
-                        selectionColor = '#000000'
-                        color="black"
-                        // onChangeText={setNoFormValue()}
-                    >
-                    </TextInput>
-                    <Card
+                    <View
                         style={{
-                            backgroundColor: '#32a875',
+                            width: '90%',
+                            justifyContent: 'center',
+                            alignSelf: 'center',
+                            marginBottom: 10,
                         }}>
-                        <TouchableOpacity
-                            onPress={searchbyNoForm()}>
-                            <Text
-                                style={{
-                                    margin: 10,
-                                    fontSize: 15,
+                        {labelForm()}
+                        <TextInput
+                            style={styles.input}
+                            placeholder="UTD-000000-000"
+                            placeholderTextColor="#808080"
+                            autoCapitalize="characters"
+                            selectionColor="#000000"
+                            color="black"
+                            // onChangeText={setNoFormValue()}
+                        ></TextInput>
+                        <Card
+                            style={{
+                                backgroundColor: '#32a875',
+                            }}>
+                            <TouchableOpacity onPress={searchbyNoForm()}>
+                                <Text
+                                    style={{
+                                        margin: 10,
+                                        fontSize: 15,
 
-                                    color: 'white',
-                                    textAlign: 'center',
-                                }}>
+                                        color: 'white',
+                                        textAlign: 'center',
+                                    }}>
                                     <AntDesign
                                         style={styles2.icon}
                                         color={'black'}
@@ -374,128 +375,144 @@ function KebutuhanDarah(props) {
                                         size={15}
                                     />
                                     {'  Cari'}
-                            </Text>
-                        </TouchableOpacity>
-                    </Card>
+                                </Text>
+                            </TouchableOpacity>
+                        </Card>
                     </View>
-                ) : null }
-                {isEnabled ?(
-            <View>
-                <View style={{
-                        width: '90%',
-                        justifyContent: 'center',
-                        alignSelf: 'center',
-                        marginBottom: 10,
-                    }}>
-                    {labelRs()}
-                    <Dropdown
-                    style={[styles.dropdown, isFocus1 && { borderColor: 'blue' }]}
-                    placeholderStyle={styles2.placeholderStyle}
-                    selectedTextStyle={styles2.selectedTextStyle}
-                    inputSearchStyle={styles2.inputSearchStyle}
-                    iconStyle={styles2.iconStyle}
-                    data={list_rs}
-                    search
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={!isFocus1 ? 'Pilih Rumah Sakit' : '...'}
-                    searchPlaceholder="Search..."
-                    value={rs}
-                    onFocus={() => setIsFocus1(true)}
-                    onBlur={() => setIsFocus1(false)}
-                    onChange={item => {
-                        setValueRs(item.value)
-                        setIsFocus1(false);
-                    }}
-                    renderLeftIcon={() => (
-                        <AntDesign
-                        style={styles2.icon}
-                        color={isFocus1 ? 'blue' : 'black'}
-                        name="downcircleo"
-                        size={20}
-                        />
-                    )}
-                    />
-                </View>
-             
-               
-                <View style={{
-                        width: '90%',
-                        justifyContent: 'center',
-                        alignSelf: 'center',
-                        marginBottom: 10,
-                    }}>
-                    {labelDarah()}
-                    <Dropdown
-                    style={[styles.dropdown, isFocus2 && { borderColor: 'blue' }]}
-                    placeholderStyle={styles2.placeholderStyle}
-                    selectedTextStyle={styles2.selectedTextStyle}
-                    inputSearchStyle={styles2.inputSearchStyle}
-                    iconStyle={styles2.iconStyle}
-                    data={list_darah}
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={!isFocus2 ? 'Pilih Golongan Darah' : '...'}
-                    searchPlaceholder="Search..."
-                    value={golda}
-                    onFocus={() => setIsFocus2(true)}
-                    onBlur={() => setIsFocus2(false)}
-                    onChange={item => {
-                        setValueGolda(item.value)
-                        setIsFocus2(false);    
-                    }}
-                    renderLeftIcon={() => (
-                        <AntDesign
-                        style={styles2.icon}
-                        color={isFocus2 ? 'blue' : 'black'}
-                        name="downcircleo"
-                        size={20}
-                        />
-                    )}
-                    />
-                </View>
+                ) : null}
+                {isEnabled ? (
+                    <View>
+                        <View
+                            style={{
+                                width: '90%',
+                                justifyContent: 'center',
+                                alignSelf: 'center',
+                                marginBottom: 10,
+                            }}>
+                            {labelRs()}
+                            <Dropdown
+                                style={[
+                                    styles.dropdown,
+                                    isFocus1 && {borderColor: 'blue'},
+                                ]}
+                                placeholderStyle={styles2.placeholderStyle}
+                                selectedTextStyle={styles2.selectedTextStyle}
+                                inputSearchStyle={styles2.inputSearchStyle}
+                                iconStyle={styles2.iconStyle}
+                                data={list_rs}
+                                search
+                                maxHeight={300}
+                                labelField="label"
+                                valueField="value"
+                                placeholder={
+                                    !isFocus1 ? 'Pilih Rumah Sakit' : '...'
+                                }
+                                searchPlaceholder="Search..."
+                                value={rs}
+                                onFocus={() => setIsFocus1(true)}
+                                onBlur={() => setIsFocus1(false)}
+                                onChange={item => {
+                                    setValueRs(item.value);
+                                    setIsFocus1(false);
+                                }}
+                                renderLeftIcon={() => (
+                                    <AntDesign
+                                        style={styles2.icon}
+                                        color={isFocus1 ? 'blue' : 'black'}
+                                        name="downcircleo"
+                                        size={20}
+                                    />
+                                )}
+                            />
+                        </View>
 
-                <View style={{
-                        width: '90%',
-                        justifyContent: 'center',
-                        alignSelf: 'center',
-                        marginBottom: 20,
-                    }}>
-                    {labelProduct()}
-                    <Dropdown
-                    style={[styles.dropdown, isFocus3 && { borderColor: 'blue' }]}
-                    placeholderStyle={styles2.placeholderStyle}
-                    selectedTextStyle={styles2.selectedTextStyle}
-                    inputSearchStyle={styles2.inputSearchStyle}
-                    iconStyle={styles2.iconStyle}
-                    data={list_product}
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={!isFocus3 ? 'Pilih Product' : '...'}
-                    searchPlaceholder="Search..."
-                    value={product}
-                    onFocus={() => setIsFocus3(true)}
-                    onBlur={() => setIsFocus3(false)}
-                    onChange={item => {
-                        setValueProduct(item.value)
-                        setIsFocus3(false);
-                    }}
-                    renderLeftIcon={() => (
-                        <AntDesign
-                        style={styles2.icon}
-                        color={isFocus3 ? 'blue' : 'black'}
-                        name="downcircleo"
-                        size={20}
-                        />
-                    )}
-                    />
-                </View>
-                
-            </View>
-            ) : null}
+                        <View
+                            style={{
+                                width: '90%',
+                                justifyContent: 'center',
+                                alignSelf: 'center',
+                                marginBottom: 10,
+                            }}>
+                            {labelDarah()}
+                            <Dropdown
+                                style={[
+                                    styles.dropdown,
+                                    isFocus2 && {borderColor: 'blue'},
+                                ]}
+                                placeholderStyle={styles2.placeholderStyle}
+                                selectedTextStyle={styles2.selectedTextStyle}
+                                inputSearchStyle={styles2.inputSearchStyle}
+                                iconStyle={styles2.iconStyle}
+                                data={list_darah}
+                                maxHeight={300}
+                                labelField="label"
+                                valueField="value"
+                                placeholder={
+                                    !isFocus2 ? 'Pilih Golongan Darah' : '...'
+                                }
+                                searchPlaceholder="Search..."
+                                value={golda}
+                                onFocus={() => setIsFocus2(true)}
+                                onBlur={() => setIsFocus2(false)}
+                                onChange={item => {
+                                    setValueGolda(item.value);
+                                    setIsFocus2(false);
+                                }}
+                                renderLeftIcon={() => (
+                                    <AntDesign
+                                        style={styles2.icon}
+                                        color={isFocus2 ? 'blue' : 'black'}
+                                        name="downcircleo"
+                                        size={20}
+                                    />
+                                )}
+                            />
+                        </View>
+
+                        <View
+                            style={{
+                                width: '90%',
+                                justifyContent: 'center',
+                                alignSelf: 'center',
+                                marginBottom: 20,
+                            }}>
+                            {labelProduct()}
+                            <Dropdown
+                                style={[
+                                    styles.dropdown,
+                                    isFocus3 && {borderColor: 'blue'},
+                                ]}
+                                placeholderStyle={styles2.placeholderStyle}
+                                selectedTextStyle={styles2.selectedTextStyle}
+                                inputSearchStyle={styles2.inputSearchStyle}
+                                iconStyle={styles2.iconStyle}
+                                data={list_product}
+                                maxHeight={300}
+                                labelField="label"
+                                valueField="value"
+                                placeholder={
+                                    !isFocus3 ? 'Pilih Product' : '...'
+                                }
+                                searchPlaceholder="Search..."
+                                value={product}
+                                onFocus={() => setIsFocus3(true)}
+                                onBlur={() => setIsFocus3(false)}
+                                onChange={item => {
+                                    setValueProduct(item.value);
+                                    setIsFocus3(false);
+                                }}
+                                renderLeftIcon={() => (
+                                    <AntDesign
+                                        style={styles2.icon}
+                                        color={isFocus3 ? 'blue' : 'black'}
+                                        name="downcircleo"
+                                        size={20}
+                                    />
+                                )}
+                            />
+                        </View>
+                    </View>
+                ) : null}
                 <View
                     style={{
                         width: '90%',
@@ -591,42 +608,43 @@ export default KebutuhanDarah;
 
 const styles2 = StyleSheet.create({
     container: {
-      backgroundColor: 'white',
-      padding: 16,
+        backgroundColor: 'white',
+        padding: 16,
     },
     dropdown: {
-      height: 10,
-      borderColor: 'gray',
-      borderWidth: 0.5,
-      borderRadius: 4,
-      paddingHorizontal: 4,
+        height: 10,
+        borderColor: 'gray',
+        borderWidth: 0.5,
+        borderRadius: 4,
+        paddingHorizontal: 4,
     },
     icon: {
-      marginRight: 15,
+        marginRight: 15,
     },
     label: {
-      position: 'absolute',
-      backgroundColor: 'white',
-      left: 22,
-      top: 8,
-      zIndex: 999,
-      paddingHorizontal: 8,
-      fontSize: 12,
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: 22,
+        top: 8,
+        zIndex: 999,
+        paddingHorizontal: 8,
+        fontSize: 12,
     },
     placeholderStyle: {
-      fontSize: 12,
+        fontSize: 12,
     },
     selectedTextStyle: {
-      fontSize: 12,
+        fontSize: 12,
     },
     iconStyle: {
-      width: 10,
-      height: 10,
-      marginRight: 20,
+        width: 10,
+        height: 10,
+        marginRight: 20,
     },
     inputSearchStyle: {
-      height: 50,
-      fontSize: 16,
-      color: 'black'
+        height: 50,
+        fontSize: 16,
+        color: 'black',
     },
-  });
+});
+
