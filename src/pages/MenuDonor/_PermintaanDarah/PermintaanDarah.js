@@ -6,6 +6,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
 import styles from '../../styles/styles';
 import Bg from '../../image/baground3.jpeg';
+import DocumentPicker from 'react-native-document-picker';
 
 function PermintaanDarah(props) {
     const [text, onChangeText] = React.useState('Useless Text');
@@ -93,6 +94,40 @@ function PermintaanDarah(props) {
             props.navigation.navigate(page);
         }
     };
+    const [file_permintaan, setPermintaanFile] = useState('');
+    const selectPermintaanFile = async () => {
+        //Opening Document Picker for selection of one file
+        try {
+          const res = await DocumentPicker.pick({
+            type: [DocumentPicker.types.images],
+            //There can me more options as well
+            // DocumentPicker.types.allFiles
+            // DocumentPicker.types.images
+            // DocumentPicker.types.plainText
+            // DocumentPicker.types.audio
+            // DocumentPicker.types.pdf
+          });
+          //Printing the log realted to the file
+          
+          //Setting the state to show single file attributes
+          const img = {
+            uri: res[0].uri,
+            type: res[0].type,
+            name: res[0].name
+          }
+          setPermintaanFile(img);
+        } catch (err) {
+          //Handling any exception (If any)
+          if (DocumentPicker.isCancel(err)) {
+            //If user canceled the document selection
+            alert('Canceled from single doc picker');
+          } else {
+            //For Unknown Error
+            alert('Unknown Error: ' + JSON.stringify(err));
+            throw err;
+          }
+        }
+      };
     const submitData = value => {};
     return (
         <Container>
@@ -399,8 +434,102 @@ function PermintaanDarah(props) {
                             }
                         })}
                     </View>
-                </View>
+                    <View>
+                    <TouchableOpacity
+          activeOpacity={0.5}
+          style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+            backgroundColor: '#DDDDDD',
+            padding: 5,
+            marginTop :10,
+            marginLeft: 30,
+            marginRight: 30}}
+          onPress={selectPermintaanFile}>
+          {/*Single file selection button*/}
+          <Text style={{
+            marginLeft:0,
+            marginRight: 15,
+            marginTop: 0,
+            fontSize: 15,
+            color: "black",
+            fontWeight: "bold",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}>
+             Upload Surat Permintaan Darah
+          </Text>
+          <Image
+            source={{
+              uri: 'https://img.icons8.com/offices/40/000000/attach.png',
+            }}
+            style={styles.imageIconStyle}
+          />
+        </TouchableOpacity>
+        <Text style={{
+            marginLeft: 30,
+            marginTop: 0,
+            marginBottom : 0,
+            fontSize: 15,
+            color: "black",
+            fontWeight: "bold",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}>
+           {file_permintaan.name ? file_permintaan.name : ''}
+        </Text>
+                    </View>
 
+                </View>
+                <View>
+                    <TouchableOpacity
+          activeOpacity={0.5}
+          style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+            backgroundColor: '#DDDDDD',
+            padding: 5,
+            marginTop :10,
+            marginLeft: 30,
+            marginRight: 30}}
+          onPress={selectPermintaanFile}>
+          {/*Single file selection button*/}
+          <Text style={{
+            marginLeft:0,
+            marginRight: 15,
+            marginTop: 0,
+            fontSize: 15,
+            color: "black",
+            fontWeight: "bold",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}>
+             Upload hasil SWAB Positf
+          </Text>
+          <Image
+            source={{
+              uri: 'https://img.icons8.com/offices/40/000000/attach.png',
+            }}
+            style={styles.imageIconStyle}
+          />
+        </TouchableOpacity>
+        <Text style={{
+            marginLeft: 30,
+            marginTop: 0,
+            marginBottom : 0,
+            fontSize: 15,
+            color: "black",
+            fontWeight: "bold",
+            textShadowColor: "#fff",
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 10,
+          }}>
+           {file_permintaan.name ? file_permintaan.name : ''}
+        </Text>
+                    </View>
                 <View
                     style={{
                         alignContent: 'center',

@@ -30,18 +30,38 @@ import {API} from '../../config/api';
 function StockDarah(props) {
     const [CONTENT, setCONTENT] = useState({
         tableHead: ['Informasi kebutuhan Darah\nTanggal ..... Pukul ... '],
+        product: [
+            "WB",
+        "PRC",
+        "TC",
+        "FFP",
+        "AHF",
+        "LD",
+        "LR",
+        "PK",
+        ],
         tableTitle2: ['Produk'],
         tableData2: [['Golongan Darah'], ['A', 'B', 'O', 'AB', 'TOTAL']],
     });
+    const [product , setProduct] = useState([
+        "WB",
+        "PRC",
+        "TC",
+        "FFP",
+        "AHF",
+        "LD",
+        "LR",
+        "PK",
+    ])
     const [tableData, setTableData] = useState([
-        ['WB ', '0', '0', '0', '0', '0'],
-        ['PRC ', '0', '0', '0', '0', '0'],
-        ['TC ', '0', '0', '0', '0', '0'],
-        ['FFP ', '0', '0', '0', '0', '0'],
-        ['AHF ', '0', '0', '0', '0', '0'],
-        ['LD ', '0', '0', '0', '0', '0'],
-        ['LR ', '0', '0', '0', '0', '0'],
-        ['PK ', '0', '0', '0', '0', '0'],
+        ['0', '0', '0', '0', '0'],
+        ['0', '0', '0', '0', '0'],
+        ['0', '0', '0', '0', '0'],
+        ['0', '0', '0', '0', '0'],
+        ['0', '0', '0', '0', '0'],
+        ['0', '0', '0', '0', '0'],
+        ['0', '0', '0', '0', '0'],
+        ['0', '0', '0', '0', '0'],
     ]);
     useEffect(() => {
         const headers = {
@@ -65,7 +85,6 @@ function StockDarah(props) {
                     ];
                     setTableData([
                         [
-                            'WB',
                             res.data.data[0].wb_a,
                             res.data.data[0].wb_b,
                             res.data.data[0].wb_ab,
@@ -73,7 +92,6 @@ function StockDarah(props) {
                             res.data.data[0].subtotal_wb,
                         ],
                         [
-                            'PRC',
                             res.data.data[0].prc_a,
                             res.data.data[0].prc_b,
                             res.data.data[0].prc_ab,
@@ -81,7 +99,6 @@ function StockDarah(props) {
                             res.data.data[0].subtotal_prc,
                         ],
                         [
-                            'TC',
                             res.data.data[0].tc_a,
                             res.data.data[0].tc_b,
                             res.data.data[0].tc_ab,
@@ -89,7 +106,6 @@ function StockDarah(props) {
                             res.data.data[0].subtotal_tc,
                         ],
                         [
-                            'FFP',
                             res.data.data[0].ffp_a,
                             res.data.data[0].ffp_b,
                             res.data.data[0].ffp_ab,
@@ -97,7 +113,6 @@ function StockDarah(props) {
                             res.data.data[0].subtotal_ffp,
                         ],
                         [
-                            'AHF',
                             res.data.data[0].ahf_a,
                             res.data.data[0].ahf_b,
                             res.data.data[0].ahf_ab,
@@ -105,7 +120,6 @@ function StockDarah(props) {
                             res.data.data[0].subtotal_ahf,
                         ],
                         [
-                            'LD',
                             res.data.data[0].ld_a,
                             res.data.data[0].ld_b,
                             res.data.data[0].ld_ab,
@@ -113,7 +127,6 @@ function StockDarah(props) {
                             res.data.data[0].subtotal_ld,
                         ],
                         [
-                            'LR',
                             res.data.data[0].lr_a,
                             res.data.data[0].lr_b,
                             res.data.data[0].lr_ab,
@@ -121,7 +134,6 @@ function StockDarah(props) {
                             res.data.data[0].subtotal_lr,
                         ],
                         [
-                            'PK',
                             res.data.data[0].pk_a,
                             res.data.data[0].pk_b,
                             res.data.data[0].pk_ab,
@@ -166,26 +178,6 @@ function StockDarah(props) {
                     top: 10,
                 }}></Image>
             <ScrollView>
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: 25,
-                        fontSize: 35,
-                        fontWeight: 'bold',
-                    }}>
-                    Informasi Stok &
-                </Text>
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: -10,
-                        fontSize: 35,
-                        fontWeight: 'bold',
-                        color: 'red',
-                    }}>
-                    Kebutuhan Darah
-                </Text>
-
                 <Card
                     style={{
                         backgroundColor: '#70282b',
@@ -205,7 +197,7 @@ function StockDarah(props) {
 
                                 color: 'white',
                             }}>
-                            STOK DARAH
+                            {CONTENT.tableHead}
                         </Text>
                     </TouchableOpacity>
                 </Card>
@@ -222,33 +214,28 @@ function StockDarah(props) {
                             borderWidth: 1,
                             justifyContent: 'center',
                             alignContent: 'center',
+                            marginBottom:30
                         }}>
-                        <Row
-                            data={CONTENT.tableHead}
-                            flexArr={[1, 2, 1, 1]}
-                            style={styles.head}
-                            textStyle={styles.textHead}
-                        />
                         <TableWrapper style={styles.wrapper}>
                             <Col
                                 data={CONTENT.tableTitle2}
                                 style={styles.title}
-                                textStyle={styles.text}
+                                textStyle={styles.textTitle}
                             />
                             <Rows
                                 data={CONTENT.tableData2}
                                 flexArr={[1, 1, 1, 1]}
-                                style={styles.row}
-                                textStyle={styles.text}
+                                style={styles.title}
+                                textStyle={styles.textTitle}
                             />
                         </TableWrapper>
 
                         <TableWrapper style={styles.wrapper}>
                             <Col
-                                data={CONTENT.tableTitle}
+                                data={CONTENT.product}
                                 style={styles.title}
                                 flexArr={[2, 1, 1, 1, 1]}
-                                textStyle={styles.text}
+                                textStyle={styles.textTitle}
                             />
                             <Rows
                                 data={tableData}
@@ -258,15 +245,16 @@ function StockDarah(props) {
                             />
                         </TableWrapper>
                     </Table>
-                    <Text>Keterangan :</Text>
-                    <Text>*WB = Whole Blood</Text>
-                    <Text>*PRC = Packed Red Cell</Text>
-                    <Text>*TC = Thrombocyte Concentrate</Text>
-                    <Text>*FFP = Fresh Frozen Plasma</Text>
-                    <Text>*AHF = AHF</Text>
-                    <Text>*LD = Leucodepleted</Text>
-                    <Text>*LR = Leucoreduce</Text>
-                    <Text>*PK = Plasma Konvalesen</Text>
+                    <Text style={{marginLeft:20}}></Text>
+                    <Text style={{marginLeft:10}}>Keterangan :</Text>
+                    <Text style={{marginLeft:10}}>*WB = Whole Blood</Text>
+                    <Text style={{marginLeft:10}}>*PRC = Packed Red Cell</Text>
+                    <Text style={{marginLeft:10}}>*TC = Thrombocyte Concentrate</Text>
+                    <Text style={{marginLeft:10}}>*FFP = Fresh Frozen Plasma</Text>
+                    <Text style={{marginLeft:10}}>*AHF = AHF</Text>
+                    <Text style={{marginLeft:10}}>*LD = Leucodepleted</Text>
+                    <Text style={{marginLeft:10}}>*LR = Leucoreduce</Text>
+                    <Text style={{marginLeft:10}}>*PK = Plasma Konvalesen</Text>
                 </View>
             </ScrollView>
             <View

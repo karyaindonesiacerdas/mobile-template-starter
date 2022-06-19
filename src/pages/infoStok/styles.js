@@ -99,9 +99,6 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    
-    marginRight: 30,
-    marginLeft: 30,
     backgroundColor:'#bebebe',
   
     padding: 10,
@@ -115,14 +112,22 @@ const styles = StyleSheet.create({
   
     paddingTop: 20,
   },
+  dropdown: {
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
   checkbox: {
     marginTop:0,marginLeft:30,marginRight:30, flexDirection: "row",justifyContent: "space-between"
   },
   head: {  backgroundColor: 'orange',  },
   wrapper: { flexDirection: 'row' },
   title: {  backgroundColor: '#2ecc71'},
-  row: { width:"100%"},
+  row: { width:"100%",  backgroundColor: 'white'},
   text: { textAlign: 'center',padding:5,fontSize:10 },
+  textTitle: { textAlign: 'center',padding:5,fontSize:10, fontWeight: "bold" },
   textHead: { textAlign: 'center',padding:5,fontSize:12, fontWeight:'bold' },
 });
 

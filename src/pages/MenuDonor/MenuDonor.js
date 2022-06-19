@@ -22,7 +22,7 @@ function MenuDonor(props) {
     }, []);
     const goNextPage = page => {
         if (page) {
-            if (page==='RiwayatPermintaan'){
+            if (page==='Kegiatan'){
                 Alert.alert("Warning","Feature Sedang Dalam Pengembangan",
                 [{ text: "OK", onPress: () => console.log('Ok') }]
                 ) 

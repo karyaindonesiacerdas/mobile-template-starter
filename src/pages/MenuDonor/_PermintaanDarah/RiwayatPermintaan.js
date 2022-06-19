@@ -294,7 +294,7 @@ function RiwayatPermintaan(props) {
                 .catch(err => {
                     console.log(err);
                     Alert.alert("Error","Session Berakhir Silahkan Login Kembali",
-                    [{ text: "OK", onPress: () => props.navigation.navigate('Dashboard') }]
+                    [{ text: "OK", onPress: () => console.log('ok') }]
                     )
                 });
         }
