@@ -15,7 +15,7 @@ import GantiPasword from './MenuUser/GantiPasword/GantiPasword';
 import KartuDonor from './MenuUser/KartuDonor/KartuDonor';
 import ActiveDonor from './MenuUser/ActiveDonor/ActiveDonor';
 import ActiveDonorDetail from './MenuUser/ActiveDonor/ActiveDonorDetail';
-import RiwayatDonor	from './MenuUser/RiwayatDonor/RiwayatDonor'
+import RiwayatDonor from './MenuUser/RiwayatDonor/RiwayatDonor';
 import Status from './status';
 import Sukses from './suksestempat';
 import Barcode3 from './barcodetempat';
@@ -42,15 +42,20 @@ import Konvalesen17 from './konvalesen/konvalesen17';
 import Konvalesen19 from './konvalesen/konvalesen19';
 import Konvalesen22 from './konvalesen/konvalesen22';
 import Konvalesen23 from './konvalesen/konvalesen23';
-import { MenuStock, KebutuhanDarah, StockDarah } from './infoStok';
+import {
+    MenuStock,
+    KebutuhanDarah,
+    StockDarah,
+    KebutuhanDarahDetail,
+} from './infoStok';
 import MobilUnit01 from './mobilUnit/mobilUnit01';
 import MobilUnit02 from './mobilUnit/mobilUnit02';
-import MenuAlur from './MenuAlur/MenuAlur'
+import MenuAlur from './MenuAlur/MenuAlur';
 import alurDonorBiasa from './MenuAlur/DonorBiasa/alurDonorBiasa';
-import alurDonorKonvalesen from './MenuAlur/DonorKonvalesen/alurDonorKonvalesen'
-import permintaanDarah from './MenuAlur/permintaanDarah/permintaanDarah'
-import pengadaanDonor from './MenuAlur/pengadaanDonor/pengadaanDonor'
-import konselingDonor from './MenuAlur/KonselingDonor/konselingDonor' 
+import alurDonorKonvalesen from './MenuAlur/DonorKonvalesen/alurDonorKonvalesen';
+import permintaanDarah from './MenuAlur/permintaanDarah/permintaanDarah';
+import pengadaanDonor from './MenuAlur/pengadaanDonor/pengadaanDonor';
+import konselingDonor from './MenuAlur/KonselingDonor/konselingDonor';
 import PermintaanDarah from './MenuDonor/_PermintaanDarah/PermintaanDarah';
 import ListUser from './user';
 import ListPendonor from './listpendonor';
@@ -69,77 +74,79 @@ import RateKonseling from './MenuKonseling/Konseling/rateKonseling';
 import HistoryKonseling from './MenuKonseling/HistoryKonseling/historyKonseling';
 import RiwayatPermintaan from './MenuDonor/_PermintaanDarah/RiwayatPermintaan';
 export {
-	Login,
-	Register,
-	MenuDonor,
-	LoadingStart,
-	persyaratanBiasa,
-	daftarDonorBiasa,
-	infoPendonorBiasa,
-	lokasiDonor,
-	lokasiGedung,
-	BarcodeDonor,
-	admBiasaResult,
-	Status,
-	lokasiMobilUnit,
-	Sukses,
-	Barcode3,
-	Kegiatan,
-	Barcode2,
-	Kalender,
-	Dashboard,
-	kuisionerBiasa,
-	persyaratanKonvalesen,
-	daftarDonorkonv,
-	infoPendonorKonv,
-	infoCovidPendonor,
-	kuisonerKonvalesen,
-	agrementKonvalesen,
-	admKonvalesenResult,
-	lokasiSampel,
-	gedungUddKonvalesen,
-	agrementPlace,
-	barcodeSampel,
-	Konvalesen14,
-	Konvalesen15,
-	Konvalesen16,
-	Konvalesen17,
-	Konvalesen19,
-	Konvalesen22,
-	Konvalesen23,
-	MenuStock,
-	KebutuhanDarah,
-	StockDarah,
-	MobilUnit01,
-	MobilUnit02,
+    Login,
+    Register,
+    MenuDonor,
+    LoadingStart,
+    persyaratanBiasa,
+    daftarDonorBiasa,
+    infoPendonorBiasa,
+    lokasiDonor,
+    lokasiGedung,
+    BarcodeDonor,
+    admBiasaResult,
+    Status,
+    lokasiMobilUnit,
+    Sukses,
+    Barcode3,
+    Kegiatan,
+    Barcode2,
+    Kalender,
+    Dashboard,
+    kuisionerBiasa,
+    persyaratanKonvalesen,
+    daftarDonorkonv,
+    infoPendonorKonv,
+    infoCovidPendonor,
+    kuisonerKonvalesen,
+    agrementKonvalesen,
+    admKonvalesenResult,
+    lokasiSampel,
+    gedungUddKonvalesen,
+    agrementPlace,
+    barcodeSampel,
+    Konvalesen14,
+    Konvalesen15,
+    Konvalesen16,
+    Konvalesen17,
+    Konvalesen19,
+    Konvalesen22,
+    Konvalesen23,
+    MenuStock,
+    KebutuhanDarah,
+    StockDarah,
+    MobilUnit01,
+    MobilUnit02,
     DashboardAdmin,
     ActiveDonor,
-	ActiveDonorDetail,
-	RiwayatDonor,
-	MenuAlur,
-	alurDonorBiasa,
-	alurDonorKonvalesen,
-	permintaanDarah,
-	pengadaanDonor,
-	konselingDonor,
-	PermintaanDarah,
-	EditProfil,
-	ListUser,
-	ListPendonor,
-	DetailPermintaan,
-	ResultPermintaan,
-	GantiPasword,
-	KartuDonor,
-	Contact,
-	InfoKegiatan,
-	InfoKonvalesen,
-	Sejarah,
-	MenuKonseling,
-	FAQ,
-	TentangKonseling,
-	DaftarKonseling,
-	JadwalKonseling,
-	RateKonseling,
-	HistoryKonseling,
-	RiwayatPermintaan,
+    ActiveDonorDetail,
+    RiwayatDonor,
+    MenuAlur,
+    alurDonorBiasa,
+    alurDonorKonvalesen,
+    permintaanDarah,
+    pengadaanDonor,
+    konselingDonor,
+    PermintaanDarah,
+    EditProfil,
+    ListUser,
+    ListPendonor,
+    DetailPermintaan,
+    ResultPermintaan,
+    GantiPasword,
+    KartuDonor,
+    Contact,
+    InfoKegiatan,
+    InfoKonvalesen,
+    Sejarah,
+    MenuKonseling,
+    FAQ,
+    TentangKonseling,
+    DaftarKonseling,
+    JadwalKonseling,
+    RateKonseling,
+    HistoryKonseling,
+    RiwayatPermintaan,
+    KebutuhanDarahDetail,
 };
+

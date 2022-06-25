@@ -30,26 +30,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Dropdown} from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import DataTable, {COL_TYPES} from 'react-native-datatable-component';
-
+import AwesomeLoading from 'react-native-awesome-loading';
 function KebutuhanDarah(props) {
-    const [res, setRes] = useState({
-        data: [
-            {
-                uid: '1',
-                waktu: '2021-08-18T07:10:09Z',
-                no_form: 'UTD-180821-0018',
-                rumah_sakit: 'RSUP Dr Kariadi Semarang',
-                produk_darah: 'PRC',
-                golongan_darah: 'B',
-                rhesus: '+',
-                jumlah_permintaan: '1',
-                jumlah_terpenuhi: 0,
-                keterangan: 'DATA DUMMY',
-                ditambahkan: '2021-08-18T13:21:34Z',
-                diupdate: '',
-            },
-        ],
-    });
+    const [loading, setLoading] = useState(false);
+    const [res, setRes] = useState([]);
     const [rs, setValueRs] = useState(null);
     const [golda, setValueGolda] = useState(null);
     const [product, setValueProduct] = useState(null);
@@ -57,14 +41,37 @@ function KebutuhanDarah(props) {
     const [isFocus2, setIsFocus2] = useState(false);
     const [isFocus3, setIsFocus3] = useState(false);
     const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const [nopage, setNoPage] = useState();
+    const [textFilter, setTextFilter] = useState('Search Use No Form');
+    const toggleSwitch = () => {
+        setIsEnabled(previousState => !previousState);
+        setNoFormValue('');
+        if (!isEnabled) {
+            setTextFilter('Search Use No Form');
+        } else {
+            setTextFilter('Filter By');
+        }
+        // setValueRs(null);
+        // setValueGolda(null);
+        // setValueProduct(null);
+    };
+
+    var today = new Date();
+    var date =
+        today.getDate() +
+        '-' +
+        (today.getMonth() + 1) +
+        '-' +
+        today.getFullYear() +
+        '  Pukul ' +
+        today.getHours() +
+        ':' +
+        today.getMinutes() +
+        ':' +
+        today.getSeconds();
+
     const CONTENT = {
-        tableHead: [
-            `INFORMASI KEBUTUHAN DARAH\nTanggal ${res.data[0].waktu.slice(
-                0,
-                10,
-            )} Pukul ${res.data[0].waktu.slice(11, 16)} `,
-        ],
+        tableHead: [`INFORMASI KEBUTUHAN DARAH\nTanggal ${date} `],
 
         tableData: [
             [
@@ -81,6 +88,7 @@ function KebutuhanDarah(props) {
     const [list_darah, setListDarah] = useState([]);
     const [list_rs, setRs] = useState([]);
     const [list_product, setProduct] = useState([]);
+    const [button, setButton] = useState();
 
     useEffect(() => {
         get_kebutuhan_darah();
@@ -129,6 +137,12 @@ function KebutuhanDarah(props) {
         return null;
     };
 
+    const resetInput = () => {
+        setValueRs(null);
+        setValueGolda(null);
+        setValueProduct(null);
+    };
+
     async function get_kebutuhan_darah() {
         const token = await AsyncStorage.getItem('token');
         const body = {
@@ -136,8 +150,7 @@ function KebutuhanDarah(props) {
             produk: product,
             golda: golda,
         };
-        console.log(body);
-        // Axios.get(`${API}/kebutuhandarah/list/produk`, {
+        setLoading(true);
         Axios.post(`${API}/kebutuhandarah/list/kebutuhandarah`, body, {
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -147,11 +160,40 @@ function KebutuhanDarah(props) {
             .then(r => {
                 var KebutuhanDarahList = r.data.data.KebutuhanDarahList;
                 var list_darah = [];
-                console.log(KebutuhanDarahList[0]);
-                console.log(KebutuhanDarahList[1]);
-                // console.log(KebutuhanDarahList);
+                if (!r.data.data.KebutuhanDarahList) {
+                    Alert.alert('Gagal', 'Data Tidak Ditemukan', [
+                        {
+                            text: 'Coba Lagi',
+                            onPress: () => resetInput(),
+                        },
+                    ]);
+                } else {
+                    var check_len = r.data.data.KebutuhanDarahList.length;
+                    if (check_len > 100) {
+                        check_len = 100;
+                    }
+
+                    var nopage = Math.ceil(check_len / 10);
+                    setNoPage(nopage);
+                    for (var i = 0; i < check_len; i++) {
+                        var kebutuhan = {};
+                        kebutuhan['No Form'] = KebutuhanDarahList[i]['noform'];
+                        kebutuhan['Rumah Sakit'] =
+                            KebutuhanDarahList[i]['rumah_sakit'];
+                        var golda = KebutuhanDarahList[i]['golda'];
+                        var rhesus = KebutuhanDarahList[i]['rhesus'];
+                        var product = KebutuhanDarahList[i]['produk'];
+                        kebutuhan['Gol. Darah'] = golda + rhesus;
+                        kebutuhan['Product'] = product;
+                        kebutuhan['doHighlight'] = 'rgba(243,255,255, 0.65)';
+                        list_darah.push(kebutuhan);
+                    }
+                    setRes(list_darah);
+                    setLoading(false);
+                }
             })
             .catch(err => {
+                setLoading(false);
                 console.log(err);
             });
     }
@@ -222,20 +264,17 @@ function KebutuhanDarah(props) {
     }
 
     useEffect(() => {
-        get_kebutuhan_darah();
         get_info();
     }, []);
 
     const [no_form, setNoFormValue] = useState('');
 
     const searchbyNoForm = () => {
-        console.log('asda');
         async function get_kebutuhan_darah_by_form() {
             const token = await AsyncStorage.getItem('token');
             const body = {
                 noform: no_form,
             };
-            console.log(body);
             // Axios.get(`${API}/kebutuhandarah/list/produk`, {
             Axios.post(`${API}/kebutuhandarah/list/kebutuhandarah`, body, {
                 headers: {
@@ -246,32 +285,67 @@ function KebutuhanDarah(props) {
                 .then(r => {
                     var KebutuhanDarahList = r.data.data.KebutuhanDarahList;
                     var list_darah = [];
-                    console.log(KebutuhanDarahList[0]);
-                    console.log(KebutuhanDarahList[1]);
-                    // console.log(KebutuhanDarahList);
+                    if (!r.data.data.KebutuhanDarahList) {
+                        Alert.alert('Gagal', 'Data Tidak Ditemukan', [
+                            {
+                                text: 'Coba Lagi',
+                                onPress: () => resetInput(),
+                            },
+                        ]);
+                    } else {
+                        var check_len = r.data.data.KebutuhanDarahList.length;
+                        if (check_len > 100) {
+                            check_len = 100;
+                        }
+
+                        var nopage = Math.ceil(check_len / 10);
+                        setNoPage(nopage);
+                        for (var i = 0; i < check_len; i++) {
+                            var kebutuhan = {};
+                            kebutuhan['No Form'] =
+                                KebutuhanDarahList[i]['noform'];
+                            kebutuhan['Rumah Sakit'] =
+                                KebutuhanDarahList[i]['rumah_sakit'];
+                            var golda = KebutuhanDarahList[i]['golda'];
+                            var rhesus = KebutuhanDarahList[i]['rhesus'];
+                            var product = KebutuhanDarahList[i]['produk'];
+                            kebutuhan['Gol. Darah'] = golda + rhesus;
+                            kebutuhan['Product'] = product;
+                            kebutuhan['doHighlight'] =
+                                'rgba(243,255,255, 0.65)';
+                            list_darah.push(kebutuhan);
+                        }
+                        setRes(list_darah);
+                        setLoading(false);
+                    }
                 })
                 .catch(err => {
                     console.log(err);
+                    setLoading(false);
                 });
         }
-        get_kebutuhan_darah_by_form();
+        if (no_form.length < 7) {
+            Alert.alert('Gagal', 'Input Minimal 7 Karakter', [
+                {
+                    text: 'Coba Lagi',
+                    onPress: () => console.log('Ok'),
+                },
+            ]);
+        } else {
+            get_kebutuhan_darah_by_form();
+        }
     };
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
         }
     };
-    res.data.map((dat, i) =>
-        CONTENT.tableData.push([
-            i + 1,
-            dat.rumah_sakit,
-            dat.produk_darah,
-            dat.golongan_darah,
-            dat.rhesus,
-            dat.jumlah_permintaan,
-            dat.keterangan,
-        ]),
-    );
+
+    const goToDetail = row => {
+        props.navigation.navigate('KebutuhanDarahDetail', {
+            noform: row['No Form'],
+        });
+    };
 
     return (
         <Container>
@@ -296,6 +370,12 @@ function KebutuhanDarah(props) {
                     right: 10,
                     top: 10,
                 }}></Image>
+            <AwesomeLoading
+                indicatorId={18}
+                size={50}
+                isActive={loading}
+                text="loading.."
+            />
             <ScrollView>
                 <Card
                     style={{
@@ -328,7 +408,7 @@ function KebutuhanDarah(props) {
                         marginBottom: 10,
                         flex: 2,
                     }}>
-                    <Text>Show Filter</Text>
+                    <Text>{textFilter}</Text>
                     <Switch
                         trackColor={{false: '#767577', true: '#81b0ff'}}
                         thumbColor={isEnabled ? '#0c77ab' : '#669ab3'}
@@ -353,13 +433,14 @@ function KebutuhanDarah(props) {
                             autoCapitalize="characters"
                             selectionColor="#000000"
                             color="black"
-                            // onChangeText={setNoFormValue()}
-                        ></TextInput>
+                            onChangeText={text =>
+                                setNoFormValue(text)
+                            }></TextInput>
                         <Card
                             style={{
                                 backgroundColor: '#32a875',
                             }}>
-                            <TouchableOpacity onPress={searchbyNoForm()}>
+                            <TouchableOpacity onPress={searchbyNoForm.bind()}>
                                 <Text
                                     style={{
                                         margin: 10,
@@ -515,34 +596,56 @@ function KebutuhanDarah(props) {
                 ) : null}
                 <View
                     style={{
-                        width: '90%',
+                        width: '95%',
                         justifyContent: 'center',
                         alignSelf: 'center',
                         marginBottom: 100,
+                        fontSize: 10,
                     }}>
-                    {/* <DataTable
-                        data={[ 
-                            { name: 'Muhammad Rafeh', age: 21, gender: 'male', name1: 'Muhammad Rafeh', age1: 21, gender1: 'male' },
-                            { name: 'Muhammad Akif', age: 22, gender: 'male',name1: 'Muhammad Rafeh', age1: 21, gender1: 'male' },
-                            { name: 'Muhammad Umar', age: 21, gender: 'male' ,name1: 'Muhammad Rafeh', age1: 21, gender1: 'male'},
-                            { name: 'Amna Shakeel', age: 22, gender: 'female' ,name1: 'Muhammad Rafeh', age1: 21, gender1: 'male'},
-                            { name: 'Muhammad Ammar', age: 20, gender: 'male' ,name1: 'Muhammad Rafeh', age1: 21, gender1: 'male'},
-                            { name: 'Muhammad Moiz', age: 13, gender: 'male',name1: 'Muhammad Rafeh', age1: 21, gender1: 'male' }
-                        ]} // list of objects
-                        colNames={['name', 'age', 'gender', 'name1' , 'age1', 'gender1']} //List of Strings
+                    <DataTable
+                        onRowSelect={row => {
+                            goToDetail(row);
+                        }}
+                        data={res} // list of objects
+                        colNames={[
+                            'No Form',
+                            'Rumah Sakit',
+                            'Gol. Darah',
+                            'Product',
+                            'Detail',
+                        ]} //List of Strings
                         colSettings={[
-                        { name: 'name', type: COL_TYPES.STRING, width: 'auto' }, 
-                        { name: 'age', type: COL_TYPES.INT, width: 'auto' }, 
-                        {name: 'gender', type: COL_TYPES.STRING, width: 'auto'},
-                        { name: 'name1', type: COL_TYPES.STRING, width: 'auto' }, 
-                        { name: 'age1', type: COL_TYPES.INT, width: 'auto' }, 
-                        {name: 'gender1', type: COL_TYPES.STRING, width: 'auto'}
-                    
-                    ]}//List of Objects
-                        noOfPages={1} //number
-                        backgroundColor={'rgba(23,2,4,0.2)'} //Table Background Color
-                        headerLabelStyle={{ color: 'grey', fontSize: 12 }} //Text Style Works
-                    /> */}
+                            {
+                                name: 'No Form',
+                                type: COL_TYPES.STRING,
+                                width: '25%',
+                            },
+                            {
+                                name: 'Rumah Sakit',
+                                type: COL_TYPES.STRING,
+                                width: '30%',
+                            },
+                            {
+                                name: 'Gol. Darah',
+                                width: '15%',
+                                type: COL_TYPES.STRING,
+                            },
+                            {
+                                name: 'Product',
+                                width: '15%',
+                                type: COL_TYPES.STRING,
+                            },
+                            {
+                                name: 'Detail',
+                                type: COL_TYPES.CHECK_BOX,
+                                width: '15%',
+                            },
+                        ]} //List of Objects
+                        noOfPages={nopage} //number
+                        backgroundColor={'rgba(112,40,43,0.3)'} //Table Background Color
+                        headerLabelStyle={{color: 'black', fontSize: 12}} //Text Style Works
+                        footerLabelStyle={{color: 'black', fontSize: 12}} //Text Style Works
+                    />
                 </View>
             </ScrollView>
             <View
