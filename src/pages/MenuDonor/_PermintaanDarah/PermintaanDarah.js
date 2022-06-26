@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Image, Text, View, TextInput} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Image, Text, View, TextInput, StyleSheet} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Container, Card, Picker, Item} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -7,127 +7,118 @@ import {TouchableOpacity} from 'react-native';
 import styles from '../../styles/styles';
 import Bg from '../../image/baground3.jpeg';
 import DocumentPicker from 'react-native-document-picker';
+import {Dropdown} from 'react-native-element-dropdown';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {API} from '../../../config/api';
+import DatePicker from 'react-native-date-picker';
+import moment from 'moment';
+import 'moment/locale/id';
 
 function PermintaanDarah(props) {
-    const [text, onChangeText] = React.useState('Useless Text');
-    const [selectedLanguage, setSelectedLanguage] = React.useState();
-
     const [number, onChangeNumber] = React.useState(null);
+    const [tanggal_permintaan, setTanggalPermintaan] = useState();
+    const [date, setDate] = useState(new Date());
+    const [open, setOpen] = useState(false);
     const [jeniskelamin, setJenisKelamin] = React.useState([
-        {label: 'Laki-Laki', value: 'laki-laki', checked: false},
-        {label: 'Perempuan', value: 'perempuan', checked: false},
+        {label: 'Laki-Laki', value: 'laki-laki', name: 'jenis_kelamin'},
+        {label: 'Perempuan', value: 'perempuan', name: 'jenis_kelamin'},
     ]);
     const [gologanDarah, setGolonganDarah] = React.useState([
-        {label: 'A', value: 'A', checked: false},
-        {label: 'B', value: 'B', checked: false},
-        {label: 'O', value: 'O', checked: false},
-        {label: 'AB', value: 'AB', checked: false},
+        {label: 'A', value: 'A', name: 'golongan_darah'},
+        {label: 'B', value: 'B', name: 'golongan_darah'},
+        {label: 'O', value: 'O', name: 'golongan_darah'},
+        {label: 'AB', value: 'AB', name: 'golongan_darah'},
     ]);
     const [rhesus, setRhesus] = React.useState([
-        {label: 'Positif', value: '+', checked: false},
-        {label: 'Negatif', value: '-', checked: false},
+        {label: 'Positif', value: '+', name: 'rhesus'},
+        {label: 'Negatif', value: '-', name: 'rhesus'},
     ]);
-    const [input] = useState({
-        gologan_darah: '',
+    const [jenis_permintaan, setJenisPermintaan] = useState([
+        {label: 'Mandiri', value: '1', name: 'jenis_permintaan_darah'},
+        {label: 'Rumah Sakit', value: '2', name: 'jenis_permintaan_darah'},
+    ]);
+    const [list_rs, setRs] = useState([]);
+    const [rs, setValueRs] = useState(null);
+    const [value, setValue] = useState({
+        jenis_permintaan_darah: '',
+        nama_pasien: '',
+        tanggal_permintaan: '',
+        rumah_sakit: '',
         jenis_kelamin: '',
+        no_rekam_medis: '',
+        golongan_darah: '',
         rhesus: '',
+        surat_permintaan_darah: '',
     });
-    const golonganDarahHandler = index => {
-        const newValue = gologanDarah.map((checkbox, i) => {
-            if (i !== index)
-                return {
-                    ...checkbox,
-                    checked: false,
-                };
-            if (i === index) {
-                const item = {
-                    ...checkbox,
-                    checked: !checkbox.checked,
-                };
-                input.gologan_darah = checkbox.value;
-                return item;
-            }
-            return checkbox;
-        });
-        setGolonganDarah(newValue);
-    };
-    const jeniskelaminHandler = index => {
-        const newValue = jeniskelamin.map((checkbox, i) => {
-            if (i !== index)
-                return {
-                    ...checkbox,
-                    checked: false,
-                };
-            if (i === index) {
-                const item = {
-                    ...checkbox,
-                    checked: !checkbox.checked,
-                };
-                input.jenis_kelamin = checkbox.value;
-                return item;
-            }
-            return checkbox;
-        });
-        setJenisKelamin(newValue);
-    };
-    const rhesusHandler = index => {
-        const newValue = rhesus.map((checkbox, i) => {
-            if (i !== index)
-                return {
-                    ...checkbox,
-                    checked: false,
-                };
-            if (i === index) {
-                const item = {
-                    ...checkbox,
-                    checked: !checkbox.checked,
-                };
-                input.rhesus = checkbox.value;
-                return item;
-            }
-            return checkbox;
-        });
-        setRhesus(newValue);
-    };
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
         }
     };
+    console.log(value);
+
+    const handleChange = e => {
+        console.log(e);
+        const {name, value} = e;
+        setValue(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+    async function get_info() {
+        const token = await AsyncStorage.getItem('token');
+
+        Axios.get(`${API}/kebutuhandarah/list/rumahsakit`, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(r => {
+                var rs = r.data.data.hospitals;
+                var rs_list = [];
+                for (var i in rs) {
+                    var d = {};
+                    d['label'] = rs[i];
+                    d['value'] = rs[i];
+                    d['name'] = 'rumah_sakit';
+                    rs_list.push(d);
+                }
+                console.log(rs_list);
+                setRs(rs_list);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    useEffect(() => {
+        get_info();
+    }, []);
+
     const [file_permintaan, setPermintaanFile] = useState('');
     const selectPermintaanFile = async () => {
-        //Opening Document Picker for selection of one file
         try {
-          const res = await DocumentPicker.pick({
-            type: [DocumentPicker.types.images],
-            //There can me more options as well
-            // DocumentPicker.types.allFiles
-            // DocumentPicker.types.images
-            // DocumentPicker.types.plainText
-            // DocumentPicker.types.audio
-            // DocumentPicker.types.pdf
-          });
-          //Printing the log realted to the file
-          
-          //Setting the state to show single file attributes
-          const img = {
-            uri: res[0].uri,
-            type: res[0].type,
-            name: res[0].name
-          }
-          setPermintaanFile(img);
+            const res = await DocumentPicker.pick({
+                type: [DocumentPicker.types.images],
+            });
+            const img = {
+                uri: res[0].uri,
+                type: res[0].type,
+                name: res[0].name,
+            };
+            setPermintaanFile(img);
+            handleChange({name: 'surat_permintaan_darah', value: img});
         } catch (err) {
-          //Handling any exception (If any)
-          if (DocumentPicker.isCancel(err)) {
-            //If user canceled the document selection
-            alert('Canceled from single doc picker');
-          } else {
-            //For Unknown Error
-            alert('Unknown Error: ' + JSON.stringify(err));
-            throw err;
-          }
+            if (DocumentPicker.isCancel(err)) {
+            } else {
+                alert('Unknown Error: ' + JSON.stringify(err));
+                throw err;
+            }
         }
-      };
+    };
     const submitData = value => {};
     return (
         <Container>
@@ -156,380 +147,282 @@ function PermintaanDarah(props) {
                     right: 10,
                     top: 10,
                 }}></Image>
+            <Text
+                style={{
+                    marginLeft: 30,
+                    marginTop: 0,
+                    fontSize: 35,
+                    fontWeight: 'bold',
+                    color: 'black',
+                }}>
+                Permintaan
+            </Text>
+            <Text
+                style={{
+                    marginLeft: 30,
+                    marginTop: -10,
+                    fontSize: 30,
+                    fontWeight: 'bold',
+                    color: 'red',
+                }}>
+                Darah
+            </Text>
             <ScrollView>
-                <Text
+                <View
                     style={{
-                        marginLeft: 30,
-                        marginTop: 0,
-                        fontSize: 35,
-                        fontWeight: 'bold',
-                        color: 'black',
+                        width: '90%',
+                        justifyContent: 'center',
+                        alignSelf: 'center',
+                        marginBottom: 10,
+                        marginTop: 30,
                     }}>
-                    Permintaan
-                </Text>
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: -10,
-                        fontSize: 30,
-                        fontWeight: 'bold',
-                        color: 'red',
-                    }}>
-                    Darah
-                </Text>
+                    <Text style={[styles.label]}>Permintaan Darah</Text>
+                    <Dropdown
+                        style={[styles.dropdown]}
+                        placeholderStyle={styles2.placeholderStyle}
+                        selectedTextStyle={styles2.selectedTextStyle}
+                        inputSearchStyle={styles2.inputSearchStyle}
+                        iconStyle={styles2.iconStyle}
+                        data={jenis_permintaan}
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        placeholder={'Pilih Jenis Permintaan'}
+                        value={rs}
+                        onChange={e => {
+                            handleChange(e);
+                        }}
+                        renderLeftIcon={() => (
+                            <AntDesign
+                                style={styles2.icon}
+                                color={'black'}
+                                name="downcircleo"
+                                size={20}
+                            />
+                        )}
+                    />
+                    <Text style={[styles.label]}>Rumah Sakit</Text>
+                    <Dropdown
+                        style={[styles.dropdown]}
+                        placeholderStyle={styles2.placeholderStyle}
+                        selectedTextStyle={styles2.selectedTextStyle}
+                        inputSearchStyle={styles2.inputSearchStyle}
+                        iconStyle={styles2.iconStyle}
+                        data={list_rs}
+                        search
+                        searchPlaceholder="Cari Rumah Sakit"
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        placeholder={'Pilih Rumah Sakit'}
+                        value={rs}
+                        onChange={e => {
+                            handleChange(e);
+                        }}
+                        renderLeftIcon={() => (
+                            <AntDesign
+                                style={styles2.icon}
+                                color={'black'}
+                                name="downcircleo"
+                                size={20}
+                            />
+                        )}
+                    />
+                    <Text style={[styles.label]}>Tanggal Permintaan</Text>
+                    <TextInput
+                        style={{
+                            height: 40,
+                            borderColor: 'gray',
+                            borderWidth: 0.5,
+                            borderRadius: 8,
+                            paddingHorizontal: 8,
+                            marginBottom: 10,
+                            backgroundColor: 'white',
+                        }}
+                        onPressIn={() => setOpen(true)}
+                        placeholder={'Tanggal Permintaan'}
+                        value={tanggal_permintaan}
+                    />
+                    <DatePicker
+                        modal
+                        mode="date"
+                        open={open}
+                        date={date}
+                        onConfirm={date => {
+                            setOpen(false);
 
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: 20,
-                        fontSize: 15,
-                        fontWeight: 'normal',
-                        color: 'black',
-                        textShadowColor: '#fff',
-                        textShadowOffset: {width: 1, height: 1},
-                        textShadowRadius: 10,
-                    }}>
-                    Permintaan Darah
-                </Text>
-                <Item style={styles.item}>
-                    <Picker
-                        style={styles.input}
-                        onChangeText={onChangeNumber}
-                        selectedValue={selectedLanguage}
-                        onValueChange={(itemValue, itemIndex) =>
-                            setSelectedLanguage(itemValue)
-                        }>
-                        <Picker.Item label="Rumah Sakit" value="java" />
-                        <Picker.Item label="Mandiri" value="js" />
-                    </Picker>
-                </Item>
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: 20,
-                        fontSize: 15,
-                        fontWeight: 'normal',
-                        color: 'black',
-                        textShadowColor: '#fff',
-                        textShadowOffset: {width: 1, height: 1},
-                        textShadowRadius: 10,
-                    }}>
-                    Tanggal Permintaan
-                </Text>
-                <Item style={styles.item}>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={onChangeNumber}
+                            setTanggalPermintaan(
+                                moment(date).format('YYYY-MM-DD').toString(),
+                            );
+                            handleChange({
+                                name: 'tanggal_permintaan',
+                                value: moment(date)
+                                    .format('YYYY-MM-DD')
+                                    .toString(),
+                            });
+                        }}
+                        onCancel={() => {
+                            setOpen(false);
+                        }}
                     />
-                </Item>
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: 20,
-                        fontSize: 15,
-                        fontWeight: 'normal',
-                        color: 'black',
-                        textShadowColor: '#fff',
-                        textShadowOffset: {width: 1, height: 1},
-                        textShadowRadius: 10,
-                    }}>
-                    Nama Pasien
-                </Text>
-                <Item style={styles.item}>
+                    <Text style={[styles.label]}>Nama Pasien</Text>
                     <TextInput
-                        style={styles.input}
-                        onChangeText={onChangeNumber}
+                        style={{
+                            height: 40,
+                            borderColor: 'gray',
+                            borderWidth: 0.5,
+                            borderRadius: 8,
+                            paddingHorizontal: 8,
+                            marginBottom: 10,
+                            backgroundColor: 'white',
+                        }}
+                        name="nama_pasien"
+                        onChangeText={text =>
+                            handleChange({name: 'nama_pasien', value: text})
+                        }
+                        placeholder={'Nama Pasien'}
                     />
-                </Item>
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: 20,
-                        fontSize: 15,
-                        fontWeight: 'normal',
-                        color: 'black',
-                        textShadowColor: '#fff',
-                        textShadowOffset: {width: 1, height: 1},
-                        textShadowRadius: 10,
-                    }}>
-                    Rumah Sakit
-                </Text>
-                <Item style={styles.item}>
+                    <Text style={[styles.label]}>Jenis Kelamin</Text>
+                    <Dropdown
+                        style={[styles.dropdown]}
+                        placeholderStyle={styles2.placeholderStyle}
+                        selectedTextStyle={styles2.selectedTextStyle}
+                        inputSearchStyle={styles2.inputSearchStyle}
+                        iconStyle={styles2.iconStyle}
+                        data={jeniskelamin}
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        placeholder={'Pilih Jenis Kelamin'}
+                        value={rs}
+                        onChange={e => {
+                            handleChange(e);
+                        }}
+                        renderLeftIcon={() => (
+                            <AntDesign
+                                style={styles2.icon}
+                                color={'black'}
+                                name="downcircleo"
+                                size={20}
+                            />
+                        )}
+                    />
+                    <Text style={[styles.label]}>No Rekam Medis</Text>
                     <TextInput
-                        style={styles.input}
-                        onChangeText={onChangeNumber}
+                        style={{
+                            height: 40,
+                            borderColor: 'gray',
+                            borderWidth: 0.5,
+                            borderRadius: 8,
+                            paddingHorizontal: 8,
+                            marginBottom: 10,
+                            backgroundColor: 'white',
+                        }}
+                        onChangeText={text =>
+                            handleChange({name: 'no_rekam_medis', value: text})
+                        }
+                        placeholder={'No Rekam Medis'}
                     />
-                </Item>
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: 20,
-                        fontSize: 15,
-                        fontWeight: 'bold',
-                        color: 'black',
-                        textShadowColor: '#fff',
-                        textShadowOffset: {width: 1, height: 1},
-                        textShadowRadius: 10,
-                    }}>
-                    jenis kelamin
-                </Text>
-                <View
-                    style={{
-                        marginTop: 10,
-                        marginLeft: 30,
-                        marginRight: 40,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                    }}>
-                    <View>
-                        {jeniskelamin.map((checkbox, i) => {
-                            if (i < jeniskelamin.length / 2) {
-                                return (
-                                    <CheckBox
-                                        style={{width: '70%'}}
-                                        title={checkbox.label}
-                                        checked={checkbox.checked}
-                                        onPress={() => jeniskelaminHandler(i)}
-                                        key={i}
-                                    />
-                                );
-                            }
-                        })}
-                    </View>
-                    <View>
-                        {jeniskelamin.map((checkbox, i) => {
-                            if (i >= jeniskelamin.length / 2) {
-                                return (
-                                    <CheckBox
-                                        style={{width: '70%'}}
-                                        title={checkbox.label}
-                                        checked={checkbox.checked}
-                                        onPress={() => jeniskelaminHandler(i)}
-                                        key={i}
-                                    />
-                                );
-                            }
-                        })}
-                    </View>
-                </View>
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: 20,
-                        fontSize: 15,
-                        fontWeight: 'normal',
-                        color: 'black',
-                        textShadowColor: '#fff',
-                        textShadowOffset: {width: 1, height: 1},
-                        textShadowRadius: 10,
-                    }}>
-                    No.Rekam Medis
-                </Text>
-                <Item style={styles.item}>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={onChangeNumber}
+                    <Text style={[styles.label]}>Golongan Darah</Text>
+                    <Dropdown
+                        style={[styles.dropdown]}
+                        placeholderStyle={styles2.placeholderStyle}
+                        selectedTextStyle={styles2.selectedTextStyle}
+                        inputSearchStyle={styles2.inputSearchStyle}
+                        iconStyle={styles2.iconStyle}
+                        data={gologanDarah}
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        placeholder={'Pilih Jenis Permintaan'}
+                        value={rs}
+                        onChange={e => {
+                            handleChange(e);
+                        }}
+                        renderLeftIcon={() => (
+                            <AntDesign
+                                style={styles2.icon}
+                                color={'black'}
+                                name="downcircleo"
+                                size={20}
+                            />
+                        )}
                     />
-                </Item>
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: 20,
-                        fontSize: 15,
-                        fontWeight: 'bold',
-                        color: 'black',
-                        textShadowColor: '#fff',
-                        textShadowOffset: {width: 1, height: 1},
-                        textShadowRadius: 10,
-                    }}>
-                    Golongan Darah
-                </Text>
-                <View
-                    style={{
-                        marginTop: 10,
-                        marginLeft: 30,
-                        marginRight: 40,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                    }}>
-                    <View>
-                        {gologanDarah.map((checkbox, i) => {
-                            if (i < gologanDarah.length / 2) {
-                                return (
-                                    <CheckBox
-                                        style={{width: '70%'}}
-                                        title={checkbox.label}
-                                        checked={checkbox.checked}
-                                        onPress={() => golonganDarahHandler(i)}
-                                        key={i}
-                                    />
-                                );
-                            }
-                        })}
-                    </View>
-                    <View>
-                        {gologanDarah.map((checkbox, i) => {
-                            if (i >= gologanDarah.length / 2) {
-                                return (
-                                    <CheckBox
-                                        style={{width: '70%'}}
-                                        title={checkbox.label}
-                                        checked={checkbox.checked}
-                                        onPress={() => golonganDarahHandler(i)}
-                                        key={i}
-                                    />
-                                );
-                            }
-                        })}
-                    </View>
-                </View>
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginTop: 20,
-                        fontSize: 15,
-                        fontWeight: 'bold',
-                        color: 'black',
-                        textShadowColor: '#fff',
-                        textShadowOffset: {width: 1, height: 1},
-                        textShadowRadius: 10,
-                    }}>
-                    Rhesus
-                </Text>
-                <View
-                    style={{
-                        marginTop: 10,
-                        marginLeft: 30,
-                        marginRight: 40,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                    }}>
-                    <View>
-                        {rhesus.map((checkbox, i) => {
-                            if (i < rhesus.length / 2) {
-                                return (
-                                    <CheckBox
-                                        style={{width: '70%'}}
-                                        title={checkbox.label}
-                                        checked={checkbox.checked}
-                                        onPress={() => rhesusHandler(i)}
-                                        key={i}
-                                    />
-                                );
-                            }
-                        })}
-                    </View>
-                    <View>
-                        {rhesus.map((checkbox, i) => {
-                            if (i >= rhesus.length / 2) {
-                                return (
-                                    <CheckBox
-                                        style={{width: '70%'}}
-                                        title={checkbox.label}
-                                        checked={checkbox.checked}
-                                        onPress={() => rhesusHandler(i)}
-                                        key={i}
-                                    />
-                                );
-                            }
-                        })}
-                    </View>
-                    <View>
+                    <Text style={[styles.label]}>Rhesus</Text>
+                    <Dropdown
+                        style={[styles.dropdown]}
+                        placeholderStyle={styles2.placeholderStyle}
+                        selectedTextStyle={styles2.selectedTextStyle}
+                        inputSearchStyle={styles2.inputSearchStyle}
+                        iconStyle={styles2.iconStyle}
+                        data={rhesus}
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        placeholder={'Pilih Rhesus'}
+                        value={rs}
+                        onChange={e => {
+                            handleChange(e);
+                        }}
+                        renderLeftIcon={() => (
+                            <AntDesign
+                                style={styles2.icon}
+                                color={'black'}
+                                name="downcircleo"
+                                size={20}
+                            />
+                        )}
+                    />
                     <TouchableOpacity
-          activeOpacity={0.5}
-          style={{
-            alignItems: 'center',
-            flexDirection: 'row',
-            backgroundColor: '#DDDDDD',
-            padding: 5,
-            marginTop :10,
-            marginLeft: 30,
-            marginRight: 30}}
-          onPress={selectPermintaanFile}>
-          {/*Single file selection button*/}
-          <Text style={{
-            marginLeft:0,
-            marginRight: 15,
-            marginTop: 0,
-            fontSize: 15,
-            color: "black",
-            fontWeight: "bold",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}>
-             Upload Surat Permintaan Darah
-          </Text>
-          <Image
-            source={{
-              uri: 'https://img.icons8.com/offices/40/000000/attach.png',
-            }}
-            style={styles.imageIconStyle}
-          />
-        </TouchableOpacity>
-        <Text style={{
-            marginLeft: 30,
-            marginTop: 0,
-            marginBottom : 0,
-            fontSize: 15,
-            color: "black",
-            fontWeight: "bold",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}>
-           {file_permintaan.name ? file_permintaan.name : ''}
-        </Text>
-                    </View>
-
+                        activeOpacity={0.5}
+                        style={{
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            borderColor: 'gray',
+                            height: 40,
+                            borderWidth: 0.5,
+                            borderRadius: 8,
+                            paddingHorizontal: 8,
+                            marginTop: 15,
+                            backgroundColor: 'rgba(112,40,43,0.6)',
+                        }}
+                        onPress={selectPermintaanFile}>
+                        {/*Single file selection button*/}
+                        <Text
+                            style={{
+                                marginRight: 10,
+                                marginLeft: 30,
+                                textAlign: 'center',
+                                marginTop: 0,
+                                fontSize: 15,
+                                color: 'white',
+                                fontWeight: 'bold',
+                                textShadowRadius: 10,
+                            }}>
+                            Upload Surat Permintaan Darah
+                        </Text>
+                        <AntDesign
+                            style={{marginLeft: 10}}
+                            color={'blue'}
+                            name="addfile"
+                            size={25}
+                        />
+                    </TouchableOpacity>
+                    <Text
+                        style={{
+                            marginLeft: 10,
+                            marginTop: 0,
+                            marginBottom: 0,
+                            fontSize: 15,
+                            color: 'black',
+                            fontWeight: 'bold',
+                            textShadowColor: '#fff',
+                            textShadowOffset: {width: 1, height: 1},
+                            textShadowRadius: 10,
+                        }}>
+                        {file_permintaan.name ? file_permintaan.name : ''}
+                    </Text>
                 </View>
-                <View>
-                    <TouchableOpacity
-          activeOpacity={0.5}
-          style={{
-            alignItems: 'center',
-            flexDirection: 'row',
-            backgroundColor: '#DDDDDD',
-            padding: 5,
-            marginTop :10,
-            marginLeft: 30,
-            marginRight: 30}}
-          onPress={selectPermintaanFile}>
-          {/*Single file selection button*/}
-          <Text style={{
-            marginLeft:0,
-            marginRight: 15,
-            marginTop: 0,
-            fontSize: 15,
-            color: "black",
-            fontWeight: "bold",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}>
-             Upload hasil SWAB Positf
-          </Text>
-          <Image
-            source={{
-              uri: 'https://img.icons8.com/offices/40/000000/attach.png',
-            }}
-            style={styles.imageIconStyle}
-          />
-        </TouchableOpacity>
-        <Text style={{
-            marginLeft: 30,
-            marginTop: 0,
-            marginBottom : 0,
-            fontSize: 15,
-            color: "black",
-            fontWeight: "bold",
-            textShadowColor: "#fff",
-            textShadowOffset: { width: 1, height: 1 },
-            textShadowRadius: 10,
-          }}>
-           {file_permintaan.name ? file_permintaan.name : ''}
-        </Text>
-                    </View>
                 <View
                     style={{
                         alignContent: 'center',
@@ -591,3 +484,46 @@ function PermintaanDarah(props) {
 }
 
 export default PermintaanDarah;
+
+const styles2 = StyleSheet.create({
+    container: {
+        backgroundColor: 'white',
+        padding: 16,
+    },
+    dropdown: {
+        height: 10,
+        borderColor: 'gray',
+        borderWidth: 0.5,
+        borderRadius: 4,
+        paddingHorizontal: 4,
+    },
+    icon: {
+        marginRight: 15,
+    },
+    label: {
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: 22,
+        top: 8,
+        zIndex: 999,
+        paddingHorizontal: 8,
+        fontSize: 12,
+    },
+    placeholderStyle: {
+        fontSize: 12,
+    },
+    selectedTextStyle: {
+        fontSize: 12,
+    },
+    iconStyle: {
+        width: 10,
+        height: 10,
+        marginRight: 20,
+    },
+    inputSearchStyle: {
+        height: 50,
+        fontSize: 16,
+        color: 'black',
+    },
+});
+

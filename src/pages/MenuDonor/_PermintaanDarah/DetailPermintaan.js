@@ -14,9 +14,10 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {Formik} from 'formik';
+import Bg from '../../image/baground3.jpeg';
 
 function DetailPermintaan(props) {
-    const [pekerjaan, setPekerjaan] = React.useState([
+    const [product, setProduct] = React.useState([
         {
             label: 'Whole Blood (WB) Biasa',
             value: 'Whole Blood (WB) Biasa',
@@ -97,28 +98,8 @@ function DetailPermintaan(props) {
         },
     ]);
     const [input] = useState({
-        pekerjaan: '',
+        product: '',
     });
-    const pekerjaanHandler = index => {
-        const newValue = pekerjaan.map((data, i) => {
-            if (i !== index)
-                return {
-                    ...checkbox,
-                    checked: false,
-                };
-            if (i === index) {
-                const item = {
-                    ...checkbox,
-                    checked: !checkbox.checked,
-                };
-                input.pekerjaan = checkbox.value;
-                return item;
-            }
-            return checkbox;
-        });
-        setPekerjaan(newValue);
-    };
-
     const goNextPage = page => {
         if (page) {
             props.navigation.navigate(page);
@@ -129,7 +110,7 @@ function DetailPermintaan(props) {
     const [number, onChangeNumber] = React.useState(null);
 
     const plusNum = (item, key) => {
-        let newArr = [...pekerjaan]; // copying the old datas array
+        let newArr = [...product]; // copying the old datas array
         if (item.num < 4) {
             newArr[key] = {
                 checked: item.checked,
@@ -138,14 +119,14 @@ function DetailPermintaan(props) {
                 num: item.num + 1,
             }; // replace e.target.value with whatever you want to change it to
             console.info('newArr', newArr);
-            setPekerjaan(newArr); // ??
+            setProduct(newArr); // ??
         } else {
             alert('sudah melebihi jumlah maksimal!');
         }
     };
 
     const minusNum = (item, key) => {
-        let newArr = [...pekerjaan]; // copying the old datas array
+        let newArr = [...product]; // copying the old datas array
         console.info('num', item.num);
         if (item.num > 0) {
             newArr[key] = {
@@ -155,17 +136,21 @@ function DetailPermintaan(props) {
                 num: item.num - 1,
             }; // replace e.target.value with whatever you want to change it to
             console.info('newArr', newArr);
-            setPekerjaan(newArr); // ??
+            setProduct(newArr); // ??
         }
     };
 
     return (
         <Container>
             <Image
+                source={Bg}
+                style={{width: '100%', height: '100%', position: 'absolute'}}
+            />
+            <Image
                 source={require('../../image/logo.png')}
                 style={{
-                    width: 60,
-                    height: 65,
+                    width: 54,
+                    height: 60,
                     top: 10,
                     margin: 20,
 
@@ -175,208 +160,223 @@ function DetailPermintaan(props) {
                 source={require('../../image/Logo2.png')}
                 style={{
                     position: 'absolute',
-                    width: 60,
+                    width: 54,
                     height: 60,
                     margin: 20,
 
                     right: 10,
                     top: 10,
                 }}></Image>
-            <ScrollView>
+            <Text
+                style={{
+                    marginLeft: 30,
+                    marginTop: 0,
+                    fontSize: 35,
+                    fontWeight: 'bold',
+                    color: 'black',
+                }}>
+                Permintaan
+            </Text>
+            <Text
+                style={{
+                    marginLeft: 30,
+                    marginTop: -10,
+                    marginBottom: 20,
+                    fontSize: 30,
+                    fontWeight: 'bold',
+                    color: 'red',
+                }}>
+                Darah Detail
+            </Text>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    borderWidth: 2,
+                    padding: 5,
+                    borderColor: 'grey',
+                }}>
                 <Text
                     style={{
                         marginLeft: 10,
-                        marginTop: 0,
-                        fontSize: 35,
+                        fontSize: 20,
                         fontWeight: 'bold',
-                        color: 'black',
                     }}>
-                    Permintaan
-                </Text>
-                <Text
-                    style={{
-                        marginLeft: 10,
-                        marginTop: -10,
-                        fontSize: 35,
-                        fontWeight: 'bold',
-                        color: 'red',
-                    }}>
-                    Darah
+                    Product
                 </Text>
                 <View
                     style={{
-                        marginTop: 0,
-                        marginLeft: 30,
-                        marginRight: 70,
                         flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignContent: 'center',
+                        alignItems: 'center',
+                        marginRight: 20,
+                        borderColor: 'grey',
                     }}>
-                    <View style={{}}>
-                        <Text
-                            style={{
-                                marginLeft: 20,
-                                marginTop: 20,
-                                fontSize: 15,
-                                fontWeight: 'bold',
-                                color: 'black',
-                                textShadowColor: '#fff',
-                                textShadowOffset: {width: 1, height: 1},
-                                textShadowRadius: 10,
-                                alignContent: 'space-around',
-                            }}>
-                            Produk
-                        </Text>
-                    </View>
+                    <Text
+                        style={{
+                            marginRight: 5,
+                            marginLeft: 5,
+                            marginTop: 0,
+                            fontSize: 20,
+                            fontWeight: 'bold',
 
-                    <View>
-                        <Text
-                            style={{
-                                marginLeft: 260,
-                                marginTop: 20,
-                                fontSize: 15,
-                                fontWeight: 'bold',
-                                color: 'black',
-                                textShadowColor: '#fff',
-                                textShadowOffset: {width: 1, height: 1},
-                                textShadowRadius: 10,
-                                alignContent: 'space-around',
-                                marginBottom: 10,
-                            }}>
-                            Jumlah
-                        </Text>
-                    </View>
+                            textAlign: 'center',
+                            color: 'black',
+                        }}>
+                        Jumlah
+                    </Text>
                 </View>
+            </View>
+            <ScrollView>
+                <View
+                    tyle={{
+                        width: '90%',
+                        justifyContent: 'center',
+                        alignSelf: 'center',
+                        marginBottom: 10,
+                        marginTop: 30,
+                    }}>
+                    {/* ============================ */}
 
-                {/* ============================ */}
-
-                {pekerjaan.map((item, key) => {
-                    return (
-                        <View
-                            key={key}
-                            style={{
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                borderWidth: 2,
-                                padding: 5,
-                            }}>
-                            <Text style={{marginLeft: 10,fontSize:10}}>{item.value}</Text>
+                    {product.map((item, key) => {
+                        return (
                             <View
+                                key={key}
                                 style={{
                                     flexDirection: 'row',
-                                    alignItems: 'center',
-                                    marginRight: 20,
+                                    justifyContent: 'space-between',
+                                    borderWidth: 2,
+                                    padding: 5,
+                                    borderColor: 'grey',
+                                    backgroundColor: 'white',
                                 }}>
-                                <TouchableOpacity>
-                                    <Icon
-                                        type="FontAwesome5"
-                                        name="minus-circle"
-                                        onPress={() => minusNum(item, key)}
-                                    />
-                                </TouchableOpacity>
                                 <Text
                                     style={{
-                                        marginRight: 5,
-                                        marginLeft: 5,
-                                        marginTop: 0,
-                                        fontSize: 10,
-                                        fontWeight: 'normal',
-
-                                        textAlign: 'center',
-                                        color: 'black',
+                                        marginLeft: 10,
+                                        fontSize: 11,
+                                        fontWeight: 'bold',
                                     }}>
-                                    {item.num}
+                                    {item.value}
                                 </Text>
-                                <TouchableOpacity>
-                                    <Icon
-                                        type="FontAwesome5"
-                                        name="plus-circle"
-                                        onPress={() => plusNum(item, key)}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    );
-                })}
-
-                {/* ============================ */}
-
-                <Formik
-                    initialValues={{
-                        bb: 0,
-                    }}
-                    onSubmit={value => {
-                        submitData(value);
-                        goNextPage.bind(this, 'Kuesioner');
-                    }}>
-                    {({handleChange, handleBlur, handleSubmit, values}) => (
-                        <View>
-                            <View
-                                style={{
-                                    alignContent: 'center',
-
-                                    flexDirection: 'row',
-                                    justifyContent: 'center',
-                                    alignContent: 'center',
-                                    marginTop: 30,
-                                }}>
-                                <Card
+                                <View
                                     style={{
-                                        backgroundColor: '#000',
-                                        width: '40%',
-                                        marginRight: '2%',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        marginRight: 20,
                                     }}>
-                                    <TouchableOpacity
-                                        style={styles.button}
-                                        onPress={goNextPage.bind(
-                                            this,
-                                            'PermintaanDarah',
-                                        )}>
-                                        <Text
-                                            style={{
-                                                margin: 10,
-                                                fontSize: 20,
-
-                                                color: 'white',
-                                                fontWeight: 'bold',
-                                                textAlign: 'center',
-                                            }}>
-                                            Kembali
-                                        </Text>
+                                    <TouchableOpacity>
+                                        <Icon
+                                            style={{color: 'grey'}}
+                                            type="FontAwesome5"
+                                            name="minus-circle"
+                                            onPress={() => minusNum(item, key)}
+                                        />
                                     </TouchableOpacity>
-                                </Card>
-                                <Card
-                                    style={{
-                                        backgroundColor: '#000',
-                                        width: '40%',
-                                        marginLeft: '2%',
-                                    }}>
-                                    <TouchableOpacity
-                                        style={styles.button}
-                                        onPress={goNextPage.bind(
-                                            this,
-                                            'PermintaanSukses',
-                                        )}>
-                                        <Text
-                                            style={{
-                                                margin: 10,
-                                                fontSize: 20,
-                                                textAlign: 'center',
+                                    <Text
+                                        style={{
+                                            marginRight: 5,
+                                            marginLeft: 5,
+                                            marginTop: 0,
+                                            fontSize: 12,
+                                            fontWeight: 'bold',
 
-                                                color: 'white',
-                                                fontWeight: 'bold',
-                                            }}>
-                                            Selanjutnya
-                                        </Text>
+                                            textAlign: 'center',
+                                            color: 'black',
+                                        }}>
+                                        {item.num}
+                                    </Text>
+                                    <TouchableOpacity>
+                                        <Icon
+                                            style={{color: 'grey'}}
+                                            type="FontAwesome5"
+                                            name="plus-circle"
+                                            onPress={() => plusNum(item, key)}
+                                        />
                                     </TouchableOpacity>
-                                </Card>
+                                </View>
                             </View>
-                        </View>
-                    )}
-                </Formik>
+                        );
+                    })}
+
+                    {/* ============================ */}
+
+                    <Formik
+                        initialValues={{
+                            bb: 0,
+                        }}
+                        onSubmit={value => {
+                            submitData(value);
+                            goNextPage.bind(this, 'Kuesioner');
+                        }}>
+                        {({handleChange, handleBlur, handleSubmit, values}) => (
+                            <View>
+                                <View
+                                    style={{
+                                        alignContent: 'center',
+
+                                        flexDirection: 'row',
+                                        justifyContent: 'center',
+                                        alignContent: 'center',
+                                        marginTop: 30,
+                                    }}>
+                                    <Card
+                                        style={{
+                                            backgroundColor: '#000',
+                                            width: '40%',
+                                            marginRight: '2%',
+                                        }}>
+                                        <TouchableOpacity
+                                            style={styles.button}
+                                            onPress={goNextPage.bind(
+                                                this,
+                                                'PermintaanDarah',
+                                            )}>
+                                            <Text
+                                                style={{
+                                                    margin: 10,
+                                                    fontSize: 20,
+
+                                                    color: 'white',
+                                                    fontWeight: 'bold',
+                                                    textAlign: 'center',
+                                                }}>
+                                                Kembali
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </Card>
+                                    <Card
+                                        style={{
+                                            backgroundColor: '#000',
+                                            width: '40%',
+                                            marginLeft: '2%',
+                                        }}>
+                                        <TouchableOpacity
+                                            style={styles.button}
+                                            onPress={goNextPage.bind(
+                                                this,
+                                                'PermintaanSukses',
+                                            )}>
+                                            <Text
+                                                style={{
+                                                    margin: 10,
+                                                    fontSize: 20,
+                                                    textAlign: 'center',
+
+                                                    color: 'white',
+                                                    fontWeight: 'bold',
+                                                }}>
+                                                Selanjutnya
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </Card>
+                                </View>
+                            </View>
+                        )}
+                    </Formik>
+                </View>
             </ScrollView>
         </Container>
     );
 }
 
 export default DetailPermintaan;
+

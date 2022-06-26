@@ -95,6 +95,8 @@ function InfoKegiatan(props) {
                                 style={{
                                     flexDirection: 'row',
                                     alignSelf: 'center',
+                                    marginLeft: '2%',
+                                    marginRight: '2%',
                                 }}>
                                 <Text
                                     style={{

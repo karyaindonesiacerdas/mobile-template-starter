@@ -155,29 +155,27 @@ function MenuStock(props) {
             <View
                 style={{
                     alignContent: 'center',
-
-                    flexDirection: 'row',
                     justifyContent: 'center',
                     alignContent: 'center',
-                    marginTop: 30,
+                    margin: 30,
                     bottom: 10,
                 }}>
                 <Card
                     style={{
-                        backgroundColor: '#000',
-                        width: '40%',
-                        marginRight: '2%',
+                        backgroundColor: '#6e6562',
+                        borderRadius: 10,
+                        zIndex: 1,
+                        marginTop: 10,
                     }}>
                     <TouchableOpacity
                         onPress={goNextPage.bind(this, 'Dashboard')}>
                         <Text
                             style={{
                                 margin: 10,
-                                fontSize: 20,
-
-                                color: 'white',
-                                fontWeight: 'bold',
+                                fontSize: 14,
                                 textAlign: 'center',
+                                fontWeight: 'bold',
+                                color: 'white',
                             }}>
                             Kembali
                         </Text>

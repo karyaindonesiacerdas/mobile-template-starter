@@ -27,13 +27,13 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     viewAtas: {
-        alignContent: 'center',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignContent: 'center',
         marginTop: 15,
-        width: '80%',
+        marginLeft: '2%',
+        marginRight: '2%',
         alignSelf: 'center',
+        width: 100,
     },
     textAtas: {
         marginTop: 5,
@@ -43,17 +43,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     textTengah: {
-        margin: 10,
-        fontSize: 14,
+        // marginTop: 10,
+        // marginBottom: 10,
+        marginVertical: 10,
+        marginHorizontal: 10,
+        fontSize: 12,
         textAlign: 'center',
         color: 'white',
         fontWeight: 'bold',
     },
     cardTengah: {
         backgroundColor: '#e60013',
-        width: 120,
         borderRadius: 10,
-        margin: '2%',
+        width: 110,
     },
     textBawah: {
         marginTop: 5,
@@ -63,9 +65,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     cardStyle: {
-        margin: 5,
+        margin: 8,
         borderRadius: 10,
-        width: 120,
+        width: 100,
         height: 100,
         backgroundColor: '#fff',
         elevation: 2, // Android shadowColor: 'rgba(0,0,0, .4)', // IOS

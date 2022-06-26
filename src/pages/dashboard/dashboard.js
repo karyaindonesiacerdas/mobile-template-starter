@@ -143,7 +143,11 @@ function Dashboard(props) {
                 source={require('../image/Logo2.png')}
                 style={styles.logoSehat}
             />
-            <ScrollView>
+            <ScrollView
+                style={{
+                    marginLeft: 10,
+                    marginRight: 10,
+                }}>
                 <View>
                     <Card
                         style={{
@@ -176,8 +180,8 @@ function Dashboard(props) {
                         onPress={goNextPage.bind(this, 'Sejarah')}
                         style={{
                             backgroundColor: '#fff',
-                            width: 120,
-                            height: 120,
+                            width: 115,
+                            height: 110,
                         }}>
                         <Image
                             source={require('../image/sejarah.jpeg')}
@@ -192,8 +196,8 @@ function Dashboard(props) {
                         onPress={goNextPage.bind(this, 'InfoKegiatan')}
                         style={{
                             backgroundColor: '#fff',
-                            width: 120,
-                            height: 120,
+                            width: 115,
+                            height: 110,
                         }}>
                         <Image
                             source={require('../image/donordarah.jpeg')}
@@ -208,8 +212,8 @@ function Dashboard(props) {
                         onPress={goNextPage.bind(this, 'InfoKonvalesen')}
                         style={{
                             backgroundColor: '#fff',
-                            width: 120,
-                            height: 120,
+                            width: 115,
+                            height: 110,
                         }}>
                         <Image
                             source={require('../image/konvalesen.jpeg')}

@@ -86,6 +86,8 @@ function Sejarah(props) {
                                 style={{
                                     flexDirection: 'row',
                                     alignSelf: 'center',
+                                    marginLeft: '1%',
+                                    marginRight: '2%',
                                 }}>
                                 <Text
                                     style={{
@@ -112,6 +114,8 @@ function Sejarah(props) {
                                 style={{
                                     flexDirection: 'row',
                                     alignSelf: 'center',
+                                    marginLeft: '1%',
+                                    marginRight: '2%',
                                 }}>
                                 <Text
                                     style={{
