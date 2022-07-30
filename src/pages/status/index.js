@@ -157,7 +157,7 @@ function Status(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Barcode')}>
+                            onPress={goNextPage.bind(this, 'BarcodeDonor')}>
                             <Text
                                 style={{
                                     margin: 10,

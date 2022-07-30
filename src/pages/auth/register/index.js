@@ -15,50 +15,72 @@ import {
 } from 'native-base';
 import {useMutation} from 'react-query';
 import {Formik} from 'formik';
-import {Image, StyleSheet, TouchableOpacity,Alert} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import * as Yup from 'yup';
 import Bg from '../../image/Baground2.jpg';
 import qs from 'qs';
 import Axios from 'axios';
 import {StackActions} from '@react-navigation/native';
+import {API} from '../../../config/api';
+import AwesomeLoading from 'react-native-awesome-loading';
 
 function Register(props) {
     const [check1, setCheck1] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     const handleSubmitRegister = value => {
-        const url = 'http://sahabat-utd.id:6005';
-        const headers = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        };
-        const body = {
-            role: 'pendonor',
-            nama: value.nama,
-            email: value.email,
-            nomor_telepon: value.nomorTelepon,
-        };
-        console.log(body);
-        Axios.post(
-            `${url}/api/simaba/user/register`,
-            qs.stringify(body),
-            headers,
-        )
-            .then(res => {
-                if (res.data.code === 200) {
-                    console.log()
-                    Alert.alert("Berhasil","Anda Telah Terdaftar, Silakan Cek Email Untuk Mendapatkan Credential",
-                    [{ text: "OK", onPress: () => console.log("OK Pressed") }]
-                    )
-                    props.navigation.dispatch(StackActions.navigate('Login'));
-                } else {
-                    console.log('Error', res.data.message);
-                    Alert.alert("Gagal","Email Sudah Digunakan , Silahkan Gunakan Email Lain Atau Login",
-                    [{ text: "OK", onPress: () => console.log("OK Pressed") }]
-                    )
-                    props.navigation.dispatch(StackActions.replace('Register'));
-                }
-            })
-            .catch(err => {
-                console.log('test : ', err);
-            });
+        if (check1) {
+            setLoading(true);
+            const headers = {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            };
+            const body = {
+                role: 'pendonor',
+                nama: value.nama,
+                email: value.email,
+                nomor_telepon: value.nomorTelepon,
+            };
+            Axios.post(`${API}/user/register`, qs.stringify(body), headers)
+                .then(res => {
+                    setLoading(false);
+                    if (res.data.code === 200) {
+                        Alert.alert(
+                            'Berhasil',
+                            'Anda Telah Terdaftar, Silakan Cek Email Untuk Mendapatkan Credential',
+                            [
+                                {
+                                    text: 'OK',
+                                    onPress: () => console.log('OK Pressed'),
+                                },
+                            ],
+                        );
+                        props.navigation.navigate('Login');
+                    } else {
+                        console.log('Error', res.data.message);
+                        Alert.alert(
+                            'Gagal',
+                            'Email Sudah Digunakan , Silahkan Gunakan Email Lain Atau Login',
+                            [
+                                {
+                                    text: 'OK',
+                                    onPress: () => console.log('OK Pressed'),
+                                },
+                            ],
+                        );
+                        props.navigation.dispatch(
+                            StackActions.replace('Register'),
+                        );
+                    }
+                })
+                .catch(err => {
+                    setLoading(false);
+                    console.log('test : ', err);
+                });
+        } else {
+            Alert.alert('Warning', 'Check Term Of Service', [
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ]);
+        }
     };
     const goNextPage = page => {
         if (page) {
@@ -72,6 +94,13 @@ function Register(props) {
                 source={Bg}
                 style={{width: '100%', height: '100%', position: 'absolute'}}
             />
+            <AwesomeLoading
+                indicatorId={18}
+                size={50}
+                isActive={loading}
+                text="loading.."
+            />
+
             <Image
                 source={require('../../image/logo.png')}
                 style={{
@@ -162,18 +191,18 @@ function Register(props) {
                                     value={values.password}
                                     placeholder="No.Telp"
                                     underlineColorAndroid="transparent"
+                                    keyboardType="numeric"
                                 />
                             </Item>
-                            {errors.password && (
+                            {errors.nomorTelepon && (
                                 <View>
                                     <Text style={styles.errMsg}>
-                                        {errors.password}
+                                        {errors.nomorTelepon}
                                     </Text>
                                 </View>
                             )}
                             <ListItem>
                                 <CheckBox
-                                    checked={false}
                                     color=""
                                     checked={check1}
                                     onPress={() => setCheck1(!check1)}
@@ -242,10 +271,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     errMsg: {
-        color: 'red',
+        color: 'black',
         marginBottom: 10,
         marginTop: -10,
         fontSize: 12,
         paddingLeft: 10,
     },
 });
+

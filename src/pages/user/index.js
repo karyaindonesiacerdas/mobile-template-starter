@@ -23,7 +23,7 @@ import {
     Rows,
     Col,
 } from 'react-native-table-component';
-import {USER_MANAGEMENT} from '../../config/api';
+import {API} from '../../config/api';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -45,13 +45,12 @@ function ListUser(props) {
         async function getToken() {
             const token = await AsyncStorage.getItem('token');
             var t = new Date().toISOString().slice(0, 10);
-            const url = USER_MANAGEMENT;
             const headers = {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + token,
             };
             const body = {};
-            Axios.post(`${url}/api/simaba/user`, JSON.stringify(body), headers)
+            Axios.post(`${API}/user`, JSON.stringify(body), headers)
                 .then(r => {
                     if (r.data.code == 200) {
                         setRes(r.data);

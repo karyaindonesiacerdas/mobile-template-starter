@@ -27,7 +27,7 @@ import Bg from '../../image/baground3.jpeg';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PENDONOR} from '../../config/api';
+import {API} from '../../config/api';
 import Axios from 'axios';
 function Kalender(props) {
     const [check1, setCheck1] = useState(false);
@@ -36,7 +36,7 @@ function Kalender(props) {
     const lokasi = props.route.params;
 
     const goNextPage = page => {
-        if (page == 'Barcode') {
+        if (page == 'BarcodeDonor') {
             submit();
         } else {
             props.navigation.navigate(page);
@@ -67,14 +67,13 @@ function Kalender(props) {
         const token = await AsyncStorage.getItem('token');
         const ktp = await AsyncStorage.getItem('ktp');
         const lokasi = props.route.params.location;
-        const url = PENDONOR;
         const body = {
             ktp: ktp,
             lokasi: lokasi,
             jadwal: jadwal,
         };
         console.log(body);
-        Axios.put(`${url}/api/simaba/pendonor/update/lokasi`, body, {
+        Axios.put(`${API}/pendonor/update/lokasi`, body, {
             headers: {
                 Authorization: 'Bearer ' + token,
                 'Content-Type': 'application/json',
@@ -84,7 +83,7 @@ function Kalender(props) {
                 console.info('res.data', res.data);
                 console.log(res.data);
                 if (res.data.code === 200) {
-                    props.navigation.navigate('Barcode');
+                    props.navigation.navigate('BarcodeDonor');
                 } else {
                     console.log('Error', res.data.message);
                 }
@@ -177,7 +176,7 @@ function Kalender(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Gedung')}>
+                            onPress={goNextPage.bind(this, 'lokasiGedung')}>
                             <Text
                                 style={{
                                     margin: 10,
@@ -199,7 +198,7 @@ function Kalender(props) {
                         }}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={goNextPage.bind(this, 'Barcode')}>
+                            onPress={goNextPage.bind(this, 'BarcodeDonor')}>
                             <Text
                                 style={{
                                     margin: 10,
