@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Image, Text, View, TextInput, StyleSheet} from 'react-native';
+import {Image, Text, View, TextInput, StyleSheet, Alert} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Container, Card, Picker, Item} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -13,6 +13,7 @@ import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {API} from '../../../config/api';
 import DatePicker from 'react-native-date-picker';
+import AwesomeLoading from 'react-native-awesome-loading';
 import moment from 'moment';
 import 'moment/locale/id';
 
@@ -57,10 +58,24 @@ function PermintaanDarah(props) {
             props.navigation.navigate(page);
         }
     };
-    console.log(value);
+
+    const removeFile = () => {
+        Alert.alert('Warning', 'Hapus Surat Permintaan Darah ?', [
+            {
+                text: 'Ya',
+                onPress: () => {
+                    setPermintaanFile('');
+                    handleChange({name: 'surat_permintaan_darah', value: ''});
+                },
+            },
+            {
+                text: 'Tidak',
+                onPress: () => console.log('Ok'),
+            },
+        ]);
+    };
 
     const handleChange = e => {
-        console.log(e);
         const {name, value} = e;
         setValue(prevState => ({
             ...prevState,
@@ -86,7 +101,6 @@ function PermintaanDarah(props) {
                     d['name'] = 'rumah_sakit';
                     rs_list.push(d);
                 }
-                console.log(rs_list);
                 setRs(rs_list);
             })
             .catch(err => {
@@ -119,7 +133,51 @@ function PermintaanDarah(props) {
             }
         }
     };
-    const submitData = value => {};
+    const submitData = () => {
+        var flag_error = 0;
+        // const body = value;
+        var body = new FormData();
+        for (var key in value) {
+            // if (!value[key] && flag_error == 0) {
+            //     flag_error += 1;
+            //     var text = 'Kolom ' + key.toUpperCase() + ' Tidak Boleh Kosong';
+            //     Alert.alert('Gagal', text, [
+            //         {text: 'Coba Lagi', onPress: () => console.log('Ok')},
+            //     ]);
+            // }
+            body.append(key, value[key]);
+        }
+        async function submit() {
+            const token = await AsyncStorage.getItem('token');
+            console.log(body);
+            Axios.post(`${API}/permintaan/darah/master/create`, body, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                    'Content-Type':
+                        'multipart/form-data; boundary=${body._boundary}',
+                },
+            })
+                .then(r => {
+                    console.log(r.data);
+                    if (r.data.code == 200) {
+                        alert('sukses');
+                    } else {
+                        Alert.alert('Gagal', r.data.message, [
+                            {
+                                text: 'Coba Lagi',
+                                onPress: () => console.log('Ok'),
+                            },
+                        ]);
+                    }
+                })
+                .catch(err => {
+                    console.log('error : ', err);
+                });
+        }
+        if (flag_error == 0) {
+            submit();
+        }
+    };
     return (
         <Container>
             <Image
@@ -408,20 +466,22 @@ function PermintaanDarah(props) {
                             size={25}
                         />
                     </TouchableOpacity>
-                    <Text
-                        style={{
-                            marginLeft: 10,
-                            marginTop: 0,
-                            marginBottom: 0,
-                            fontSize: 15,
-                            color: 'black',
-                            fontWeight: 'bold',
-                            textShadowColor: '#fff',
-                            textShadowOffset: {width: 1, height: 1},
-                            textShadowRadius: 10,
-                        }}>
-                        {file_permintaan.name ? file_permintaan.name : ''}
-                    </Text>
+                    <TouchableOpacity onPress={removeFile.bind()}>
+                        <Text
+                            style={{
+                                marginLeft: 10,
+                                marginTop: 0,
+                                marginBottom: 0,
+                                fontSize: 15,
+                                color: 'black',
+                                fontWeight: 'bold',
+                                textShadowColor: '#fff',
+                                textShadowOffset: {width: 1, height: 1},
+                                textShadowRadius: 10,
+                            }}>
+                            {file_permintaan.name ? file_permintaan.name : ''}
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <View
                     style={{
@@ -438,6 +498,8 @@ function PermintaanDarah(props) {
                             backgroundColor: '#000',
                             width: '40%',
                             marginRight: '2%',
+                            borderRadius: 10,
+                            zIndex: 1,
                         }}>
                         <TouchableOpacity
                             style={styles.button}
@@ -460,6 +522,8 @@ function PermintaanDarah(props) {
                             backgroundColor: '#000',
                             width: '40%',
                             marginLeft: '2%',
+                            borderRadius: 10,
+                            zIndex: 1,
                         }}>
                         <TouchableOpacity
                             style={styles.button}

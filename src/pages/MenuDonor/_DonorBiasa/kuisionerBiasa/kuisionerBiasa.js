@@ -404,6 +404,7 @@ function kuisionerBiasa(props) {
             }
         }
         async function submit() {
+            console.log(body);
             Axios.post(`${API}/pendonor/calon-pendonor/create`, body, {
                 headers: {
                     Authorization: 'Bearer ' + token,

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Alert,
     ImageBackground,
@@ -15,7 +15,7 @@ import {
 } from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
 //import styles from "./styles";
-
+import styles from './styles';
 function ResultPermintaan(props) {
     const goNextPage = page => {
         if (page) {
@@ -24,6 +24,10 @@ function ResultPermintaan(props) {
     };
     const [check1, setCheck1] = useState(false);
     const [check2, setCheck2] = useState(false);
+    const [no_permintaan, setNoPermintaan] = useState('');
+    useEffect(() => {
+        setNoPermintaan(props.route.params.kode_permintaan);
+    }, []);
     return (
         <Container>
             <Image
@@ -65,26 +69,44 @@ function ResultPermintaan(props) {
                         fontSize: 25,
                         fontWeight: 'bold',
                         color: 'red',
+                        marginBottom: 40,
                     }}>
                     Darah
                 </Text>
+                <Card style={styles.flowCardPeach}>
+                    <Text
+                        style={{
+                            marginLeft: 20,
+                            marginRight: 20,
 
-                <Text
-                    style={{
-                        marginLeft: 30,
-                        marginRight: 30,
+                            marginTop: 20,
+                            marginBottom: 20,
+                            fontSize: 20,
+                            fontWeight: 'bold',
 
-                        marginTop: 90,
-                        marginBottom: 20,
-                        fontSize: 23,
-                        fontWeight: 'bold',
+                            textAlign: 'center',
+                            color: 'black',
+                        }}>
+                        Permintaan Darah Berhasil {'\n'}
+                        No Form : {'  ' + no_permintaan}
+                    </Text>
+                    <Text
+                        style={{
+                            marginLeft: 20,
+                            marginRight: 20,
 
-                        textAlign: 'center',
-                        color: 'black',
-                    }}>
-                    Terima Kasih telah mengajukan permintaan darah. Permintaan
-                    akan di riview danakan diberitahukan ketersediaannya
-                </Text>
+                            marginBottom: 20,
+                            fontSize: 16,
+                            fontWeight: 'bold',
+
+                            textAlign: 'center',
+                            color: 'black',
+                        }}>
+                        Terima Kasih telah mengajukan permintaan darah. {'\n'}{' '}
+                        Permintaan akan di review dan akan diberitahukan
+                        ketersediaannya
+                    </Text>
+                </Card>
             </ScrollView>
             <View
                 style={{
@@ -98,22 +120,23 @@ function ResultPermintaan(props) {
                 }}>
                 <Card
                     style={{
-                        backgroundColor: '#000',
-                        width: '40%',
-                        marginLeft: '2%',
+                        backgroundColor: '#6e6562',
+                        borderRadius: 10,
+                        zIndex: 1,
+                        marginTop: 10,
                     }}>
                     <TouchableOpacity
-                        onPress={goNextPage.bind(this, 'Dashboard')}>
+                        onPress={goNextPage.bind(this, 'RiwayatPermintaan')}>
                         <Text
                             style={{
-                                margin: 10,
-                                fontSize: 20,
+                                fontSize: 15,
                                 textAlign: 'center',
+                                margin: 15,
 
                                 color: 'white',
                                 fontWeight: 'bold',
                             }}>
-                            Selanjutnya
+                            Riwayat Permintaan Darah
                         </Text>
                     </TouchableOpacity>
                 </Card>
@@ -141,3 +164,4 @@ function ResultPermintaan(props) {
 }
 
 export default ResultPermintaan;
+

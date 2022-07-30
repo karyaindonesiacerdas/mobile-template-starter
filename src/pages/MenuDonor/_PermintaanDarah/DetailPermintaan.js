@@ -15,86 +15,89 @@ import {TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {Formik} from 'formik';
 import Bg from '../../image/baground3.jpeg';
+import Axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {API} from '../../../config/api';
 
 function DetailPermintaan(props) {
     const [product, setProduct] = React.useState([
         {
             label: 'Whole Blood (WB) Biasa',
-            value: 'Whole Blood (WB) Biasa',
+            produk: 'Whole Blood (WB) Biasa',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Whole Blood (WB) Biasa',
-            value: 'Whole Blood (WB) Biasa',
+            produk: 'Whole Blood (WB) Biasa',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Whole Blood (WB) Segar',
-            value: 'Whole Blood (WB) Segar',
+            produk: 'Whole Blood (WB) Segar',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Packed Red Cell (PRC) Biasa',
-            value: 'Packed Red Cell (PRC) Biasa',
+            produk: 'Packed Red Cell (PRC) Biasa',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Packed Red Cell (PRC) Leukodepleted',
-            value: 'Packed Red Cell (PRC) Leukodepleted',
+            produk: 'Packed Red Cell (PRC) Leukodepleted',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Packed Red Cell (PRC) Pediatric Leukodepleted',
-            value: 'Packed Red Cell (PRC) Pediatric Leukodepleted',
+            produk: 'Packed Red Cell (PRC) Pediatric Leukodepleted',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Packed Red Cell (PRC) Pediatric Biasa',
-            value: 'Packed Red Cell (PRC) Pediatric Biasa',
+            produk: 'Packed Red Cell (PRC) Pediatric Biasa',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Washed Erytrocyte (WE)',
-            value: 'Washed Erytrocyte (WE)',
+            produk: 'Washed Erytrocyte (WE)',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Trombosite Concentrate (TC) Biasa',
-            value: 'Trombosite Concentrate (TC) Biasa',
+            produk: 'Trombosite Concentrate (TC) Biasa',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Trombosite Concentrate (TC) Apheresis Leukodepleted',
-            value: 'Trombosite Concentrate (TC) Leukodepleted',
+            produk: 'Trombosite Concentrate (TC) Leukodepleted',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Fresh Frozen Plasma (FFP)',
-            value: 'Fresh Frozen Plasma (FFP)',
+            produk: 'Fresh Frozen Plasma (FFP)',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Cryoprecipitate',
-            value: 'Cryoprecipitate',
+            produk: 'Cryoprecipitate',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
         {
             label: 'Plasma Konvalesen',
-            value: 'Plasma Konvalesen',
+            produk: 'Plasma Konvalesen',
             checked: false,
-            num: 0,
+            jumlah_permintaan: 0,
         },
     ]);
     const [input] = useState({
@@ -105,20 +108,72 @@ function DetailPermintaan(props) {
             props.navigation.navigate(page);
         }
     };
-    const submitData = value => {};
+
+    const [kode_permintaan, setKodePermintaan] = useState('');
+    const submitData = () => {
+        let list_permintaan = [];
+        for (let i = 0; i < product.length; i++) {
+            if (product[i]['jumlah_permintaan'] > 0) {
+                let map_request = {};
+                map_request['produk'] = product[i]['produk'];
+                map_request['jumlah_permintaan'] =
+                    product[i]['jumlah_permintaan'];
+                list_permintaan.push(map_request);
+            }
+        }
+        if (list_permintaan.length == 0) {
+            alert('permintaan tidak boleh kosong');
+        } else {
+            var body = {
+                kode_permintaan_darah: 'PMD2022-04-17-0001',
+                produk_request_detail: list_permintaan,
+            };
+            setKodePermintaan('PMD2022-04-17-0001');
+            async function submit() {
+                const token = await AsyncStorage.getItem('token');
+                console.log(body);
+                Axios.post(`${API}/permintaan/darah/detail/create`, body, {
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(r => {
+                        console.log(r.data);
+                        if (r.data.code == 200) {
+                            setKodePermintaan('PMD2022-04-17-0001');
+                            props.navigation.navigate('ResultPermintaan', {
+                                kode_permintaan: kode_permintaan,
+                            });
+                        } else {
+                            Alert.alert('Gagal', r.data.message, [
+                                {
+                                    text: 'Coba Lagi',
+                                    onPress: () => console.log('Ok'),
+                                },
+                            ]);
+                        }
+                    })
+                    .catch(err => {
+                        console.log('error : ', err);
+                    });
+            }
+            submit();
+        }
+        console.log('list_permintaan' + JSON.stringify(list_permintaan));
+    };
     const [text, onChangeText] = React.useState('Useless Text');
     const [number, onChangeNumber] = React.useState(null);
 
     const plusNum = (item, key) => {
         let newArr = [...product]; // copying the old datas array
-        if (item.num < 4) {
+        if (item.jumlah_permintaan < 4) {
             newArr[key] = {
                 checked: item.checked,
                 label: item.label,
-                value: item.value,
-                num: item.num + 1,
+                produk: item.produk,
+                jumlah_permintaan: item.jumlah_permintaan + 1,
             }; // replace e.target.value with whatever you want to change it to
-            console.info('newArr', newArr);
             setProduct(newArr); // ??
         } else {
             alert('sudah melebihi jumlah maksimal!');
@@ -127,13 +182,13 @@ function DetailPermintaan(props) {
 
     const minusNum = (item, key) => {
         let newArr = [...product]; // copying the old datas array
-        console.info('num', item.num);
-        if (item.num > 0) {
+        console.info('jumlah_permintaan', item.jumlah_permintaan);
+        if (item.jumlah_permintaan > 0) {
             newArr[key] = {
                 checked: item.checked,
                 label: item.label,
-                value: item.value,
-                num: item.num - 1,
+                produk: item.produk,
+                jumlah_permintaan: item.jumlah_permintaan - 1,
             }; // replace e.target.value with whatever you want to change it to
             console.info('newArr', newArr);
             setProduct(newArr); // ??
@@ -255,7 +310,7 @@ function DetailPermintaan(props) {
                                         fontSize: 11,
                                         fontWeight: 'bold',
                                     }}>
-                                    {item.value}
+                                    {item.produk}
                                 </Text>
                                 <View
                                     style={{
@@ -282,7 +337,7 @@ function DetailPermintaan(props) {
                                             textAlign: 'center',
                                             color: 'black',
                                         }}>
-                                        {item.num}
+                                        {item.jumlah_permintaan}
                                     </Text>
                                     <TouchableOpacity>
                                         <Icon
@@ -304,8 +359,7 @@ function DetailPermintaan(props) {
                             bb: 0,
                         }}
                         onSubmit={value => {
-                            submitData(value);
-                            goNextPage.bind(this, 'Kuesioner');
+                            submitData();
                         }}>
                         {({handleChange, handleBlur, handleSubmit, values}) => (
                             <View>
@@ -323,6 +377,8 @@ function DetailPermintaan(props) {
                                             backgroundColor: '#000',
                                             width: '40%',
                                             marginRight: '2%',
+                                            borderRadius: 10,
+                                            zIndex: 1,
                                         }}>
                                         <TouchableOpacity
                                             style={styles.button}
@@ -348,13 +404,12 @@ function DetailPermintaan(props) {
                                             backgroundColor: '#000',
                                             width: '40%',
                                             marginLeft: '2%',
+                                            borderRadius: 10,
+                                            zIndex: 1,
                                         }}>
                                         <TouchableOpacity
                                             style={styles.button}
-                                            onPress={goNextPage.bind(
-                                                this,
-                                                'PermintaanSukses',
-                                            )}>
+                                            onPress={submitData.bind()}>
                                             <Text
                                                 style={{
                                                     margin: 10,
